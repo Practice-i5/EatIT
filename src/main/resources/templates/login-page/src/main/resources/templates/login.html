@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+
+<div class="wrap">
+    <div class="login">
+        <div class="login_logo">
+            <a th:href="@{/}">
+                <img src="images/image_146.png" width="150" height="150">
+            </a>
+        </div>
+
+        <div>
+            <h2>로그인</h2>
+        </div>
+
+        <div class="login_email">
+            <h4>E-mail</h4>
+            <input type="email" placeholder="Email">
+        </div>
+
+        <div class="login_pw">
+            <h4>Password</h4>
+            <input type="password" placeholder="Password">
+        </div>
+
+        <div class="login_etc">
+            <div class="forgot_pw">
+                <a th:href="@{/FindEmail}">이메일 찾기/</a>
+                <a th:href="@{/FindPwd}">비밀번호 찾기</a>
+            </div>
+            <div class="forgot_pw">
+                <a th:href="@{/Join}">회원가입</a>
+            </div>
+        </div>
+
+        <div class="button">
+            <button type="button" class="login-btn" onclick="location.href='/main'">확인</button>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Html Generated</title>
+    <meta name="description" content="Figma htmlGenerator">
+    <meta name="author" content="htmlGenerator">
+    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abhaya+Libre&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/Join.css">
+</head>
+
+<body>
+<div class="wrap">
+    <div class="login">
+        <div class="login_logo">
+            <a th:href="@{/}">
+                <img src="images/image_146.png" width="150" height="150">
+            </a>
+        </div>
+        <h1>회원가입</h1>
+        <form action="/register" method="post" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
+            <div class="textForm">
+                <input name="loginId" type="text" class="id" placeholder="이메일">
+            </div>
+
+            <div class="textForm">
+                <input name="loginPw" type="password" class="pw" placeholder="비밀번호">
+            </div>
+
+            <div class="textForm">
+                <input name="loginPwConfirm" type="password" class="pw" placeholder="비밀번호 확인">
+            </div>
+
+            <div class="textForm">
+                <input name="name" type="text" class="name" placeholder="이름">
+            </div>
+
+            <div class="form-item">
+                <label class="profile-label">
+                    <p style="color:#707070">내 기술 스택</p>
+                </label>
+                <ul class="list-no-pad chip-btn-list">
+                    <li style="margin-top:5px; margin-bottom: 10px;">
+                        <input id="interest-1" class="interest-check" type="checkbox" value="frontend">
+                        <label class="btn-choice-mid interest-label" for="interest-1">프론트엔드</label>
+                    </li>
+                    <li style="margin-top:5px; margin-bottom: 10px;">
+                        <input id="interest-2" class="interest-check" type="checkbox" value="backend">
+                        <label class="btn-choice-mid interest-label" for="interest-2">백엔드</label>
+                    </li>
+                    <li style="margin-top:5px; margin-bottom: 10px;">
+                        <input id="interest-3" class="interest-check" type="checkbox" value="project-management">
+                        <label class="btn-choice-mid interest-label" for="interest-3">기획</label>
+                    </li>
+                    <li style="margin-top:5px; margin-bottom: 10px;">
+                        <input id="interest-7" class="interest-check" type="checkbox" value="security">
+                        <label class="btn-choice-mid interest-label" for="interest-7">보안</label>
+                    </li>
+                    <li style="margin-top:5px; margin-bottom: 10px;">
+                        <input id="interest-5" class="interest-check" type="checkbox" value="game-client">
+                        <label class="btn-choice-mid interest-label" for="interest-5">게임 클라이언트</label>
+                    </li>
+                    <li style="margin-top:5px; margin-bottom: 10px;">
+                        <input id="interest-6" class="interest-check" type="checkbox" value="embedded">
+                        <label class="btn-choice-mid interest-label" for="interest-6">임베디드</label>
+                    </li>
+                    <li style="margin-top:5px; margin-bottom: 10px;">
+                        <input id="interest-4" class="interest-check" type="checkbox" value="mobile">
+                        <label class="btn-choice-mid interest-label" for="interest-4">모바일</label>
+                    </li>
+                    <li style="margin-top:5px; margin-bottom: 10px;">
+                        <input id="interest-8" class="interest-check" type="checkbox" value="data-engineering">
+                        <label class="btn-choice-mid interest-label" for="interest-8">데이터 엔지니어링</label>
+                    </li>
+                    <li style="margin-top:5px; margin-bottom: 10px;">
+                        <input id="interest-9" class="interest-check" type="checkbox" value="game-server">
+                        <label class="btn-choice-mid interest-label" for="interest-9">게임 서버</label>
+                    </li>
+                    <li style="margin-top:5px; margin-bottom: 10px;">
+                        <input id="interest-10" class="interest-check" type="checkbox" value="ui-ux">
+                        <label class="btn-choice-mid interest-label" for="interest-10">UI/UX</label>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="textForm">
+                <input name="nickname" type="text" class="nickname" placeholder="닉네임">
+            </div>
+
+            <div class="textForm">
+                <input name="cellphoneNo" type="text" class="cellphoneNo" placeholder="전화번호">
+            </div>
+
+            <div class="button">
+                <button type="submit" class="btn">확인</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+
+</html>
