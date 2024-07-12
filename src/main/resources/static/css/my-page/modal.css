@@ -1,0 +1,109 @@
+#profile-modal {
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+#profile-modal.active {
+    display: flex;
+}
+
+#tech-profile {
+    width: 90%;
+    max-width: 500px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+#close {
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    background: none;
+    float: right;
+}
+
+#close:hover,
+#close:focus {
+    color: red;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.profile-pic img {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+}
+
+.profile-name {
+    margin: 0;
+    text-align: center;
+}
+
+.profile-contents {
+    background-color: #dff0d8;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.profile-contents h5 {
+    margin: 10px 0;
+}
+
+.profile-contents p {
+    margin: 5px 0;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.block-btn,
+.report-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.block-btn {
+    background-color: #ccc;
+    color: #000;
+}
+
+.report-btn {
+    background-color: #f44336;
+    color: #fff;
+}
+
+/* 기술 스택 모달 추가예정*/

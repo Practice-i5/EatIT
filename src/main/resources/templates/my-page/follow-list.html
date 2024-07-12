@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>프로필 수정</title>
+        <title>팔로우 목록</title>
         <link rel="stylesheet" href="css/style-mypage.css" th:href="@{/css/my-page/style-mypage.css}">
         <link rel="stylesheet" href="css/button.css" th:href="@{/css/my-page/button.css}">
     </head>
@@ -29,13 +29,13 @@
                     <h2>마이 페이지</h2>
                     <ul class="list-no-pad">
                         <li class="bar-list">
-                            <a class="active-page" href="./profile.html" th:href="@{profile}">프로필 수정</a>
+                            <a class="unactive-page" href="./profile.html" th:href="@{profile}">프로필 수정</a>
                         </li>
                         <li class="bar-list">
                             <a class="unactive-page" href="./tech-profile.html" th:href="@{tech-profile}">기술 프로필 설정</a>
                         </li>
                         <li class="bar-list">
-                            <a class="unactive-page" href="./follow-list.html" th:href="@{follow-list}">팔로우 유저 목록</a>
+                            <a class="active-page" href="./follow-list.html" th:href="@{follow-list}">팔로우 유저 목록</a>
                         </li>
                         <li class="bar-list">
                             <a class="unactive-page" href="./black-list.html" th:href="@{black-list}">차단 회원 관리</a>
@@ -52,49 +52,67 @@
 
             <div class="profile">
                 <form class="form-content">
-                    <h2>프로필 수정</h2>
-                    <div class="form-item">
-                        <label class="profile-label">프로필 사진</label>
-                        <div class="form-input" style="width: 70%; display: flex; align-items: center; justify-content: space-between;">
-                            
-                            <img id="img-preview" src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"/>
-                            <div>
-                                <input id="img-file" style="display: none; width:0px; margin: 0px; padding: 0px;" type="file" accept="image/*"/>
-                                <label for="img-file" class="upload-btn btn-choice-small btn-wb">수정</label>
-                                <label class="reset-img btn-choice-small btn-wb">초기화</label>
+                    <h2>팔로우 유저 목록</h2>
+                    <!-- <p class="form-message">날짜 순으로 최근 5개가 표시됩니다.</p> -->
+                    <ul class="form-list-block">
+                        <li>
+                            <div class="form-item">
+                                <div class="block-info">
+                                    <img src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"/>
+                                    <div class="block-info-text">
+                                        닉네임1
+                                    </div>
+                                </div>
+
+                                <div class="block-modify">
+                                    <button class="btn-choice-small btn-wb">프로필</button>
+                                    <button class="btn-choice-small btn-wb">삭제</button>
+                                </div>
                             </div>
+                        </li>
 
-                        </div>
-                        
-                    </div>
-                    <div class="form-item">
-                        <label class="profile-label" for="get-nickname">닉네임</label>
-                        <input id="get-nickname" type="text" placeholder="닉네임을 입력하세요.">
-                    </div>
-                    <p class="form-message warn">주의사항 같은 것 작성</p>
+                        <li>
+                            <div class="form-item">
+                                <div class="block-info">
+                                    <img src="images/ellipse_56.png" th:src="@{/mypage/images/ellipse_56.png}"/>
+                                    <div class="block-info-text">
+                                        화성남
+                                    </div>
+                                </div>
 
-                    <div class="form-item">
-                        <label class="profile-label">성별</label>
-                        <select>
-                            <option value="">성별</option>
-                            <option value="male">남성</option>
-                            <option value="female">여성</option>
-                        </select>
-                    </div>
-                    <div class="form-item">
-                        <label class="profile-label" for="age">나이</label>
-                        <input class="form-input" id="age" type="number" placeholder="나이를 입력하세요.">
-                    </div>
+                                <div class="block-modify">
+                                    <button class="btn-choice-small btn-wb">프로필</button>
+                                    <button class="btn-choice-small btn-wb">삭제</button>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-item">
+                                <div class="block-info">
+                                    <img id="img-preview" src="images/ellipse_51.png" th:src="@{/mypage/images/ellipse_51.png}"/>
+                                    <div class="block-info-text">
+                                        래빗
+                                    </div>
+                                </div>
 
-                    <div class="form-item">
-                        <label class="profile-label" for="intro">소개글</label>
-                        <textarea class="form-input" id="intro" placeholder="소개글을 입력하세요." rows="5"></textarea>
-                    </div>
-                    <p class="form-message error">에러 메시지</p>
-                    <button class="btn-rw btn-submit" type="submit">제출</button>
+                                <div class="block-modify">
+                                    <button class="btn-choice-small btn-wb">프로필</button>
+                                    <button class="btn-choice-small btn-wb">삭제</button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul class="list-no-pad" style="display: flex; justify-content: center;">
+                        <li style="width: 40px;">1</li>
+                        <li style="width: 40px;">2</li>
+                        <li style="width: 40px;">3</li>
+                        <li style="width: 40px;">4</li>
+                        <li style="width: 40px;">5</li>
+                    </ul>
                 </form>
-            </div>
                 
+            </div>
             <footer class="footer">
                 <div class="footer-link-block">
                     <a>고객서비스</a>
@@ -114,6 +132,5 @@
                 <img src="images/git_image.png" th:src="@{/img/my-page/git_image.png}" style="width: 50%; min-width: 200px;max-width: 450px;">
             </footer>
         </div>
-        <script src="js/upload-image.js" th:src="@{/js/my-page/upload-image.js}"></script>
     </body>
 </html>

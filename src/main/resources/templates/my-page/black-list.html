@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>차단 회원 관리</title>
+        <link rel="stylesheet" href="css/style-mypage.css" th:href="@{/css/my-page/style-mypage.css}">
+        <link rel="stylesheet" href="css/button.css" th:href="@{/css/my-page/button.css}">
+    </head>
+    <body>
+        <div class="container">
+            <nav class="header">
+                <div class="header-bar">
+                    <img class="header-item logo" src="images/logo.png" th:src="@{/img/my-page/logo.png}" >
+                    <a class="header-item">홈</a>
+                    <a class="header-item">모임 등록</a>
+                    <a class="header-item">모임 찾기</a>
+                    <a class="header-item">후기</a>
+                    <div class="header-item">
+                        <button id="notification-icon">
+                            <img class="icon-image" src="images/notification.png" th:src="@{/img/my-page/notification.png}">
+                        </button>
+                        <button class="btn-choice-mid btn-wb">마이페이지</button>
+                        <button class="btn-choice-mid btn-wb">로그아웃</button>
+                    </div>
+                </div>
+            </nav>
+
+            <aside class="bar">
+                <div class="my-page-list sidebar-block">
+                    <h2>마이 페이지</h2>
+                    <ul class="list-no-pad">
+                        <li class="bar-list">
+                            <a class="unactive-page" href="./profile.html" th:href="@{profile}">프로필 수정</a>
+                        </li>
+                        <li class="bar-list">
+                            <a class="unactive-page" href="./tech-profile.html" th:href="@{tech-profile}">기술 프로필 설정</a>
+                        </li>
+                        <li class="bar-list">
+                            <a class="unactive-page" href="./follow-list.html" th:href="@{follow-list}">팔로우 유저 목록</a>
+                        </li>
+                        <li class="bar-list">
+                            <a class="active-page" href="./black-list.html" th:href="@{black-list}">차단 회원 관리</a>
+                        </li>
+                        <li class="bar-list">
+                            <a class="unactive-page" href="./account-info.html" th:href="@{account-info}">계정 정보 보기</a>
+                        </li>
+                        <li class="bar-list">
+                            <a class="unactive-page" href="./withdraw.html" th:href="@{withdraw}">회원 탈퇴</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <div class="profile">
+                <form class="form-content">
+                    <h2>차단 회원 관리</h2>
+                    <p class="form-message">상대방은 차단여부를 알 수 없습니다.</p>
+                    <ul class="form-list-block">
+                        <li>
+                            <div class="form-item">
+                                <div class="block-info">
+                                    <img id="img-preview" src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"/>
+                                    <div class="block-info-text">
+                                        닉네임1
+                                        <p class="form-message warn">모임 시 비매너 행동</p>
+                                    </div>
+                                </div>
+
+                                <div class="block-modify">
+                                    <button class="btn-choice-small btn-wb">수정</button>
+                                    <button class="btn-choice-small btn-wb">삭제</button>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="form-item">
+                                <div class="block-info">
+                                    <img id="img-preview" src="images/profile-voodoo.jpg"/>
+                                    <div class="block-info-text">
+                                        부두술사
+                                        <p class="form-message warn">종교 활동 권유</p>
+                                    </div>
+                                </div>
+
+                                <div class="block-modify">
+                                    <button class="btn-choice-small btn-wb">수정</button>
+                                    <button class="btn-choice-small btn-wb">삭제</button>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-item">
+                                <div class="block-info">
+                                    <img id="img-preview" src="images/profile-al nassr.svg"/>
+                                    <div class="block-info-text">
+                                        알 나스르
+                                        <p class="form-message warn">노쇼</p>
+                                    </div>
+                                </div>
+
+                                <div class="block-modify">
+                                    <button class="btn-choice-small btn-wb">수정</button>
+                                    <button class="btn-choice-small btn-wb">삭제</button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul class="list-no-pad" style="display: flex; justify-content: center;">
+                        <li style="width: 40px;">1</li>
+                        <li style="width: 40px;">2</li>
+                        <li style="width: 40px;">3</li>
+                        <li style="width: 40px;">4</li>
+                        <li style="width: 40px;">5</li>
+                    </ul>
+                    
+                </form>
+            </div>
+            <footer class="footer">
+                <div class="footer-link-block">
+                    <a>고객서비스</a>
+                    <a>소셜미디어</a>
+                    <a>팀원소개</a>
+                    <a>github</a>
+                </div>
+                <div style="width: 100%; align-items: center;">
+                    <ul style="margin:auto; display: flex; flex-direction: row; width: 50%; max-width: 450px;">
+                        <li>김도현</li>
+                        <li>김재협</li>
+                        <li>김혜진</li>
+                        <li>정현민</li>
+                        <li>홍관섭</li>
+                    </ul>
+                </div>
+                <img src="images/git_image.png" th:src="@{/img/my-page/git_image.png}" style="width: 50%; min-width: 200px;max-width: 450px;">
+            </footer>
+        </div>
+    </body>
+</html>

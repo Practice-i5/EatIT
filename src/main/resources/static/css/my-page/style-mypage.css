@@ -1,0 +1,422 @@
+body {
+    margin: auto;
+
+}
+
+* {
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+img{
+    width: 100px;
+    height: 100px;
+}
+
+.modal {
+    position: absolute;
+    display: none;
+
+    justify-content: center;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal_body {
+    position: absolute;
+    top: 50%;
+
+
+    width: 400px;
+    height: 600px;
+
+    padding: 40px;
+
+    text-align: center;
+
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+    transform: translateY(-50%);
+}
+
+
+.container {
+    min-height: 100vh;
+    display: grid;
+    grid-template-areas:
+        "header header header"
+        "bar main ."
+        ". . ."
+        "footer footer footer"
+    ;
+    grid-template-columns: 2fr 3fr 2fr;
+    grid-template-rows: auto 1fr auto;
+    /* grid-template-columns: 1fr 2fr 3fr  2fr 1fr; */
+}
+
+
+#notification-icon {
+    background-color: white;
+}
+
+#notification-icon:hover {
+    background-color: gainsboro;
+}
+
+
+.header {
+    grid-area: header;
+    text-align: center;
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: center;
+}
+
+.header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 75%;
+    max-width: 850px;
+
+}
+
+.header-item {
+    display: flex;
+    margin: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.header a:hover {
+    color: red;
+}
+
+.bar {
+    /* display: flex; */
+    grid-area: bar;
+    align-items: right;
+}
+
+.profile {
+    grid-area: main;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.profile input {
+    height: 30px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #c2c2c2;
+    border-width: 2px;
+    flex-grow: 1;
+    margin: 5px;
+}
+
+
+.profile select {
+    height: 30px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #c2c2c2;
+    border-width: 2px;
+    flex-grow: 1;
+    margin: 5px;
+    box-sizing: content-box;
+}
+
+.profile textarea {
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #c2c2c2;
+    border-width: 2px;
+    flex-grow: 1;
+    margin: 5px;
+    resize: none;
+}
+
+.profile img {
+    width: 75px;
+    height:75px;
+    border:1.5px solid;
+}
+
+.footer {
+    grid-area: footer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #F5F5F5;
+    margin-bottom: auto;
+}
+
+.footer-link-block {
+    width: 100%;
+    margin: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+
+
+/* select{
+    box-sizing: content-box;
+} */
+.bar-list {
+    list-style-type: none;
+    font-size: 20px;
+    margin-bottom: 30px;
+    border-bottom: solid #ECECEC 2px;
+}
+
+.my-page-list {
+    float: right;
+    border: solid 2px;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.my-page-list a {
+    text-decoration: none;
+}
+
+.my-page-list a:hover {
+    color: red;
+    text-decoration: none;
+}
+
+.active-page {
+    color: black;
+}
+
+.unactive-page {
+    color: #8e8c8c;
+}
+
+
+/* .form-input {
+    height: 30px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #c2c2c2;
+    border-width: 2px;
+    width: 70%;
+    margin:5px;
+} */
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    border: solid 1.5px;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+
+.form-item {
+    display: flex;
+    /* align-items: center; */
+    margin: 3px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.profile-label {
+    display: inline-block;
+    text-align: left;
+    width: 30%;
+}
+
+
+/* interest : 관심사 설정쪽 */
+
+.interest-check {
+    display: none;
+}
+
+
+.interest-label {
+    box-sizing: border-box;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/* .interest-label .interest-check {
+    color: white;
+    background-color: red;
+    border-color: red;
+} */
+
+.interest-check+.interest-label {
+    background-color: #ECECEC;
+    border-color: #ECECEC;
+    color: #707070;
+}
+
+/* .interest-check+.interest-label:hover{
+    color:blue;
+    background-color: red;
+} */
+
+.interest-check:checked~.interest-label {
+    color: white;
+    background-color: red;
+    border-color: red;
+}
+
+.form-message {
+    font-size: 12px;
+    margin: 2px;
+    text-align: right;
+}
+
+.form-message-mini{
+    font-size: 12px;
+    margin:0px;
+    text-align: right;
+}
+
+.block-info {
+    display: flex;
+    align-items: center;
+}
+
+.block-info-text {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+.block-modify {
+    display: flex;
+    align-items: end;
+}
+
+.sidebar-block {
+    float: right;
+    border: solid 1.5px;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.chip-btn-list {
+    /* max-width: 70%; */
+    margin-left: 5px;
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+}
+
+.form-size-limit{
+    max-width: 70%;
+}
+
+.image-box {
+    border: solid;
+    border-width: 2px;
+}
+
+.logo {
+    width: 100px;
+}
+
+.icon-image{
+    width: 30px;
+    height:30px;
+}
+
+
+.footer li{
+    list-style: none;
+    width: 20%;
+}
+
+.unactive{
+    display:none;
+}
+
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://example.com/MaterialIcons-Regular.eot); /* For IE6-8 */
+    src: local('Material Icons'),
+      local('MaterialIcons-Regular'),
+      url(https://example.com/MaterialIcons-Regular.woff2) format('woff2'),
+      url(https://example.com/MaterialIcons-Regular.woff) format('woff'),
+      url(https://example.com/MaterialIcons-Regular.ttf) format('truetype');
+  }
+  .material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 32px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    align-items: center;
+  
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+  
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+  
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+  }
+
+
+.form-list-block{
+    list-style: none;
+    margin:3px;
+    padding:0px;
+}
+
+.list-no-pad{
+    list-style: none;
+    float:left;
+    padding-left: 0px;
+}
+
+
+.warn {
+    color: #8c8c8c;
+    font-size: 12px;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+.valid {
+    color: blue;
+    font-size: 12px;
+}
