@@ -6,24 +6,20 @@
 
 }
 
-html, body {
-
+html,body {
+    min-height: 100%;
     background-image: #34495e;
-    min-width: 1280px;
-    min-height: 600px;
 }
-
 h1 {
     color: rgba(255, 0, 0, 1);
     font-size: 2em;
-    margin: 5%;
+    margin:5%;
 }
-
 .joinForm {
     position: absolute;
     width: 464px;
     height: 800px;
-    padding: 30px 20px;
+    padding: 30px, 20px;
     background-color: #FFFFFF;
     text-align: center;
     top: 40%;
@@ -111,6 +107,34 @@ h1 {
     background: none;
 }
 
+.btn {
+    position: relative;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 40px;
+    margin-top: 40;
+    width: 464px;
+    height: 48px;
+    background-color: rgba(255, 0, 0, 1);
+    background-position: left;
+    background-size: 200%;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: 0.4s;
+    display: inline;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+
+}
+
+.btn:hover{
+    background-position: right;
+}
 .button {
     width: 445px;
     height: 50px;
@@ -136,36 +160,6 @@ h1 {
     transform: translateX(-50%);
 }
 
-.btn {
-    position: relative;
-    top: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-bottom: 40px;
-    margin-top: 40px;
-    width: 464px;
-    height: 48px;
-    background-color: rgba(255, 0, 0, 1);
-    background-position: left;
-    background-size: 200%;
-    color: white;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    transition: 0.4s;
-    display: inline;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
-
-}
-
-.btn:hover {
-    background-position: right;
-}
-
-
 /* .container {
     display: grid;
     grid-template-areas: 
@@ -177,6 +171,9 @@ h1 {
 } */
 
 
+
+
+
 .form-item {
     display: flex;
     /* align-items: center; */
@@ -185,6 +182,8 @@ h1 {
     align-items: center;
     justify-content: space-between;
 }
+
+
 
 
 .profile-label {
@@ -213,7 +212,7 @@ h1 {
     border-color: red;
 }
 
-.interest-check + .interest-label {
+.interest-check+.interest-label {
     background-color: #ECECEC;
     border-color: #ECECEC;
     color: #707070;
@@ -224,7 +223,7 @@ h1 {
     background-color: red;
 } */
 
-.interest-check:checked ~ .interest-label {
+.interest-check:checked~.interest-label {
     color: white;
     background-color: red;
     border-color: red;
@@ -251,6 +250,7 @@ h1 {
 }
 
 
+
 .btn-wr:hover {
     background-color: #ECECEC;
     /* border-color : #D0D0D0; */
@@ -264,7 +264,7 @@ h1 {
 }
 
 
-.btn-wb:hover {
+.btn-wb:hover{
     background-color: gainsboro;
 }
 
@@ -284,7 +284,7 @@ h1 {
 .btn-choice-mid {
     border-style: solid;
     border-radius: 20px;
-    height: 30px;
+    height:30px;
     margin: 3px;
     padding-top: 2px;
     padding-bottom: 2px;
@@ -302,12 +302,12 @@ h1 {
     height: 32px;
     border-radius: 25px;
     border-style: none;
-    margin: auto;
+    margin:auto;
     outline: solid;
 }
 
-.list-no-pad {
+.list-no-pad{
     list-style: none;
-    float: left;
+    float:left;
     padding-left: 0px;
 }

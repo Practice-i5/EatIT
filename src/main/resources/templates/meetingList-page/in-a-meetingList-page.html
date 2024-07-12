@@ -71,10 +71,11 @@
         </button>
         <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
           <div class="navbar-nav mx-auto">
-            <a href="../main-page/home.html" class="nav-item nav-link">홈</a>
-            <a href="../enroll-meeting/index.html" class="nav-item nav-link">모임등록</a>
-            <a href="../search/list.html" class="nav-item nav-link">모임찾기</a>
+            <a href="home.html" class="nav-item nav-link">홈</a>
+            <a href="enroll-meeting.html" class="nav-item nav-link">모임등록</a>
+            <a href="search.html" class="nav-item nav-link">모임찾기</a>
             <a href="before-meetingList-page.html" class="nav-item nav-link active">모임 목록</a>
+            <a href="contact.html" class="nav-item nav-link">Contact</a>
           </div>
           <!-- 알림, 로그인, 회원가입 버튼 추가 -->
 
@@ -153,14 +154,14 @@
 
               <li class="nav-item">
                 <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="like-page.html">
-                  <span class="text-dark" style="width: 130px">찜한 모임</span>
+                  <span class="text-dark" style="width: 130px">찜 모임</span>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill"
-                  href="before-meetingList-page.html">
-                  <span class="text-dark" style="width: 130px">참여 전 모임</span>
+                href="followerList.html">
+                  <span class="text-dark" style="width: 130px">팔로잉 모임</span>
                 </a>
               </li>
 
@@ -197,7 +198,7 @@
                   <div class="col-md-6 col-lg-4 col-xl-3">
                     <div class="rounded position-relative fruite-item">
                       <div class="fruite-img">
-                        <img src="https://cdn.pixabay.com/photo/2021/02/04/12/47/food-5981232_640.jpg"
+                        <img src="https://cdn.pixabay.com/photo/2017/09/30/15/10/plate-2802332_640.jpg"
                           class="other-image img-fluid w-100 rounded-top" alt="" />
                       </div>
                       <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
@@ -205,11 +206,11 @@
                         프론트엔드
                       </div>
                       <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                        <h4>브런치카페</h4>
+                        <h4>피자맛집</h4>
                         <p>
-                          맛있는 브런치먹고 힘내봅시다
+                          맛있는 피자 먹고 취뽀 가보자!!!
                           <br>
-                          [시니어 프론트 개발자 모임]
+                          [개발자 지망생 & 개발 멘토 모임]
                         </p>
                         <div class="d-flex justify-content-between flex-lg-wrap">
                           <!-- 프로필 추가하는 부분-->
@@ -218,16 +219,22 @@
                               alt="Profile Picture" class="profile-image">
                             <span class="profile-text">1/3명</span>
                           </div>
+                          <div class="meeting-status text-success fw-bold">
+                            모임 진행 중
+                          </div> 
                           <p class="text-dark fs-5 fw-bold mb-0">
-                            2024.07.01(월) 오후 12:00
+                            2024.06.30(일) 오후 1:00
                           </p>
-                          <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                              class="fa fa-shopping-bag me-2 text-primary"></i>
-                            Add to cart</a>
+                          <!-- toggleFavorite와 id의 heartIcon[N] N변경-->
+                          <a href="#" class="icon" onclick="toggleFavorite(event, 'heartIcon1')">
+                            <i id="heartIcon1" class="far fa-heart me-2 text-primary"></i> 찜하기
+                          </a>
                         </div>
                       </div>
                     </div>
                   </div>
+
+
 
 
                   <div class="col-md-6 col-lg-4 col-xl-3">
@@ -254,16 +261,22 @@
                               alt="Profile Picture" class="profile-image">
                             <span class="profile-text">1/3명</span>
                           </div>
+                          <div class="meeting-status text-success fw-bold">
+                            모임 진행 중
+                          </div>
                           <p class="text-dark fs-5 fw-bold mb-0">
                             2024.06.29(토) 오후 5:00
                           </p>
-                          <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                              class="fa fa-shopping-bag me-2 text-primary"></i>
-                            Add to cart</a>
+                          <!-- toggleFavorite와 id의 heartIcon[N] N변경-->
+                          <a href="#" class="icon" onclick="toggleFavorite(event, 'heartIcon2')">
+                            <i id="heartIcon2" class="far fa-heart me-2 text-primary"></i> 찜하기
+                          </a>
                         </div>
                       </div>
                     </div>
                   </div>
+
+
 
 
                   <div class="col-md-6 col-lg-4 col-xl-3">
@@ -289,16 +302,23 @@
                               alt="Profile Picture" class="profile-image">
                             <span class="profile-text">1/3명</span>
                           </div>
+                          <div class="meeting-status text-success fw-bold">
+                            모임 진행 중
+                          </div>
                           <p class="text-dark fs-5 fw-bold mb-0">
                             2024.06.29(토) 오후 1:00
                           </p>
-                          <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                              class="fa fa-shopping-bag me-2 text-primary"></i>
-                            Add to cart</a>
+                          <!-- toggleFavorite와 id의 heartIcon[N] N변경-->
+                          <a href="#" class="icon" onclick="toggleFavorite(event, 'heartIcon3')">
+                            <i id="heartIcon3" class="far fa-heart me-2 text-primary"></i> 찜하기
+                          </a>
                         </div>
                       </div>
                     </div>
                   </div>
+
+
+
 
                   <div class="col-md-6 col-lg-4 col-xl-3">
                     <div class="rounded position-relative fruite-item">
@@ -324,12 +344,16 @@
                               alt="Profile Picture" class="profile-image">
                             <span class="profile-text">1/3명</span>
                           </div>
+                          <div class="meeting-status text-success fw-bold">
+                            모임 진행 중
+                          </div>
                           <p class="text-dark fs-5 fw-bold mb-0">
                             2024.07.01(월) 오후 12:00
                           </p>
-                          <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                              class="fa fa-shopping-bag me-2 text-primary"></i>
-                            Add to cart</a>
+                          <!-- toggleFavorite와 id의 heartIcon[N] N변경-->
+                          <a href="#" class="icon" onclick="toggleFavorite(event, 'heartIcon4')">
+                            <i id="heartIcon4" class="far fa-heart me-2 text-primary"></i> 찜하기
+                          </a>
                         </div>
                       </div>
                     </div>

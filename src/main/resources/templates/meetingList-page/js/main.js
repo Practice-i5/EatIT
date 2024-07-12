@@ -188,4 +188,42 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //로그인 , 회원가입
 
+// 찜 기능, 하트 버튼
+let favorited = false;
 
+function toggleFavorite(event) {
+    event.preventDefault(); // 기본 이벤트(링크 이동) 방지
+
+    favorited = !favorited;
+    const heartIcon = document.getElementById('heartIcon');
+
+    if (favorited) {
+        heartIcon.classList.remove('far');
+        heartIcon.classList.add('fas');
+        heartIcon.classList.add('text-danger');
+    } else {
+        heartIcon.classList.remove('fas');
+        heartIcon.classList.remove('text-danger');
+        heartIcon.classList.add('far');
+    }
+}
+
+
+// 찜하기 하트 색 변경
+function toggleFavorite(event, iconId) {
+    event.preventDefault();
+    var heartIcon = document.getElementById(iconId);
+
+    // Font Awesome 클래스를 토글하여 빈 하트와 채워진 하트를 교체 // far : 빈 하트, fas : 채워진 하트
+    if (heartIcon.classList.contains('far')) {
+        heartIcon.classList.remove('far');
+        heartIcon.classList.add('fas'); // 채워진 하트 클래스
+        heartIcon.classList.remove('text-primary');
+        heartIcon.classList.add('text-pink'); // 핑크 클래스
+    } else {
+        heartIcon.classList.remove('fas');
+        heartIcon.classList.add('far'); // 빈 하트 클래스
+        heartIcon.classList.remove('text-pink');
+        heartIcon.classList.add('text-primary'); // 원래 색 클래스
+    }
+}

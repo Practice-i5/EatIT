@@ -18,7 +18,7 @@
   --bs-white: #fff;
   --bs-gray: #6c757d;
   --bs-gray-dark: #343a40;
-  --bs-primary: #81c408;
+  --bs-primary: #dcb335;
   --bs-secondary: #ffb524;
   --bs-success: #198754;
   --bs-info: #0dcaf0;
@@ -239,7 +239,7 @@ sup {
 }
 
 a {
-  color: #81c408;
+  color: #000000;
   text-decoration: none;
 }
 
@@ -310,6 +310,8 @@ figure {
 img,
 svg {
   vertical-align: middle;
+  /*max-height: 140px;*/
+  /*이게 근데 저렇게 max-height를 두면 모든 이미지가 작아져 버려서 다른 방법을 찾아야 함!*/
 }
 
 table {
@@ -387,8 +389,7 @@ select:disabled {
 button,
 [type='button'],
 [type='reset'],
-[type='submit'] {
-  -webkit-appearance: button;
+[type='submit'] {-webkit-appearance: button;
 }
 
 button:not(:disabled),
@@ -3155,21 +3156,21 @@ fieldset:disabled .btn {
 
 .btn-primary {
   color: #000;
-  background-color: #81c408;
-  border-color: #81c408;
+  background-color: #9f5a19aa;
+  border-color: #9f5a19aa;
 }
 
 .btn-primary:hover {
   color: #000;
-  background-color: #94cd2d;
-  border-color: #8eca21;
+  background-color: #9f5a19aa;
+  border-color: #9f5a19aa;
 }
 
 .btn-check:focus+.btn-primary,
 .btn-primary:focus {
   color: #000;
-  background-color: #94cd2d;
-  border-color: #8eca21;
+  background-color: #9f5a19aa;
+  border-color: #9f5a19aa;
   box-shadow: 0 0 0 0.25rem rgba(110, 167, 7, 0.5);
 }
 
@@ -3179,8 +3180,8 @@ fieldset:disabled .btn {
 .btn-primary.active,
 .show>.btn-primary.dropdown-toggle {
   color: #000;
-  background-color: #9ad039;
-  border-color: #8eca21;
+  background-color: #9f5a19aa;
+  border-color: #9f5a19aa;
 }
 
 .btn-check:checked+.btn-primary:focus,
@@ -7396,7 +7397,7 @@ fieldset:disabled .btn {
 }
 
 .border-primary {
-  border-color: #81c408 !important;
+  border-color: #000000 !important;
 }
 
 .border-secondary {
@@ -8373,7 +8374,7 @@ fieldset:disabled .btn {
 }
 
 .text-primary {
-  color: #81c408 !important;
+  color: #ff9800 !important;
 }
 
 .text-secondary {

@@ -11,32 +11,29 @@
 </head>
 
 <body>
-
-
 <div class="wrap">
     <div class="login">
         <div class="login_logo">
-            <a th:href="@{/}">
-                <img src="images/image_146.png" width="150" height="150">
-            </a>
+            <img src="images\image_146.png" width="150" height="150">
         </div>
-
-        <h2>이메일 찾기</h2>
+        <h2>비밀번호 찾기</h2>
         <div class="login_email">
-            <h4>이름</h4>
-            <input type="email" placeholder="name">
+            <h4>이메일</h4>
+            <input type="email" placeholder="email">
         </div>
         <div class="login_pw">
+            <h4>이름</h4>
+            <input type="password"placeholder="name">
+        </div>
+        <div class="login_email">
             <h4>전화번호</h4>
-            <input type="password" placeholder="phone number">
+            <input type="email"placeholder="phone number">
         </div>
         <div class="login_etc">
 
         </div>
-        <div class="button">
-            <form action="/main" method="post">
-                <button type="button" class="login-btn" onclick="location.href='/login'">확인</button>
-            </form>
+        <div class="buttom">
+            <input type="button" class="btn" value="확인"/>
         </div>
     </div>
 </div>
