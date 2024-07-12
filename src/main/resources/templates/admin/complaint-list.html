@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            margin: 20px 0;
+        }
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+        }
+        .content {
+            flex-grow: 1;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        .content .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .content .header .search-box {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .content .header .search-box input {
+            border: none;
+            outline: none;
+            margin-left: 10px;
+            font-size: 16px;
+        }
+        .content .header .admin {
+            font-size: 18px;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .table th, .table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #f1f1f1;
+        }
+        .table th {
+            background-color: #f7f7f7;
+        }
+        .table td .btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .pagination button {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        .pagination button.active {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <ul>
+                <li><a href="#">회원 관리</a></li>
+                <li><a href="#">리뷰 관리</a></li>
+                <li><a href="#">블랙리스트</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="header">
+                <div class="search-box">
+                    <input type="text" placeholder="search">
+                </div>
+                <div class="admin">Admin</div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>이름</th>
+                        <th>역할</th>
+                        <th>계정정지</th>
+                        <th>신고 누적</th>
+                        <th>벌점</th>
+                        <th>로그인횟수</th>
+                        <th>가입일</th>
+                        <th>관리</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>tboy022@gmail.com</td>
+                        <td>엉터리</td>
+                        <td>USER</td>
+                        <td>N</td>
+                        <td>0</td>
+                        <td>3.5</td>
+                        <td>3</td>
+                        <td>2024.05.22</td>
+                        <td><button class="btn">관리</button></td>
+                    </tr>
+                    <tr>
+                        <td>vitamin@gmail.com</td>
+                        <td>비타민</td>
+                        <td>USER</td>
+                        <td>N</td>
+                        <td>0</td>
+                        <td>3.5</td>
+                        <td>3</td>
+                        <td>2024.05.01</td>
+                        <td><button class="btn">관리</button></td>
+                    </tr>
+                    <tr>
+                        <td>khj@gmail.com</td>
+                        <td>khj</td>
+                        <td>USER</td>
+                        <td>N</td>
+                        <td>0</td>
+                        <td>5.0</td>
+                        <td>5</td>
+                        <td>2024.01.03</td>
+                        <td><button class="btn">관리</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <button>«</button>
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>4</button>
+                <button>5</button>
+                <button>»</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

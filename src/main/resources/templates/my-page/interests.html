@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>관심사 설정</title>
+    </head>
+    <style>
+        .container {
+            display: grid;
+            grid-template-areas: 
+                "header header header"
+                "bar main ."
+                "footer footer footer"
+            ;
+        }
+
+        .header {grid-area:header;
+            text-align: center;}
+        .bar{grid-area:bar;}
+        .profile{grid-area: main;
+            display: flex;
+            flex-direction:column;
+            align-items: center;
+        }
+        .footer {grid-area:footer;
+            text-align: center;}
+        
+
+        /* select{
+            box-sizing: content-box;
+        } */
+        .bar-list{
+            list-style-type: none;
+            font-size: 20px;
+            /* padding-top:18px;
+            padding-bottom: 18px; */
+        }
+        .active-page {
+            color:black;
+        }
+        .unactive-page {
+            color:#8e8c8c;
+        }
+        
+        .form-input{
+            height:30px;
+            border-style: solid;
+            border-radius: 5px;
+            border-color: #c2c2c2;
+            border-width:2px;
+        }
+
+        .btn-submit{
+            width: 250px;
+            height:32px;
+            border-radius: 25px;
+            border-style: none;
+            outline: solid;
+        }
+
+        .warn-message{
+            color: #8c8c8c;
+            font-size:12px;
+        }
+
+        .btn-rw{
+            background-color: red;
+            color: white;
+        }
+
+        .btn-rw:hover{
+            background-color:brown;
+            color: white;
+        }
+
+        .btn-wr{
+            background-color: white;
+            color: red;
+        }
+    </style>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>대충 헤더</h1>
+            </div>
+            <div class="bar">
+                <h2>마이 페이지</h2>
+                <ul>
+                    <li class="unactive-page bar-list">
+                        프로필 수정
+                    </li>
+                    <li class="active-page bar-list">
+                        관심사 설정
+                    </li>
+                    <li class="unactive-page bar-list">
+                        위치 정보 관리
+                    </li>
+                    <li class="unactive-page bar-list">
+                        참여한 모임 관리
+                    </li>
+                    <li class="unactive-page bar-list">
+                        차단 내역 관리
+                    </li>
+                    <li class="unactive-page bar-list">
+                        회원 탈퇴
+                    </li>
+                </ul>
+            </div>
+            <div class="profile">
+                <h2>관심사 설정</h2>
+                <form>
+                    <div class="form-item" id="nickname-form">
+                        <label>관심 개발 분야</label>
+                        <div>
+                            <ul>
+                                <li><input type="checkbox" value="frontend">프론트엔드</li>
+                                <li><input type="checkbox" value="backend">백엔드</li>
+                                <li><input type="checkbox" value="project-management">기획</li>
+                                <li><input type="checkbox" value="game-client">게임 클라이언트</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="btn-rw btn-submit" type="submit">제출</button>
+                </form>
+            </div>
+            <div class="footer">
+                <h1>대충 푸터</h1>
+            </div>
+        </div>
+    </body>
+</html>

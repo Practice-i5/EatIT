@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>모달</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #review-modal {
+            position: fixed;
+            display: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        #review-modal.active {
+            display: flex;
+        }
+
+        #review {
+            width: 90%;
+            max-width: 500px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        #review-close {
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            background: none;
+            float: right;
+        }
+
+        #review-close:hover,
+        #review-close:focus {
+            color: red;
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .review-pic img {
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+        }
+
+        .review-name {
+            margin: 0;
+            text-align: center;
+        }
+
+        .review-contents {
+            background-color: #dff0d8;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .review-contents h5 {
+            margin: 10px 0;
+        }
+
+        .review-contents p {
+            margin: 5px 0;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .temp-prt {
+            text-align: center;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .block-btn,
+        .report-btn,
+        .follow-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .follow-btn {
+            background-color:rgb(157, 231, 249);
+            color: #000;
+        }
+
+        .block-btn {
+            background-color: #ccc;
+            color: #000;
+        }
+
+        .report-btn {
+            background-color: #f44336;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="review-modal">
+        <div id="review">
+            <button id="review-close">&times;</button>
+            <div class="review-header">
+                <h3 class="modal-name">후기 상세 보기</h3>
+            </div>
+            <div class="review-contents">
+                <div class="review-header">
+                    <div class="review-pic">
+                        <img src="../../static/img/flower_doguri.png" alt="후기 사진">
+                    </div>
+                    <div class="review-info">
+                        <h5 class="review-name">리더 닉네임</h5>
+                        <p>모임 횟수: 5</p>
+                    </div>
+                </div>
+                <div>
+                    <hr />
+                    <div>
+                        <h4>평가</h4>
+                        <p>시간 약속을 잘 지켜요</p>
+                        <p>질문에 대한 답변이 빨라요</p>
+                        <p>응답이 빨라요</p>
+						<p>모임이 너무 늦게 끝나요</p>
+                    </div>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <button class="report-btn">신고하기</button>
+            </div>
+        </div>
+    </div>
+
+    <button id="open-review">후기 보기</button>
+    <a id="open-review-img" value="button"><img src="../../static/img/sakura_doguri.png" style="width:100px;height:100px;"></a>
+    <a id="open-review-search" value="button">검색</a>
+    <script src="../../static/js/review-modal.js"></script>
+</body>
+
+</html>

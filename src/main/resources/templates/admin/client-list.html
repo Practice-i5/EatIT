@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>User Management</title>
+	<link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="sidebar">
+			<ul>
+				<li>회원 관리</li>
+				<li>리뷰 관리</li>
+				<li>블랙리스트</li>
+				<li><a href="login.html">로그아웃</a></li>
+			</ul>
+		</div>
+		<div class="main">
+			<div class="header">
+				<input type="text" id="search" placeholder="search by ID">
+				<button id="searchBtn" class="add-user">조회</button>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>이름</th>
+						<th>역할</th>
+						<th>계정잠금</th>
+						<th>신고 누적</th>
+						<th>벌점</th>
+						<th>로그인시도</th>
+						<th>가입일</th>
+						<th>관리</th>
+					</tr>
+				</thead>
+				<tbody id="userTableBody">
+					<!-- Table rows will be inserted here dynamically -->
+				</tbody>
+			</table>
+			<div class="pagination">
+				<button id="prevPage">«</button>
+				<span id="pageNumbers"></span>
+				<button id="nextPage">»</button>
+			</div>
+		</div>
+	</div>
+	<script src="js/admin.js"></script>
+</body>
+
+</html>

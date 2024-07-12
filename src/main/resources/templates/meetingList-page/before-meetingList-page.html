@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Eat IT</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta content="" name="keywords" />
+  <meta content="" name="description" />
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap"
+    rel="stylesheet" />
+
+  <!-- Icon Font Stylesheet -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <!-- Libraries Stylesheet -->
+  <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
+  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+
+  <!-- Customized Bootstrap Stylesheet -->
+  <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Template Stylesheet -->
+  <link href="css/style.css" rel="stylesheet" />
+  <style>
+    .main-image {
+      max-height: none;
+      /* 메인 이미지에는 최대 높이를 제한하지 않음 */
+    }
+
+    .other-image {
+      max-height: 140px;
+      /* 다른 이미지의 최대 높이를 140px로 제한 */
+    }
+
+    .carousel-inner img {
+      vertical-align: middle;
+      /* 모든 이미지에 대해 중간 정렬 */
+    }
+  </style>
+
+</head>
+
+<body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="lib/lightbox/js/lightbox.min.js"></script>
+  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="js/main.js"></script> <!-- Link to your main.js file -->
+  <!-- Spinner Start -->
+  <div id="spinner"
+    class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-grow text-primary" role="status"></div>
+  </div>
+  <!-- Spinner End -->
+
+  <!-- Navbar start  수정한 부분-- 헤더 부분!-->
+  <div class="container-fluid fixed-top">
+    <div class="container px-0">
+      <nav class="navbar navbar-light bg-white navbar-expand-xl">
+        <img src="/meetingList-page/img/image_145.png" width="80" alt="Eat-IT Logo">
+        <h1 class="text-primary display-6">Eat-IT</h1>
+        <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarCollapse">
+          <span class="fa fa-bars text-primary"></span>
+        </button>
+        <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
+          <div class="navbar-nav mx-auto">
+            <a href="../main-page/home.html" class="nav-item nav-link">홈</a>
+            <a href="../enroll-meeting/index.html" class="nav-item nav-link">모임등록</a>
+            <a href="../search/list.html" class="nav-item nav-link">모임찾기</a>
+            <a href="before-meetingList-page.html" class="nav-item nav-link active">모임 목록</a>
+          </div>
+          <!-- 알림, 로그인, 회원가입 버튼 추가 -->
+
+          <a href="#" class="btn-notification my-auto me-4">
+            <i class="fas fa-bell fa-2x"></i>
+            <span class="position-absolute bg-danger rounded-circle"
+              style="top: 0; right: 0; width: 10px; height: 10px;"></span>
+          </a>
+          <!-- JavaScript 파일 연결 -->
+          <button class="btn btn-danger rounded-pill me-2" id="loginButton">로그인</button>
+          <button class="btn btn-outline-danger rounded-pill" id="signupButton">회원가입</button>
+        </div>
+    </div>
+    </nav>
+  </div>
+  </div>
+  <!-- Navbar End -->
+
+
+  <!-- 일단 이렇게 해야 페이지 이동될 수 있어서 이 방식으로 했는데, 추후에 js로 분리시켜야 함-->
+  <script src="js/main.js"></script>
+  <script>
+    // JavaScript for login and signup buttons
+    document.addEventListener('DOMContentLoaded', function () {
+      document.getElementById('loginButton').addEventListener('click', function () {
+        window.location.href = 'login.html'; // Navigate to login.html
+      });
+
+      document.getElementById('signupButton').addEventListener('click', function () {
+        window.location.href = 'join.html'; // Navigate to join.html
+      });
+    });
+  </script>
+
+
+  <!-- Modal Search Start -->
+  <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+      <div class="modal-content rounded-0">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            Search by keyword
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body d-flex align-items-center">
+          <div class="input-group w-75 mx-auto d-flex">
+            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1" />
+            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Search End -->
+
+  <!-- Hero Start -->
+
+  <div>
+    <h1>
+      asasdas
+      asd
+      asd
+      asd
+    </h1>
+  </div>
+
+  <!-- Hero End -->
+  <!-- 관심 개발 분야 목록-->
+  <div class="container-fluid fruite py-5">
+    <div class="container py-5">
+      <div class="tab-class text-center">
+        <div class="row g-4">
+          <div class="col-lg-4 text-start">
+            <h2>참여 전 모임</h2>
+          </div>
+          <div class="col-lg-8 text-end">
+            <ul class="nav nav-pills d-inline-flex text-center mb-5">
+
+              <li class="nav-item">
+                <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="like-page.html">
+                  <span class="text-dark" style="width: 130px">찜한 모임</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="d-flex m-2 py-2 bg-light rounded-pill active" data-bs-toggle="pill"
+                  href="before-meetingList-page.html">
+                  <span class="text-dark" style="width: 130px">참여 전 모임</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="d-flex py-2 m-2 bg-light rounded-pill" data-bs-toggle="pill"
+                  href="in-a-meetingList-page.html">
+                  <span class="text-dark" style="width: 130px">참여중인 모임</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill"
+                  href="after-meetingList-page.html">
+                  <span class="text-dark" style="width: 130px">완료된 모임</span>
+                </a>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+
+
+
+
+
+        <!-- 관심 개발 분야 음식점 목록 나오는 곳-->
+        <div class="tab-content">
+          <div id="tab-1" class="tab-pane fade show p-0 active">
+            <div class="row g-4">
+              <div class="col-lg-12">
+                <div class="row g-4">
+                  <!-- 이 부분이 관심 개발 분야 네모 상자인데, 클래스 이름 변경 해야 함!-->
+
+                  <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="rounded position-relative fruite-item">
+                      <div class="fruite-img">
+                        <img src="https://cdn.pixabay.com/photo/2017/08/02/00/51/food-2569257_640.jpg"
+                          class="other-image img-fluid w-100 rounded-top" alt="" />
+                      </div>
+                      <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                        style="top: 10px; left: 10px">
+                        백엔드
+                      </div>
+                      <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                        <h4>치킨</h4>
+                        <p>
+                          Lorem ipsum dolor sit amet consectetur adipisicing
+                          elit sed do eiusmod te incididunt
+                        </p>
+                        <div class="d-flex justify-content-between flex-lg-wrap">
+                          <!-- 프로필 추가하는 부분-->
+                          <div class="profile-container">
+                            <img src="https://cdn.pixabay.com/photo/2020/06/30/22/34/dog-5357794_640.jpg"
+                              alt="Profile Picture" class="profile-image">
+                            <span class="profile-text">1/3명</span>
+                          </div>
+                          <p class="text-dark fs-5 fw-bold mb-0">
+                            기간 시간
+                          </p>
+                          <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                              class="fa fa-shopping-bag me-2 text-primary"></i>
+                            Add to cart</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="rounded position-relative fruite-item">
+                      <div class="fruite-img">
+                        <img src="https://cdn.pixabay.com/photo/2014/04/22/02/56/pizza-329523_640.jpg"
+                          class="other-image img-fluid w-100 rounded-top" alt="" />
+                      </div>
+                      <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                        style="top: 10px; left: 10px">
+                        기획
+                      </div>
+                      <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                        <h4>Oranges</h4>
+                        <p>
+                          Lorem ipsum dolor sit amet consectetur adipisicing
+                          elit sed do eiusmod te incididunt
+                        </p>
+                        <div class="d-flex justify-content-between flex-lg-wrap">
+                          <!-- 프로필 추가하는 부분-->
+                          <div class="profile-container">
+                            <img src="https://cdn.pixabay.com/photo/2020/06/30/22/34/dog-5357794_640.jpg"
+                              alt="Profile Picture" class="profile-image">
+                            <span class="profile-text">1/3명</span>
+                          </div>
+                          <p class="text-dark fs-5 fw-bold mb-0">
+                            기간, 시간
+                          </p>
+                          <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                              class="fa fa-shopping-bag me-2 text-primary"></i>
+                            Add to cart</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="rounded position-relative fruite-item">
+                      <div class="fruite-img">
+                        <img src="https://cdn.pixabay.com/photo/2017/07/15/13/45/french-restaurant-2506490_640.jpg"
+                          class="other-image img-fluid w-100 rounded-top" alt="" />
+                      </div>
+                      <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                        style="top: 10px; left: 10px">
+                        프론트엔드
+                      </div>
+                      <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                        <h4>프랑스식당</h4>
+                        <p>
+                          양식 먹고 정보 공유하실분~!
+                          <br> [판교 프론트 개발자 모임]
+                        </p>
+                        <div class="d-flex justify-content-between flex-lg-wrap">
+                          <!-- 프로필 추가하는 부분-->
+                          <div class="profile-container">
+                            <img src="https://cdn.pixabay.com/photo/2020/06/30/22/34/dog-5357794_640.jpg"
+                              alt="Profile Picture" class="profile-image">
+                            <span class="profile-text">1/3명</span>
+                          </div>
+                          <p class="text-dark fs-5 fw-bold mb-0">
+                            2024.06.29(토) 오후 1:00
+                          </p>
+                          <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                              class="fa fa-shopping-bag me-2 text-primary"></i>
+                            Add to cart</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="rounded position-relative fruite-item">
+                      <div class="fruite-img">
+                        <img src="https://cdn.pixabay.com/photo/2021/02/04/12/47/food-5981232_640.jpg"
+                          class="other-image img-fluid w-100 rounded-top" alt="" />
+                      </div>
+                      <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                        style="top: 10px; left: 10px">
+                        프론트엔드
+                      </div>
+                      <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                        <h4>브런치카페</h4>
+                        <p>
+                          맛있는 브런치먹고 힘내봅시다
+                          <br>
+                          [시니어 프론트 개발자 모임]
+                        </p>
+                        <div class="d-flex justify-content-between flex-lg-wrap">
+                          <!-- 프로필 추가하는 부분-->
+                          <div class="profile-container">
+                            <img src="https://cdn.pixabay.com/photo/2020/06/30/22/34/dog-5357794_640.jpg"
+                              alt="Profile Picture" class="profile-image">
+                            <span class="profile-text">1/3명</span>
+                          </div>
+                          <p class="text-dark fs-5 fw-bold mb-0">
+                            2024.07.01(월) 오후 12:00
+                          </p>
+                          <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                              class="fa fa-shopping-bag me-2 text-primary"></i>
+                            Add to cart</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript 파일 연결 -->
+  <script src="main.js"></script>
+  <!-- Fruits Shop End-->
+
+  <!-- Footer Start -->
+  <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
+    <div class="container py-5">
+      <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5)">
+        <div class="row g-4">
+          <div class="col-lg-3">
+            <a href="#">
+              <h1 class="text-primary mb-0">Eat IT</h1>
+              <p class="text-secondary mb-0">먹고 마시며 즐기는 인맥 확장의 기회!<br>
+                소소한 IT 소모임 “Eat IT”
+                <br>🍽️🍝🍦🍕🍣🍳🍛🌭🍰🍛🍚🍮🌮☕️
+              </p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row g-5">
+      <div class="col-lg-3 col-md-6">
+        <div class="footer-item">
+          <h4 class="text-light mb-3">NOTICE</h4>
+          <p class="mb-4">
+            공지사항
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="d-flex flex-column text-start footer-item">
+          <h4 class="text-light mb-3">ABOUT US</h4>
+          <a class="btn-link" href="">Eat IT 소개</a>
+          <a class="btn-link" href="">회사 소개</a>
+          <a class="btn-link" href="">인재 채용</a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="d-flex flex-column text-start footer-item">
+          <h4 class="text-light mb-3">팀원 소개</h4>
+          <a class="btn-link" href="">팀원 깃허브</a>
+          <div class="team-member">
+            <img src="/meetingList-page/img/image_161.png" width="400" alt="Team Member" class="team-member-img">
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="d-flex flex-column text-start footer-item">
+          <h4 class="text-light mb-3">github</h4>
+          <a class="btn-link" href="">https://github.com/Practice-i5/EatIT-FE</a>
+          <a class="btn-link" href="">팀 노션</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!-- Footer End -->
+
+  <!-- Copyright Start -->
+  <div class="container-fluid copyright bg-dark py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+          <span class="text-light"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Eat IT</a>, All right
+            reserved.</span>
+        </div>
+        <div class="col-md-6 my-auto text-center text-md-end text-white">
+          <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
+          <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
+          <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
+          Designed By
+          <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+          Distributed By
+          <a class="border-bottom" href="https://themewagon.com">ThemeWagon</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Copyright End -->
+
+</body>
+
+</html>

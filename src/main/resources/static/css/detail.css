@@ -1,0 +1,270 @@
+.logo {
+    width: 100px;
+    height: 100px;
+}
+
+.payments-logo {
+    width: 15px;
+    height: 15px;
+}
+
+.leader-data {
+    width: 300px;
+    border: solid black;
+    border-radius: 2%;
+    /*box-shadow: insert;*/
+    /* position: fixed; */
+}
+
+.profile-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.leader-rate {
+    text-align: center;
+}
+
+.round-corner-print-green {
+    background-color: white;
+    color: #49D188;
+    border: solid #49D188;
+    border-radius: 150px;
+    text-align: center;
+    border-width: 2px;
+}
+
+.border-radius-right-left {
+    border-radius: 150px;
+}
+
+.align-center {
+    text-align: center;
+}
+
+/* .container-fluid.py-5.mt-5{
+        border: solid black;
+        border-top-left-radius: 25px;
+        border-top-right-radius: 25px;
+    } */
+/* 컨텐츠를 가로로 배열하는 부분 .contents-container .contents-container-item */
+.contents-container {
+    display: flex;
+}
+
+.contents-container-item {
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    background-color: white;
+}
+
+.participants-container {
+    display: flex;
+}
+
+.participants-container-item {
+    display: inline-block;
+    width: 100%;
+    height: 30%;
+}
+
+.padding-bottom-20px {
+    padding-bottom: 20px;
+}
+
+.padding-left-20px {
+    padding-left: 20px;
+}
+
+.padding-top-20px {
+    padding-top: 20px;
+}
+
+.header-menu-active {
+    color: #FF0000 !important;
+}
+
+.active-red {
+    color: white;
+    background: #FF0000;
+}
+
+/* import button style */
+/* end */
+
+.hashtag {
+    background-color: #FF0000;
+    color: white;
+    align-content: center;
+    border-radius: 50px;
+    height: 30px;
+}
+
+.page-header {
+    position: relative;
+    height: 300px;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/front_image.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.div-center {
+    align-content: center;
+}
+
+.normal-btn {
+    border-radius: 10px;
+    border-style: hidden;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px;
+    align-items: stretch;
+    border-color: black;
+}
+
+/* modal style css start */
+body {
+    font-family: Arial, sans-serif;
+}
+
+#profile-modal {
+    /*position: fixed;*/
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+#profile-modal.active {
+    display: flex;
+}
+
+#profile {
+    width: 90%;
+    max-width: 500px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+#profile-close {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+#profile-close:hover,
+#profile-close:focus {
+    color: red;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.profile-pic img {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+}
+
+.profile-name {
+    margin: 0;
+    text-align: center;
+}
+
+.profile-contents {
+    background-color: #dff0d8;
+    padding: 20px;
+    border-radius: 10px;
+    /* margin-bottom: 10px; */
+}
+
+.profile-contents h5 {
+    margin: 10px 0;
+}
+
+.profile-contents p {
+    margin: 5px 0;
+}
+
+#action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.report-button {
+    display: none;
+}
+
+.block-btn,
+.report-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.follow-btn{
+    background-color: rgb(134, 252, 252);
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.block-btn {
+    background-color: #ccc;
+    color: #000;
+}
+
+.report-btn {
+    background-color: #f44336;
+    color: #fff;
+}
+
+/* modal style css end */
+.team-member {
+    display: inline-block;
+    margin: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.team-member img {
+    width: 100%;
+    /* 이미지 너비 */
+    height: auto;
+    /* 이미지 높이 자동 */
+}
