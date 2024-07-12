@@ -34,18 +34,20 @@ public class DetailController {
 
         String groupName = "임시 모임 이름";
         String groupLocation = "임시 모임 상세 주소";
+        String leaderId = "임시 닉네임";
+        String intro = "The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc. Susp endisse ultricies nisi vel quam suscipit";
+        String theme = "임시 멘토링";
+        String idDrink = "마셔요";
+        String gender = "상관없음";
+
         // 임시 모임 일시
         Date date = new Date(System.currentTimeMillis());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd(E) a hh:mm");
         String groupDate = sdf.format(date);
-        String leaderId = "임시 닉네임";
-        String intro = "The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc. Susp endisse ultricies nisi vel quam suscipit";
-        String theme = "임시 멘토링";
 
         int expectPayments = 20000;
         int enterAge = 20;
         int temp = 81;
-
 
         List<String> careers = new ArrayList<>();
         careers.add("우리은행 백엔드");
@@ -75,6 +77,9 @@ public class DetailController {
         model.addAttribute("evaluates", evaluates);
         model.addAttribute("temp", temp);
         model.addAttribute("categories", categories);
+        model.addAttribute("isDrink", idDrink);
+        model.addAttribute("gender", gender);
+
 
         return "detail/done-detail";
     }
