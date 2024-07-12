@@ -1,0 +1,152 @@
+
+.logo {
+    width: 100px;
+    height: 100px;
+}
+
+.payments-logo {
+    width: 15px;
+    height: 15px;
+}
+
+
+.profile-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.leader-rate {
+    text-align: center;
+}
+
+.round-corner-print-green {
+    background-color: white;
+    color: #49D188;
+    border-color: #49D188;
+    border-radius: 150px;
+    text-align: center;
+}
+
+.border-radius-right-left {
+    border-radius: 150px;
+}
+
+.align-center {
+    text-align: center;
+}
+
+/* .container-fluid.py-5.mt-5{
+        border: solid black;
+        border-top-left-radius: 25px;
+        border-top-right-radius: 25px;
+    } */
+/* 컨텐츠를 가로로 배열하는 부분 .contents-container .contents-container-item */
+.contents-container {
+    display: flex;
+}
+
+.contents-container-item {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    background-color: white;
+}
+
+.padding-bottom-20px {
+    padding-bottom: 20px;
+}
+
+.padding-left-20px {
+    padding-left: 20px;
+}
+
+.padding-left-100px {
+    padding-left: 20px;
+}
+
+.padding-top-20px {
+    padding-top: 20px;
+}
+
+.header-menu-active {
+    color: #FF0000 !important;
+}
+
+.hashtag {
+    background-color: #FF0000;
+    color: white;
+    align-content: center;
+    border-radius: 50px;
+    height: 30px;
+}
+
+.page-header {
+    position: relative;
+    height: 300px;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/front_image.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.div-center {
+    align-content: center;
+}
+
+.active-red {
+    color: #fff;
+    background-color: #FF0000;
+}
+
+.unactive {
+    color: black;
+    background-color: gray;
+}
+
+.search-profile-img {
+    width: 30px;
+    height: 30px;
+}
+
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.header h2 {
+    margin: 0;
+    font-size: 24px;
+}
+.alarm {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+}
+.alarm img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.alarm .text {
+    flex: 1;
+}
+.alarm .text p {
+    margin: 0;
+}
+.alarm .text small {
+    color: #888;
+}
+.alarm .important small {
+    color: red;
+    font-weight: bold;
+}
+.alarm.highlight {
+    border: 2px solid red;
+}

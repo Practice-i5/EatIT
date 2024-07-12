@@ -1,8 +1,10 @@
 <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <html lang="ko">
 <head>
     <meta charset="utf-8">
-    <title>알림 페이지</title>
+    <title>Alarms</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -19,139 +21,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!--<link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">-->
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
-    <style>
-        .logo {
-            width: 100px;
-            height: 100px;
-        }
+    <link th:href="@{/css/template.css}" rel="stylesheet">
+    <link th:href="@{/css/alarm.css}" rel="stylesheet">
 
-        .payments-logo {
-            width: 15px;
-            height: 15px;
-        }
-
-        .header-button {
-            font: size 30px;
-            background-color: white;
-            /* color: black; */
-            /* border-color: black; */
-        }
-
-        .leader-data {
-            border: solid black;
-            border-radius: 2%;
-            box-shadow: insert;
-        }
-
-        .profile-image {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-        }
-
-        .leader-rate {
-            text-align: center;
-        }
-
-        .round-corner-print-green {
-            background-color: white;
-            color: #49D188;
-            border-color: #49D188;
-            border-radius: 150px;
-            text-align: center;
-        }
-
-        .border-radius-right-left {
-            border-radius: 150px;
-        }
-
-        .align-center {
-            text-align: center;
-        }
-
-        /* .container-fluid.py-5.mt-5{
-                border: solid black;
-                border-top-left-radius: 25px;
-                border-top-right-radius: 25px;
-            } */
-        /* 컨텐츠를 가로로 배열하는 부분 .contents-container .contents-container-item */
-        .contents-container {
-            display: flex;
-        }
-
-        .contents-container-item {
-            width: 100px;
-            height: 100px;
-            margin: 10px;
-            background-color: white;
-        }
-
-        .padding-bottom-20px {
-            padding-bottom: 20px;
-        }
-
-        .padding-left-20px {
-            padding-left: 20px;
-        }
-
-        .padding-left-100px {
-            padding-left: 20px;
-        }
-
-        .padding-top-20px {
-            padding-top: 20px;
-        }
-
-        .header-menu-active {
-            color: #FF0000 !important;
-        }
-
-        .hashtag {
-            background-color: #FF0000;
-            color: white;
-            align-content: center;
-            border-radius: 50px;
-            height: 30px;
-        }
-
-        .page-header {
-            position: relative;
-            height: 300px;
-            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(img/front_image.png);
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        .div-center {
-            align-content: center;
-        }
-
-        .active-red {
-            color: #fff;
-            background-color: #FF0000;
-        }
-
-        .unactive {
-            color: black;
-            background-color: gray;
-        }
-
-        .search-profile-img {
-            width: 30px;
-            height: 30px;
-        }
-    </style>
 </head>
+
+
 <body>
 
     <!-- Spinner Start -->
@@ -182,7 +65,7 @@
         <div class="container px-0">
             <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                    <a href="index.html" class="navbar-brand"><img class=logo src="img/logo.png" /></a>
+                    <a href="../main-page/home.html" class="navbar-brand"><img class=logo src="/img/logo.png" alt="logo"/></a>
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>
@@ -202,8 +85,9 @@
                                 </div> -->
                             <!-- </div> -->
                             <!-- <a href="contact.html" class="nav-item nav-link">Contact</a> -->
-                            <a href="../meetingList-page/like-page.html" class="nav-item nav-link">모임목록</a>
-
+                            <!-- <a href="#" class="nav-item nav-link btn-open-modal" data-bs-toggle="modal"
+                                data-bs-target="#searchModal">검색</a> -->
+                            <a id="open" href="../meetingList-page/like-page.html" class="nav-item nav-link">모임목록</a>
                         </div>
                         <div class="d-flex m-3 me-0">
                             <a href="#" class="btn-notification my-auto me-4">
@@ -212,7 +96,9 @@
                             <!-- JavaScript 파일 연결 -->
                             <button class="btn btn-danger rounded-pill me-2"
                                 onclick="location.href='../newPagetemplate/newlogin.html'" id="loginButton">로그인</button>
-                            <button class="btn btn-outline-danger rounded-pill" id="signupButton">회원가입</button>
+                            <button class="btn btn-outline-danger rounded-pill"
+                                onclick="location.href='../newPagetemplate/newjoin.html'"
+                                id="signupButton">회원가입</button>
                         </div>
                     </div>
                 </nav>
@@ -222,7 +108,7 @@
     <!-- Navbar End -->
 
     <!-- Modal Search Start -->
-    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content rounded-0">
                 <div class="modal-header">
@@ -239,8 +125,6 @@
             </div>
         </div>
     </div>
-    <!-- Modal Search End -->
-
 
     <!-- Single Page Header start -->
     <div class="container-fluid page-header py-5">
@@ -252,6 +136,9 @@
         </ol> -->
     </div>
     <!-- Single Page Header End -->
+
+
+    <!-- Alarm List Start -->
     <div class="container-fluid fruite py-5">
         <div class="container py-5">
             <div class="align-center">
@@ -259,122 +146,97 @@
             </div>
         </div>
     </div>
-
     <div class="container">
-        <div class="notification">
-            <img src="profile1.jpg" alt="Profile">
+        <div class="alarm">
+            <img src="/img/test_image.png">
             <div class="text">
-                <p>후라토식당 아브뉴프랑 판교점</p>
-                <small class="important">모임이 곧 시작되요!</small>
+                <p th:text="${meetingname}">후라토식당 아브뉴프랑 판교점</p>
+                <small class="important" th:text="${meetingMessage}">모임이 곧 시작되요!</small>
             </div>
         </div>
-        <div class="notification highlight">
-            <img src="profile2.jpg" alt="Profile">
+        <div class="alarm highlight">
+            <img src="/img/test_image.png">
             <div class="text">
-                <p>후라토식당 아브뉴프랑 판교점</p>
-                <small>모임 신청이 도착했어요!</small>
+                <p th:text="${joinname}">기본 식당</p>
+                <small th:text="${joinMessage}">기본 문구</small>
             </div>
         </div>
-        <div class="notification">
-            <img src="profile3.jpg" alt="Profile">
+        <div class="alarm">
+            <img src="/img/profile.png">
             <div class="text">
-                <p>아이디</p>
-                <small>님이 나를 팔로우 했어요!</small>
+                <p th:text="${followname}">아이디</p>
+                <small th:text="${followMessage}">님이 나를 팔로우 했어요!</small>
             </div>
         </div>
-        <div class="notification">
-            <img src="profile4.jpg" alt="Profile">
+        <div class="alarm">
+            <img src="/img/test_image.png">
             <div class="text">
-                <p>후라토식당 아브뉴프랑 판교점</p>
-                <small>모임 신청이 도착했어요!</small>
+                <p th:text="${joinname}">기본 식당</p>
+                <small th:text="${joinMessage}">기본 문구</small>
             </div>
         </div>
-        <div class="notification">
-            <img src="profile5.jpg" alt="Profile">
+        <div class="alarm">
+            <img src="/img/test_image.png">
             <div class="text">
-                <p>후라토식당 아브뉴프랑 판교점</p>
-                <small>모임 신청이 도착했어요!</small>
+                <p th:text="${joinname}">기본 식당</p>
+                <small th:text="${joinMessage}">기본 문구</small>
             </div>
         </div>
     </div>
+    <!-- Alarm List End -->
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
         <div class="container py-5">
-            <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
+            <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5)">
                 <div class="row g-4">
                     <div class="col-lg-3">
                         <a href="#">
-                            <h1 class="text-primary mb-0">Fruitables</h1>
-                            <p class="text-secondary mb-0">Fresh products</p>
+                            <h1 class="text-primary mb-0">Eat IT</h1>
+                            <p class="text-secondary mb-0">먹고 마시며 즐기는 인맥 확장의 기회!<br>
+                                소소한 IT 소모임 “Eat IT”
+                                <br>🍽️🍝🍦🍕🍣🍳🍛🌭🍰🍛🍚🍮🌮☕️
+                            </p>
                         </a>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="position-relative mx-auto">
-                            <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="number"
-                                placeholder="Your Email">
-                            <button type="submit"
-                                class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white"
-                                style="top: 0; right: 0;">Subscribe Now</button>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="d-flex justify-content-end pt-3">
-                            <a class="btn  btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-youtube"></i></a>
-                            <a class="btn btn-outline-secondary btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row g-5">
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-item">
-                        <h4 class="text-light mb-3">Why People Like us!</h4>
-                        <p class="mb-4">typesetting, remaining essentially unchanged. It was
-                            popularised in the 1960s with the like Aldus PageMaker including of Lorem Ipsum.</p>
-                        <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Read More</a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="d-flex flex-column text-start footer-item">
-                        <h4 class="text-light mb-3">Shop Info</h4>
-                        <a class="btn-link" href="">About Us</a>
-                        <a class="btn-link" href="">Contact Us</a>
-                        <a class="btn-link" href="">Privacy Policy</a>
-                        <a class="btn-link" href="">Terms & Condition</a>
-                        <a class="btn-link" href="">Return Policy</a>
-                        <a class="btn-link" href="">FAQs & Help</a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="d-flex flex-column text-start footer-item">
-                        <h4 class="text-light mb-3">Account</h4>
-                        <a class="btn-link" href="">My Account</a>
-                        <a class="btn-link" href="">Shop details</a>
-                        <a class="btn-link" href="">Shopping Cart</a>
-                        <a class="btn-link" href="">Wishlist</a>
-                        <a class="btn-link" href="">Order History</a>
-                        <a class="btn-link" href="">International Orders</a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-item">
-                        <h4 class="text-light mb-3">Contact</h4>
-                        <p>Address: 1429 Netus Rd, NY 48247</p>
-                        <p>Email: Example@gmail.com</p>
-                        <p>Phone: +0123 4567 8910</p>
-                        <p>Payment Accepted</p>
-                        <img src="img/payment.png" class="img-fluid" alt="">
                     </div>
                 </div>
             </div>
         </div>
+        <div class="row g-5">
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-item">
+                    <h4 class="text-light mb-3">NOTICE</h4>
+                    <p class="mb-4">
+                        공지사항
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="d-flex flex-column text-start footer-item">
+                    <h4 class="text-light mb-3">ABOUT US</h4>
+                    <a class="btn-link" href="">Eat IT 소개</a>
+                    <a class="btn-link" href="">회사 소개</a>
+                    <a class="btn-link" href="">인재 채용</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="d-flex flex-column text-start footer-item">
+                    <h4 class="text-light mb-3">팀원 소개</h4>
+                    <a class="btn-link" href="">팀원 깃허브</a>
+                    <div class="team-member">
+                        <img src="../main-page/img/image_team.png" alt="Team Member" class="team-member-img">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="d-flex flex-column text-start footer-item">
+                    <h4 class="text-light mb-3">github</h4>
+                    <a class="btn-link" href="">https://github.com/Practice-i5/EatIT-FE</a>
+                    <a class="btn-link" href="">팀 노션</a>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
     <!-- Footer End -->
 
@@ -404,17 +266,16 @@
     <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i
             class="fa fa-arrow-up"></i></a>
 
-
     <!-- JavaScript Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/lightbox/js/lightbox.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/detail.js"></script>
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+
 
 </body>
 </html>
