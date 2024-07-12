@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Abhaya+Libre&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/Join.css">
+    <link rel="stylesheet" href="../../static/css/join.css" th:href="@{/css/join.css}">
 
 </head>
 <form action="doJoin" method="POST" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
@@ -18,7 +18,9 @@
     <div class="wrap">
         <div class="login">
             <div class="login_logo">
-                <img src="images\image_146.png" width="150" height="150">
+                <a th:href="@{/login/loginMain}">
+                    <img src="../../static/img/image_146.png" width="150" height="150">
+                </a>
 
 
                 <h1>회원가입</h1>
@@ -127,8 +129,8 @@
                 <input name="cellphoneNo" type="text" class="cellphoneNo" placeholder="전화번호">
             </div>
 
-            <div class="buttom">
-                <input type="button" class="btn" value="로그인"/>
+            <div class="button">
+                <input type="button" class="btn" value="확인"/>
             </div>
 
 

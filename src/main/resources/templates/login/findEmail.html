@@ -7,14 +7,16 @@
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../../static/css/login.css" th:href="@{/css/login.css}">
 </head>
 
 <body>
     <div class="wrap">
         <div class="login">
             <div class="login_logo">
-                <img src="images\image_146.png" width="150" height="150">
+                <a th:href="@{/login/loginMain}">
+                    <img src="../../static/img/image_146.png" width="150" height="150">
+                </a>
             </div>
             <h2>이메일 찾기</h2>
             <div class="login_email">
@@ -28,7 +30,7 @@
             <div class="login_etc">
                 
             </div>
-            <div class="buttom">
+            <div class="button">
                 <input type="submit" class="btn" value="확인" />
             </div>
         </div>
