@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +12,9 @@
 <body>
 <div class="wrap">
     <div class="login">
+        <!--로그인 메인 페이지 이동 (정보이동 x)-->
         <div class="login_logo">
-            <a th:href="@{/login/loginMain}">
+            <a th:href="@{/main}">
                 <img src="/img/image_146.png" width="150" height="150">
             </a>
         </div>
@@ -32,18 +34,21 @@
         </div>
 
         <div class="login_etc">
+            <!--이메일, 비밀번호 찾기 페이지 이동 (정보이동 x)-->
             <div class="forgot_pw">
                 <a href="findEmail.html" th:href="@{/login/findEmail}">이메일 찾기/</a>
                 <a href="findPwd.html" th:href="@{/login/findPwd}">비밀번호 찾기</a>
             </div>
+            <!-- 회원가입 페이지 이동 (정보이동 x)-->
             <div class="forgot_pw">
                 <a href="join.html" th:href="@{/login/join}">회원가입</a>
             </div>
         </div>
 
-        <div class="button">
+        <!--이메일, 비밀번호로 조회 후 메인 페이지 연결-->
+        <form action="/authenticate" method="post" class="button">
             <input type="submit" class="btn" value="로그인" onclick="location.href='/main'"/>
-        </div>
+        </form>
     </div>
 </div>
 </body>
