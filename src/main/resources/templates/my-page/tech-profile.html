@@ -88,16 +88,23 @@
                     <div class="form-item">
                         <label class="profile-label">기술 스택</label>
                         <ul class="list-no-pad form-size-limit chip-btn-list">
-                            <li style="margin-top:5px; margin-bottom: 10px;">
-                                    <input id="interest-1" class="interest-check" type="checkbox" value="frontend">
-                                    <label class="btn-choice-mid interest-label" for="interest-1">프론트엔드</label>
-                            </li>
-                            <li style="margin-top:5px; margin-bottom: 10px;">
-                                <div>
-                                    <input id="interest-2" class="interest-check" type="checkbox" value="backend">
-                                    <label class="btn-choice-mid interest-label" for="interest-2">백엔드</label>
-                                </div>
-                            </li>
+                            <th:block th:each="stack:${techStackList}">
+                                <li style="margin-top:5px; margin-bottom: 10px;">
+                                    <input th:id="|interest-${stack.id}|" class="interest-check" type="checkbox" th:value="${stack.engName}">
+                                    <label class="btn-choice-mid interest-label" th:for="|interest-${stack.id}|" th:text="${stack.name}"></label>
+                                </li>
+                            </th:block>
+
+<!--                            <li style="margin-top:5px; margin-bottom: 10px;">-->
+<!--                                    <input id="interest-1" class="interest-check" type="checkbox" value="frontend">-->
+<!--                                    <label class="btn-choice-mid interest-label" for="interest-1">프론트엔드</label>-->
+<!--                            </li>-->
+<!--                            <li style="margin-top:5px; margin-bottom: 10px;">-->
+<!--                                <div>-->
+<!--                                    <input id="interest-2" class="interest-check" type="checkbox" value="backend">-->
+<!--                                    <label class="btn-choice-mid interest-label" for="interest-2">백엔드</label>-->
+<!--                                </div>-->
+<!--                            </li>-->
                             <li style="margin-top:5px; margin-bottom: 10px;">
                                 <div>
                                     <input id="interest-3" class="interest-check" type="checkbox" value="project-management">
