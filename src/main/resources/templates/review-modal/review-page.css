@@ -1,0 +1,97 @@
+css
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f9f9f9;
+  margin: 0;
+}
+
+.container {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 24rem;
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.profile-picture {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  margin: 0 auto 0.5rem;
+}
+
+.profile-name {
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+}
+
+.form-checkbox {
+  height: 1.25rem;
+  width: 1.25rem;
+  color: #22c55e;
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+.submit-btn {
+  background-color: #ef4444;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  transition: background-color 0.2s;
+}
+
+.submit-btn:hover {
+  background-color: #dc2626;
+}
+
+/* 모달 */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* 모달 내용 스타일 - 화면 중앙 배치 */
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+  width: 80%;
+  max-width: 600px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

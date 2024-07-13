@@ -1,0 +1,326 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    font-family: sans-serif;
+
+}
+
+html,body {
+    min-height: 100%;
+    background-image: #34495e;
+}
+
+.wrap {
+    margin-top : 50px;
+}
+
+h1 {
+    color: rgba(255, 0, 0, 1);
+    font-size: 2em;
+    margin:5%;
+}
+.joinForm {
+    position: absolute;
+    width: 464px;
+    height: 800px;
+    padding: 30px 20px;
+    background-color: #FFFFFF;
+    text-align: center;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+}
+
+.joinForm h2 {
+    text-align: center;
+    margin: 30%;
+}
+
+.textForm {
+    width: 445px;
+    height: 50px;
+    border-bottom: 2px solid #adadad;
+
+    padding: 10px 10px;
+}
+
+
+.id {
+    width: 445px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #636e72;
+    font-size: 16px;
+    background: none;
+}
+
+.pw {
+    top: 5%;
+    width: 445px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #636e72;
+    font-size: 16px;
+    background: none;
+}
+
+.name {
+    top: 5%;
+    width: 445px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #636e72;
+    font-size: 16px;
+    background: none;
+}
+
+.email {
+    top: 5%;
+    width: 445px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #636e72;
+    font-size: 16px;
+    background: none;
+}
+
+.nickname {
+    top: 5%;
+    width: 445px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #636e72;
+    font-size: 16px;
+    background: none;
+}
+
+.cellphoneNo {
+    top: 5%;
+    width: 445px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #636e72;
+    font-size: 16px;
+    background: none;
+}
+
+.btn {
+    position: relative;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 40px;
+    margin-top: 40;
+    width: 464px;
+    height: 48px;
+    background-color: rgba(255, 0, 0, 1);
+    background-position: left;
+    background-size: 200%;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: 0.4s;
+    display: inline;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+
+}
+
+.btn:hover{
+    background-position: right;
+}
+.button {
+    width: 445px;
+    height: 50px;
+
+    padding: 10px 10px;
+}
+
+.button input {
+    width: 100%;
+    height: 50px;
+    border: 0;
+    outline: none;
+    border-radius: 40px;
+    background-color: rgba(255, 0, 0, 1);
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    position: relative;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* .container {
+    display: grid;
+    grid-template-areas: 
+        ". header header header ."
+        ". bar main . ."
+        ". footer footer footer ."
+    ;
+    grid-template-columns: 1fr 2fr 3fr  2fr 1fr;
+} */
+
+
+
+
+
+.form-item {
+    display: flex;
+    /* align-items: center; */
+    margin: 3px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+
+
+.profile-label {
+    display: inline-block;
+    text-align: left;
+    width: 30%;
+}
+
+
+/* interest : 관심사 설정쪽 */
+
+.interest-check {
+    display: none;
+}
+
+
+.interest-label {
+    box-sizing: border-box;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.interest-label .interest-check {
+    color: white;
+    background-color: red;
+    border-color: red;
+}
+
+.interest-check+.interest-label {
+    background-color: #ECECEC;
+    border-color: #ECECEC;
+    color: #707070;
+}
+
+/* .interest-check+.interest-label:hover{
+    color:blue;
+    background-color: red;
+} */
+
+.interest-check:checked~.interest-label {
+    color: white;
+    background-color: red;
+    border-color: red;
+}
+
+.chip-btn-list {
+    max-width: 70%;
+    margin-left: 5px;
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+}
+
+.valid {
+    color: blue;
+    font-size: 12px;
+}
+
+
+.btn-rw:hover {
+    background-color: brown;
+    /* color: white; */
+    border-color: brown;
+}
+
+
+
+.btn-wr:hover {
+    background-color: #ECECEC;
+    /* border-color : #D0D0D0; */
+}
+
+
+.btn-gray:hover {
+    background-color: #B0B0B0;
+    border-color: #B0B0B0;
+    color: #FFFFFF;
+}
+
+
+.btn-wb:hover{
+    background-color: gainsboro;
+}
+
+.btn-choice-small {
+    border-style: solid;
+    border-radius: 20px;
+    margin: 3px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+
+    /* border-style: none; */
+}
+
+.btn-choice-mid {
+    border-style: solid;
+    border-radius: 20px;
+    height:30px;
+    margin: 3px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: center;
+
+
+    /* border-style: none; */
+}
+
+.btn-submit {
+    width: 250px;
+    height: 32px;
+    border-radius: 25px;
+    border-style: none;
+    margin:auto;
+    outline: solid;
+}
+
+.list-no-pad{
+    list-style: none;
+    float:left;
+    padding-left: 0px;
+}
+
+/* 증가 감소 버튼 없애기*/
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
