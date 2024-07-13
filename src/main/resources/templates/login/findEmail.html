@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- 이메일 조회 : forward-->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,30 +13,34 @@
 </head>
 
 <body>
+<form action="/login/regist" method="post">
     <div class="wrap">
         <div class="login">
             <div class="login_logo">
                 <a th:href="@{/login/loginMain}">
-                    <img src="../../static/img/image_146.png" width="150" height="150">
+                    <img src="/img/image_146.png" width="150" height="150">
                 </a>
             </div>
+
             <h2>이메일 찾기</h2>
+
+
             <div class="login_email">
                 <h4>이름</h4>
-                <input type="email" placeholder="name">
+                <input type="text" placeholder="name">
             </div>
-            <div class="login_pw">
+            <div class="login_phone">
                 <h4>전화번호</h4>
-                <input type="password" name="" id="" placeholder="phone number">
+                <input type="number" placeholder="phone number">
             </div>
-            <div class="login_etc">
-                
-            </div>
+            <div class="login_etc"></div>
+
             <div class="button">
-                <input type="submit" class="btn" value="확인" />
+                <input type="submit" class="btn" value="확인" onclick="location.href='/login/loginMain'"/>
             </div>
         </div>
     </div>
+</form>
 </body>
 
 </html>

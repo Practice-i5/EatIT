@@ -10,6 +10,11 @@ html,body {
     min-height: 100%;
     background-image: #34495e;
 }
+
+.wrap {
+    margin-top : 50px;
+}
+
 h1 {
     color: rgba(255, 0, 0, 1);
     font-size: 2em;
@@ -310,4 +315,12 @@ h1 {
     list-style: none;
     float:left;
     padding-left: 0px;
+}
+
+/* 증가 감소 버튼 없애기*/
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
