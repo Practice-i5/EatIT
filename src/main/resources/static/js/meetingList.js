@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// main.js 파일 내부
+// meetingList.js 파일 내부
 document.addEventListener('DOMContentLoaded', function () {
     // 전체보기 버튼 클릭 이벤트 처리
     document.getElementById('showAllButton').addEventListener('click', function () {
