@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/login/*")
 public class LoginController {
 
+    /* 단순 이동 메서드*/
+
     // 메인 페이지로 이동
     @GetMapping("/main")
     public String main() {
@@ -49,6 +51,8 @@ public class LoginController {
 
         return "login/findEmail"; // "findEmail"을 반환하여 뷰 리졸버가 "login/findEmail.html"을 찾도록 한다.
     }
+
+    /*정보를 조회하고 반응하는 메서드*/
 
 
     // 이메일과 비밀번호를 조회하고 로그인 후 메인화면 이동
