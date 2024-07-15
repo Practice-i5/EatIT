@@ -44,7 +44,7 @@ body {
 }
 .navbar a {
     text-decoration: none;
-    overflow: hiddlen;
+    overflow: hidden;
     white-space: nowrap;
 }
 
@@ -57,7 +57,7 @@ body {
 
 .nav_menu li {
     padding: 8px 30px;
-    overflow: hiddlen;
+    overflow: hidden;
     white-space: nowrap;
   }
 
@@ -70,7 +70,7 @@ body {
 
 .nav_users  li{
     padding: 8px 30px;   
-    overflow: hiddlen;
+    overflow: hidden;
     white-space: nowrap;             
 }
 
@@ -263,3 +263,4 @@ form {
     margin-left: 5px;
     cursor: pointer;
 }
+
