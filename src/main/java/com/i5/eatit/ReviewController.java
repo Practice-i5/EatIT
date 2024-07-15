@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ReviewController {
 
     @GetMapping("/memberList")
-    public String reviewMain() {
+    public String goReview() {
         return "review/memberList";
     }
+
+    // 모임 정보 받아오기(시간, 모임제목, 참가자(호스트, 게스트)
+
 }

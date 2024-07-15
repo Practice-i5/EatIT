@@ -7,7 +7,7 @@
     <title>Evaluation Form</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/review.css" th:href="@{/static/css/review.css}">
+    <link rel="stylesheet" href="/static/css/review.css" th:href="@{/css/review.css}">
 
     <style>
         /* Additional or Tailwind CSS can be added here */
@@ -16,11 +16,14 @@
 
 <body class="bg-gray-100 p-4">
 <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <!--모임 시간 받아오기-->
     <h2 class="text-xl font-bold mb-4">24년 6월 21일 금요일 16:30</h2>
+    <!--모임 제목 받아오기-->
     <p class="text-gray-600 mb-6">즐거운 AI 이야기(스타벅스)</p>
 
     <!-- 모임장 평가 항목 -->
     <div class="mb-6">
+        <!--모임장(호스트) 이름 받아오기-->
         <h3 class="text-lg font-semibold mb-2">모임장은 어땠나요?</h3>
         <div class="flex space-x-2 mb-4">
             <button class="bg-blue-500 text-white px-4 py-2 rounded openModalBtn">평가하기</button>
@@ -38,6 +41,7 @@
 
     <!-- 모임원1 평가 항목 -->
     <div class="mb-6">
+        <!--모임원1(게스트) 이름 받아오기-->
         <h3 class="text-lg font-semibold mb-2">모임원1은 어땠나요?</h3>
         <div class="flex space-x-2 mb-4">
             <button class="bg-blue-500 text-white px-4 py-2 rounded openModalBtn">평가하기</button>
@@ -55,6 +59,7 @@
 
     <!-- 모임원2 평가 항목 -->
     <div class="mb-6">
+        <!--모임원2(게스트) 이름 받아오기-->
         <h3 class="text-lg font-semibold mb-2">모임원2은 어땠나요?</h3>
         <div class="flex space-x-2 mb-4">
             <button class="bg-blue-500 text-white px-4 py-2 rounded openModalBtn">평가하기</button>
@@ -84,8 +89,9 @@
             <div>
                 <div class="container">
                     <div class="text-center mb-6">
-                        <h2 class="text-xl font-bold mb-4">모임장을 평가해주세요.</h2>
-                        <img src="/static/img/profile.png" alt="Profile Picture" class="profile-picture">
+                        <img src="/static/img/profile.png" th:src="@{/img/profile.png}" alt="Profile Picture"
+                             class="profile-picture">
+                        <!--모임장(호스트) 이름 받아오기-->
                         <p class="profile-name">강아지님</p>
                     </div>
                     <form>
@@ -177,8 +183,9 @@
             <div>
                 <div class="container">
                     <div class="text-center mb-6">
-                        <h2 class="text-xl font-bold mb-4">모임원1을 평가해주세요.</h2>
-                        <img src="/static/img/profile.png" alt="Profile Picture" class="profile-picture">
+                        <img src="/static/img/profile.png" th:src="@{/img/profile.png}" alt="Profile Picture"
+                             class="profile-picture">
+                        <!--모임원1(게스트) 이름 받아오기-->
                         <p class="profile-name">고양이님</p>
                     </div>
                     <form>
@@ -268,8 +275,9 @@
             <div>
                 <div class="container">
                     <div class="text-center mb-6">
-                        <h2 class="text-xl font-bold mb-4">모임원2을 평가해주세요.</h2>
-                        <img src="/static/img/profile.png" alt="Profile Picture" class="profile-picture">
+                        <img src="/static/img/profile.png" th:src="@{/img/profile.png}" alt="Profile Picture"
+                             class="profile-picture">
+                        <!--모임원2(게스트) 이름 받아오기-->
                         <p class="profile-name">코끼리님</p>
                     </div>
                     <form>
@@ -344,9 +352,13 @@
                                 <span class="ml-2">약속 장소를 못 정해요.</span>
                             </label>
                         </div>
-                        <div class="text-center">
-                            <button class="bg-blue-500 text-white px-6 py-2 rounded submit-btn">제출</button>
-                        </div>
+
+                        <!--결과 제출-->
+                        <form action="/detail/done-detail" method="post">
+                            <div class="text-center">
+                                <button class="bg-blue-500 text-white px-6 py-2 rounded submit-btn">제출</button>
+                            </div>
+                        </form>
                     </form>
                 </div>
             </div>
@@ -356,7 +368,7 @@
 <!-- 모달끝-->
 
 <!-- JS 파일 연결 -->
-<script src="/static/js/review.js" th:src="@{/static/js/review.js}"></script>
+<script src="/static/js/review.js" th:src="@{/js/review.js}"></script>
 
 </body>
 </html>
