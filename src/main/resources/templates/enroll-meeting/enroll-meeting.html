@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,13 +38,13 @@
 
         <h1>모임 등록하기</h1>
 
-        <form>
+        <form action="", method="POST">
             <div class="form-group">
                 <label for="meeting-place">약속 장소</label>
-                <input type="text" id="meeting-place" name="meeting-place" placeholder="약속장소를 선택해주세요"/>
+                <input type="text" id="meeting-place" name="meeting-place" placeholder="약속장소를 입력해주세요"/>
             </div>
             <button type="button" id="show-map-button">지도에서 선택</button>
-            <div id="map" style="height: 400px; width: 100%; display: none;"></div>
+            <div id="map" style="height: 400px; width: 400px;"></div>
             <div class="form-group">
                 <label for="group-name">모임 이름을 입력하세요</label>
                 <input type="text" id="group-name" name="group-name" placeholder="ex) 장소, 대화주제 등 대표 키워드를 포함해주세요"/>
@@ -127,7 +127,7 @@
         </form>
     </div>
 
-    <script src="../../static/js/enroll-meeting.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtrF28U4XgcY4rrHUzvKPhOtiOJzbxwRQ&callback=initMap&libraries=places"></script>
+    <script  th:src="@{/js/enroll-meeting.js}"></script>
+    <script th:src="'https://maps.googleapis.com/maps/api/js?key=AIzaSyCtrF28U4XgcY4rrHUzvKPhOtiOJzbxwRQ&callback=initMap&libraries=places'" async defer></script>
 </body>
 </html>

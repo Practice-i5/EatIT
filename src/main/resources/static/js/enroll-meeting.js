@@ -152,15 +152,27 @@ document.addEventListener('DOMContentLoaded', () => {
 // script.js
 let map;
 let marker;
+let geocoder;
+let autocomplete;
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: -34.397, lng: 150.644 },
+        center: { lat: 37.515133, lng: 127.734086 },
         zoom: 8
     });
 
+    geocoder = new google.maps.Geocoder();
+
     map.addListener('click', function(event) {
         placeMarkerAndPanTo(event.latLng);
+    });
+    autocomplete = new google.maps.places.Autocomplete(document.getElementById('meeting-place'));
+    autocomplete.addListener('place_changed', onPlaceChanged);
+
+    document.getElementById('meeting-place').addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+        }
     });
 }
 
@@ -174,7 +186,40 @@ function placeMarkerAndPanTo(latLng) {
         });
     }
     map.panTo(latLng);
-    document.getElementById('meeting-place').value = `Lat: ${latLng.lat()}, Lng: ${latLng.lng()}`;
+    getPlaceName(latLng);
+}
+
+function getPlaceName(latLng) {
+    geocoder.geocode({ 'location': latLng }, function(results, status) {
+        if (status === 'OK') {
+            if (results[0]) {
+                var placeName = results[0].formatted_address;
+                document.getElementById('meeting-place').value = placeName;
+            } else {
+                console.log('No results found');
+            }
+        } else {
+            console.log('Geocoder failed due to: ' + status);
+        }
+    });
+}
+
+function onPlaceChanged() {
+    var place = autocomplete.getPlace();
+    if (!place.geometry) {
+        console.log("No details available for input: '" + place.name + "'");
+        return;
+    }
+
+    // If the place has a geometry, then present it on a map.
+    if (place.geometry.viewport) {
+        map.fitBounds(place.geometry.viewport);
+    } else {
+        map.setCenter(place.geometry.location);
+        map.setZoom(17);
+    }
+
+    placeMarkerAndPanTo(place.geometry.location);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -185,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showMapButton.addEventListener('click', () => {
         mapElement.style.display = 'block';
         google.maps.event.trigger(map, 'resize'); // 지도 크기 변경 후 재조정
-        map.setCenter({ lat: -34.397, lng: 150.644 }); // 지도의 중심을 재설정
+        map.setCenter({ lat: 37.515133, lng: 127.734086 }); // 지도의 중심을 재설정
     });
 
     initMap();
