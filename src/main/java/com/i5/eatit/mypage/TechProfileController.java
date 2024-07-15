@@ -17,6 +17,9 @@ public class TechProfileController {
     @GetMapping("tech-profile")
     public void techProfile() {}
 
+    @GetMapping("tech-profile-modify")
+    public void techProfileModify() {}
+
     @GetMapping("tech-profile/test")
     public String getTechStack(Model model) {
         List<techStackDTO> techStackList = new ArrayList<>();
@@ -28,6 +31,6 @@ public class TechProfileController {
 
         model.addAttribute("techStackList", techStackList);
 
-        return "/my-page/tech-profile";
+        return "/my-page/tech-profile-modify";
     }
 }

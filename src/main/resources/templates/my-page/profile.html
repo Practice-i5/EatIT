@@ -51,7 +51,7 @@
             </aside>
 
             <div class="profile">
-                <form class="form-content">
+                <form class="form-content" method="post" action="profile">
                     <h2>프로필 수정</h2>
                     <div class="form-item">
                         <label class="profile-label">프로필 사진</label>
@@ -70,13 +70,13 @@
                     </div>
                     <div class="form-item">
                         <label class="profile-label" for="get-nickname">닉네임</label>
-                        <input id="get-nickname" type="text" placeholder="닉네임을 입력하세요." th:value="${nickName}">
+                        <input id="get-nickname" type="text" placeholder="닉네임을 입력하세요." name=nickName th:value="${nickName}">
                     </div>
                     <p class="form-message warn">주의사항 같은 것 작성</p>
 
                     <div class="form-item">
                         <label class="profile-label">성별</label>
-                        <select>
+                        <select name="gender">
                             <option value="">성별</option>
                             <option value="male">남성</option>
                             <option value="female">여성</option>
@@ -84,14 +84,14 @@
                     </div>
                     <div class="form-item">
                         <label class="profile-label" for="age">나이</label>
-                        <input class="form-input" id="age" type="number" placeholder="나이를 입력하세요." th:value="${age}">
+                        <input class="form-input" id="age" type="number" placeholder="나이를 입력하세요." name=age th:value="${age}">
                     </div>
 
                     <div class="form-item">
                         <label class="profile-label" for="intro">소개글</label>
-                        <textarea class="form-input" id="intro" placeholder="소개글을 입력하세요." rows="5" th:text="${introduce}"></textarea>
+                        <textarea class="form-input" id="intro" placeholder="소개글을 입력하세요." rows="5" name=introduce th:text="${introduce}"></textarea>
                     </div>
-                    <p class="form-message error">에러 메시지</p>
+                    <p class="form-message error">에러 메시지</p>3
                     <button class="btn-rw btn-submit" type="submit">제출</button>
                 </form>
             </div>

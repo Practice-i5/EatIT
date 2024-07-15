@@ -2,9 +2,12 @@ package com.i5.eatit.mypage;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
+
+import java.util.Iterator;
+import java.util.Map;
+import java.util.function.Consumer;
 
 @RequestMapping("/my-page/*")
 @Controller
@@ -12,6 +15,22 @@ public class ProfileController {
 
     @GetMapping("profile")
     public void profile() {}
+
+    @PostMapping("profile")
+    public String modifyProfile(Model model, WebRequest request) {
+        //System.out.println();
+
+
+
+        for (var it: request.getParameterMap().keySet()) {
+            System.out.println(it +":" + request.getParameter(it));
+
+        }
+
+        //System.out.println(request.getParameter("nickName"));
+        return "my-page/profile";
+    }
+
 
     @GetMapping("profile/test")
     public String profileTest(Model model){

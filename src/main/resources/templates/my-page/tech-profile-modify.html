@@ -88,21 +88,71 @@
                     <div class="form-item">
                         <label class="profile-label">기술 스택</label>
                         <ul class="list-no-pad form-size-limit chip-btn-list">
+                            <th:block th:each="stack:${techStackList}">
+                                <li style="margin-top:5px; margin-bottom: 10px;">
+                                    <input th:id="|interest-${stack.id}|" class="interest-check" type="checkbox" th:value="${stack.engName}">
+                                    <label class="btn-choice-mid interest-label" th:for="|interest-${stack.id}|" th:text="${stack.name}"></label>
+                                </li>
+                            </th:block>
 
-                            <li style="margin-top:5px; margin-bottom: 10px;">
-                                    <input id="interest-1" class="interest-check" type="checkbox" value="frontend" checked disabled>
-                                    <label class="btn-choice-mid interest-label" for="interest-1">프론트엔드</label>
-                            </li>
+<!--                            <li style="margin-top:5px; margin-bottom: 10px;">-->
+<!--                                    <input id="interest-1" class="interest-check" type="checkbox" value="frontend">-->
+<!--                                    <label class="btn-choice-mid interest-label" for="interest-1">프론트엔드</label>-->
+<!--                            </li>-->
+<!--                            <li style="margin-top:5px; margin-bottom: 10px;">-->
+<!--                                <div>-->
+<!--                                    <input id="interest-2" class="interest-check" type="checkbox" value="backend">-->
+<!--                                    <label class="btn-choice-mid interest-label" for="interest-2">백엔드</label>-->
+<!--                                </div>-->
+<!--                            </li>-->
                             <li style="margin-top:5px; margin-bottom: 10px;">
                                 <div>
-                                    <input id="interest-2" class="interest-check" type="checkbox" value="backend" checked disabled>
-                                    <label class="btn-choice-mid interest-label" for="interest-2">백엔드</label>
+                                    <input id="interest-3" class="interest-check" type="checkbox" value="project-management">
+                                    <label class="btn-choice-mid interest-label" for="interest-3">기획</label>
                                 </div>
                             </li>
                             <li style="margin-top:5px; margin-bottom: 10px;">
                                 <div>
-                                    <input id="interest-8" class="interest-check" type="checkbox" value="game-client" disabled checked>
+                                    <input id="interest-4" class="interest-check" type="checkbox" value="game-client">
+                                    <label class="btn-choice-mid interest-label" for="interest-4">모바일</label>    
+                                </div>
+                            </li>
+
+                            <li style="margin-top:5px; margin-bottom: 10px;">
+                                <div>
+                                    <input id="interest-5" class="interest-check" type="checkbox" value="game-client">
+                                    <label class="btn-choice-mid interest-label" for="interest-5">게임 클라이언트</label>    
+                                </div>
+                            </li>
+                            <li style="margin-top:5px; margin-bottom: 10px;">
+                                <div>
+                                    <input id="interest-6" class="interest-check" type="checkbox" value="game-client">
+                                    <label class="btn-choice-mid interest-label" for="interest-6">임베디드</label>    
+                                </div>
+                            </li>
+                            <li style="margin-top:5px; margin-bottom: 10px;">
+                                <div>
+                                    <input id="interest-7" class="interest-check" type="checkbox" value="game-client">
+                                    <label class="btn-choice-mid interest-label" for="interest-7">보안</label>    
+                                </div>
+                            </li>
+                            <li style="margin-top:5px; margin-bottom: 10px;">
+                                <div>
+                                    <input id="interest-8" class="interest-check" type="checkbox" value="game-client">
                                     <label class="btn-choice-mid interest-label" for="interest-8">데이터 엔지니어링</label>    
+                                </div>
+                            </li>
+                            <li style="margin-top:5px; margin-bottom: 10px;">
+                                <div>
+                                    <input id="interest-9" class="interest-check" type="checkbox" value="game-client">
+                                    <label class="btn-choice-mid interest-label" for="interest-9">게임 서버</label>    
+                                </div>
+                            </li>
+
+                            <li style="margin-top:5px; margin-bottom: 10px;">
+                                <div>
+                                    <input id="interest-10" class="interest-check" type="checkbox" value="game-client">
+                                    <label class="btn-choice-mid interest-label" for="interest-10">UI/UX</label>    
                                 </div>
                             </li>
                         </ul>
@@ -118,10 +168,10 @@
                                         <p class="form-message-mini warn"> 백엔드 개발</p>
                                         <p class="form-message-mini warn">2022.10~2023.11</p>
                                     </div>
-<!--                                    <div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">-->
-<!--                                        <button class="btn-choice-small btn-wb">수정</button>-->
-<!--                                        <button class="btn-choice-small btn-wb">삭제</button>-->
-<!--                                    </div> -->
+                                    <div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+                                        <button class="btn-choice-small btn-wb">수정</button>
+                                        <button class="btn-choice-small btn-wb">삭제</button>
+                                    </div> 
                                 </li>
                                 <li style="display: flex; justify-content: space-between; width: 100%;">
                                     <div style="display: flex; flex-direction: column; align-items: baseline;">
@@ -129,16 +179,16 @@
                                         <p class="form-message-mini warn"> 백엔드 개발</p>
                                         <p class="form-message-mini warn">2023.11~재직 중</p>
                                     </div>
-<!--                                    <div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">-->
-<!--                                        <button class="btn-choice-small btn-wb">수정</button>-->
-<!--                                        <button class="btn-choice-small btn-wb">삭제</button>-->
-<!--                                    </div> -->
+                                    <div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+                                        <button class="btn-choice-small btn-wb">수정</button>
+                                        <button class="btn-choice-small btn-wb">삭제</button>
+                                    </div> 
                                 </li>
                                 <li style="float: right;"><button type="button" class="btn-choice-small btn-wb" id="add-experience">경력 사항 추가</button></li>
                             </ul>
                         </div>
                     </div>
-                    <button class="btn-rw btn-submit" type="button" onclick="location.href='tech-profile-modify'">수정</button>
+                    <button class="btn-rw btn-submit" type="submit">제출</button>
                 </form>
             </div>
             <footer class="footer">
