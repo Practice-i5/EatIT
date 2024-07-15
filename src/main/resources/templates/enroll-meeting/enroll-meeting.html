@@ -5,25 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>모임 등록하기</title>
-    <link href="/enroll-meeting.css" rel="stylesheet" >
+    <link href="../../static/css/enroll-meeting.css" rel="stylesheet" th:href="@{/css/enroll-meeting.css}">
+
 </head>
 <body>
     <div class="form-container">
 
 <!-------------------------------------------------- navbar -------------------------------------------------->
-        <nav class="navbar">
+
+
+                <nav class="navbar">
 
             <div class="nav_logo">
-                <img class="logo" src="images/logo.png" alt="logo">
+                <img class="logo" src="images/logo.png" th:src="@{/img/logo.png}" alt="logo">
                 <a href="#">Eat IT</a>
             </div>
-             
+
             <ul class="nav_menu">
                 <li><a href="#">홈</a></li>
                 <li><a href="#">모임등록</a></li>
                 <li><a href="#">모임찾기</a></li>
-                <li><a href="#">후기</a></li>
-                
+                <li><a href="#">Contact</a></li>
+
             </ul>
             <ul class="nav_users">
                 <li><a href="#">마이페이지</a></li>
@@ -123,7 +126,8 @@
             </div>
         </form>
     </div>
-    <script src="js/script.js"></script>
+
+    <script src="../../static/js/enroll-meeting.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtrF28U4XgcY4rrHUzvKPhOtiOJzbxwRQ&callback=initMap&libraries=places"></script>
 </body>
 </html>
