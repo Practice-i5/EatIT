@@ -1,5 +1,8 @@
 package com.i5.eatit.admin;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,20 +24,24 @@ public class AdminController {
     @PostMapping("client-list")
     public String adminClientList(Model model) {
 
-        UserDTO userDTO = null;
+        Random random = new Random();
+        List<AdminUserDto> adminUserDtoList = new ArrayList<>();
 
         for (int i = 1; i <= 100; i++) {
-            userDTO = new UserDTO();
-            userDTO.setUserId("user"+ i + "@example.com");
-            userDTO.setUserName("user" + i);
-            userDTO.setRole("user");
-            userDTO.setLockedAccount(false);
-            userDTO.setReportedCount((int)(Math.random() * 10));
-            userDTO.setPenaltyScore((int)(Math.random() * 10));
-            userDTO.setTryLogin((int)(Math.random() * 5));
-            userDTO.setJoinDate(new Date(System.currentTimeMillis()));
-            model.addAttribute("user", userDTO);
-        };
+            AdminUserDto adminUserDto = AdminUserDto.builder()
+                .userId("user" + i + "@example.com")
+                .userName("randomName" + i)
+                .role("USER")
+                .isLockedAccount(false)
+                .reportedCount(random.nextInt(10))
+                .penaltyScore(random.nextInt(5))
+                .tryLogin(random.nextInt(5))
+                .joinDate(new Date(System.currentTimeMillis()))
+                .build();
+
+            adminUserDtoList.add(adminUserDto);
+        }
+        model.addAttribute("adminUserDtoList", adminUserDtoList);
         return "admin/client-list";
     }
 }
