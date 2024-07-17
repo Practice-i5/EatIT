@@ -22,7 +22,7 @@ public class AdminController {
     }
 
     // 추후 Get 메서드로 수정 예정
-    @PostMapping("/clients")
+    @GetMapping("/clients")
     public String getClients(Model model) {
 
         Random random = new Random();
