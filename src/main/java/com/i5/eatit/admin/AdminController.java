@@ -12,17 +12,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.sql.Date;
 
 @Controller
-@RequestMapping("/admin/*")
+@RequestMapping("/admin")
 public class AdminController {
 
-    @GetMapping("login")
+    @GetMapping("/login")
     public String adminLogin(Model model) {
         model.addAttribute("admin", "test");
-        return "admin/login";
+        return "admin/adminLogin";
     }
 
-    @PostMapping("client-list")
-    public String adminClientList(Model model) {
+    // 추후 Get 메서드로 수정 예정
+    @PostMapping("/clients")
+    public String getClients(Model model) {
 
         Random random = new Random();
         List<AdminUserDto> adminUserDtoList = new ArrayList<>();
@@ -42,6 +43,18 @@ public class AdminController {
             adminUserDtoList.add(adminUserDto);
         }
         model.addAttribute("adminUserDtoList", adminUserDtoList);
-        return "admin/client-list";
+        return "admin/clients";
+    }
+
+    // TODO: 신고 조회 위한 메서드
+    @GetMapping("/complaints")
+    public String findReports(Model model) {
+        return "admin/complaints";
+    }
+
+    // TODO: 회원 관리 위한 메서드 (정지 혹은 복구)
+    @GetMapping("/managements")
+    public String clientManagement(Model model) {
+        return "admin/managements";
     }
 }
