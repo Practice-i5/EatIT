@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>모임 등록하기</title>
+    <link href="../../static/css/enroll-meeting.css" rel="stylesheet" th:href="@{/css/enroll-meeting.css}">
+    <link th:href="'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css'" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div class="form-container">
+
+<!-------------------------------------------------- navbar -------------------------------------------------->
+
+        <nav class="navbar">
+
+            <div class="nav_logo">
+                <img class="logo" src="images/logo.png" th:src="@{/img/logo.png}" alt="logo">
+                <a href="#">Eat IT</a>
+            </div>
+
+            <ul class="nav_menu">
+                <li><a href="#">홈</a></li>
+                <li><a href="#">모임등록</a></li>
+                <li><a href="#">모임찾기</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+
+            <ul class="nav_users">
+                <li><a href="#">마이페이지</a></li>
+                <li><a href="#">로그아웃</a></li>
+            </ul>
+        </nav>
+
+<!--------------------------------------------------  -------------------------------------------------->
+
+        <h1>모임 등록하기</h1>
+
+        <form action="/meeting/enroll", method="POST">
+            <div class="form-group">
+                <label for="meeting-place">약속 장소</label>
+                <input type="text" id="meeting-place" name="meeting-place" placeholder="약속장소를 입력해주세요"/>
+            </div>
+            <div id="map" style="height: 400px; width: 400px;"></div>
+            <div class="form-group">
+                <label for="group-name">모임 이름을 입력하세요</label>
+                <input type="text" id="group-name" name="group-name" placeholder="ex) 장소, 대화주제 등 대표 키워드를 포함해주세요"/>
+            </div>
+            <div class="form-group">
+                <label for="group-detail">모임을 소개해주세요</label>
+                <input type="text" id="group-detail" name="group-detail" placeholder="모집인원, 메인 메뉴 등 모임에 대한 설정포함"/>
+            </div>
+            <div class="form-group">
+                <label>지불방식</label>
+                <div class="checkbox-group">
+                    <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" checked>
+                    <label class="btn btn-outline-success" for="success-outlined">더치페이</label>
+
+                    <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
+                    <label class="btn btn-outline-success" for="danger-outlined">골든벨</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="hashtag-input1">대화주제</label>
+                <div class="hashtag-container">
+                    <div id="hashtags1"></div>
+                    <input type="text" id="hashtag-input1" name="topics" placeholder="ex) 이직준비, 회사문화, 포트폴리오">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="hashtag-input2">관심분야</label>
+                <div class="hashtag-container">
+                    <div id="hashtags2"></div>
+                    <input type="text" id="hashtag-input2" name="interests" placeholder="ex) 백엔드, 프론트엔드, 자바, 스프링, 도커, 인공지능 등">
+                </div>
+            </div>
+            <div class="form-group upload-group">
+                <div class="upload-container">
+                    <label>모임 대표 사진을 등록해 주세요.</label>
+                    <label class="upload-box">
+                        <input type="file" multiple id="file-input">
+                        <div class="upload-icon">📷</div>
+                        <div id="file-count">0/5</div>
+                    </label>
+                </div>
+                <div class="image-preview" id="image-preview"></div>
+            </div>
+            <div class="form-group">
+                <label for="date">모임 날짜 선택해주세요.</label>
+                <input type="date" id="date" name="date"/>
+            </div>
+            <div class="form-group">
+                <label>퇴장 제한 시간</label>
+                <div class="time-group">
+                    <input type="radio" class="btn-check" name="duration" th:value="nolimit" id="no-limit" autocomplete="off" checked>
+                    <label class="btn btn-outline-success" for="no-limit">제한없음</label>
+
+                    <input type="radio" class="btn-check" name="duration" th:value="1hour" id="1-hour" autocomplete="off">
+                    <label class="btn btn-outline-success" for="1-hour">1시간</label>
+
+                    <input type="radio" class="btn-check" name="duration"  th:value="2hour" id="2-hours" autocomplete="off">
+                    <label class="btn btn-outline-success" for="2-hours">2시간</label>
+
+                    <input type="radio" class="btn-check" name="duration" th:value="3hour" id="3-hours" autocomplete="off">
+                    <label class="btn btn-outline-success" for="3-hours">3시간</label>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="min-participants">몇 명을 모집할까요?</label>
+                <input type="number" min="2" id="min-participants" name="min-participants" placeholder="최소 2명 이상"/>
+            </div>
+            <div class="form-group">
+                <label>성별</label>
+                <div class="checkbox-group">
+                    <input type="radio" class="btn-check" name="gender" th:value="all" id="all" autocomplete="off" checked>
+                    <label class="btn btn-outline-success" for="all">상관없음</label>
+
+                    <input type="radio" class="btn-check" name="gender" th:value="male" id="male" autocomplete="off">
+                    <label class="btn btn-outline-success" for="male">남성</label>
+
+                    <input type="radio" class="btn-check" name="gender" th:value="female" id="female" autocomplete="off">
+                    <label class="btn btn-outline-success" for="female">여성</label>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label>참여 가능 나이</label>
+                <div class="age-group">
+                    <input type="radio" class="btn-check" name="age" th:value="all" id="all-age" autocomplete="off" checked>
+                    <label class="btn btn-outline-success" for="all-age">상관없음</label>
+
+                    <input type="radio" class="btn-check" name="age" th:value="20s" id="twenties" autocomplete="off">
+                    <label class="btn btn-outline-success" for="twenties">20대</label>
+
+                    <input type="radio" class="btn-check" name="age" th:value="30s" id="thirties" autocomplete="off">
+                    <label class="btn btn-outline-success" for="thirties">30대</label>
+
+                    <input type="radio" class="btn-check" name="age" th:value="40s" id="forties" autocomplete="off">
+                    <label class="btn btn-outline-success" for="forties">40대</label>
+
+                    <input type="radio" class="btn-check" name="age" th:value="50s" id="fifties" autocomplete="off">
+                    <label class="btn btn-outline-success" for="fifties">50대</label>
+
+                    <input type="radio" class="btn-check" name="age" th:value="60s" id="sixties" autocomplete="off">
+                    <label class="btn btn-outline-success" for="sixties">60대</label>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit">등록하기</button>
+            </div>
+        </form>
+    </div>
+    <script th:src="'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script  th:src="@{/js/enroll-meeting.js}"></script>
+    <script th:src="'https://maps.googleapis.com/maps/api/js?key=AIzaSyCtrF28U4XgcY4rrHUzvKPhOtiOJzbxwRQ&callback=initMap&libraries=places'" async defer></script>
+</body>
+</html>

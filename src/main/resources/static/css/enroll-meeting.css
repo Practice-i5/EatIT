@@ -37,14 +37,14 @@ body {
 }
 
 .nav_logo {
-  
+
     display: flex;                      /*세로로 되어 있는 아이템들을 가로로 위치를 변경*/
-    align-items: center;  
-  
+    align-items: center;
+
 }
 .navbar a {
     text-decoration: none;
-    overflow: hiddlen;
+    overflow: hidden;
     white-space: nowrap;
 }
 
@@ -52,12 +52,12 @@ body {
     list-style: none;                   /*<li> 태그 앞에 붙어있는 구분점을 없애줌 */
     display: flex;                      /*세로로 되어 있는 아이템들을 가로로 위치를 변경*/
     margin: 0;                          /*margin 과 padding-left를 0으로 정해 공백이 생기는 것을 없애*/
-    padding-left: 0;                  
+    padding-left: 0;
 }
 
 .nav_menu li {
     padding: 8px 30px;
-    overflow: hiddlen;
+    overflow: hidden;
     white-space: nowrap;
   }
 
@@ -65,13 +65,13 @@ body {
     list-style: none;                   /*<li> 태그 앞에 붙어있는 구분점을 없애줌 */
     display: flex;                      /*세로로 되어 있는 아이템들을 가로로 위치를 변경*/
     margin: 0;                          /*margin 과 padding-left를 0으로 정해 공백이 생기는 것을 없애*/
-    padding-left: 0;                  
+    padding-left: 0;
 }
 
 .nav_users  li{
-    padding: 8px 30px;   
-    overflow: hiddlen;
-    white-space: nowrap;             
+    padding: 8px 30px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 /* --------------------------------------------------------------------------------*/
@@ -263,3 +263,4 @@ form {
     margin-left: 5px;
     cursor: pointer;
 }
+
