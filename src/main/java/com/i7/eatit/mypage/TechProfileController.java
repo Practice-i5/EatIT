@@ -1,6 +1,6 @@
-package com.i5.eatit.mypage;
+package com.i7.eatit.mypage;
 
-import com.i5.eatit.common.DTO.techStackDTO;
+import com.i7.eatit.common.DTO.techStackDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
