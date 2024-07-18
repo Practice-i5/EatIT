@@ -1,4 +1,4 @@
-package com.i5.eatit;
+package com.i7.eatit;
 
 
 import org.springframework.stereotype.Controller;

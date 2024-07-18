@@ -1,4 +1,4 @@
-package com.i5.eatit.admin;
+package com.i7.eatit.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

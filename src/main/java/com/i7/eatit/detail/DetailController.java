@@ -1,4 +1,4 @@
-package com.i5.eatit.detail;
+package com.i7.eatit.detail;
 
 /*
  *   EatITController.java

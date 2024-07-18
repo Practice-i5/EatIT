@@ -1,4 +1,4 @@
-package com.i5.eatit;
+package com.i7.eatit;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

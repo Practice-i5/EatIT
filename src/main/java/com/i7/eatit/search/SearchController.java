@@ -1,4 +1,4 @@
-package com.i5.eatit.search;
+package com.i7.eatit.search;
 
 public class SearchController {
 }
