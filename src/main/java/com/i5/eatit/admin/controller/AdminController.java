@@ -1,12 +1,12 @@
-package com.i5.eatit.admin;
+package com.i5.eatit.admin.controller;
 
+import com.i5.eatit.admin.dto.AdminUserDto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.sql.Date;
@@ -21,24 +21,23 @@ public class AdminController {
         return "admin/adminLogin";
     }
 
-    // 추후 Get 메서드로 수정 예정
+    // TODO: 회원 전체를 조회하기 위한 메서드
     @GetMapping("/clients")
     public String getClients(Model model) {
 
         Random random = new Random();
         List<AdminUserDto> adminUserDtoList = new ArrayList<>();
 
-        for (int i = 1; i <= 100; i++) {
-            AdminUserDto adminUserDto = AdminUserDto.builder()
-                .userId("user" + i + "@example.com")
-                .userName("randomName" + i)
-                .role("USER")
-                .isLockedAccount(false)
-                .reportedCount(random.nextInt(10))
-                .penaltyScore(random.nextInt(5))
-                .tryLogin(random.nextInt(5))
-                .joinDate(new Date(System.currentTimeMillis()))
-                .build();
+        for (int i = 0; i < 100; i++) {
+            AdminUserDto adminUserDto = new AdminUserDto();
+            adminUserDto.setUserId("user" + i + "@example.com");
+            adminUserDto.setUserName("randomName" + i);
+            adminUserDto.setRole("USER");
+            adminUserDto.setLockedAccount(false);
+            adminUserDto.setReportedCount(random.nextInt(10));
+            adminUserDto.setPenaltyScore(random.nextInt(5));
+            adminUserDto.setTryLogin(random.nextInt(5));
+            adminUserDto.setJoinDate(new Date(System.currentTimeMillis()));
 
             adminUserDtoList.add(adminUserDto);
         }
