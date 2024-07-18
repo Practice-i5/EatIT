@@ -1,0 +1,83 @@
+.btn-rw {
+    background-color: red;
+    color: white;
+    border-color: red;
+}
+
+.btn-rw:hover {
+    background-color: brown;
+    /* color: white; */
+    border-color: brown;
+}
+
+.btn-wr {
+    background-color: white;
+    border-color: red;
+    color: red;
+}
+
+.btn-wr:hover {
+    background-color: #ECECEC;
+    /* border-color : #D0D0D0; */
+}
+
+.btn-gray {
+    background-color: #ECECEC;
+    border-color: #ECECEC;
+    color: #707070;
+
+}
+
+.btn-gray:hover {
+    background-color: #B0B0B0;
+    border-color: #B0B0B0;
+    color: #FFFFFF;
+}
+
+.btn-wb{
+    background-color: white;
+    color: black;
+}
+
+.btn-wb:hover{
+    background-color: gainsboro;
+}
+
+.btn-choice-small {
+    border:2px solid;
+    border-radius: 20px;
+    margin: 3px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+
+    /* border-style: none; */
+}
+
+.btn-choice-mid {
+    border-style: solid;
+    border-radius: 20px;
+    height:30px;
+    margin: 3px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: center;
+
+
+    /* border-style: none; */
+}
+
+.btn-submit {
+    width: 250px;
+    height: 32px;
+    border-radius: 25px;
+    border-style: none;
+    margin:auto;
+    outline: solid;
+}
+

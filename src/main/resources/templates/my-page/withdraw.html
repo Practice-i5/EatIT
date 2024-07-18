@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>회원탈퇴</title>
+    <link rel="stylesheet" href="css/style-mypage.css" th:href="@{/css/my-page/style-mypage.css}">
+    <link rel="stylesheet" href="css/button.css" th:href="@{/css/my-page/button.css}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="header" th:include="/my-page/header-mypage.html">
+        </nav>
+        <aside class="bar">
+            <div class="my-page-list sidebar-block">
+                <h2>마이 페이지</h2>
+                <ul class="list-no-pad">
+                    <li class="bar-list">
+                        <a class="unactive-page" href="./profile.html" th:href="@{profile}">프로필 수정</a>
+                    </li>
+                    <li class="bar-list">
+                        <a class="unactive-page" href="./tech-profile.html" th:href="@{tech-profile}">기술 프로필 설정</a>
+                    </li>
+                    <li class="bar-list">
+                        <a class="unactive-page" href="./follow-list.html" th:href="@{follow-list}">팔로우 유저 목록</a>
+                    </li>
+                    <li class="bar-list">
+                        <a class="unactive-page" href="./black-list.html" th:href="@{black-list}">차단 회원 관리</a>
+                    </li>
+                    <li class="bar-list">
+                        <a class="unactive-page" href="./account-info.html" th:href="@{account-info}">계정 정보 보기</a>
+                    </li>
+                    <li class="bar-list">
+                        <a class="active-page" href="./withdraw.html" th:href="@{withdraw}">회원 탈퇴</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <div class="profile">
+            <form class="form-content" id="withdraw-quest">
+                <h2>회원탈퇴</h2>
+                <h3>정말로 회원은 탈퇴하겠습니까?</h3>
+                <p>탈퇴시 해당 이메일로 재가입이 제한됩니다.</p>
+                <button class="btn-rw btn-submit" id="withdraw-submit" type="button">탈퇴하기</button>
+            </form>
+            <form hidden class="unactive form-content" id="withdraw-done">
+                <h2>회원탈퇴 완료</h2>
+                <h3>회원 탈퇴가  완료되었습니다.</h3>
+                
+                <button class="btn-rw btn-submit" type="button">홈으로</button>
+            </form>
+        </div>
+        <footer class="footer" th:include="/my-page/footer-mypage.html">
+        </footer>
+    </div>
+    <script src="js/withdraw.js" th:src="@{/js/my-page/withdraw.js}"></script>
+</body>
+
+</html>

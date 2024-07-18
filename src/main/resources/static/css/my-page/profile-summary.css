@@ -1,0 +1,28 @@
+.profile-contents {
+    display: flex;
+    flex-direction: column;
+    background-color: #dff0d8;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+
+}
+
+.profile hr {
+    width: 100%;
+}
+
+.form-item-col {
+    display: flex;
+    margin: 3px;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+.form-item-col h5 {
+    margin: 3px;
+}
+
+.form-item-col p {
+    margin: 3px;
+}
