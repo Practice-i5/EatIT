@@ -9,7 +9,7 @@
 
 <body>
     <div class="container">
-        <nav class="header" th:include="/my-page/header-mypage.html">
+        <nav th:replace="~{my-page/layout :: header}">
         </nav>
 
         <aside class="bar">
@@ -89,7 +89,7 @@
                 <button class="btn-rw btn-submit" type="submit">제출</button>
             </form>
         </div>
-        <footer class="footer" th:include="/my-page/footer-mypage.html">
+        <footer th:replace="~{my-page/layout :: footer}">
         </footer>
     </div>
 </body>
