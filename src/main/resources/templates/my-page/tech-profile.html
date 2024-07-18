@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>기술 프로필 설정</title>
+        <link rel="stylesheet" href="css/style-mypage.css" th:href="@{/css/my-page/style-mypage.css}">
+        <link rel="stylesheet" href="css/button.css" th:href="@{/css/my-page/button.css}">
+        <link rel="stylesheet" href="css/modal.css" th:href="@{/css/my-page/modal.css}">
+    </head>
+    <body>
+        <div id="profile-modal">
+            <div id="tech-profile">
+                <button id="close">&times;</button>
+                <div class="profile-header">
+                    <h3 class="modal-name">경력 사항 추가</h3>
+                </div>
+                <form class="profile-contents">
+                    <div>
+                        <div>
+                            <h5>회사명</h5>
+                            <input type="text" required>
+                        </div>
+                        <div>
+                            <h5>재직 기간</h5>
+                            <input id="employ-start" type="month"> ~ <input id="employ-end" type="month">
+                            <input id="is-employ" type="checkbox"><label for="is-employ">재직중</label> 
+                        </div>
+                        <div>
+                            <h5>개발 업무</h5>
+                            <input type="text" required>
+                        </div>
+                    </div>
+                    <div style="display:flex; justify-content:center">
+                        <button id="experience-submit" class="btn-rw btn-choice-mid" type="button">추가</button>
+                    </div>
+    
+    
+                </form>
+            </div>
+        </div>
+
+        <div class="container">
+            <nav class="header" th:include="/my-page/header-mypage.html">
+            </nav>
+
+            <aside class="bar">
+                <div class="my-page-list sidebar-block">
+                    <h2>마이 페이지</h2>
+                    <ul class="list-no-pad">
+                        <li class="bar-list">
+                            <a class="unactive-page" href="./profile.html" th:href="@{profile}">프로필 수정</a>
+                        </li>
+                        <li class="bar-list">
+                            <a class="active-page" href="./tech-profile.html" th:href="@{tech-profile}">기술 프로필 설정</a>
+                        </li>
+                        <li class="bar-list">
+                            <a class="unactive-page" href="./follow-list.html" th:href="@{follow-list}">팔로우 유저 목록</a>
+                        </li>
+                        <li class="bar-list">
+                            <a class="unactive-page" href="./black-list.html" th:href="@{black-list}">차단 회원 관리</a>
+                        </li>
+                        <li class="bar-list">
+                            <a class="unactive-page" href="./account-info.html" th:href="@{account-info}">계정 정보 보기</a>
+                        </li>
+                        <li class="bar-list">
+                            <a class="unactive-page" href="./withdraw.html" th:href="@{withdraw}">회원 탈퇴</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <div class="profile">
+                <form class="form-content">
+                    <h2>기술 프로필 설정</h2>
+                    <div class="form-item">
+                        <label class="profile-label">기술 스택</label>
+                        <ul class="list-no-pad form-size-limit chip-btn-list">
+
+                            <li style="margin-top:5px; margin-bottom: 10px;">
+                                    <input id="interest-1" class="interest-check" type="checkbox" value="frontend" checked disabled>
+                                    <label class="btn-choice-mid interest-label" for="interest-1">프론트엔드</label>
+                            </li>
+                            <li style="margin-top:5px; margin-bottom: 10px;">
+                                <div>
+                                    <input id="interest-2" class="interest-check" type="checkbox" value="backend" checked disabled>
+                                    <label class="btn-choice-mid interest-label" for="interest-2">백엔드</label>
+                                </div>
+                            </li>
+                            <li style="margin-top:5px; margin-bottom: 10px;">
+                                <div>
+                                    <input id="interest-8" class="interest-check" type="checkbox" value="game-client" disabled checked>
+                                    <label class="btn-choice-mid interest-label" for="interest-8">데이터 엔지니어링</label>    
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- <a href="./tech-stack.html" > 기술 스택 수정</a> -->
+                    <div class="form-item" id="nickname-form">
+                        <label>개발 경력</label>
+                        <div style="width: 70%;">
+                            <ul style="margin-left:5px; list-style: none; padding-left: 0px; display:flex; flex-flow : column wrap; align-items: baseline;">
+                                <li style="display: flex; justify-content: space-between; width: 100%;">
+                                    <div style="display: flex; flex-direction: column; align-items: baseline;">
+                                        <h3 style="margin:0px;">현대오토에버</h3>
+                                        <p class="form-message-mini warn"> 백엔드 개발</p>
+                                        <p class="form-message-mini warn">2022.10~2023.11</p>
+                                    </div>
+<!--                                    <div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">-->
+<!--                                        <button class="btn-choice-small btn-wb">수정</button>-->
+<!--                                        <button class="btn-choice-small btn-wb">삭제</button>-->
+<!--                                    </div> -->
+                                </li>
+                                <li style="display: flex; justify-content: space-between; width: 100%;">
+                                    <div style="display: flex; flex-direction: column; align-items: baseline;">
+                                        <h3 style="margin:0px">네이버</h3>
+                                        <p class="form-message-mini warn"> 백엔드 개발</p>
+                                        <p class="form-message-mini warn">2023.11~재직 중</p>
+                                    </div>
+<!--                                    <div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">-->
+<!--                                        <button class="btn-choice-small btn-wb">수정</button>-->
+<!--                                        <button class="btn-choice-small btn-wb">삭제</button>-->
+<!--                                    </div> -->
+                                </li>
+                                <li style="float: right;"><button type="button" class="btn-choice-small btn-wb" id="add-experience">경력 사항 추가</button></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="btn-rw btn-submit" type="button" onclick="location.href='tech-profile-modify'">수정</button>
+                </form>
+            </div>
+            <footer class="footer" th:include="/my-page/footer-mypage.html">
+            </footer>
+        </div>
+        <script src="js/tech-profile-modal.js" th:src="@{/js/my-page/tech-profile-modal.js}"></script>
+    </body>
+</html>
