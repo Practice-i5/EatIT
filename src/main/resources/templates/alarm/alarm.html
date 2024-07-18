@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<html lang="ko">
 <head>
     <meta charset="utf-8">
     <title>Alarms</title>
@@ -21,8 +20,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <!--<link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">-->
-    <link href="../../../../../../EatIT_backup/src/main/resources/templates/alarm/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
 
     <!-- Customized Bootstrap Stylesheet -->
@@ -50,18 +48,17 @@
         <div class="container px-0">
             <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                    <a href="../../../../../../EatIT_backup/src/main/resources/templates/main-page/home.html" class="navbar-brand"><img class=logo src="/img/logo.png" alt="logo"/></a>
+                    <a href="../main-page/home.html" class="navbar-brand"><img class=logo src="/img/logo.png" alt="logo"/></a>
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>
                     </button>
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
-                            <a href="../../../../../../EatIT_backup/src/main/resources/templates/main-page/home.html" class="nav-item nav-link">홈</a>
-                            <a href="../../../../../../EatIT_backup/src/main/resources/templates/enroll-meeting/index.html" class="nav-item nav-link">모임 등록하기</a>
-                            <a href="../../../../../../EatIT_backup/src/main/resources/templates/search/list.html" class="nav-item nav-link header-menu-active">모임 찾기</a>
-
-                            <a id="open" href="../../../../../../EatIT_backup/src/main/resources/templates/meetingList-page/like-page.html" class="nav-item nav-link">모임목록</a>
+                            <a href="../main-page/home.html" class="nav-item nav-link">홈</a>
+                            <a href="../enroll-meeting/index.html" class="nav-item nav-link">모임 등록하기</a>
+                            <a href="../search/list.html" class="nav-item nav-link header-menu-active">모임 찾기</a>
+                            <a id="open" href="../meetingList-page/like-page.html" class="nav-item nav-link">모임목록</a>
                         </div>
                         <div class="d-flex m-3 me-0">
                             <a href="#" class="btn-notification my-auto me-4">
@@ -82,7 +79,7 @@
     <!-- Navbar End -->
 
     <!-- Modal Search Start -->
-     <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content rounded-0">
                 <div class="modal-header">
@@ -98,7 +95,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Single Page Header start -->
     <div class="container-fluid page-header py-5">
@@ -159,6 +156,9 @@
     </div>
     <!-- Alarm List End -->
 
+
+
+
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
         <div class="container py-5">
@@ -198,7 +198,7 @@
                     <h4 class="text-light mb-3">팀원 소개</h4>
                     <a class="btn-link" href="">팀원 깃허브</a>
                     <div class="team-member">
-                        <img src="../../../../../../EatIT_backup/src/main/resources/templates/main-page/img/image_team.png" alt="Team Member" class="team-member-img">
+                        <img src="../main-page/img/image_team.png" alt="Team Member" class="team-member-img">
                     </div>
                 </div>
             </div>
@@ -243,9 +243,9 @@
     <!-- JavaScript Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../../../../../EatIT_backup/src/main/resources/templates/alarm/lib/easing/easing.min.js"></script>
-    <script src="../../../../../../EatIT_backup/src/main/resources/templates/alarm/lib/waypoints/waypoints.min.js"></script>
-    <script src="../../../../../../EatIT_backup/src/main/resources/templates/alarm/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/detail.js"></script>
 

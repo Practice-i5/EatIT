@@ -43,19 +43,23 @@ public class AlarmPageController {
     static class FollowAlarm{
         String followname;
         String profileImg;
+        String profileLink;
         static final String followMessage = "님이 나를 팔로우 했어요!";
     }
 
     static class JoinAlarm {
         String joinname;
         String joinImg;
+        String joinLink;
         static final String joinMessage = "모임 신청이 도착했어요!";
     }
 
     static class MeetingAlarm {
         String meetingname;
         String meetingImg;
+        String meetingLink;
         static final String meetingMessage = "모임이 곧 시작되요!";
     }
+
 
 }
