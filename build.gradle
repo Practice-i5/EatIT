@@ -24,12 +24,11 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-	// lombok
-	compileOnly 'org.projectlombok:lombok:1.18.34'
-	annotationProcessor 'org.projectlombok:lombok:1.18.34'
+	// mysql 연결을 위한 JDBC 드라이버 라이브러리 추가
+	implementation 'com.mysql:mysql-connector-j'
 
-	testCompileOnly 'org.projectlombok:lombok:1.18.34'
-	testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
+	// JPA (Java Persistence API) 연결 위한 스타터 의존성 (Spring Data JPA, Hibernate 등의 기술 포함)
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 }
 
 tasks.named('test') {
