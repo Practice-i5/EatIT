@@ -1,4 +1,4 @@
-package com.i5.eatit.mypage;
+package com.i7.eatit.mypage;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

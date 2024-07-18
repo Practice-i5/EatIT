@@ -1,6 +1,6 @@
-package com.i5.eatit.admin.controller;
+package com.i7.eatit.admin.controller;
 
-import com.i5.eatit.admin.dto.AdminUserDto;
+import com.i7.eatit.admin.dto.AdminUserDto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

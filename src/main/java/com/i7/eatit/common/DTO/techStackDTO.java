@@ -1,4 +1,4 @@
-package com.i5.eatit.common.DTO;
+package com.i7.eatit.common.DTO;
 
 public class techStackDTO {
     private int id;

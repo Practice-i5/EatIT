@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:src/main/java/com/i7/eatit/admin/dto/AdminUserDto.java
-package com.i5.eatit.admin.dto;
-========
 package com.i7.eatit.admin;
->>>>>>>> dev:src/main/java/com/i7/eatit/admin/UserDTO.java
 
 import java.sql.Date;
 
