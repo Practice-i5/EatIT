@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.i7.eatit.domain.user.dao.UserMapper">
+
+    <resultMap id="UserMap" type="com.i7.eatit.domain.user.dto.UserSignupDTO">
+        <id property="userCode" column="member_id"/>
+
+        <result property="email" column="email"/>
+        <result property="password" column="password"/>
+        <result property="name" column="name"/>
+        <result property="nickname" column="nickname"/>
+        <result property="phoneNumber" column="phone_number"/>
+
+        <result property="email" column="login_method"/>
+        <!-- withdrawal_status : 'Y'-->
+        <!-- created_date : now()-->
+    </resultMap>
+
+    <insert id="UserMap" parameterType = "com.i7.eatit.domain.user.dto.UserSignupDTO">
+        insert into
+                    tbl_member
+                    (
+                    email
+                    , password
+                    , name
+                    , nickname
+                    , phone_number
+                    , login_method
+                    , withdrawal_status
+                    , created_date
+                    )
+        values
+                    (
+                    #{ email }
+                    , #{ password }
+                    , #{ name }
+                    , #{ nickname }
+                    , #{ phone_number }
+                    , #{ login_method }
+                    , #{ withdrawal_status }
+                    , #{ created_date }
+                    , #{ email }
+                    ,'N'
+                    ,now()
+        )
+    </insert>
+</mapper>
