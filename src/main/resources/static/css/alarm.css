@@ -148,5 +148,10 @@
     font-weight: bold;
 }
 .alarm.highlight {
+    transition: border 100ms;
+}
+
+.alarm.highlight:hover {
     border: 2px solid red;
+    cursor: pointer;
 }
