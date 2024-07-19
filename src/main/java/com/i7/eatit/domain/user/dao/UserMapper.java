@@ -1,5 +1,6 @@
 package com.i7.eatit.domain.user.dao;
 
+import com.i7.eatit.domain.user.dto.UserLoginDTO;
 import com.i7.eatit.domain.user.dto.UserSignupDTO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,5 +11,6 @@ public interface UserMapper {
     void userInsert(UserSignupDTO userSignupDTO);
 
 
-
+    // 로그인
+    UserLoginDTO userSelect(UserLoginDTO userLoginDTO);
 }

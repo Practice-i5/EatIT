@@ -1,23 +1,43 @@
 package com.i7.eatit.domain.user.dto;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class UserSignupDTO {
 
     private int userCode;
+
     private String name;
     private String email;
     private String password;
+
     private int phoneNumber;
     private String nickname;
+    private String loginMethod;
 
-    public UserSignupDTO() {}
+    private final String date;
+    private String withdrawalStatus;
 
-    public UserSignupDTO(int userCode, String name, String email, String password, int phoneNumber, String nickname) {
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
+
+    public UserSignupDTO() {
+        this.email = "email";
+        this.date = DATE_FORMAT.format(new Date());
+        this.withdrawalStatus = "N";
+    }
+
+    public UserSignupDTO(int userCode, String name, String email, String password, int phoneNumber,
+                         String nickname, String loginMethod, String withdrawalStatus) {
+
         this.userCode = userCode;
         this.name = name;
-        this.email = email;
+        this.email = "email";
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.nickname = nickname;
+        this.loginMethod = loginMethod;
+        this.date = DATE_FORMAT.format(new Date());
+        this.withdrawalStatus = "N";
     }
 
     public int getUserCode() {
@@ -68,6 +88,26 @@ public class UserSignupDTO {
         this.nickname = nickname;
     }
 
+    public String getLoginMethod() {
+        return loginMethod;
+    }
+
+    public void setLoginMethod(String loginMethod) {
+        this.loginMethod = loginMethod;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getWithdrawalStatus() {
+        return withdrawalStatus;
+    }
+
+    public void setWithdrawalStatus(String withdrawalStatus) {
+        this.withdrawalStatus = withdrawalStatus;
+    }
+
     @Override
     public String toString() {
         return "UserSignupDTO{" +
@@ -77,6 +117,9 @@ public class UserSignupDTO {
                 ", password='" + password + '\'' +
                 ", phoneNumber=" + phoneNumber +
                 ", nickname='" + nickname + '\'' +
+                ", loginMethod='" + loginMethod + '\'' +
+                ", date='" + date + '\'' +
+                ", withdrawalStatus='" + withdrawalStatus + '\'' +
                 '}';
     }
 }
