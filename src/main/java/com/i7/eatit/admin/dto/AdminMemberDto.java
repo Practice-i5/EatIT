@@ -2,7 +2,7 @@ package com.i7.eatit.admin.dto;
 
 import java.sql.Date;
 
-public class AdminUserDto {
+public class AdminMemberDto {
 
     private String userId;
     private String userName;
@@ -13,10 +13,10 @@ public class AdminUserDto {
     private int tryLogin;
     private Date joinDate;
 
-    public AdminUserDto() {
+    public AdminMemberDto() {
     }
 
-    public AdminUserDto(String userId, String userName, String role, Boolean isLockedAccount,
+    public AdminMemberDto(String userId, String userName, String role, Boolean isLockedAccount,
         int reportedCount, int penaltyScore, int tryLogin, Date joinDate) {
         this.userId = userId;
         this.userName = userName;
