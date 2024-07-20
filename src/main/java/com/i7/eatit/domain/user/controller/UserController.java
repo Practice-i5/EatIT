@@ -19,17 +19,40 @@ public class UserController {
         this.userService = userService;
     }
 
+    /*
+        단순 이동 메서드
+     */
+
     // 메인로그인 페이지로 이동 (브랜드 이미지 클릭)
     @GetMapping("/loginMain")
-    public String loginMain() {
-        return "/login/loginMain";
+    public void goLoginMain() {
     }
+
+    @GetMapping("/main")
+    public void goMain() {
+    }
+
+    @GetMapping("/findEmail")
+    public void goFindEmail() {
+    }
+
+    @GetMapping("/findPwd")
+    public void goFindPwd() {
+    }
+
+    @GetMapping("/join")
+    public void goJoin() {
+    }
+    
+    /*
+        정보 전달 메서드
+     */
 
 
     // 회원가입 - 이메일, 비밀번호, 이름, 전화번호,닉네임, 기술스택
-    @PostMapping("/login/regist")
+    @PostMapping("/regist")
     public String join(UserSignupDTO userSignupDTO) {
-
+        System.out.println("userSignupDTO = " + userSignupDTO);
         userService.UserSignUp(userSignupDTO);
 
         return "redirect:/login/loginMain";

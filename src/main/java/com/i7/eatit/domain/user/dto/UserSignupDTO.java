@@ -5,55 +5,45 @@ import java.util.Date;
 
 public class UserSignupDTO {
 
-    private int userCode;
+    private int member_id;
 
-    private String name;
     private String email;
     private String password;
+    private String name;
 
-    private int phoneNumber;
     private String nickname;
-    private String loginMethod;
+    private String loginMethod = "email";
+    private String phoneNumber;
 
-    private final String date;
-    private String withdrawalStatus;
+    private final String createdDate;
+    private String withdrawalStatus = "N";
 
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 
     public UserSignupDTO() {
-        this.email = "email";
-        this.date = DATE_FORMAT.format(new Date());
-        this.withdrawalStatus = "N";
+        this.createdDate = DATE_FORMAT.format(new Date());
     }
 
-    public UserSignupDTO(int userCode, String name, String email, String password, int phoneNumber,
+    public UserSignupDTO(int member_id, String name, String email, String password, String phoneNumber,
                          String nickname, String loginMethod, String withdrawalStatus) {
 
-        this.userCode = userCode;
+        this.member_id = member_id;
         this.name = name;
-        this.email = "email";
+        this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.nickname = nickname;
         this.loginMethod = loginMethod;
-        this.date = DATE_FORMAT.format(new Date());
-        this.withdrawalStatus = "N";
+        this.createdDate = DATE_FORMAT.format(new Date());
+        this.withdrawalStatus = withdrawalStatus;
     }
 
-    public int getUserCode() {
-        return userCode;
+    public int getMember_id() {
+        return member_id;
     }
 
-    public void setUserCode(int userCode) {
-        this.userCode = userCode;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setMember_id(int member_id) {
+        this.member_id = member_id;
     }
 
     public String getEmail() {
@@ -72,12 +62,12 @@ public class UserSignupDTO {
         this.password = password;
     }
 
-    public int getPhoneNumber() {
-        return phoneNumber;
+    public String getName() {
+        return name;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getNickname() {
@@ -96,8 +86,16 @@ public class UserSignupDTO {
         this.loginMethod = loginMethod;
     }
 
-    public String getDate() {
-        return date;
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
     }
 
     public String getWithdrawalStatus() {
@@ -111,14 +109,14 @@ public class UserSignupDTO {
     @Override
     public String toString() {
         return "UserSignupDTO{" +
-                "userCode=" + userCode +
-                ", name='" + name + '\'' +
+                "member_id=" + member_id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", phoneNumber=" + phoneNumber +
+                ", name='" + name + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", loginMethod='" + loginMethod + '\'' +
-                ", date='" + date + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", createdDate='" + createdDate + '\'' +
                 ", withdrawalStatus='" + withdrawalStatus + '\'' +
                 '}';
     }

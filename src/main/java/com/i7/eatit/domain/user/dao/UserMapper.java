@@ -7,10 +7,9 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper {
 
-    // 회원가입
-    void userInsert(UserSignupDTO userSignupDTO);
-
-
     // 로그인
     UserLoginDTO userSelect(UserLoginDTO userLoginDTO);
+
+    // 회원가입
+    void userInsert(UserSignupDTO userSignupDTO);
 }
