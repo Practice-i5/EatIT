@@ -2,24 +2,24 @@ package com.i7.eatit.domain.picture.dto;
 
 public class MemberPhotoDTO {
 
-    private int MemberPhotoID;
+    private int memberPhotoID;
     private int memberId;
     private String photoURL;
 
     public MemberPhotoDTO(){}
 
     public MemberPhotoDTO(int memberPhotoID, int memberId, String photoURL) {
-        MemberPhotoID = memberPhotoID;
+        this.memberPhotoID = memberPhotoID;
         this.memberId = memberId;
         this.photoURL = photoURL;
     }
 
     public int getMemberPhotoID() {
-        return MemberPhotoID;
+        return memberPhotoID;
     }
 
     public void setMemberPhotoID(int memberPhotoID) {
-        MemberPhotoID = memberPhotoID;
+        this.memberPhotoID = memberPhotoID;
     }
 
     public int getMemberId() {
@@ -38,5 +38,12 @@ public class MemberPhotoDTO {
         this.photoURL = photoURL;
     }
 
-
+    @Override
+    public String toString() {
+        return "MemberPhotoDTO{" +
+                "memberPhotoID=" + memberPhotoID +
+                ", memberId=" + memberId +
+                ", photoURL='" + photoURL + '\'' +
+                '}';
+    }
 }

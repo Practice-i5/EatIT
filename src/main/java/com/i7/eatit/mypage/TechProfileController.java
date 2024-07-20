@@ -1,11 +1,14 @@
 package com.i7.eatit.mypage;
 
+import com.i7.eatit.domain.tag.dto.MemberTechStackDTO;
 import com.i7.eatit.domain.tag.dto.TechStackTypeDTO;
+import com.i7.eatit.domain.tag.service.MemberTechStackService;
 import com.i7.eatit.domain.tag.service.TechStackTypeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -15,10 +18,12 @@ import java.util.List;
 @RequestMapping("/my-page/*")
 public class TechProfileController {
 
+    private final MemberTechStackService memberTechStackService;
     TechStackTypeService techStackTypeService;
 
-    public TechProfileController(TechStackTypeService techStackTypeService) {
+    public TechProfileController(TechStackTypeService techStackTypeService, MemberTechStackService memberTechStackService) {
         this.techStackTypeService = techStackTypeService;
+        this.memberTechStackService = memberTechStackService;
     }
 
     @GetMapping("tech-profile")
@@ -39,5 +44,21 @@ public class TechProfileController {
         model.addAttribute("techStackList", techStackList);
 
         return "my-page/tech-profile-modify";
+    }
+
+    @GetMapping("member-stack-test")
+    public String stackTestPage(){
+        return "my-page/stacktest";
+    }
+
+    @PostMapping("member-stack-test")
+    public String memberStackTest(Model model) {
+        List<TechStackTypeDTO> techStackList = techStackTypeService.findAllTechStack();
+        MemberTechStackDTO memberTechStack = new MemberTechStackDTO(4, 7);
+        memberTechStackService.addMemberTechStack(memberTechStack);
+        memberTechStackService.deleteMemberAllTechStack(11);
+        //작성중
+
+        return "redirect:/my-page/profile";
     }
 }
