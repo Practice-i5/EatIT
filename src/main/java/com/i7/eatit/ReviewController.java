@@ -27,18 +27,5 @@ public class ReviewController {
     모임 정보 가져오기 (시간, 모임제목, 참가자(호스트, 게스트)
      */
 
-    @GetMapping()
 
-
-    /*
-    리뷰 등록하기 - 체크한 체크박스를 db에 저장
-     */
-    
-    
-    
-    // 모임 정보 받아오기(시간, 모임제목, 참가자(호스트, 게스트)
-    @PostMapping("/review/regist")
-    public void goRegister() {
-        
-    }
 }
