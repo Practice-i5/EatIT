@@ -1,6 +1,5 @@
+<!DOCTYPE html>
 <html lang="en">
-
-<!--회원가입 정보를 추가하는 역할, post 사용-->
 
 <head>
     <meta charset="utf-8">
@@ -10,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Abhaya+Libre&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/join.css" th:href="@{/css/join.css}">
-    <link rel="stylesheet" href="../../static/css/login.css" th:href="@{/css/login.css}">
 </head>
 
 <body>
@@ -18,8 +16,8 @@
     <div class="wrap">
         <div class="login">
             <div class="login_logo">
-                <a th:href="@{/login/loginMain}">
-                    <img src="/img/image_146.png" width="150" height="150">
+                <a href="../../templates/login/loginMain.html" th:href="@{/login/loginMain}">
+                    <img src="../../static/img/image_146.png" th:src="@{/img/image_146.png}" width="150" height="150">
                 </a>
             </div>
 
@@ -38,9 +36,9 @@
             </div>
 
             <!--비밀번호 확인-->
-            <div class="textForm">
-                <input name="passwordConfirm" type="password" class="pw" placeholder="비밀번호 확인">
-            </div>
+            <!-- <div class="textForm">
+                 <input name="passwordConfirm" type="password" class="pw" placeholder="비밀번호 확인">
+             </div>-->
 
             <!--이름-->
             <div class="textForm">
@@ -48,7 +46,7 @@
             </div>
 
             <!--기술스택-->
-            <div class="form-item">
+            <!--<div class="form-item">
                 <label class="profile-label">
                     <p style="color:#707070">내 기술 스택</p>
                 </label>
@@ -98,14 +96,8 @@
                         <input id="interest-10" name="security" class="interest-check" type="checkbox" value="security">
                         <label class="btn-choice-mid interest-label" for="interest-10">보안</label>
                     </li>
-                    <!--
-                    <li style="margin-top:5px; margin-bottom: 10px;">
-                        <input id="interest-11" name="DAO" class="interest-check" type="checkbox" value="DAO">
-                        <label class="btn-choice-mid interest-label" for="interest-11">DAO</label>
-                    </li>
-                    -->
                 </ul>
-            </div>
+            </div>-->
 
             <!--닉네임-->
             <div class="textForm">
@@ -114,9 +106,8 @@
 
             <!--전화번호-->
             <div class="textForm">
-                <input name="phoneNo" type="number" class="phoneNumber" placeholder="전화번호">
+                <input name="phoneNumber" type="number" class="cellphoneNo" placeholder="전화번호">
             </div>
-
 
             <!--완료 버튼-->
             <div>
@@ -126,5 +117,4 @@
     </div>
 </form>
 </body>
-
 </html>
