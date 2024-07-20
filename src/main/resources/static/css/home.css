@@ -198,14 +198,6 @@
   margin-left: 20px;
 }
 
-.page-header {
-  position: relative;
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    url(../img/cart-page-header-img.jpg);
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 
 @media (min-width: 992px) {
   .hero-header,
@@ -408,3 +400,76 @@ button#showAllButton:hover {
 .carousel-inner img {
   vertical-align: middle; /* 모든 이미지에 대해 중간 정렬 */
 }
+
+/* home.css */
+
+/* 채팅 버튼 스타일 */
+.chat-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.chat-button:hover {
+  background-color: #0056b3;
+}
+
+/* 관심 개발 분야 */
+.fruite-item {
+  transition: transform 0.3s ease-in-out;
+}
+
+.fruite-item:hover {
+  transform: scale(1.05);
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+}
+
+.profile-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-text {
+  margin-left: 10px;
+}
+
+/* home.css */
+
+/* 찜하기 및 공유 버튼 스타일 */
+.icon {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* 하트 아이콘 스타일 */
+.icon .far.fa-heart {
+  color: #ccc; /* 기본 상태: 회색 하트 */
+}
+
+.icon .fas.fa-heart {
+  color: #f00; /* 클릭 시 빨간색 하트 */
+}
+
+
+
+
