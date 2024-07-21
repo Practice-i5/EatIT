@@ -1,10 +1,4 @@
-package com.i7.eatit.detail;
-
-/*
- *   EatITController.java
- *   Author : syamcat
- *   Created : 24. 7. 11.
- **/
+package com.i7.eatit.domain.meeting.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +21,7 @@ public class DetailController {
     /*
      * 1. WebRequst로 요청 파라미터 전달 받기
      * */
-    @GetMapping("done-detail")
+    @GetMapping("detail")
     public String writeDoneDetail(Model model) {
 
         String groupName = "임시 모임 이름";
@@ -82,7 +76,7 @@ public class DetailController {
         model.addAttribute("buttonStr", buttonStr);
 
 
-        return "detail/done-detail";
+        return "detail/detail";
     }
 
 //    @GetMapping("detail")
