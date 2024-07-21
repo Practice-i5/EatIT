@@ -21,12 +21,12 @@
                         </div>
                         <div>
                             <h5>재직 기간</h5>
-                            <input id="employ-start" type="month"> ~ <input id="employ-end" type="month">
-                            <input id="is-employ" type="checkbox"><label for="is-employ">재직중</label> 
+                            <input id="employ-start" type="month"/> ~ <input id="employ-end" type="month"/>
+                            <input id="is-employ" type="checkbox"/><label for="is-employ">재직중</label>
                         </div>
                         <div>
                             <h5>개발 업무</h5>
-                            <input type="text" required>
+                            <input type="text" required/>
                         </div>
                     </div>
                     <div style="display:flex; justify-content:center">
@@ -39,7 +39,7 @@
         </div>
 
         <div class="container">
-            <nav class="header" th:include="/my-page/header-mypage.html">
+            <nav th:replace="~{my-page/layout :: header}">
             </nav>
 
             <aside class="bar">
@@ -76,8 +76,8 @@
                         <ul class="list-no-pad form-size-limit chip-btn-list">
                             <th:block th:each="stack:${techStackList}">
                                 <li style="margin-top:5px; margin-bottom: 10px;">
-                                    <input th:id="|interest-${stack.id}|" class="interest-check" type="checkbox" th:value="${stack.engName}">
-                                    <label class="btn-choice-mid interest-label" th:for="|interest-${stack.id}|" th:text="${stack.name}"></label>
+                                    <input th:id="|interest-${stack.code}|" class="interest-check" type="checkbox" th:value="${stack.name}">
+                                    <label class="btn-choice-mid interest-label" th:for="|interest-${stack.code}|" th:text="${stack.name}"></label>
                                 </li>
                             </th:block>
 
@@ -93,52 +93,52 @@
 <!--                            </li>-->
                             <li style="margin-top:5px; margin-bottom: 10px;">
                                 <div>
-                                    <input id="interest-3" class="interest-check" type="checkbox" value="project-management">
-                                    <label class="btn-choice-mid interest-label" for="interest-3">기획</label>
+                                    <input id="interest-1113" class="interest-check" type="checkbox" value="project-management">
+                                    <label class="btn-choice-mid interest-label" for="interest-1113">기획</label>
                                 </div>
                             </li>
                             <li style="margin-top:5px; margin-bottom: 10px;">
                                 <div>
-                                    <input id="interest-4" class="interest-check" type="checkbox" value="game-client">
-                                    <label class="btn-choice-mid interest-label" for="interest-4">모바일</label>    
-                                </div>
-                            </li>
-
-                            <li style="margin-top:5px; margin-bottom: 10px;">
-                                <div>
-                                    <input id="interest-5" class="interest-check" type="checkbox" value="game-client">
-                                    <label class="btn-choice-mid interest-label" for="interest-5">게임 클라이언트</label>    
-                                </div>
-                            </li>
-                            <li style="margin-top:5px; margin-bottom: 10px;">
-                                <div>
-                                    <input id="interest-6" class="interest-check" type="checkbox" value="game-client">
-                                    <label class="btn-choice-mid interest-label" for="interest-6">임베디드</label>    
-                                </div>
-                            </li>
-                            <li style="margin-top:5px; margin-bottom: 10px;">
-                                <div>
-                                    <input id="interest-7" class="interest-check" type="checkbox" value="game-client">
-                                    <label class="btn-choice-mid interest-label" for="interest-7">보안</label>    
-                                </div>
-                            </li>
-                            <li style="margin-top:5px; margin-bottom: 10px;">
-                                <div>
-                                    <input id="interest-8" class="interest-check" type="checkbox" value="game-client">
-                                    <label class="btn-choice-mid interest-label" for="interest-8">데이터 엔지니어링</label>    
-                                </div>
-                            </li>
-                            <li style="margin-top:5px; margin-bottom: 10px;">
-                                <div>
-                                    <input id="interest-9" class="interest-check" type="checkbox" value="game-client">
-                                    <label class="btn-choice-mid interest-label" for="interest-9">게임 서버</label>    
+                                    <input id="interest-1114" class="interest-check" type="checkbox" value="game-client">
+                                    <label class="btn-choice-mid interest-label" for="interest-1114">모바일</label>
                                 </div>
                             </li>
 
                             <li style="margin-top:5px; margin-bottom: 10px;">
                                 <div>
-                                    <input id="interest-10" class="interest-check" type="checkbox" value="game-client">
-                                    <label class="btn-choice-mid interest-label" for="interest-10">UI/UX</label>    
+                                    <input id="interest-1115" class="interest-check" type="checkbox" value="game-client">
+                                    <label class="btn-choice-mid interest-label" for="interest-1115">게임 클라이언트</label>
+                                </div>
+                            </li>
+                            <li style="margin-top:5px; margin-bottom: 10px;">
+                                <div>
+                                    <input id="interest-1116" class="interest-check" type="checkbox" value="game-client">
+                                    <label class="btn-choice-mid interest-label" for="interest-1116">임베디드</label>
+                                </div>
+                            </li>
+                            <li style="margin-top:5px; margin-bottom: 10px;">
+                                <div>
+                                    <input id="interest-1117" class="interest-check" type="checkbox" value="game-client">
+                                    <label class="btn-choice-mid interest-label" for="interest-1117">보안</label>
+                                </div>
+                            </li>
+                            <li style="margin-top:5px; margin-bottom: 10px;">
+                                <div>
+                                    <input id="interest-1118" class="interest-check" type="checkbox" value="game-client">
+                                    <label class="btn-choice-mid interest-label" for="interest-1118">데이터 엔지니어링</label>
+                                </div>
+                            </li>
+                            <li style="margin-top:5px; margin-bottom: 10px;">
+                                <div>
+                                    <input id="interest-1119" class="interest-check" type="checkbox" value="game-client">
+                                    <label class="btn-choice-mid interest-label" for="interest-1119">게임 서버</label>
+                                </div>
+                            </li>
+
+                            <li style="margin-top:5px; margin-bottom: 10px;">
+                                <div>
+                                    <input id="interest-1110" class="interest-check" type="checkbox" value="game-client">
+                                    <label class="btn-choice-mid interest-label" for="interest-1110">UI/UX</label>
                                 </div>
                             </li>
                         </ul>
@@ -177,7 +177,7 @@
                     <button class="btn-rw btn-submit" type="submit">제출</button>
                 </form>
             </div>
-            <footer class="footer" th:include="/my-page/footer-mypage.html">
+            <footer th:replace="~{my-page/layout :: footer}">
             </footer>
         </div>
         <script src="js/tech-profile-modal.js" th:src="@{/js/my-page/tech-profile-modal.js}"></script>

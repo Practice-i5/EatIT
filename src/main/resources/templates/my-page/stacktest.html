@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>프로필 수정</title>
+        <link rel="stylesheet" href="css/style-mypage.css" th:href="@{/css/my-page/style-mypage.css}">
+        <link rel="stylesheet" href="css/button.css" th:href="@{/css/my-page/button.css}">
+    </head>
+    <body>
+        <div class="container">
+            <nav th:replace="~{my-page/layout :: header}"></nav>
+
+            <aside class="bar">
+                <div class="my-page-list sidebar-block">
+                    <h2>마이 페이지</h2>
+                    <ul class="list-no-pad">
+                        <li class="bar-list">
+                            <a class="active-page" href="./profile.html" th:href="@{profile}">프로필 수정</a>
+                        </li>
+                        <li class="bar-list">
+                            <a class="unactive-page" href="./tech-profile.html" th:href="@{tech-profile}">기술 프로필 설정</a>
+                        </li>
+                        <li class="bar-list">
+                            <a class="unactive-page" href="./follow-list.html" th:href="@{follow-list}">팔로우 유저 목록</a>
+                        </li>
+                        <li class="bar-list">
+                            <a class="unactive-page" href="./black-list.html" th:href="@{black-list}">차단 회원 관리</a>
+                        </li>
+                        <li class="bar-list">
+                            <a class="unactive-page" href="./account-info.html" th:href="@{account-info}">계정 정보 보기</a>
+                        </li>
+                        <li class="bar-list">
+                            <a class="unactive-page" href="./withdraw.html" th:href="@{withdraw}">회원 탈퇴</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <div class="profile">
+                <form class="form-content" method="post" action="/my-page/member-stack-test">
+                    <h2>테크스택 테스트</h2>
+                    <button class="btn-rw btn-submit" type="submit">제출</button>
+                </form>
+            </div>
+
+            <footer th:replace="~{my-page/layout :: footer}">
+            </footer>
+        </div>
+        <script src="js/upload-image.js" th:src="@{/js/my-page/upload-image.js}"></script>
+    </body>
+</html>
