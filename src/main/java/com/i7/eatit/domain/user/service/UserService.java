@@ -4,6 +4,7 @@ import com.i7.eatit.domain.user.dao.UserMapper;
 import com.i7.eatit.domain.user.dto.UserLoginDTO;
 import com.i7.eatit.domain.user.dto.UserSignupDTO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService {
@@ -15,6 +16,7 @@ public class UserService {
     }
     
     // 회원가입
+    @Transactional
     public void UserSignUp(UserSignupDTO userSignupDTO) {
         userMapper.userInsert(userSignupDTO);
     }
