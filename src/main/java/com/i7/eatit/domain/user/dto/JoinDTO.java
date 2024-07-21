@@ -3,7 +3,7 @@ package com.i7.eatit.domain.user.dto;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class UserSignupDTO {
+public class JoinDTO {
 
     private int member_id;
 
@@ -20,12 +20,12 @@ public class UserSignupDTO {
 
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 
-    public UserSignupDTO() {
+    public JoinDTO() {
         this.createdDate = DATE_FORMAT.format(new Date());
     }
 
-    public UserSignupDTO(int member_id, String name, String email, String password, String phoneNumber,
-                         String nickname, String loginMethod, String withdrawalStatus) {
+    public JoinDTO(int member_id, String name, String email, String password, String phoneNumber,
+                   String nickname, String loginMethod, String withdrawalStatus) {
 
         this.member_id = member_id;
         this.name = name;
