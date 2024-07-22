@@ -2,13 +2,11 @@
 <html
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{my-page/layout}"
->
+        layout:decorate="~{my-page/layout}">
     <head>
         <title>차단 회원 관리</title>
-        <link rel="stylesheet" href="css/style-mypage.css" th:href="@{/css/my-page/style-mypage.css}">
-        <link rel="stylesheet" href="css/button.css" th:href="@{/css/my-page/button.css}">
     </head>
+
     <aside layout:fragment="sidebar" class="bar">
         <div class="my-page-list sidebar-block">
             <h2>마이 페이지</h2>

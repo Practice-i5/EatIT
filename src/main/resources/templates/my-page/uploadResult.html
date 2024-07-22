@@ -1,66 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{my-page/layout}">
     <head>
         <title>프로필 수정</title>
-        <link rel="stylesheet" href="css/style-mypage.css" th:href="@{/static/css/my-page/style-mypage.css}">
-        <link rel="stylesheet" href="css/button.css" th:href="@{/static/css/my-page/button.css}">
     </head>
-    <body>
-        <div class="container">
-            <nav th:replace="~{my-page/layout :: header}"></nav>
 
-            <aside class="bar">
-                <div class="my-page-list sidebar-block">
-                    <h2>마이 페이지</h2>
-                    <ul class="list-no-pad">
-                        <li class="bar-list">
-                            <a class="active-page" href="./profile.html" th:href="@{profile}">프로필 수정</a>
-                        </li>
-                        <li class="bar-list">
-                            <a class="unactive-page" href="./tech-profile.html" th:href="@{tech-profile}">기술 프로필 설정</a>
-                        </li>
-                        <li class="bar-list">
-                            <a class="unactive-page" href="./follow-list.html" th:href="@{follow-list}">팔로우 유저 목록</a>
-                        </li>
-                        <li class="bar-list">
-                            <a class="unactive-page" href="./black-list.html" th:href="@{black-list}">차단 회원 관리</a>
-                        </li>
-                        <li class="bar-list">
-                            <a class="unactive-page" href="./account-info.html" th:href="@{account-info}">계정 정보 보기</a>
-                        </li>
-                        <li class="bar-list">
-                            <a class="unactive-page" href="./withdraw.html" th:href="@{withdraw}">회원 탈퇴</a>
-                        </li>
-                    </ul>
-                </div>
-            </aside>
-
-            <div class="profile">
-                <form class="form-content" method="post" action="/my-page/uploadTest"  enctype="multipart/form-data">
-                    <h2>사진 업로드 결과</h2>
-                    <div class="form-item">
-                        <label class="profile-label">프로필 사진</label>
-                        <div class="form-input" style="width: 70%; display: flex; align-items: center; justify-content: space-between;">
-                            
-                            <img id="img-preview" src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"
-                            th:src="${profileImage}"/>
-                            <p th:text="${tst}"></p>
-                            <div>
-                                <input id="img-file" style="display: none; width:0px; margin: 0px; padding: 0px;" type="file" name="singleFile" accept="image/*"/>
-                                <label for="img-file" class="upload-btn btn-choice-small btn-wb">수정</label>
-                                <label class="reset-img btn-choice-small btn-wb">초기화</label>
-                            </div>
-
-                        </div>
-                        
-                    </div>
-                    <a href="/my-page/uploadTest">되돌아가기</a>
-                </form>
-            </div>
-
-            <footer th:replace="~{my-page/layout :: footer}">
-            </footer>
+    <aside layout:fragment="sidebar" class="bar">
+        <div class="my-page-list sidebar-block">
+            <h2>마이 페이지</h2>
+            <ul class="list-no-pad">
+                <li class="bar-list">
+                    <a class="active-page" href="./profile.html" th:href="@{profile}">프로필 수정</a>
+                </li>
+                <li class="bar-list">
+                    <a class="unactive-page" href="./tech-profile.html" th:href="@{tech-profile}">기술 프로필 설정</a>
+                </li>
+                <li class="bar-list">
+                    <a class="unactive-page" href="./follow-list.html" th:href="@{follow-list}">팔로우 유저 목록</a>
+                </li>
+                <li class="bar-list">
+                    <a class="unactive-page" href="./black-list.html" th:href="@{black-list}">차단 회원 관리</a>
+                </li>
+                <li class="bar-list">
+                    <a class="unactive-page" href="./account-info.html" th:href="@{account-info}">계정 정보 보기</a>
+                </li>
+                <li class="bar-list">
+                    <a class="unactive-page" href="./withdraw.html" th:href="@{withdraw}">회원 탈퇴</a>
+                </li>
+            </ul>
         </div>
-        <script src="js/upload-image.js" th:src="@{/static/js/my-page/upload-image.js}"></script>
-    </body>
+    </aside>
+
+    <div layout:fragment="content" class="profile">
+        <form class="form-content" method="post" action="/my-page/uploadTest"  enctype="multipart/form-data">
+            <h2>사진 업로드 결과</h2>
+            <div class="form-item">
+                <label class="profile-label">프로필 사진</label>
+                <div class="form-input" style="width: 70%; display: flex; align-items: center; justify-content: space-between;">
+
+                    <img id="img-preview" src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"
+                         th:src="${profileImage}"/>
+                    <p th:text="${tst}"></p>
+                    <div>
+                        <input id="img-file" style="display: none; width:0px; margin: 0px; padding: 0px;" type="file" name="singleFile" accept="image/*"/>
+                        <label for="img-file" class="upload-btn btn-choice-small btn-wb">수정</label>
+                        <label class="reset-img btn-choice-small btn-wb">초기화</label>
+                    </div>
+
+                </div>
+
+            </div>
+            <a href="/my-page/uploadTest">되돌아가기</a>
+        </form>
+    </div>
+
 </html>

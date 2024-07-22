@@ -1,124 +1,115 @@
 <!DOCTYPE html>
-<html>
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{my-page/layout}">
     <head>
         <title>팔로우 목록</title>
-        <link rel="stylesheet" href="css/style-mypage.css" th:href="@{/css/my-page/style-mypage.css}">
-        <link rel="stylesheet" href="css/button.css" th:href="@{/css/my-page/button.css}">
     </head>
-    <body>
-        <div class="container">
-            <nav th:replace="~{my-page/layout :: header}">
-            </nav>
 
-            <aside class="bar">
-                <div class="my-page-list sidebar-block">
-                    <h2>마이 페이지</h2>
-                    <ul class="list-no-pad">
-                        <li class="bar-list">
-                            <a class="unactive-page" href="./profile.html" th:href="@{profile}">프로필 수정</a>
-                        </li>
-                        <li class="bar-list">
-                            <a class="unactive-page" href="./tech-profile.html" th:href="@{tech-profile}">기술 프로필 설정</a>
-                        </li>
-                        <li class="bar-list">
-                            <a class="active-page" href="./follow-list.html" th:href="@{follow-list}">팔로우 유저 목록</a>
-                        </li>
-                        <li class="bar-list">
-                            <a class="unactive-page" href="./black-list.html" th:href="@{black-list}">차단 회원 관리</a>
-                        </li>
-                        <li class="bar-list">
-                            <a class="unactive-page" href="./account-info.html" th:href="@{account-info}">계정 정보 보기</a>
-                        </li>
-                        <li class="bar-list">
-                            <a class="unactive-page" href="./withdraw.html" th:href="@{withdraw}">회원 탈퇴</a>
-                        </li>
-                    </ul>
-                </div>
-            </aside>
-
-            <div class="profile">
-                <form class="form-content">
-                    <h2>팔로우 유저 목록</h2>
-                    <!-- <p class="form-message">날짜 순으로 최근 5개가 표시됩니다.</p> -->
-                    <ul class="form-list-block">
-                        <th:block th:each="followUser:${followList}">
-                            <li>
-                                <div class="form-item">
-                                    <div class="block-info">
-                                        <img th:src="${followUser.url}"
-                                                src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"/>
-                                        <div class="block-info-text" th:text="${followUser.name}">
-                                            닉네임1
-                                        </div>
-                                    </div>
-
-                                    <div class="block-modify">
-                                        <button class="btn-choice-small btn-wb">프로필</button>
-                                        <button class="btn-choice-small btn-wb">삭제</button>
-                                    </div>
-                                </div>
-                            </li>
-                        </th:block>
-                        <li>
-                            <div class="form-item">
-                                <div class="block-info">
-                                    <img src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"/>
-                                    <div class="block-info-text">
-                                        닉네임1
-                                    </div>
-                                </div>
-
-                                <div class="block-modify">
-                                    <button class="btn-choice-small btn-wb">프로필</button>
-                                    <button class="btn-choice-small btn-wb">삭제</button>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="form-item">
-                                <div class="block-info">
-                                    <img src="images/ellipse_56.png" th:src="@{/img/my-page/ellipse_56.png}"/>
-                                    <div class="block-info-text">
-                                        화성남
-                                    </div>
-                                </div>
-
-                                <div class="block-modify">
-                                    <button class="btn-choice-small btn-wb">프로필</button>
-                                    <button class="btn-choice-small btn-wb">삭제</button>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="form-item">
-                                <div class="block-info">
-                                    <img id="img-preview" src="images/ellipse_51.png" th:src="@{/img/my-page/ellipse_51.png}"/>
-                                    <div class="block-info-text">
-                                        래빗
-                                    </div>
-                                </div>
-
-                                <div class="block-modify">
-                                    <button class="btn-choice-small btn-wb">프로필</button>
-                                    <button class="btn-choice-small btn-wb">삭제</button>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-
-                    <ul class="list-no-pad" style="display: flex; justify-content: center;">
-                        <li style="width: 40px;">1</li>
-                        <li style="width: 40px;">2</li>
-                        <li style="width: 40px;">3</li>
-                        <li style="width: 40px;">4</li>
-                        <li style="width: 40px;">5</li>
-                    </ul>
-                </form>
-                
-            </div>
-            <footer th:replace="~{my-page/layout :: footer}">
-            </footer>
+    <aside layout:fragment="sidebar" class="bar">
+        <div class="my-page-list sidebar-block">
+            <h2>마이 페이지</h2>
+            <ul class="list-no-pad">
+                <li class="bar-list">
+                    <a class="unactive-page" href="./profile.html" th:href="@{profile}">프로필 수정</a>
+                </li>
+                <li class="bar-list">
+                    <a class="unactive-page" href="./tech-profile.html" th:href="@{tech-profile}">기술 프로필 설정</a>
+                </li>
+                <li class="bar-list">
+                    <a class="active-page" href="./follow-list.html" th:href="@{follow-list}">팔로우 유저 목록</a>
+                </li>
+                <li class="bar-list">
+                    <a class="unactive-page" href="./black-list.html" th:href="@{black-list}">차단 회원 관리</a>
+                </li>
+                <li class="bar-list">
+                    <a class="unactive-page" href="./account-info.html" th:href="@{account-info}">계정 정보 보기</a>
+                </li>
+                <li class="bar-list">
+                    <a class="unactive-page" href="./withdraw.html" th:href="@{withdraw}">회원 탈퇴</a>
+                </li>
+            </ul>
         </div>
-    </body>
+    </aside>
+
+    <div layout:fragment="content" class="profile">
+        <form class="form-content">
+            <h2>팔로우 유저 목록</h2>
+            <!-- <p class="form-message">날짜 순으로 최근 5개가 표시됩니다.</p> -->
+            <ul class="form-list-block">
+                <th:block th:each="followUser:${followList}">
+                    <li>
+                        <div class="form-item">
+                            <div class="block-info">
+                                <img th:src="${followUser.url}"
+                                     src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"/>
+                                <div class="block-info-text" th:text="${followUser.name}">
+                                    닉네임1
+                                </div>
+                            </div>
+
+                            <div class="block-modify">
+                                <button class="btn-choice-small btn-wb">프로필</button>
+                                <button class="btn-choice-small btn-wb">삭제</button>
+                            </div>
+                        </div>
+                    </li>
+                </th:block>
+                <li>
+                    <div class="form-item">
+                        <div class="block-info">
+                            <img src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"/>
+                            <div class="block-info-text">
+                                닉네임1
+                            </div>
+                        </div>
+
+                        <div class="block-modify">
+                            <button class="btn-choice-small btn-wb">프로필</button>
+                            <button class="btn-choice-small btn-wb">삭제</button>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="form-item">
+                        <div class="block-info">
+                            <img src="images/ellipse_56.png" th:src="@{/img/my-page/ellipse_56.png}"/>
+                            <div class="block-info-text">
+                                화성남
+                            </div>
+                        </div>
+
+                        <div class="block-modify">
+                            <button class="btn-choice-small btn-wb">프로필</button>
+                            <button class="btn-choice-small btn-wb">삭제</button>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="form-item">
+                        <div class="block-info">
+                            <img id="img-preview" src="images/ellipse_51.png" th:src="@{/img/my-page/ellipse_51.png}"/>
+                            <div class="block-info-text">
+                                래빗
+                            </div>
+                        </div>
+
+                        <div class="block-modify">
+                            <button class="btn-choice-small btn-wb">프로필</button>
+                            <button class="btn-choice-small btn-wb">삭제</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="list-no-pad" style="display: flex; justify-content: center;">
+                <li style="width: 40px;">1</li>
+                <li style="width: 40px;">2</li>
+                <li style="width: 40px;">3</li>
+                <li style="width: 40px;">4</li>
+                <li style="width: 40px;">5</li>
+            </ul>
+        </form>
+    </div>
 </html>
