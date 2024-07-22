@@ -19,6 +19,7 @@
 
     <result property="createdDate" column="created_date"/>
     <result property="withdrawalStatus" column="withdrawal_status"/>
+    <result property="reportedCount" column="reported_count"/>
     <!-- TODO : 신고 당한 횟수도 추가해야 함.-->
   </resultMap>
 

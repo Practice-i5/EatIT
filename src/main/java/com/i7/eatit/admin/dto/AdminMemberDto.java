@@ -12,12 +12,12 @@ public class AdminMemberDto {
     private String loginMethod;
     private String phoneNumber;
     private LocalDateTime createdDate;  // 가입 일시
-    private String withdrawalStatus;   // 탈퇴 여부
-//    TODO : private int reportedCount;          // 누적 신고 횟수 (Join 해서 가져와야 함.)
+    private String withdrawalStatus;    // 탈퇴 여부
+    private int reportedCount;          // 누적 신고 횟수
 
     public AdminMemberDto(int memberId, String email, String password, String name, String nickname,
         String loginMethod, String phoneNumber, LocalDateTime createdDate,
-        String withdrawalStatus) {
+        String withdrawalStatus, int reportedCount) {
         this.memberId = memberId;
         this.email = email;
         this.password = password;
@@ -27,6 +27,7 @@ public class AdminMemberDto {
         this.phoneNumber = phoneNumber;
         this.createdDate = createdDate;
         this.withdrawalStatus = withdrawalStatus;
+        this.reportedCount = reportedCount;
     }
 
     public AdminMemberDto() {
@@ -104,18 +105,11 @@ public class AdminMemberDto {
         this.withdrawalStatus = withdrawalStatus;
     }
 
-    @Override
-    public String toString() {
-        return "AdminMemberDto{" +
-            "memberId=" + memberId +
-            ", email='" + email + '\'' +
-            ", password='" + password + '\'' +
-            ", name='" + name + '\'' +
-            ", nickname='" + nickname + '\'' +
-            ", loginMethod='" + loginMethod + '\'' +
-            ", phoneNumber='" + phoneNumber + '\'' +
-            ", createdDate=" + createdDate +
-            ", withdrawalStatus='" + withdrawalStatus + '\'' +
-            '}';
+    public int getReportedCount() {
+        return reportedCount;
+    }
+
+    public void setReportedCount(int reportedCount) {
+        this.reportedCount = reportedCount;
     }
 }
