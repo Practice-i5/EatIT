@@ -1,14 +1,13 @@
-package com.i7.eatit.home;
+package com.i7.eatit.domain.chatting.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/home/*")
-public class HomeController {
+@RequestMapping("chat")
+public class PersonalChatController {
 
-    @GetMapping("home")
-    public void home() {}
-
+    @GetMapping("chat-page")
+    public void chat() {}
 }
