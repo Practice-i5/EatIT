@@ -1,6 +1,6 @@
 package com.i7.eatit.domain.user.controller;
 
-import com.i7.eatit.domain.user.dto.JoinDTO;
+import com.i7.eatit.domain.user.dto.UserInfoDTO;
 
 import com.i7.eatit.domain.user.service.JoinService;
 import org.springframework.stereotype.Controller;
@@ -20,11 +20,11 @@ public class JoinController {
 
     // 회원가입 - 이메일, 비밀번호, 이름, 전화번호,닉네임, 기술스택
     @PostMapping("/regist")
-    public String join(JoinDTO joinDTO) {
+    public String join(UserInfoDTO userInfoDTO) {
 
-        System.out.println("userSignupDTO = " + joinDTO); // 확인용
+        System.out.println("userSignupDTO = " + userInfoDTO); // 확인용
 
-        joinService.UserSignUp(joinDTO);
+        joinService.UserSignUp(userInfoDTO);
 
         return "redirect:/login/loginMain";
     }
