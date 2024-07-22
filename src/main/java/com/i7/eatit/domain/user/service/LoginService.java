@@ -19,21 +19,18 @@ public class LoginService {
 
     // 로그인
     public UserInfoDTO checkUser(UserLoginDTO loginUser) {
-        
+
         // userLoginDTO 로 조회 후 JoinDTO 로 반환
 
-        // 반환할 SessionDTO 생성
-        UserInfoDTO userSessionDTO = new UserInfoDTO();
-        
         // 맵 형태로 전달
         Map<String, String> userMap = new HashMap<>();
-        
+
         // Mapper 에 전달할 값을 JoinDTO 에
-        userMap.put("email",loginUser.getEmail());
+        userMap.put("email", loginUser.getEmail());
         userMap.put("password", loginUser.getPassword());
 
         // 요청 확인용
-        System.out.println("==="+loginMapper.selectUser(userMap) + "===");
+        System.out.println("===" + loginMapper.selectUser(userMap) + "===");
 
         return loginMapper.selectUser(userMap);
     }
