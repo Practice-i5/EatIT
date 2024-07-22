@@ -24,7 +24,7 @@ public class MemberTechStackService {
 
     @Transactional
     public void deleteMemberAllTechStack(int memberId){
-        memberTechStackMapper.deleteMemberAllTechStack(memberId);
+        memberTechStackMapper.deleteMemberTechStack(memberId);
     }
 
     @Transactional
