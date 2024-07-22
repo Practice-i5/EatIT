@@ -25,6 +25,13 @@
 
   <select id="findAllMember" resultMap="AdminMemberResultMap">
     SELECT * FROM tbl_member
+    <if test="sort != null">
+      ORDER BY
+      <choose>
+        <when test="sort == 'reportedCount'">reported_count DESC</when>
+        <otherwise>member_id</otherwise>
+      </choose>
+    </if>
   </select>
 
 </mapper>
