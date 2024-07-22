@@ -4,10 +4,10 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!--내가 만든 Mapper이름과 동일하게 지정-->
-<mapper namespace="com.i7.eatit.domain.user.dao.UserMapper">
+<mapper namespace="com.i7.eatit.domain.user.dao.JoinMapper">
 
     <!-- <resultMap id="아이디명" type="대상 DTO" > -->
-    <resultMap id="UserMap" type="com.i7.eatit.domain.user.dto.UserSignupDTO">
+    <resultMap id="UserMap" type="com.i7.eatit.domain.user.dto.JoinDTO">
 
         <id property="member_id" column="member_id"/>
 
@@ -24,17 +24,8 @@
 
     </resultMap>
 
-    <!--<resultMap id="userLoginMap" type="com.i7.eatit.domain.user.dto.UserLoginDTO">
-
-        <id property="userCode" column="member_id"/>
-
-        <result property="email" column="email"/>
-        <result property="password" column="password"/>
-
-    </resultMap>-->
-
     <!--회원가입-->
-    <insert id="userInsert" parameterType="com.i7.eatit.domain.user.dto.UserSignupDTO"
+    <insert id="userInsert" parameterType="com.i7.eatit.domain.user.dto.JoinDTO"
             useGeneratedKeys="true" keyProperty="member_id">
         insert into tbl_member
                 (
@@ -60,12 +51,4 @@
                 )
     </insert>
 
-    <!--로그인-->
-    <!--<select id="userSelect" resultMap="UserMap">
-        select
-                email
-                , password
-        from
-                tbl_member
-    </select>-->
 </mapper>
