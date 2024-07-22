@@ -6,24 +6,38 @@
 <!--내가 만든 Mapper이름과 동일하게 지정-->
 <mapper namespace="com.i7.eatit.domain.user.dao.LoginMapper">
 
-    <resultMap id="userLoginMap" type="com.i7.eatit.domain.user.dto.UserLoginDTO">
-        <id property="member_id" column="member_id"/>
-        <result property="email" column="email"/>
-        <result property="password" column="password"/>
-    </resultMap>
+    <resultMap id="userLoginMap" type="com.i7.eatit.domain.user.dto.UserInfoDTO">
 
+        <id property="member_id" column="MEMBER_ID"/>
+
+        <result property="email" column="EMAIL"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="name" column="NAME"/>
+        <result property="nickname" column="NICKNAME"/>
+        <result property="loginMethod" column="LOGIN_METHOD"/>
+        <result property="phoneNumber" column="PHONE_NUMBER"/>
+        <result property="createdDate" column="CREATED_DATE"/>
+        <result property="withdrawalStatus" column="WITHDRAWAL_STATUS"/>
+
+    </resultMap>
 
     <!--로그인-->
     <select id="selectUser" resultMap="userLoginMap" parameterType="hashmap">
-        select
-                member_id
-                , email
-                , password
+        SELECT
+                MEMBER_ID
+                , EMAIL
+                , PASSWORD
+                , NAME
+                , NICKNAME
+                , LOGIN_METHOD
+                , PHONE_NUMBER
+                , CREATED_DATE
+                , WITHDRAWAL_STATUS
         from
-                tbl_member
+                TBL_MEMBER
         where
-                email = #{ email }
+                EMAIL = #{ email }
         and
-                password = #{ password }
+                PASSWORD = #{ password }
     </select>
 </mapper>

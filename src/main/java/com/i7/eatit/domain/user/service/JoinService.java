@@ -1,7 +1,7 @@
 package com.i7.eatit.domain.user.service;
 
 import com.i7.eatit.domain.user.dao.JoinMapper;
-import com.i7.eatit.domain.user.dto.JoinDTO;
+import com.i7.eatit.domain.user.dto.UserInfoDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +16,7 @@ public class JoinService {
 
     // 회원가입
     @Transactional
-    public void UserSignUp(JoinDTO joinDTO) {
-        joinMapper.userInsert(joinDTO);
+    public void UserSignUp(UserInfoDTO userInfoDTO) {
+        joinMapper.userInsert(userInfoDTO);
     }
 }

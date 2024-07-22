@@ -5,7 +5,11 @@
 </header>
 
 <body>
-<h1 th:text="|${session.loginUser.email} 환영합니다|"></h1>
-<button onclick="location.href='login/loginMain'">로그아웃</button>
+<!--<h1 th:text="|${session.loginUser.member_id} 환영합니다|"></h1>-->
+<!-- th:if 문을 이용해서 div로 감싸서 ifgkrh 세션이 널이 아니면-->
+<div th:if="${loginUser != null}">
+    <h1 th:text="|${loginUser.nickname} 환영합니다|"></h1>
+</div>
+<button onclick="location.href='/login/logout'">로그아웃</button>
 </body>
 </html>
