@@ -7,7 +7,7 @@
     </head>
     <body>
         <div class="container">
-            <nav class="header" th:include="/my-page/header-mypage.html">
+            <nav th:replace="~{my-page/layout :: header}">
             </nav>
 
             <aside class="bar">
@@ -102,8 +102,7 @@
                     
                 </form>
             </div>
-            <footer class="footer" th:include="/my-page/footer-mypage.html">
-            </footer>
+            <footer th:replace="~{my-page/layout :: footer}"></footer>
         </div>
     </body>
 </html>

@@ -37,27 +37,29 @@
 
         <h1>모임 등록하기</h1>
 
-        <form action="/meeting/enroll", method="POST">
+        <form action="/enroll-meeting/enroll-meeting" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="meeting-place">약속 장소</label>
-                <input type="text" id="meeting-place" name="meeting-place" placeholder="약속장소를 입력해주세요"/>
+                <input type="text" id="meeting-place" name="locationName" placeholder="약속장소를 입력해주세요"/>
+                <input type="hidden" id="locationLatitude" name="locationLatitude"/>
+                <input type="hidden" id="locationLongitude" name="locationLongitude"/>
             </div>
             <div id="map" style="height: 400px; width: 400px;"></div>
             <div class="form-group">
                 <label for="group-name">모임 이름을 입력하세요</label>
-                <input type="text" id="group-name" name="group-name" placeholder="ex) 장소, 대화주제 등 대표 키워드를 포함해주세요"/>
+                <input type="text" id="group-name" name="title" placeholder="ex) 장소, 대화주제 등 대표 키워드를 포함해주세요"/>
             </div>
             <div class="form-group">
                 <label for="group-detail">모임을 소개해주세요</label>
-                <input type="text" id="group-detail" name="group-detail" placeholder="모집인원, 메인 메뉴 등 모임에 대한 설정포함"/>
+                <input type="text" id="group-detail" name="introduction" placeholder="모집인원, 메인 메뉴 등 모임에 대한 설정포함"/>
             </div>
             <div class="form-group">
                 <label>지불방식</label>
                 <div class="checkbox-group">
-                    <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" checked>
+                    <input type="radio" class="btn-check" name="paymentMethod" id="success-outlined" autocomplete="off" checked value="Paid">
                     <label class="btn btn-outline-success" for="success-outlined">더치페이</label>
 
-                    <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
+                    <input type="radio" class="btn-check" name="paymentMethod" id="danger-outlined" autocomplete="off" value="Free">
                     <label class="btn btn-outline-success" for="danger-outlined">골든벨</label>
                 </div>
             </div>
@@ -65,7 +67,7 @@
                 <label for="hashtag-input1">대화주제</label>
                 <div class="hashtag-container">
                     <div id="hashtags1"></div>
-                    <input type="text" id="hashtag-input1" name="topics" placeholder="ex) 이직준비, 회사문화, 포트폴리오">
+                    <input type="text" id="hashtag-input1" name="meetingType" placeholder="ex) 이직준비, 회사문화, 포트폴리오">
                 </div>
             </div>
             <div class="form-group">
@@ -79,7 +81,7 @@
                 <div class="upload-container">
                     <label>모임 대표 사진을 등록해 주세요.</label>
                     <label class="upload-box">
-                        <input type="file" multiple id="file-input">
+                        <input type="file" name="file" multiple id="file-input">
                         <div class="upload-icon">📷</div>
                         <div id="file-count">0/5</div>
                     </label>
@@ -87,29 +89,53 @@
                 <div class="image-preview" id="image-preview"></div>
             </div>
             <div class="form-group">
-                <label for="date">모임 날짜 선택해주세요.</label>
-                <input type="date" id="date" name="date"/>
+                <label for="scheduled-date">모임 일시를 선택해주세요.</label>
+                <input
+                        id="scheduled-date"
+                        type="datetime-local"
+                        name="scheduledDate"
+                        required />
+            </div>
+            <div class="form-group">
+                <label for="end-date">종료일시</label>
+                <input
+                        id="end-date"
+                        type="datetime-local"
+                        name="endDate"
+                        required />
+<!--                        min="2017-06-01T08:30"-->
+<!--                        max="2017-06-30T16:30"-->
             </div>
             <div class="form-group">
                 <label>퇴장 제한 시간</label>
                 <div class="time-group">
-                    <input type="radio" class="btn-check" name="duration" th:value="nolimit" id="no-limit" autocomplete="off" checked>
+                    <input type="radio" class="btn-check" name="exitRestrictionTime" th:value="'00:00:00'" id="no-limit" autocomplete="off" checked>
                     <label class="btn btn-outline-success" for="no-limit">제한없음</label>
 
-                    <input type="radio" class="btn-check" name="duration" th:value="1hour" id="1-hour" autocomplete="off">
+                    <input type="radio" class="btn-check" name="exitRestrictionTime" th:value="'01:00:00'" id="1-hour" autocomplete="off">
                     <label class="btn btn-outline-success" for="1-hour">1시간</label>
 
-                    <input type="radio" class="btn-check" name="duration"  th:value="2hour" id="2-hours" autocomplete="off">
+                    <input type="radio" class="btn-check" name="exitRestrictionTime"  th:value="'02:00:00'" id="2-hours" autocomplete="off">
                     <label class="btn btn-outline-success" for="2-hours">2시간</label>
 
-                    <input type="radio" class="btn-check" name="duration" th:value="3hour" id="3-hours" autocomplete="off">
+                    <input type="radio" class="btn-check" name="exitRestrictionTime" th:value="'03:00:00'" id="3-hours" autocomplete="off">
                     <label class="btn btn-outline-success" for="3-hours">3시간</label>
 
                 </div>
             </div>
             <div class="form-group">
                 <label for="min-participants">몇 명을 모집할까요?</label>
-                <input type="number" min="2" id="min-participants" name="min-participants" placeholder="최소 2명 이상"/>
+                <input type="number" min="2" id="min-participants" name="recruitmentNumber" placeholder="최소 2명 이상"/>
+            </div>
+            <div class="form-group">
+                <label>모집방식</label>
+                <div class="checkbox-group">
+                    <input type="radio" class="btn-check" name="participationMethod" id="accept-regist" autocomplete="off" checked value="리더승인">
+                    <label class="btn btn-outline-success" for="accept-regist">리더승인</label>
+
+                    <input type="radio" class="btn-check" name="participationMethod" id="free-regist" autocomplete="off" value="자유참여">
+                    <label class="btn btn-outline-success" for="free-regist">자유참여</label>
+                </div>
             </div>
             <div class="form-group">
                 <label>성별</label>
@@ -128,22 +154,22 @@
             <div class="form-group">
                 <label>참여 가능 나이</label>
                 <div class="age-group">
-                    <input type="radio" class="btn-check" name="age" th:value="all" id="all-age" autocomplete="off" checked>
+                    <input type="radio" class="btn-check" name="eligibleAge" th:value="all" id="all-age" autocomplete="off" checked>
                     <label class="btn btn-outline-success" for="all-age">상관없음</label>
 
-                    <input type="radio" class="btn-check" name="age" th:value="20s" id="twenties" autocomplete="off">
+                    <input type="radio" class="btn-check" name="eligibleAge" th:value="20s" id="twenties" autocomplete="off">
                     <label class="btn btn-outline-success" for="twenties">20대</label>
 
-                    <input type="radio" class="btn-check" name="age" th:value="30s" id="thirties" autocomplete="off">
+                    <input type="radio" class="btn-check" name="eligibleAge" th:value="30s" id="thirties" autocomplete="off">
                     <label class="btn btn-outline-success" for="thirties">30대</label>
 
-                    <input type="radio" class="btn-check" name="age" th:value="40s" id="forties" autocomplete="off">
+                    <input type="radio" class="btn-check" name="eligibleAge" th:value="40s" id="forties" autocomplete="off">
                     <label class="btn btn-outline-success" for="forties">40대</label>
 
-                    <input type="radio" class="btn-check" name="age" th:value="50s" id="fifties" autocomplete="off">
+                    <input type="radio" class="btn-check" name="eligibleAge" th:value="50s" id="fifties" autocomplete="off">
                     <label class="btn btn-outline-success" for="fifties">50대</label>
 
-                    <input type="radio" class="btn-check" name="age" th:value="60s" id="sixties" autocomplete="off">
+                    <input type="radio" class="btn-check" name="eligibleAge" th:value="60s" id="sixties" autocomplete="off">
                     <label class="btn btn-outline-success" for="sixties">60대</label>
 
                 </div>

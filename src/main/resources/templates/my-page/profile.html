@@ -7,8 +7,7 @@
     </head>
     <body>
         <div class="container">
-            <nav class="header" th:include="/my-page/header-mypage.html">
-            </nav>
+            <nav th:replace="~{my-page/layout :: header}"></nav>
 
             <aside class="bar">
                 <div class="my-page-list sidebar-block">
@@ -62,10 +61,23 @@
 
                     <div class="form-item">
                         <label class="profile-label">성별</label>
-                        <select name="gender">
+                        <select name="gender" th:switch="${gender}">
                             <option value="">성별</option>
-                            <option value="male">남성</option>
-                            <option value="female">여성</option>
+                            <th:block th:case="male">
+                                <option selected value="male">남성</option>
+                                <option value="female">여성</option>
+                            </th:block>
+                            <th:block th:case="female">
+<!--                            <th:block th:if="${gender == 'female'}">-->
+                                <option value="male">남성</option>
+                                <option selected value="female">여성</option>
+                            </th:block>
+
+                            <th:block th:case="*">
+<!--                            <th:block th:unless="${gender=='feamle' or gender=='male'}">-->
+                                <option value="male">남성</option>
+                                <option value="female">여성</option>
+                            </th:block>
                         </select>
                     </div>
                     <div class="form-item">
@@ -77,12 +89,12 @@
                         <label class="profile-label" for="intro">소개글</label>
                         <textarea class="form-input" id="intro" placeholder="소개글을 입력하세요." rows="5" name=introduce th:text="${introduce}"></textarea>
                     </div>
-                    <p class="form-message error">에러 메시지</p>3
+                    <p class="form-message error">에러 메시지</p>
                     <button class="btn-rw btn-submit" type="submit">제출</button>
                 </form>
             </div>
 
-            <footer class="footer" th:include="/my-page/footer-mypage.html">
+            <footer th:replace="~{my-page/layout :: footer}">
             </footer>
         </div>
         <script src="js/upload-image.js" th:src="@{/js/my-page/upload-image.js}"></script>
