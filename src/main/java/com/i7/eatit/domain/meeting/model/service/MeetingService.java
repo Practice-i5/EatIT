@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class MeetingService {
 
@@ -19,4 +21,6 @@ public class MeetingService {
     public void createNewMeeting(MeetingDTO meeting) {
         meetingMapper.registMeeting(meeting);
     }
+
+    public List<MeetingDTO> findAllMeetings() { return meetingMapper.findAllMeetings(); }
 }
