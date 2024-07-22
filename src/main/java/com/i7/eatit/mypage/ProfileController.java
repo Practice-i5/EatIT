@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -29,6 +30,20 @@ public class ProfileController {
 
         //System.out.println(request.getParameter("nickName"));
         return "my-page/profile";
+    }
+
+    @GetMapping("uploadTest")
+    public void uploadTest(){}
+
+    @PostMapping("uploadTest")
+    public String uploadTest(@RequestParam MultipartFile singleFile,
+                             String singleFileDescription, Model model){
+
+        System.out.println("singleFile : " + singleFile);
+        System.out.println("singleFileDescription : " + singleFileDescription);
+
+
+        return "my-page/uploadTest";
     }
 
 

@@ -1,3 +1,4 @@
+/*
 package com.i7.eatit.admin;
 
 import org.springframework.stereotype.Controller;
@@ -38,3 +39,4 @@ public class AdminController {
         return "admin/client-list";
     }
 }
+*/
