@@ -34,6 +34,7 @@
         <th>전화번호</th>
         <th>가입 일시</th>
         <th>탈퇴 여부</th>
+        <th>누적 신고 횟수</th>
         <th>관리</th>
       </tr>
       </thead>
@@ -47,6 +48,7 @@
         <td th:text="${adminMemberDto.phoneNumber}"></td>
         <td th:text="${#temporals.format(adminMemberDto.createdDate, 'yyyy-MM-dd-hh-mm-ss')}"></td>
         <td th:text="${adminMemberDto.withdrawalStatus}"></td>
+        <td th:text="${adminMemberDto.reportedCount}"></td>
 
         <td>
           <button>관리</button>
