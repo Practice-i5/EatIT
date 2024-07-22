@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Management</title>
+  <title>Clients Management</title>
   <link rel="stylesheet" th:href="@{/css/admin.css}">
 </head>
 
@@ -26,38 +26,34 @@
     <table>
       <thead>
       <tr>
-        <th>ID</th>
+        <th>회원 아이디</th>
+        <th>이메일</th>
         <th>이름</th>
-        <th>역할</th>
-        <th>계정잠금</th>
-        <th>신고 누적</th>
-        <th>벌점</th>
-        <th>로그인시도</th>
-        <th>가입일</th>
+        <th>닉네임</th>
+        <th>로그인 수단</th>
+        <th>전화번호</th>
+        <th>가입 일시</th>
+        <th>탈퇴 여부</th>
         <th>관리</th>
       </tr>
       </thead>
       <tbody id="userTableBody">
-      <tr th:each="adminUserDto : ${adminUserDtoList}">
-        <td th:text="${adminUserDto.userId}"></td>
-        <td th:text="${adminUserDto.userName}"></td>
-        <td th:text="${adminUserDto.role}"></td>
-        <td th:text="${adminUserDto.lockedAccount}"></td>
-        <td th:text="${adminUserDto.reportedCount}"></td>
-        <td th:text="${adminUserDto.penaltyScore}"></td>
-        <td th:text="${adminUserDto.tryLogin}"></td>
-        <td th:text="${#dates.format(adminUserDto.joinDate, 'yyyy-MM-dd')}"></td>
+      <tr th:each="adminMemberDto : ${adminMemberDtoList}">
+        <td th:text="${adminMemberDto.memberId}"></td>
+        <td th:text="${adminMemberDto.email}"></td>
+        <td th:text="${adminMemberDto.name}"></td>
+        <td th:text="${adminMemberDto.nickname}"></td>
+        <td th:text="${adminMemberDto.loginMethod}"></td>
+        <td th:text="${adminMemberDto.phoneNumber}"></td>
+        <td th:text="${#temporals.format(adminMemberDto.createdDate, 'yyyy-MM-dd-hh-mm-ss')}"></td>
+        <td th:text="${adminMemberDto.withdrawalStatus}"></td>
+
         <td>
           <button>관리</button>
         </td>
       </tr>
       </tbody>
     </table>
-    <div class="pagination">
-      <button id="prevPage">«</button>
-      <span id="pageNumbers"></span>
-      <button id="nextPage">»</button>
-    </div>
   </div>
 </div>
 </body>
