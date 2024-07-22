@@ -14,6 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Iterator;
 
 @Controller
@@ -32,10 +34,14 @@ public class EnrollMeetingController {
     }
 
     @PostMapping("enroll-meeting")
-    public String createNewMeeting(MeetingDTO meeting, @RequestParam("file") MultipartHttpServletRequest request, RedirectAttributes rttr) {
+    public String createNewMeeting(MeetingDTO meeting, @RequestParam("file") MultipartFile request, @RequestParam("inputScheduledDate") String scheduledDate, @RequestParam("inputEndDate") String endDate, RedirectAttributes rttr) {
         Timestamp now = new Timestamp(System.currentTimeMillis());
         meeting.setCreatedDate(now);
         meeting.setStatus("Open");
+//        meeting.setScheduledDate(Timestamp.valueOf(scheduledDate));
+//        meeting.setEndDate(Timestamp.valueOf(endDate));
+        meeting.setScheduledDate(now);
+        meeting.setEndDate(now);
 
         meetingService.createNewMeeting(meeting);
 
@@ -44,14 +50,7 @@ public class EnrollMeetingController {
         * 2. 이미지 파일 Upload Service
         * 3.
         * */
-        Iterator<String> fileNames = request.getFileNames();
-        String uploadedFileName = null;
-        MultipartFile uploadFile = null;
 
-        if (fileNames.hasNext()) {
-            uploadedFileName = fileNames.next();
-            uploadFile = request.getFile(uploadedFileName);
-        }
 
         rttr.addFlashAttribute("successMessage", "Meeting has been created");
         return "redirect:/detail/meeting-list";

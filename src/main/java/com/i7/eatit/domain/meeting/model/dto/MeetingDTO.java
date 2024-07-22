@@ -1,6 +1,5 @@
 package com.i7.eatit.domain.meeting.model.dto;
 
-import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 
