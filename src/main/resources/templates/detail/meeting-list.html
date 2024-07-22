@@ -14,13 +14,13 @@
     <tr>
         <th>모임 id</th>
         <th>모임제목</th>
-        <th>제목</th>
         <th>장소명</th>
         <th>장소위도</th>
         <th>장소경도</th>
         <th>설명</th>
         <th>지불방식</th>
         <th>모임유형</th>
+        <th>모임태그</th>
         <th>모임일시</th>
         <th>퇴장시간</th>
         <th>모집인원</th>
@@ -33,9 +33,10 @@
         <th>호스트멤버ID</th>
     </tr>
     <tr th:each="meeting : ${meetingList}">
+        <td th:text="${meeting.meetingId}"></td>
         <td th:text="${meeting.title}"></td>
         <td th:text="${meeting.locationName}"></td>
-        <td th:number ="${meeting.locationLatitude}"></td>
+        <td th:text="${meeting.locationLatitude}"></td>
         <td th:text="${meeting.locationLongitude}"></td>
         <td th:text="${meeting.introduction}"></td>
         <td th:text="${meeting.paymentMethod}"></td>
