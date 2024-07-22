@@ -1,14 +1,25 @@
 package com.i7.eatit.domain.alarm.controller;
 
 
+import com.i7.eatit.domain.alarm.dto.AlarmDTO;
+import com.i7.eatit.domain.alarm.service.AlarmService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
-@RequestMapping("/alarm/*")
+@RequestMapping("/alarm")
 public class AlarmPageController {
+
+    private final AlarmService alarmService;
+
+
+    public AlarmPageController(AlarmService alarmService) {
+        this.alarmService = alarmService;
+    }
 
     @GetMapping("alarm")
     public String alarmPage(Model model) {
@@ -35,6 +46,15 @@ public class AlarmPageController {
         model.addAttribute("meetingImg", meetingAlarm.meetingImg);
         model.addAttribute("meetingMessage", MeetingAlarm.meetingMessage);
 
+
+        //Todo : 로그인 정보 받아 와야 함
+        int member_id = 1;
+        List<AlarmDTO> alarmList = alarmService.findAllAlarm(member_id);
+        model.addAttribute("alarmList", alarmList);
+
+        for (AlarmDTO alarmDTO : alarmList) {
+            System.out.println(alarmDTO.toString());
+        }
 
         return "/alarm/alarm";
     }
