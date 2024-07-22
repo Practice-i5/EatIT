@@ -45,7 +45,7 @@ public class LoginController {
      */
 
     // 로그인 - 이메일, 비밀번호
-    @PostMapping("/loginMain")
+    @PostMapping("/goLogin")
     public String login(UserLoginDTO userLoginDTO, Model model) {
 
         UserLoginDTO loginUser = loginService.checkUser(userLoginDTO);
@@ -54,7 +54,7 @@ public class LoginController {
 
         model.addAttribute("loginUser", loginUser);
 
-        return "login/successLogin";
+        return "/login/successLogin";
     }
 
 
