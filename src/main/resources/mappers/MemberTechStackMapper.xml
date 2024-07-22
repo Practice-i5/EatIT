@@ -5,24 +5,29 @@
 
 <mapper namespace="com.i7.eatit.domain.tag.dao.MemberTechStackMapper">
 <!--    <resultMap id="MemberTechStackMap" type="com.i7.eatit.domain.tag.dto.MemberTechStackDTO">-->
-<!--        <result property="stackCode" column="STACK_CODE"/>-->
+<!--        <result property="code" column="STACK_CODE"/>-->
 <!--        <result property="memberId" column="MEMBER_ID"/>-->
 <!--    </resultMap>-->
 
     <resultMap id="MemberTechStackDetailMap" type="com.i7.eatit.domain.tag.dto.MemberTechStackDetailDTO">
         <id property="stackCode" column="STACK_CODE"/>
         <id property="memberId" column="MEMBER_ID"/>
-        <result property="techStack" javaType="com.i7.eatit.domain.tag.dto.TechStackTypeDTO"/>
+        <association property="techStack" javaType="com.i7.eatit.domain.tag.dto.TechStackTypeDTO">
+            <id property="code" column="STACK_CODE"/>
+            <result property="name" column="STACK_NAME"/>
+        </association>
     </resultMap>
 
     <select id="findMemberTechStack" resultMap="MemberTechStackDetailMap" parameterType="_int" >
-        SELECT FROM
-            TBL_MEMBER_TECH_STACK A
+        SELECT A.STACK_CODE, A.MEMBER_ID, B.STACK_NAME
+        FROM
+            (SELECT STACK_CODE, MEMBER_ID
+                FROM TBL_MEMBER_TECH_STACK
+                WHERE MEMBER_ID=#{memberID}
+            ) A
         JOIN TBL_TECH_STACK_TYPE B
         ON A.STACK_CODE=B.STACK_CODE
-        WHERE MEMBER_ID={memberId}
     </select>
-
 
     <insert id="addMemberTechStack" parameterType="com.i7.eatit.domain.tag.dto.MemberTechStackDTO">
         INSERT INTO

@@ -41,6 +41,24 @@
                     <h2>팔로우 유저 목록</h2>
                     <!-- <p class="form-message">날짜 순으로 최근 5개가 표시됩니다.</p> -->
                     <ul class="form-list-block">
+                        <th:block th:each="followUser:${followList}">
+                            <li>
+                                <div class="form-item">
+                                    <div class="block-info">
+                                        <img th:src="${followUser.url}"
+                                                src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"/>
+                                        <div class="block-info-text" th:text="${followUser.name}">
+                                            닉네임1
+                                        </div>
+                                    </div>
+
+                                    <div class="block-modify">
+                                        <button class="btn-choice-small btn-wb">프로필</button>
+                                        <button class="btn-choice-small btn-wb">삭제</button>
+                                    </div>
+                                </div>
+                            </li>
+                        </th:block>
                         <li>
                             <div class="form-item">
                                 <div class="block-info">

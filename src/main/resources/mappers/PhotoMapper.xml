@@ -35,13 +35,13 @@
         SELECT
                PHOTO_ID
             ,  PHOTO_URL
-            ,  MEMBER_ID
+            ,  MEETING_ID
           FROM
-               TBL_MEMBER_PHOTO
+               TBL_MEETING_PHOTO
     </select>
 
-    <insert id="uploadMemberPhoto" parameterMap="com.i7.eatit.domain.picture.dto.MemberPhotoDTO">
-        INSERT INTO TBL_MEMBER_PHOTO(
+    <insert id="uploadMemberPhoto" parameterType="com.i7.eatit.domain.picture.dto.MemberPhotoDTO">
+    INSERT INTO TBL_MEMBER_PHOTO(
         PHOTO_ID
         ,  PHOTO_URL
         ,  MEMBER_ID
@@ -56,7 +56,7 @@
         MEMBER_ID = #{memberId}
     </insert>
 
-    <insert id="uploadMeetingPhoto" parameterMap="com.i7.eatit.domain.picture.dto.MeetingPhotoDTO">
+    <insert id="uploadMeetingPhoto" parameterType="com.i7.eatit.domain.picture.dto.MeetingPhotoDTO">
         INSERT INTO TBL_MEMBER_PHOTO(
         PHOTO_ID
         ,  PHOTO_URL

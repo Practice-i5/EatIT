@@ -3,6 +3,8 @@ package com.i7.eatit.domain.picture.service;
 import com.i7.eatit.domain.picture.dao.PhotoMapper;
 import com.i7.eatit.domain.picture.dto.MeetingPhotoDTO;
 import com.i7.eatit.domain.picture.dto.MemberPhotoDTO;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,9 +18,11 @@ import java.util.UUID;
 public class PhotoService {
 
     private PhotoMapper photoMapper;
+    private ResourceLoader resourceLoader;
 
-    public PhotoService(PhotoMapper photoMapper) {
+    public PhotoService(PhotoMapper photoMapper, ResourceLoader resourceLoader) {
         this.photoMapper = photoMapper;
+        this.resourceLoader = resourceLoader;
     }
 
     public MemberPhotoDTO findPhotoByMemberId(int userId){
@@ -33,38 +37,44 @@ public class PhotoService {
     }
 
     @Transactional
-    public String uploadMemberPhoto(MultipartFile singleImageFile, MemberPhotoDTO memberPhoto){
+    public String uploadMemberPhoto(MultipartFile singleImageFile, int memberId) throws IOException {
 
         System.out.println("singleImageFile = " + singleImageFile);
 
-        String root="src/main/resources/static";
-        String filePath = root + "/uploadFiles";
+        Resource resource = resourceLoader.getResource("classpath:static/img/single");
+        String filePath = null;
 
-        File dir = new File(filePath);
-        System.out.println(dir.getAbsolutePath());
+        if(!resource.exists()){
+            // 만약 static 폴더에 파일이 없는 경우 만들어 준다.
+            // 초기 해당 디렉토리가 없는 경우 서버 리로드해야 한다.
+            // spring에서 resources를 읽어와야 하는데 해당 경로가 없어 이미지를 초기에 보여줄 수 없는 상황이다.
+            String root = "src/main/resources/static/img/single";
+            File file = new File(root);
+            file.mkdirs();
 
-        if(!dir.exists()) {
-            dir.mkdirs();
+            filePath = file.getAbsolutePath();
+        }else{
+            filePath = resourceLoader.getResource("classpath:static/img/single").getFile().getAbsolutePath();
         }
 
-        String resultMessage="실패";
+
+        System.out.println("multi : "+ filePath);
+        String resultMessage=null;
 
         /* 파일명 변경 처리 */
         String originFileName = singleImageFile.getOriginalFilename();
         String ext = originFileName.substring(originFileName.lastIndexOf("."));
-        String savedName = UUID.randomUUID().toString().replace("-","") + ext;
+        String savedName = UUID.randomUUID().toString().replace("-", "") + ext;
 
         try {
             singleImageFile.transferTo(new File(filePath + "/" + savedName));
-            photoMapper.uploadMemberPhoto(memberPhoto);
-            resultMessage="성공";
-//            model.addAttribute("message", "파일 업로드 성공!");
+            //photoMapper.uploadMemberPhoto(memberPhoto);
+            resultMessage="/static/img/single/"+savedName;
+            System.out.println("파일 업로드 성공");
         } catch (Exception e) {
             e.printStackTrace();
-            //model.addAttribute("message", "파일 업로드 실패!!");
+            System.out.println("파일 업로드 실패");
         }
-        System.out.println(resultMessage);
-
 
         return resultMessage;
     }

@@ -37,13 +37,14 @@
 
             <div class="profile">
                 <form class="form-content" method="post" action="/my-page/uploadTest"  enctype="multipart/form-data">
-                    <h2>사진 업로드 테스트</h2>
+                    <h2>사진 업로드 결과</h2>
                     <div class="form-item">
                         <label class="profile-label">프로필 사진</label>
                         <div class="form-input" style="width: 70%; display: flex; align-items: center; justify-content: space-between;">
                             
                             <img id="img-preview" src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"
-                            th:src="@{/{img}(img=${profileImage})}"/>
+                            th:src="${profileImage}"/>
+                            <p th:text="${tst}"></p>
                             <div>
                                 <input id="img-file" style="display: none; width:0px; margin: 0px; padding: 0px;" type="file" name="singleFile" accept="image/*"/>
                                 <label for="img-file" class="upload-btn btn-choice-small btn-wb">수정</label>
@@ -53,7 +54,7 @@
                         </div>
                         
                     </div>
-                    <button class="btn-rw btn-submit" type="submit">제출</button>
+                    <a href="/my-page/uploadTest">되돌아가기</a>
                 </form>
             </div>
 

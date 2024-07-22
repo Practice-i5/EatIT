@@ -46,14 +46,16 @@ public class TechProfileController {
 
     @GetMapping("member-stack-test")
     public String stackTestPage(){
-        return "my-page/stacktest";
+        System.out.println(memberTechStackService.findMemberTechStack(2));
+
+        return "my-page/tech-profile";
     }
 
     @PostMapping("member-stack-test")
     public String memberStackTest(Model model) {
         List<TechStackTypeDTO> techStackList = techStackTypeService.findAllTechStack();
-        MemberTechStackDTO memberTechStack = new MemberTechStackDTO(4, 7);
-        memberTechStackService.addMemberTechStack(memberTechStack);
+        //MemberTechStackDTO memberTechStack = new MemberTechStackDTO(4, 7);
+        //memberTechStackService.addMemberTechStack(memberTechStack);
         memberTechStackService.deleteMemberAllTechStack(11);
         //작성중
 

@@ -1,18 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{my-page/layout}" >
 
 <head>
     <title>계정 정보 수정</title>
-    <link rel="stylesheet" href="css/style-mypage.css" th:href="@{/css/my-page/style-mypage.css}">
-    <link rel="stylesheet" href="css/button.css" th:href="@{/css/my-page/button.css}">
+    <link rel="stylesheet" href="css/style-mypage.css" th:href="@{/static/css/my-page/style-mypage.css}">
+    <link rel="stylesheet" href="css/button.css" th:href="@{/static/css/my-page/button.css}">
 </head>
-
-<body>
-    <div class="container">
-        <nav th:replace="~{my-page/layout :: header}">
-        </nav>
-
-        <aside class="bar">
+        <aside layout:fragment="sidebar" class="bar">
             <div class="my-page-list sidebar-block">
                 <h2>마이 페이지</h2>
                 <ul class="list-no-pad">
@@ -38,7 +34,7 @@
             </div>
         </aside>
 
-        <div class="profile">
+        <div layout:fragment="content" class="profile">
             <form class="form-content">
                 <h2>로그인 정보 보기</h2>
                 <div class="form-item">
@@ -89,8 +85,8 @@
                 <button class="btn-rw btn-submit" type="submit">제출</button>
             </form>
         </div>
-        <footer th:replace="~{my-page/layout :: footer}">
-        </footer>
-    </div>
-</body>
+<!--        <footer th:replace="~{my-page/layout :: footer}">-->
+<!--        </footer>-->
+<!--    </div>-->
+<!--</body>-->
 </html>
