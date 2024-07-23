@@ -28,6 +28,9 @@ public class LoginService {
         userMap.put("email", loginUser.getEmail());
         userMap.put("password", loginUser.getPassword());
 
+        // 요청 확인용
+        System.out.println("===" + loginMapper.selectUser(userMap) + "===");
+
         return loginMapper.selectUser(userMap);
     }
 
@@ -48,9 +51,7 @@ public class LoginService {
         userPasswordMap.put("phoneNumber", phoneNumber);
         userPasswordMap.put("password", randomPassword());
         // 문자열 형태로 비밀번호를 반환
-        loginMapper.updateUserRandomPassword(userPasswordMap);
-
-        return userPasswordMap.get("password");
+        return loginMapper.updateUserRandomPassword(userPasswordMap);
     }
 
     // 영어 + 숫자 랜덤 난수 생성
