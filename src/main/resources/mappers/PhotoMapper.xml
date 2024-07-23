@@ -23,7 +23,7 @@
         <result property="meetingId" column="MEETING_ID"/>
     </resultMap>
 
-    <select id="findPhotoByMemberID" resultMap="MemberPhotoMap">
+    <select id="findPhotoByMemberId" resultMap="MemberPhotoMap">
         SELECT
                PHOTO_ID
             ,  PHOTO_PATH
@@ -31,6 +31,8 @@
             ,  MEMBER_ID
         FROM
                TBL_MEMBER_PHOTO
+        WHERE
+               MEMBER_ID=#{memberId}
     </select>
 
     <select id="findPhotoByMeetingId" resultMap="MeetingPhotoMap">
@@ -44,7 +46,7 @@
     </select>
 
     <insert id="uploadMemberPhoto" parameterType="com.i7.eatit.domain.picture.dto.MemberPhotoDTO"
-    useGeneratedKeys="true" keyProperty="photoId">
+    useGeneratedKeys="true" keyProperty="memberPhotoId">
     INSERT INTO TBL_MEMBER_PHOTO(
         PHOTO_PATH
         ,  PHOTO_NAME
