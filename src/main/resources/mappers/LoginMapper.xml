@@ -18,6 +18,7 @@
         <result property="phoneNumber" column="PHONE_NUMBER"/>
         <result property="createdDate" column="CREATED_DATE"/>
         <result property="withdrawalStatus" column="WITHDRAWAL_STATUS"/>
+        <result property="reportedCount" column="REPORTED_COUNT"/>
 
     </resultMap>
 
@@ -33,6 +34,7 @@
                 , PHONE_NUMBER
                 , CREATED_DATE
                 , WITHDRAWAL_STATUS
+                , REPORTED_COUNT
         from
                 TBL_MEMBER
         where

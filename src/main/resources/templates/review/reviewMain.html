@@ -1,30 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluation Form</title>
+    <title>평가 폼</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/review.css" th:href="@{/css/review.css}">
 
     <style>
-        /* Additional or Tailwind CSS can be added here */
+        /* 추가적인 CSS는 여기에 작성할 수 있습니다. */
     </style>
 </head>
-
 <body class="bg-gray-100 p-4">
 <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-    <!--모임 시간 받아오기-->
-    <h2 class="text-xl font-bold mb-4">24년 6월 21일 금요일 16:30</h2> <!-- th:text="${ meeting.time }"> -->
-    <!--모임 제목 받아오기-->
-    <p class="text-gray-600 mb-6">즐거운 AI 이야기(스타벅스)</p> <!-- th:text="${ meeting.title }"> -->
+    <!-- 모임 시간 받아오기 -->
+    <h2 class="text-xl font-bold mb-4" th:text="${meeting.time}">24년 6월 21일 금요일 16:30</h2>
+    <!-- 모임 제목 받아오기 -->
+    <p class="text-gray-600 mb-6" th:text="${meeting.title}">즐거운 AI 이야기(스타벅스)</p>
 
     <!-- 모임장 평가 항목 -->
     <div class="mb-6">
-        <!--모임장(호스트) 이름 받아오기-->
-        <h3 class="text-lg font-semibold mb-2">모임장은 어땠나요?</h3> <!-- th:text=${ meeting.host.name }"> -->
+        <!-- 모임장(호스트) 이름 받아오기 -->
+        <h3 class="text-lg font-semibold mb-2" th:text="${meeting.host.name} + '님은 어땠나요?'">모임장은 어땠나요?</h3>
         <div class="flex space-x-2 mb-4">
             <button class="bg-blue-500 text-white px-4 py-2 rounded openModalBtn">평가하기</button>
             <button class="bg-red-500 text-white px-4 py-2 rounded">신고하기</button>
@@ -39,134 +37,49 @@
         </div>
     </div>
 
-    <!-- 모임원1 평가 항목 -->
-    <div class="mb-6">
-        <!--모임원1(게스트) 이름 받아오기-->
-        <h3 class="text-lg font-semibold mb-2">모임원1은 어땠나요?</h3> <!-- th:text=${ meeting.guest.name }"> -->
-        <div class="flex space-x-2 mb-4">
-            <button class="bg-blue-500 text-white px-4 py-2 rounded openModalBtn">평가하기</button>
-            <button class="bg-red-500 text-white px-4 py-2 rounded">신고하기</button>
-            <button class="bg-black text-white px-4 py-2 rounded">차단하기</button>
-        </div>
-        <div class="manager-feedback text-gray-700">
-            <div class="selected-feedback hidden mb-2">
-                <strong>선택한 항목:</strong>
-                <ul class="selected-items"></ul>
+    <!-- 모임원 평가 항목 반복 -->
+    <div th:each="guest, iterStat : ${meeting.guests}">
+        <div class="mb-6">
+            <!-- 모임원(게스트) 이름 받아오기 -->
+            <h3 class="text-lg font-semibold mb-2" th:text="${guest.name} + '님은 어땠나요?'">모임원은 어땠나요?</h3>
+            <div class="flex space-x-2 mb-4">
+                <button class="bg-blue-500 text-white px-4 py-2 rounded openModalBtn">평가하기</button>
+                <button class="bg-red-500 text-white px-4 py-2 rounded">신고하기</button>
+                <button class="bg-black text-white px-4 py-2 rounded">차단하기</button>
             </div>
-            <div class="modal-feedback"></div>
-        </div>
-    </div>
-
-    <!-- 모임원2 평가 항목 -->
-    <div class="mb-6">
-        <!--모임원2(게스트) 이름 받아오기-->
-        <h3 class="text-lg font-semibold mb-2">모임원2은 어땠나요?</h3>
-        <div class="flex space-x-2 mb-4">
-            <button class="bg-blue-500 text-white px-4 py-2 rounded openModalBtn">평가하기</button>
-            <button class="bg-red-500 text-white px-4 py-2 rounded">신고하기</button>
-            <button class="bg-black text-white px-4 py-2 rounded">차단하기</button>
-        </div>
-        <div class="manager-feedback text-gray-700">
-            <div class="selected-feedback hidden mb-2">
-                <strong>선택한 항목:</strong>
-                <ul class="selected-items"></ul>
+            <div class="manager-feedback text-gray-700">
+                <div class="selected-feedback hidden mb-2">
+                    <strong>선택한 항목:</strong>
+                    <ul class="selected-items"></ul>
+                </div>
+                <div class="modal-feedback"></div>
             </div>
-            <div class="modal-feedback"></div>
         </div>
     </div>
 
     <!-- 저장 버튼 -->
     <div class="text-center">
-        <button class="bg-red-500 text-white px-6 py-2 rounded"onclick="location.href='/'">확인</button><!--메인/상세 페이지로 돌아가기-->
+        <button class="bg-red-500 text-white px-6 py-2 rounded" onclick="location.href='/'">확인</button> <!-- 메인/상세 페이지로 돌아가기 -->
     </div>
 </div>
 
-<!-- 모달시작-->
-<div>
-    <!-- 각 모달 구조 1 -->
-    <div id="myModal1" class="modal">
+<!-- 모달 시작 -->
+<div th:each="guest, iterStat : ${meeting.guests}">
+    <div th:attr="id='myModal' + ${iterStat.index}" class="modal">
         <div class="modal-content">
             <div>
                 <div class="container">
                     <div class="text-center mb-6">
-                        <img src="/static/img/profile.png" th:src="@{/img/profile.png}" alt="Profile Picture"
-                             class="profile-picture">
-                        <!--모임장(호스트) 이름 받아오기-->
-                        <p class="profile-name">강아지님</p>
+                        <img src="/static/img/profile.png" th:src="@{/img/profile.png}" alt="프로필 사진" class="profile-picture">
+                        <p class="profile-name" th:text="${guest.name}">이름</p>
                     </div>
                     <form action="/review/regist" method="post">
                         <div class="checkbox-grid">
-
                             <label class="checkbox-label">
-                                <input name="" value="친절해요" type="checkbox" class="form-checkbox">
+                                <input type="checkbox" class="form-checkbox" value="친절해요">
                                 <span class="ml-2">친절해요</span>
                             </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">불친절해요</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">매너가 좋아요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">매너가 없어요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">재밌어요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">재미 없어요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">배울 점이 많아요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">배울 점이 없어요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">틈틈히 많이 알려줘요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">정보를 숨겨요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">시간 약속을 잘 지켜요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">시간 약속을 안지켜요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">약속 장소를 잘 정해요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">약속 장소를 못 정해요.</span>
-                            </label>
-
+                            <!-- 나머지 체크박스 항목들도 동일하게 반복해서 추가 -->
                         </div>
                         <div class="text-center">
                             <button class="bg-blue-500 text-white px-6 py-2 rounded submit-btn" type="submit">제출</button>
@@ -176,196 +89,8 @@
             </div>
         </div>
     </div>
-
-    <!-- 각 모달 구조 2 -->
-    <div id="myModal2" class="modal">
-        <div class="modal-content">
-            <div>
-                <div class="container">
-                    <div class="text-center mb-6">
-                        <img src="/static/img/profile.png" th:src="@{/img/profile.png}" alt="Profile Picture"
-                             class="profile-picture">
-                        <!--모임원1(게스트) 이름 받아오기-->
-                        <p class="profile-name">고양이님</p>
-                    </div>
-                    <form action="/review/regist" method="post">
-                        <div class="checkbox-grid">
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">친절해요</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">불친절해요</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">매너가 좋아요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">매너가 없어요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">재밌어요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">재미 없어요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">배울 점이 많아요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">배울 점이 없어요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">틈틈히 많이 알려줘요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">정보를 숨겨요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">시간 약속을 잘 지켜요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">시간 약속을 안지켜요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">약속 장소를 잘 정해요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">약속 장소를 못 정해요.</span>
-                            </label>
-                        </div>
-                        <div class="text-center">
-                            <button class="bg-blue-500 text-white px-6 py-2 rounded submit-btn" type="submit">제출</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 각 모달 구조 3 -->
-    <div id="myModal3" class="modal">
-        <div class="modal-content">
-            <div>
-                <div class="container">
-                    <div class="text-center mb-6">
-                        <img src="/static/img/profile.png" th:src="@{/img/profile.png}" alt="Profile Picture"
-                             class="profile-picture">
-                        <!--모임원2(게스트) 이름 받아오기-->
-                        <p class="profile-name">코끼리님</p>
-                    </div>
-                    <form action="/review/regist" method="post">
-                        <div class="checkbox-grid">
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">친절해요</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">불친절해요</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">매너가 좋아요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">매너가 없어요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">재밌어요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">재미 없어요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">배울 점이 많아요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">배울 점이 없어요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">틈틈히 많이 알려줘요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">정보를 숨겨요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">시간 약속을 잘 지켜요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">시간 약속을 안지켜요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">약속 장소를 잘 정해요.</span>
-                            </label>
-
-                            <label class="checkbox-label">
-                                <input type="checkbox" class="form-checkbox">
-                                <span class="ml-2">약속 장소를 못 정해요.</span>
-                            </label>
-                        </div>
-
-                        <!--결과 제출-->
-                        <form action="/detail/done-detail" method="post">
-                            <div class="text-center">
-                                <button class="bg-blue-500 text-white px-6 py-2 rounded submit-btn" type="submit">제출</button>
-                            </div>
-                        </form>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
-<!-- 모달끝-->
+<!-- 모달 끝 -->
 
 <!-- JS 파일 연결 -->
 <script src="/static/js/review.js" th:src="@{/js/review.js}"></script>

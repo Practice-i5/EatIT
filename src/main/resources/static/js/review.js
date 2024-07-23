@@ -30,29 +30,21 @@ submitBtns.forEach((btn, index) => {
 
         const checkboxes = modals[index].querySelectorAll('.form-checkbox:checked');
         const selectedItemsContainer = feedbackContainers[index].querySelector('.selected-items');
-        const modalFeedback = feedbackContainers[index].querySelector('.modal-feedback');
+        const selectedFeedbackDiv = feedbackContainers[index].querySelector('.selected-feedback');
 
         selectedItemsContainer.innerHTML = ''; // 기존 선택 항목 초기화
 
-        // 선택된 항목들을 저장g
-        const selectedItemsList = [];
         checkboxes.forEach(checkbox => {
-            const labelText = checkbox.nextElementSibling.textContent;
-            selectedItemsList.push(labelText);
-        });
-        selectedItems[index] = selectedItemsList;
-
-        // 모달 닫기
-        modals[index].style.display = 'none';
-
-        // 선택한 항목들을 표시
-        selectedItemsList.forEach(item => {
             const li = document.createElement('li');
-            li.textContent = item;
+            li.textContent = checkbox.value;
             selectedItemsContainer.appendChild(li);
         });
 
-        // 선택한 항목들을 평가하기, 신고하기, 차단하기 아래에 표시
+        selectedFeedbackDiv.classList.remove('hidden'); // 선택 항목 표시
+        modals[index].style.display = 'none'; // 모달 닫기
+
+
+// 선택한 항목들을 평가하기, 신고하기, 차단하기 아래에 표시
         const selectedFeedback = feedbackContainers[index].querySelector('.selected-feedback');
         const modalFeedbackText = modalFeedback.innerHTML;
 
