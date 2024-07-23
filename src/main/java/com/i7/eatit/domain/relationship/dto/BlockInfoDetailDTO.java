@@ -1,22 +1,22 @@
-package com.i7.eatit.domain.user.dto;
+package com.i7.eatit.domain.relationship.dto;
+
+import com.i7.eatit.domain.user.dto.UserPhotoProfileDTO;
 
 import java.sql.Date;
-import java.util.List;
 
 public class BlockInfoDetailDTO {
     private int blockId;
     private int memberId;
     private java.sql.Date blockDate;
-    private List<UserPhotoProfileDTO> blockedUserPhotoProfile;
+    private UserPhotoProfileDTO detailProfile;
 
-    public BlockInfoDetailDTO() {
-    }
+    public BlockInfoDetailDTO() {}
 
-    public BlockInfoDetailDTO(int blockId, int memberId, Date blockDate, List<UserPhotoProfileDTO> blockedUserPhotoProfile) {
+    public BlockInfoDetailDTO(int blockId, int memberId, Date blockDate, UserPhotoProfileDTO detailProfile) {
         this.blockId = blockId;
         this.memberId = memberId;
         this.blockDate = blockDate;
-        this.blockedUserPhotoProfile = blockedUserPhotoProfile;
+        this.detailProfile = detailProfile;
     }
 
     public int getBlockId() {
@@ -43,12 +43,12 @@ public class BlockInfoDetailDTO {
         this.blockDate = blockDate;
     }
 
-    public List<UserPhotoProfileDTO> getBlockedUserPhotoProfile() {
-        return blockedUserPhotoProfile;
+    public UserPhotoProfileDTO getDetailProfile() {
+        return detailProfile;
     }
 
-    public void setBlockedUserPhotoProfile(List<UserPhotoProfileDTO> blockedUserPhotoProfile) {
-        this.blockedUserPhotoProfile = blockedUserPhotoProfile;
+    public void setDetailProfile(UserPhotoProfileDTO detailProfile) {
+        this.detailProfile = detailProfile;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class BlockInfoDetailDTO {
                 "blockId=" + blockId +
                 ", memberId=" + memberId +
                 ", blockDate=" + blockDate +
-                ", blockedUserPhotoProfile=" + blockedUserPhotoProfile +
+                ", detailProfile=" + detailProfile +
                 '}';
     }
 }

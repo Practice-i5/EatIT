@@ -1,0 +1,21 @@
+INSERT INTO
+    TBL_TECH_STACK_TYPE (stack_name)
+VALUES
+        ('Java')
+      , ('Python')
+      , ('C#')
+      , ('C++')
+      , ('JavaScript')
+      , ('Rust')
+      , ('Kotlin')
+      , ('Unity')
+      , ('Unreal')
+      , ('Spring Boot')
+      , ('Go')
+      , ('FastApi')
+      , ('TypeScript')
+      , ('React')
+      , ('Node.js')
+      , ('Babylon.js')
+      , ('Django')
+      , ('PHP');

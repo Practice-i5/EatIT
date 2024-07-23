@@ -1,8 +1,10 @@
-package com.i7.eatit.domain.user.service;
+package com.i7.eatit.domain.relationship.service;
 
-import com.i7.eatit.domain.user.dao.BlockMapper;
-import com.i7.eatit.domain.user.dto.BlockInfoDetailDTO;
+import com.i7.eatit.domain.relationship.dao.BlockMapper;
+import com.i7.eatit.domain.relationship.dto.BlockInfoDetailDTO;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserBlockService {
@@ -13,7 +15,7 @@ public class UserBlockService {
         this.blockMapper = blockMapper;
     }
 
-    public BlockInfoDetailDTO findBlockedMemberById(int memberId){
+    public List<BlockInfoDetailDTO> findBlockedMemberById(int memberId){
         return blockMapper.findBlockedMember(memberId);
     }
 

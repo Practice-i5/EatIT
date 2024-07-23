@@ -38,12 +38,13 @@
             <h2>차단 회원 관리</h2>
             <p class="form-message">상대방은 차단여부를 알 수 없습니다.</p>
             <ul class="form-list-block">
-                <th:block th:each="blockUser:${blackList} ">
+                <th:block th:each="blockUser:${blockUserList} ">
                     <li>
                         <div class="form-item">
                             <div class="block-info">
-                                <img th:src="${blockUser.url}" src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"/>
-                                <div class="block-info-text" th:text="${blockUser.name}">
+                                <img th:src="${blockUser.detailProfile.memberPhoto.photoPath+blockUser.detailProfile.memberPhoto.photoName}"
+                                     src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"/>
+                                <div class="block-info-text" th:text="${blockUser.detailProfile.nickname}">
                                     닉네임1
                                 </div>
                             </div>

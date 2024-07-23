@@ -3,14 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<mapper namespace="com.i7.eatit.domain.relationship.dao.BlockMapper">
 
-<mapper namespace="com.i7.eatit.domain.user.dao.BlockMapper">
-
-    <resultMap id="blockUserMap" type="com.i7.eatit.domain.user.dto.BlockInfoDetailDTO">
+    <resultMap id="blockUserMap" type="com.i7.eatit.domain.relationship.dto.BlockInfoDetailDTO">
         <id property="blockId" column="BLOCK_ID"/>
-        <result property="memberId" column="BLOCKING_MEMBER_ID"/>
+        <result property="memberId" column="BLOCKED_MEMBER_ID"/>
         <result property="blockDate" column="BLOCK_DATE"/>
-        <collection property="blockedUserPhotoProfile" ofType="com.i7.eatit.domain.user.dto.UserPhotoProfileDTO">
+        <association property="detailProfile" javaType="com.i7.eatit.domain.user.dto.UserPhotoProfileDTO">
             <id property="memberId" column="MEMBER_ID"/>
             <result property="nickname" column="NICKNAME"/>
             <result property="phoneNumber" column="PHONE_NUMBER"/>
@@ -20,15 +19,14 @@
                 <result property="photoName" column="PHOTO_NAME"/>
                 <result property="photoPath" column="PHOTO_PATH"/>
             </association>
-        </collection>
+        </association>
     </resultMap>
-
 
     <select id="findBlockedMember" parameterType="_int" resultMap="blockUserMap">
         SELECT
               A.BLOCK_ID
             , A.BLOCK_DATE
-            , A.BLOCKING_MEMBER_ID
+            , A.BLOCKED_MEMBER_ID
             , D.MEMBER_ID
             , D.NICKNAME
             , D.PHONE_NUMBER
@@ -53,5 +51,21 @@
         WHERE A. BLOCKING_MEMBER_ID=#{memberID}
     </select>
 
+    <delete id="deleteBlockedMember>" parameterType="hashmap">
+        DELETE FROM TBL_BLOCK
+        WHERE BLOCKING_MEMBER_ID= #{blockingMemberId}
+        AND BLOCKED_MEMBER_ID = #{blockedMemberId}
+    </delete>
+
+    <insert id="insertBlockMember" parameterType="hashMap"
+        useGeneratedKeys="true" keyProperty="blockId">
+
+        INSERT TBL_BLOCK
+        (BLOCK_DATE, BLOCKING_MEMBER_ID, BLOCKED_MEMBER_ID)
+            VALUES(
+            NOW(),
+            #{blockingMemberId},
+            #{blockedMemberId})
+    </insert>
 </mapper>
 
