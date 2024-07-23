@@ -48,48 +48,6 @@
     </div>
 </form>
 
-<!-- 커스텀 다이얼로그와 오버레이 -->
-<div class="overlay" id="overlay"></div>
-<div class="custom-dialog" id="customDialog">
-    <div class="dialog-header" id="dialogTitle"></div>
-    <p id="dialogMessage"></p>
-    <button onclick="closeDialog()">확인</button>
-</div>
-
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    var email = /*[[${email}]]*/ '';
-    var error = /*[[${error}]]*/ '';
-    var redirectUrl = /*[[${redirectUrl}]]*/ ''; // 서버에서 전달받은 URL
-
-    function showDialog(title, message) {
-        document.getElementById('dialogTitle').innerText = title;
-        document.getElementById('dialogMessage').innerText = message;
-        document.getElementById('customDialog').classList.add('active');
-        document.getElementById('overlay').classList.add('active');
-    }
-
-    function closeDialog() {
-        document.getElementById('customDialog').classList.remove('active');
-        document.getElementById('overlay').classList.remove('active');
-        // 이메일이 존재하면 로그인 페이지로 이동
-        if (email) {
-            window.location.href = redirectUrl || '/login/loginMain';
-        } else if (error) {
-            // 오류가 존재하면 페이지 새로고침
-            window.location.reload();
-        }
-    }
-
-    window.onload = function() {
-        if (email) {
-            showDialog("이메일 찾기 성공", "가입한 이메일: " + email);
-        } else if (error) {
-            showDialog("이메일 찾기 실패", error);
-        }
-    };
-    /*]]>*/
-</script>
 </body>
 
 </html>

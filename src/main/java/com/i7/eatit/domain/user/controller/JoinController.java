@@ -21,11 +21,7 @@ public class JoinController {
     // 회원가입 - 이메일, 비밀번호, 이름, 전화번호,닉네임, 기술스택
     @PostMapping("/regist")
     public String join(UserInfoDTO userInfoDTO) {
-
-        System.out.println("userSignupDTO = " + userInfoDTO); // 확인용
-
         joinService.UserSignUp(userInfoDTO);
-
         return "redirect:/login/loginMain";
     }
 
