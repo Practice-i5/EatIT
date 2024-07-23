@@ -12,7 +12,7 @@
 
 <body>
 <div class="wrap">
-  <form class="login" action="/admin/members" method="GET">
+  <form class="login" action="/admin/login" method="POST">
     <div class="login_logo">
       <img th:src="@{/img/image_146.png}" style="width: 150px; height:150px;" alt="logo">
     </div>
@@ -24,14 +24,14 @@
     <div class="login_email">
       <h4>E-mail</h4>
       <label>
-        <input type="email" name="email" placeholder="Email">
+        <input type="email" name="adminEmail" placeholder="Email">
       </label>
     </div>
 
     <div class="login_pw">
       <h4>Password</h4>
       <label>
-        <input type="password" name="password" placeholder="Password">
+        <input type="password" name="adminPassword" placeholder="Password">
       </label>
     </div>
 
