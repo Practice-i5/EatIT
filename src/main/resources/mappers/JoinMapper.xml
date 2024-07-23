@@ -7,7 +7,7 @@
 <mapper namespace="com.i7.eatit.domain.user.dao.JoinMapper">
 
     <!-- <resultMap id="아이디명" type="대상 DTO" > -->
-    <resultMap id="UserMap" type="com.i7.eatit.domain.user.dto.UserInfoDTO">
+    <resultMap id="UserInfoMap" type="com.i7.eatit.domain.user.dto.UserInfoDTO">
 
         <id property="member_id" column="member_id"/>
 
@@ -27,28 +27,29 @@
     <!--회원가입-->
     <insert id="userInsert" parameterType="com.i7.eatit.domain.user.dto.UserInfoDTO"
             useGeneratedKeys="true" keyProperty="member_id">
+
         insert into tbl_member
-                (
-                email
-                , password
-                , name
-                , nickname
-                , login_method
-                , phone_number
-                , created_date
-                , withdrawal_status
-                )
+                    (
+                    email
+                    , password
+                    , name
+                    , nickname
+                    , login_method
+                    , phone_number
+                    , created_date
+                    , withdrawal_status
+                    )
         values
-                (
-                #{ email }
-                , #{ password }
-                , #{ name }
-                , #{ nickname }
-                , #{ loginMethod }
-                , #{ phoneNumber }
-                , #{ createdDate }
-                , #{ withdrawalStatus }
-                )
+                    (
+                    #{ email }
+                    , #{ password }
+                    , #{ name }
+                    , #{ nickname }
+                    , #{ loginMethod }
+                    , #{ phoneNumber }
+                    , #{ createdDate }
+                    , #{ withdrawalStatus }
+                    )
     </insert>
 
 </mapper>

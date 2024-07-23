@@ -10,4 +10,10 @@ public interface LoginMapper {
 
     // 로그인
     UserInfoDTO selectUser(Map<String, String> user);
+
+    // 이메일 찾기
+    String selectUserEmail(String name, String phoneNumber);
+
+    // 비밀번호 찾기
+    String updateUserRandomPassword(Map<String, String> userPasswordMap);
 }
