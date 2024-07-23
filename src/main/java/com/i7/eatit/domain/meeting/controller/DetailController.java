@@ -1,5 +1,6 @@
 package com.i7.eatit.domain.meeting.controller;
 
+import com.i7.eatit.domain.meeting.model.common.SearchCriteria;
 import com.i7.eatit.domain.meeting.model.dto.MeetingDTO;
 import com.i7.eatit.domain.meeting.model.service.MeetingService;
 import org.springframework.stereotype.Controller;
@@ -81,11 +82,17 @@ public class DetailController {
         return "detail/detail";
     }
 
-    @GetMapping("meeting-list")
-    public String writeDetail(Model model) {
+    @GetMapping(value = "meeting-list")
+    public String allMeetings(Model model) {
 
-        List<MeetingDTO> meetingList = meetingService.findAllMeetings();
-        model.addAttribute("meetingList", meetingList);
+        model.addAttribute("meetingList", meetingService.findAllMeetings());
+        return "detail/meeting-list";
+    }
+
+    @PostMapping(value = "meeting-list")
+    public String searchedMeetings(SearchCriteria searchCriteria, Model model) {    // @RequestBody 쓰면 JSON으로 묶어서 보내야 charset error가 발생 안 한다.
+        System.out.println(searchCriteria);
+        model.addAttribute("meetingList", meetingService.searchMeetings(searchCriteria));
         return "detail/meeting-list";
     }
 }
