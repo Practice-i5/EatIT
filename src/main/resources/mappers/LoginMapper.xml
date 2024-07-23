@@ -6,7 +6,8 @@
 <!--내가 만든 Mapper이름과 동일하게 지정-->
 <mapper namespace="com.i7.eatit.domain.user.dao.LoginMapper">
 
-    <resultMap id="userLoginMap" type="com.i7.eatit.domain.user.dto.UserInfoDTO">
+    <!-- 내가 반환받고자 하는 값을 기준으로 작성한다.-->
+    <resultMap id="userInfoMap" type="com.i7.eatit.domain.user.dto.UserInfoDTO">
 
         <id property="member_id" column="MEMBER_ID"/>
 
@@ -22,8 +23,30 @@
 
     </resultMap>
 
+
+    <!-- 이메일 찾기 -->
+    <resultMap id="userEmailMap" type="string">
+
+        <result property="email" column="EMAIL"/>
+
+    </resultMap>
+
+
+    <!-- 비밀번호 찾기 -->
+    <resultMap id="userPasswordMap" type="string">
+
+        <result property="password" column="PASSWORD"/>
+
+    </resultMap>
+
+
     <!--로그인-->
-    <select id="selectUser" resultMap="userLoginMap" parameterType="hashmap">
+
+    <!-- id : 구문을 찾기 위해 사용될 수 있는 namespace 내 유일한 구분자.
+         resultMap : 사용할 resultMap 의 id
+         parameterType : 구문에 전달될 파라미터의 클래스명(패키지 경로 포함)이나 별칭-->
+
+    <select id="selectUser" resultMap="userInfoMap" parameterType="hashmap">
         SELECT
                 MEMBER_ID
                 , EMAIL
@@ -42,4 +65,43 @@
         and
                 PASSWORD = #{ password }
     </select>
+
+
+    <!-- 이메일 찾기 -->
+
+    <!-- id : 구문을 찾기 위해 사용될 수 있는 namespace 내 유일한 구분자.
+     resultMap : 사용할 resultMap 의 id
+     parameterType : 구문에 전달될 파라미터의 클래스명(패키지 경로 포함)이나 별칭-->
+
+    <select id="selectUserEmail" resultMap="userEmailMap" parameterType="string">
+        SELECT
+            EMAIL
+        from
+            TBL_MEMBER
+        where
+            NAME = #{ name }
+        and
+            PHONE_NUMBER = #{ phoneNumber }
+    </select>
+
+
+    <!-- 비밀번호 조회 -->
+
+    <!-- id : 구문을 찾기 위해 사용될 수 있는 namespace 내 유일한 구분자.
+     resultMap : 사용할 resultMap 의 id
+     parameterType : 구문에 전달될 파라미터의 클래스명(패키지 경로 포함)이나 별칭-->
+
+    <update id="updateUserRandomPassword" parameterType="hashmap" flushCache="true" statementType="PREPARED" timeout="20">
+        UPDATE
+                TBL_MEMBER
+        SET
+                PASSWORD = #{ password }
+        WHERE
+                EMAIL = #{ email }
+        AND
+                NAME = #{ name }
+        AND
+                PHONE_NUMBER = #{ phoneNumber }
+    </update>
+
 </mapper>

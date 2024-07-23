@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 
 public class MeetingDTO {
 
-    private String meetingId;
+    private int meetingId;
     private String title;
     private String locationName;
     private double locationLatitude;
@@ -27,7 +27,7 @@ public class MeetingDTO {
 
     public MeetingDTO() {}
 
-    public MeetingDTO(String meetingId, String title, String locationName, double locationLatitude, double locationLongitude, String introduction, String paymentMethod, String meetingType, String interests, Timestamp scheduledDate, Time exitRestrictionTime, int recruitmentNumber, String gender, String eligibleAge, Timestamp createdDate, String participationMethod, String status, Timestamp endDate, int hostMemberId) {
+    public MeetingDTO(int meetingId, String title, String locationName, double locationLatitude, double locationLongitude, String introduction, String paymentMethod, String meetingType, String interests, Timestamp scheduledDate, Time exitRestrictionTime, int recruitmentNumber, String gender, String eligibleAge, Timestamp createdDate, String participationMethod, String status, Timestamp endDate, int hostMemberId) {
         this.meetingId = meetingId;
         this.title = title;
         this.locationName = locationName;
@@ -48,11 +48,11 @@ public class MeetingDTO {
         this.hostMemberId = hostMemberId;
     }
 
-    public String getMeetingId() {
+    public int getMeetingId() {
         return meetingId;
     }
 
-    public void setMeetingId(String meetingId) {
+    public void setMeetingId(int meetingId) {
         this.meetingId = meetingId;
     }
 
