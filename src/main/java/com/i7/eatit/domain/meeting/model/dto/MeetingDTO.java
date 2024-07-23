@@ -1,19 +1,19 @@
 package com.i7.eatit.domain.meeting.model.dto;
 
-import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 
 public class MeetingDTO {
 
-    private String meetingId;
-    private String meetingTitle;
+    private int meetingId;
+    private String title;
     private String locationName;
     private double locationLatitude;
     private double locationLongitude;
     private String introduction;
     private String paymentMethod;
     private String meetingType;
+    private String interests;
     private Timestamp scheduledDate;
     private Time exitRestrictionTime;
     private int recruitmentNumber;
@@ -27,9 +27,9 @@ public class MeetingDTO {
 
     public MeetingDTO() {}
 
-    public MeetingDTO(String meetingId, String meetingTitle, String locationName, double locationLatitude, double locationLongitude, String introduction, String paymentMethod, String meetingType, Timestamp scheduledDate, Time exitRestrictionTime, int recruitmentNumber, String gender, String eligibleAge, Timestamp createdDate, String participationMethod, String status, Timestamp endDate, int hostMemberId) {
+    public MeetingDTO(int meetingId, String title, String locationName, double locationLatitude, double locationLongitude, String introduction, String paymentMethod, String meetingType, String interests, Timestamp scheduledDate, Time exitRestrictionTime, int recruitmentNumber, String gender, String eligibleAge, Timestamp createdDate, String participationMethod, String status, Timestamp endDate, int hostMemberId) {
         this.meetingId = meetingId;
-        this.meetingTitle = meetingTitle;
+        this.title = title;
         this.locationName = locationName;
         this.locationLatitude = locationLatitude;
         this.locationLongitude = locationLongitude;
@@ -48,20 +48,20 @@ public class MeetingDTO {
         this.hostMemberId = hostMemberId;
     }
 
-    public String getMeetingId() {
+    public int getMeetingId() {
         return meetingId;
     }
 
-    public void setMeetingId(String meetingId) {
+    public void setMeetingId(int meetingId) {
         this.meetingId = meetingId;
     }
 
-    public String getMeetingTitle() {
-        return meetingTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setMeetingTitle(String meetingTitle) {
-        this.meetingTitle = meetingTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getLocationName() {
@@ -111,6 +111,10 @@ public class MeetingDTO {
     public void setMeetingType(String meetingType) {
         this.meetingType = meetingType;
     }
+
+    public String getInterests() { return interests; }
+
+    public void setInterests(String interests) { this.interests = interests; }
 
     public Timestamp getScheduledDate() {
         return scheduledDate;
@@ -196,13 +200,14 @@ public class MeetingDTO {
     public String toString() {
         return "MeetingDTO{" +
                 "meetingId='" + meetingId + '\'' +
-                ", meetingTitle='" + meetingTitle + '\'' +
+                ", title='" + title + '\'' +
                 ", locationName='" + locationName + '\'' +
                 ", locationLatitude=" + locationLatitude +
                 ", locationLongitude=" + locationLongitude +
                 ", introduction='" + introduction + '\'' +
                 ", paymentMethod='" + paymentMethod + '\'' +
                 ", meetingType='" + meetingType + '\'' +
+                ", interests='" + interests + '\'' +
                 ", scheduledDate=" + scheduledDate +
                 ", exitRestrictionTime=" + exitRestrictionTime +
                 ", recruitmentNumber=" + recruitmentNumber +

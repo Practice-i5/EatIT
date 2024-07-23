@@ -16,6 +16,7 @@ public interface PhotoMapper {
 
     //List<MeetingPhotoDTO> findPhotoByMeetingId(int meetingId);
 
-    List<MeetingPhotoDTO> findPhotoByMeetingId(HashMap<String, Integer> meetingId);
+    List<MeetingPhotoDTO> findPhotoByMeetingId(int meetingId);
+
 
 }

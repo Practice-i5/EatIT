@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>검색 테스트 페이지</h2>
+    <h3>(컴파일 사당 겸 신사)</h3>
+    <h4>お願いします...</h4>
+
+    <form action="/detail/meeting-list" method="POST">
+        <label>검색어를 입력해주세요 : <input name="word" type="text" placeholder="정상적인 걸로 입력해주세요 please..." /></label>
+        <div class="tag-group">
+            <p>모임 유형</p>
+            <input type="radio" class="btn-check" name="typeCondition" value="Study" id="Study" autocomplete="off">
+            <label class="btn btn-outline-success" for="Study">스터디</label>
+
+            <input type="radio" class="btn-check" name="typeCondition" value="모각코" id="coding" autocomplete="off">
+            <label class="btn btn-outline-success" for="coding">모각코</label>
+
+            <input type="radio" class="btn-check" name="typeCondition"  value="포트폴리오리뷰" id="portfolio" autocomplete="off">
+            <label class="btn btn-outline-success" for="portfolio">포트폴리오리뷰</label>
+
+            <input type="radio" class="btn-check" name="typeCondition" value="이직준비" id="turnover" autocomplete="off">
+            <label class="btn btn-outline-success" for="turnover">이직준비</label>
+        </div>
+
+        <div class="tag-group">
+            <p>모임 관심분야</p>
+            <input type="checkbox" class="btn-check" name="interestsConditions" value="python" id="python" autocomplete="off">
+            <label class="btn btn-outline-success" for="python">파이썬</label>
+
+            <input type="checkbox" class="btn-check" name="interestsConditions" value="Swift" id="Swift" autocomplete="off">
+            <label class="btn btn-outline-success" for="swift">Swift</label>
+
+            <input type="checkbox" class="btn-check" name="interestsConditions"  value="babylon" id="babylon" autocomplete="off">
+            <label class="btn btn-outline-success" for="babylon">바빌론</label>
+
+            <input type="checkbox" class="btn-check" name="interestsConditions" value="VisionOS" id="VisionOS" autocomplete="off">
+            <label class="btn btn-outline-success" for="visionOS">VisionOS</label>
+        </div>
+
+        <button type="submit">검색</button>
+    </form>
+</body>
+</html>

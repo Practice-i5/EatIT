@@ -3,7 +3,7 @@ package com.i7.eatit.domain.user.dto;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class UserSignupDTO {
+public class UserInfoDTO {
 
     private int member_id;
 
@@ -17,15 +17,16 @@ public class UserSignupDTO {
 
     private final String createdDate;
     private String withdrawalStatus = "N";
+    private int reportedCount;
 
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 
-    public UserSignupDTO() {
+    public UserInfoDTO() {
         this.createdDate = DATE_FORMAT.format(new Date());
     }
 
-    public UserSignupDTO(int member_id, String name, String email, String password, String phoneNumber,
-                         String nickname, String loginMethod, String withdrawalStatus) {
+    public UserInfoDTO(int member_id, String name, String email, String password, String phoneNumber,
+                       String nickname, String loginMethod, String withdrawalStatus, int reportedCount) {
 
         this.member_id = member_id;
         this.name = name;
@@ -36,6 +37,7 @@ public class UserSignupDTO {
         this.loginMethod = loginMethod;
         this.createdDate = DATE_FORMAT.format(new Date());
         this.withdrawalStatus = withdrawalStatus;
+        this.reportedCount = reportedCount;
     }
 
     public int getMember_id() {
@@ -106,18 +108,27 @@ public class UserSignupDTO {
         this.withdrawalStatus = withdrawalStatus;
     }
 
+    public int getReportedCount() {
+        return reportedCount;
+    }
+
+    public void setReportedCount(int reportedCount) {
+        this.reportedCount = reportedCount;
+    }
+
     @Override
     public String toString() {
-        return "UserSignupDTO{" +
+        return "UserInfoDTO{" +
                 "member_id=" + member_id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", loginMethod='" + loginMethod + '\'' +
-                ", phoneNumber=" + phoneNumber +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 ", createdDate='" + createdDate + '\'' +
                 ", withdrawalStatus='" + withdrawalStatus + '\'' +
+                ", reportCount=" + reportedCount +
                 '}';
     }
 }

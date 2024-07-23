@@ -187,6 +187,8 @@ function placeMarkerAndPanTo(latLng) {
     }
     map.panTo(latLng);
     getPlaceName(latLng);
+    document.getElementById('locationLatitude').value = latLng.lat();
+    document.getElementById('locationLongitude').value = latLng.lng();
 }
 
 function getPlaceName(latLng) {

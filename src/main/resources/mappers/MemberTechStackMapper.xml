@@ -4,10 +4,30 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.i7.eatit.domain.tag.dao.MemberTechStackMapper">
-    <resultMap id="MemberTechStackMap" type="com.i7.eatit.domain.tag.dto.MemberTechStackDTO">
-        <result property="stackCode" column="STACK_CODE"/>
-        <result property="memberId" column="MEMBER_ID"/>
+<!--    <resultMap id="MemberTechStackMap" type="com.i7.eatit.domain.tag.dto.MemberTechStackDTO">-->
+<!--        <result property="code" column="STACK_CODE"/>-->
+<!--        <result property="memberId" column="MEMBER_ID"/>-->
+<!--    </resultMap>-->
+
+    <resultMap id="MemberTechStackDetailMap" type="com.i7.eatit.domain.tag.dto.MemberTechStackDetailDTO">
+        <id property="stackCode" column="STACK_CODE"/>
+        <id property="memberId" column="MEMBER_ID"/>
+        <association property="techStack" javaType="com.i7.eatit.domain.tag.dto.TechStackTypeDTO">
+            <id property="code" column="STACK_CODE"/>
+            <result property="name" column="STACK_NAME"/>
+        </association>
     </resultMap>
+
+    <select id="findMemberTechStack" resultMap="MemberTechStackDetailMap" parameterType="_int" >
+        SELECT A.STACK_CODE, A.MEMBER_ID, B.STACK_NAME
+        FROM
+            (SELECT STACK_CODE, MEMBER_ID
+                FROM TBL_MEMBER_TECH_STACK
+                WHERE MEMBER_ID=#{memberID}
+            ) A
+        JOIN TBL_TECH_STACK_TYPE B
+        ON A.STACK_CODE=B.STACK_CODE
+    </select>
 
     <insert id="addMemberTechStack" parameterType="com.i7.eatit.domain.tag.dto.MemberTechStackDTO">
         INSERT INTO
@@ -15,7 +35,7 @@
         VALUES (#{stackCode},
                #{memberId})
     </insert>
-    <delete id="deleteMemberAllTechStack" parameterType="_int">
+    <delete id="deleteMemberTechStack" parameterType="_int">
         DELETE FROM
               TBL_MEMBER_TECH_STACK
         WHERE

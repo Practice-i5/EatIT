@@ -3,6 +3,7 @@ package com.i7.eatit.domain.tag.service;
 
 import com.i7.eatit.domain.tag.dao.MemberTechStackMapper;
 import com.i7.eatit.domain.tag.dto.MemberTechStackDTO;
+import com.i7.eatit.domain.tag.dto.MemberTechStackDetailDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,10 @@ import java.util.List;
 public class MemberTechStackService {
 
     private MemberTechStackMapper memberTechStackMapper;
+
+    public List<MemberTechStackDetailDTO> findMemberTechStack(int memberId){
+         return memberTechStackMapper.findMemberTechStack(memberId);
+    }
 
     public MemberTechStackService(MemberTechStackMapper memberTechStackMapper) {
         this.memberTechStackMapper = memberTechStackMapper;
@@ -24,7 +29,7 @@ public class MemberTechStackService {
 
     @Transactional
     public void deleteMemberAllTechStack(int memberId){
-        memberTechStackMapper.deleteMemberAllTechStack(memberId);
+        memberTechStackMapper.deleteMemberTechStack(memberId);
     }
 
     @Transactional

@@ -4,14 +4,17 @@ public class MemberPhotoDTO {
 
     private int memberPhotoID;
     private int memberId;
-    private String photoURL;
+    private String photoPath;
+    private String photoName;
+
 
     public MemberPhotoDTO(){}
 
-    public MemberPhotoDTO(int memberPhotoID, int memberId, String photoURL) {
+    public MemberPhotoDTO(int memberPhotoID, int memberId, String photoPath, String photoName) {
         this.memberPhotoID = memberPhotoID;
         this.memberId = memberId;
-        this.photoURL = photoURL;
+        this.photoPath = photoPath;
+        this.photoName = photoName;
     }
 
     public int getMemberPhotoID() {
@@ -30,12 +33,20 @@ public class MemberPhotoDTO {
         this.memberId = memberId;
     }
 
-    public String getPhotoURL() {
-        return photoURL;
+    public String getPhotoPath() {
+        return photoPath;
     }
 
-    public void setPhotoURL(String photoURL) {
-        this.photoURL = photoURL;
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
+    }
+
+    public String getPhotoName() {
+        return photoName;
+    }
+
+    public void setPhotoName(String photoName) {
+        this.photoName = photoName;
     }
 
     @Override
@@ -43,7 +54,8 @@ public class MemberPhotoDTO {
         return "MemberPhotoDTO{" +
                 "memberPhotoID=" + memberPhotoID +
                 ", memberId=" + memberId +
-                ", photoURL='" + photoURL + '\'' +
+                ", photoPath='" + photoPath + '\'' +
+                ", photoName='" + photoName + '\'' +
                 '}';
     }
 }

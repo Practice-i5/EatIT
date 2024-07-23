@@ -12,15 +12,134 @@
         <result property="introduction" column="introduction"/>
         <result property="paymentMethod" column="payment_method"/>
         <result property="meetingType" column="meeting_type"/>
+        <result property="interests" column="interests"/>
         <result property="scheduledDate" column="scheduled_date"/>
         <result property="exitRestrictionTime" column="exit_restriction_time"/>
-        <result property="recruitmentNumber" column="recruitmentNumber"/>
+        <result property="recruitmentNumber" column="recruitment_number"/>
         <result property="gender" column="gender"/>
-        <result property="eligibleAge" column="eligible_abe"/>
+        <result property="eligibleAge" column="eligible_age"/>
         <result property="createdDate" column="created_date"/>
         <result property="participationMethod" column="participation_method"/>
         <result property="status" column="status"/>
         <result property="endDate" column="end_date"/>
         <result property="hostMemberId" column="host_member_id"/>
     </resultMap>
+
+<!--    <resultMap id="searchResultMap" type="com.i7.eatit.domain.meeting.model.common.SearchCriteria">-->
+<!--        <id -->
+<!--    </resultMap>-->
+
+    <select id="findAllMeetings" resultMap="meetingResultMap">
+        SELECT
+                MEETING_ID
+                ,TITLE
+                ,LOCATION_NAME
+                ,LOCATION_LATITUDE
+                ,LOCATION_LONGITUDE
+                ,INTRODUCTION
+                ,PAYMENT_METHOD
+                ,MEETING_TYPE
+                ,INTERESTS
+                ,SCHEDULED_DATE
+                ,EXIT_RESTRICTION_TIME
+                ,RECRUITMENT_NUMBER
+                ,GENDER
+                ,ELIGIBLE_AGE
+                ,CREATED_DATE
+                ,PARTICIPATION_METHOD
+                ,STATUS
+                ,END_DATE
+                ,HOST_MEMBER_ID
+        FROM
+            TBL_MEETING
+    </select>
+
+    <select id="findMeetings" parameterType="com.i7.eatit.domain.meeting.model.common.SearchCriteria" resultMap="meetingResultMap">
+        SELECT
+                A.MEETING_ID
+                , A.TITLE
+                , A.LOCATION_NAME
+                , A.LOCATION_LATITUDE
+                , A.LOCATION_LONGITUDE
+                , A.INTRODUCTION
+                , A.PAYMENT_METHOD
+                , A.MEETING_TYPE
+                , A.INTERESTS
+                , A.SCHEDULED_DATE
+                , A.EXIT_RESTRICTION_TIME
+                , A.RECRUITMENT_NUMBER
+                , A.GENDER
+                , A.ELIGIBLE_AGE
+                , A.CREATED_DATE
+                , A.PARTICIPATION_METHOD
+                , A.STATUS
+                , A.END_DATE
+                , A.HOST_MEMBER_ID
+        FROM
+                TBL_MEETING A
+            LEFT JOIN TBL_MEETING_INTEREST_RELATION B
+            ON  A.MEETING_ID = B.MEETING_ID
+            LEFT JOIN TBL_MEETING_INTEREST_CATEGORY C
+            ON  B.CATEGORY_TYPE = C.CATEGORY_TYPE
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="word != null and word != ''">
+                A.TITLE LIKE CONCAT('%', #{ word }, '%')
+            </if>
+            <if test="interestsConditions != null and interestsConditions.size() != 0">
+                AND A.INTERESTS IN
+                <foreach collection="interestsConditions" item="condition" open="(" close=")" separator=", ">
+                    #{ condition }
+                </foreach>
+            </if>
+            <if test="typeCondition != null and typeCondition != ''">
+                AND A.MEETING_TYPE = #{ typeCondition }
+            </if>
+            AND A.STATUS = 'Open'
+        </trim>
+    </select>
+
+    <insert id="registMeeting" parameterType="com.i7.eatit.domain.meeting.model.dto.MeetingDTO">
+        INSERT INTO TBL_MEETING
+        (
+            TITLE
+            , LOCATION_NAME
+            , LOCATION_LATITUDE
+            , LOCATION_LONGITUDE
+            , INTRODUCTION
+            , PAYMENT_METHOD
+            , MEETING_TYPE
+            , INTERESTS
+            , SCHEDULED_DATE
+            , EXIT_RESTRICTION_TIME
+            , RECRUITMENT_NUMBER
+            , GENDER
+            , ELIGIBLE_AGE
+            , CREATED_DATE
+            , PARTICIPATION_METHOD
+            , STATUS
+            , END_DATE
+            , HOST_MEMBER_ID
+        )
+        VALUES
+        (
+            #{ title }
+            , #{ locationName }
+            , #{ locationLatitude }
+            , #{ locationLongitude }
+            , #{ introduction }
+            , #{ paymentMethod }
+            , #{ meetingType }
+            , #{ interests }
+            , #{ scheduledDate }
+            , #{ exitRestrictionTime }
+            , #{ recruitmentNumber }
+            , #{ gender }
+            , #{ eligibleAge }
+            , #{ createdDate }
+            , #{ participationMethod }
+            , #{ status }
+            , #{ endDate }
+            , #{ hostMemberId }
+        )
+    </insert>
 </mapper>

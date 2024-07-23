@@ -7,11 +7,9 @@ import com.i7.eatit.domain.tag.service.TechStackTypeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -48,14 +46,16 @@ public class TechProfileController {
 
     @GetMapping("member-stack-test")
     public String stackTestPage(){
-        return "my-page/stacktest";
+        System.out.println(memberTechStackService.findMemberTechStack(2));
+
+        return "my-page/tech-profile";
     }
 
     @PostMapping("member-stack-test")
     public String memberStackTest(Model model) {
         List<TechStackTypeDTO> techStackList = techStackTypeService.findAllTechStack();
-        MemberTechStackDTO memberTechStack = new MemberTechStackDTO(4, 7);
-        memberTechStackService.addMemberTechStack(memberTechStack);
+        //MemberTechStackDTO memberTechStack = new MemberTechStackDTO(4, 7);
+        //memberTechStackService.addMemberTechStack(memberTechStack);
         memberTechStackService.deleteMemberAllTechStack(11);
         //작성중
 

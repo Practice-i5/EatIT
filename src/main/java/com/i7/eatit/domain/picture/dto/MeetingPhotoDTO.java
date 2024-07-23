@@ -4,14 +4,16 @@ public class MeetingPhotoDTO {
 
     private int meetingPhotoID;
     private int meetingId;
-    private String photoURL;
+    private String photoPath;
+    private String photoName;
 
     public MeetingPhotoDTO() {}
 
-    public MeetingPhotoDTO(int meetingPhotoID, int meetingId, String photoURL) {
+    public MeetingPhotoDTO(int meetingPhotoID, int meetingId, String photoPath, String photoName) {
         this.meetingPhotoID = meetingPhotoID;
         this.meetingId = meetingId;
-        this.photoURL = photoURL;
+        this.photoPath = photoPath;
+        this.photoName = photoName;
     }
 
     public int getMeetingPhotoID() {
@@ -30,13 +32,29 @@ public class MeetingPhotoDTO {
         this.meetingId = meetingId;
     }
 
-    public String getPhotoURL() {
-        return photoURL;
+    public String getPhotoPath() {
+        return photoPath;
     }
 
-    public void setPhotoURL(String photoURL) {
-        this.photoURL = photoURL;
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
     }
 
+    public String getPhotoName() {
+        return photoName;
+    }
 
+    public void setPhotoName(String photoName) {
+        this.photoName = photoName;
+    }
+
+    @Override
+    public String toString() {
+        return "MeetingPhotoDTO{" +
+                "meetingPhotoID=" + meetingPhotoID +
+                ", meetingId=" + meetingId +
+                ", photoPath='" + photoPath + '\'' +
+                ", photoName='" + photoName + '\'' +
+                '}';
+    }
 }
