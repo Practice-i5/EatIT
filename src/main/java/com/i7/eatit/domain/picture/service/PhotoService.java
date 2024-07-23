@@ -57,7 +57,6 @@ public class PhotoService {
             filePath = resourceLoader.getResource("classpath:static/img/single").getFile().getAbsolutePath();
         }
 
-
         System.out.println("multi : "+ filePath);
         String resultMessage=null;
 
@@ -68,7 +67,13 @@ public class PhotoService {
 
         try {
             singleImageFile.transferTo(new File(filePath + "/" + savedName));
-            //photoMapper.uploadMemberPhoto(memberPhoto);
+
+            MemberPhotoDTO memberPhoto = new MemberPhotoDTO();
+            memberPhoto.setMemberId(memberId);
+            memberPhoto.setPhotoPath("/static/img/single/");
+            memberPhoto.setPhotoName(savedName);
+            photoMapper.uploadMemberPhoto(memberPhoto);
+
             resultMessage="/static/img/single/"+savedName;
             System.out.println("파일 업로드 성공");
         } catch (Exception e) {
