@@ -48,13 +48,17 @@ public class AlarmPageController {
 
 
         //Todo : 로그인 정보 받아 와야 함
-        int member_id = 1;
+        int member_id = 4;
         List<AlarmDTO> alarmList = alarmService.findAllAlarm(member_id);
         model.addAttribute("alarmList", alarmList);
 
         for (AlarmDTO alarmDTO : alarmList) {
-            System.out.println(alarmDTO.toString());
+            System.out.println(alarmDTO.getAlarmId());
         }
+
+        boolean isAlarmRinging = false;
+
+        model.addAttribute("isAlarmRinging" , isAlarmRinging);
 
         return "/alarm/alarm";
     }
