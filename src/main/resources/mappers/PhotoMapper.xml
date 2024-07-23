@@ -35,8 +35,35 @@
         SELECT
                PHOTO_ID
             ,  PHOTO_URL
-            ,  MEMBER_ID
+            ,  MEETING_ID
           FROM
-               TBL_MEMBER_PHOTO
+               TBL_MEETING_PHOTO
     </select>
+
+    <insert id="uploadMemberPhoto" parameterType="com.i7.eatit.domain.picture.dto.MemberPhotoDTO">
+    INSERT INTO TBL_MEMBER_PHOTO(
+        PHOTO_ID
+        ,  PHOTO_URL
+        ,  MEMBER_ID
+        ) VALUES
+            (#{memberPhotoId},
+            #{photoURL},
+            #{memberId})
+<!--        기존에 없으면 insert, 있으면 update -->
+        ON DUPLICATE KEY UPDATE
+        PHOTO_ID = #{memberPhotoId},
+        PHOTO_URL = #{photoURL},
+        MEMBER_ID = #{memberId}
+    </insert>
+
+    <insert id="uploadMeetingPhoto" parameterType="com.i7.eatit.domain.picture.dto.MeetingPhotoDTO">
+        INSERT INTO TBL_MEMBER_PHOTO(
+        PHOTO_ID
+        ,  PHOTO_URL
+        ,  MEETING_ID
+        ) VALUES
+        (#{meetingPhotoId},
+        #{photoURL},
+        #{meetingId})
+    </insert>
 </mapper>
