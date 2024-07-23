@@ -12,33 +12,55 @@
     <form action="/detail/meeting-list" method="POST">
         <label>검색어를 입력해주세요 : <input name="word" type="text" placeholder="정상적인 걸로 입력해주세요 please..." /></label>
         <div class="tag-group">
-            <p>모임 유형</p>
-            <input type="radio" class="btn-check" name="typeCondition" value="Study" id="Study" autocomplete="off">
-            <label class="btn btn-outline-success" for="Study">스터디</label>
+            <div class="time-group">
+                <p>모임 유형</p>
+                <input type="radio" class="btn-check" name="typeCondition" value="Study" id="Study" autocomplete="off">
+                <label class="btn btn-outline-success" for="Study">스터디</label>
 
-            <input type="radio" class="btn-check" name="typeCondition" value="모각코" id="coding" autocomplete="off">
-            <label class="btn btn-outline-success" for="coding">모각코</label>
+                <input type="radio" class="btn-check" name="typeCondition" value="모각코" id="coding" autocomplete="off">
+                <label class="btn btn-outline-success" for="coding">모각코</label>
 
-            <input type="radio" class="btn-check" name="typeCondition"  value="포트폴리오리뷰" id="portfolio" autocomplete="off">
-            <label class="btn btn-outline-success" for="portfolio">포트폴리오리뷰</label>
+                <input type="radio" class="btn-check" name="typeCondition"  value="포트폴리오리뷰" id="portfolio" autocomplete="off">
+                <label class="btn btn-outline-success" for="portfolio">포트폴리오리뷰</label>
 
-            <input type="radio" class="btn-check" name="typeCondition" value="이직준비" id="turnover" autocomplete="off">
-            <label class="btn btn-outline-success" for="turnover">이직준비</label>
+                <input type="radio" class="btn-check" name="typeCondition" value="이직준비" id="turnover" autocomplete="off">
+                <label class="btn btn-outline-success" for="turnover">이직준비</label>
+            </div>
         </div>
 
         <div class="tag-group">
-            <p>모임 관심분야</p>
-            <input type="checkbox" class="btn-check" name="interestsConditions" value="python" id="python" autocomplete="off">
-            <label class="btn btn-outline-success" for="python">파이썬</label>
+            <div class="checkbox-group">
+                <p>모임 관심분야</p>
+                <input type="checkbox" class="btn-check" name="interestsConditions" value="Python" id="python" autocomplete="off">
+                <label class="btn btn-outline-success" for="python">파이썬</label>
 
-            <input type="checkbox" class="btn-check" name="interestsConditions" value="Swift" id="Swift" autocomplete="off">
-            <label class="btn btn-outline-success" for="swift">Swift</label>
+                <input type="checkbox" class="btn-check" name="interestsConditions" value="Swift" id="Swift" autocomplete="off">
+                <label class="btn btn-outline-success" for="Swift">Swift</label>
 
-            <input type="checkbox" class="btn-check" name="interestsConditions"  value="babylon" id="babylon" autocomplete="off">
-            <label class="btn btn-outline-success" for="babylon">바빌론</label>
+                <input type="checkbox" class="btn-check" name="interestsConditions" value="VisionOS" id="VisionOS" autocomplete="off">
+                <label class="btn btn-outline-success" for="VisionOS">VisionOS</label>
 
-            <input type="checkbox" class="btn-check" name="interestsConditions" value="VisionOS" id="VisionOS" autocomplete="off">
-            <label class="btn btn-outline-success" for="visionOS">VisionOS</label>
+                <input type="checkbox" class="btn-check" name="interestsConditions"  value="C++" id="C++" autocomplete="off">
+                <label class="btn btn-outline-success" for="C++">C++</label>
+
+                <input type="checkbox" class="btn-check" name="interestsConditions" value="Backend" id="Backend" autocomplete="off">
+                <label class="btn btn-outline-success" for="Backend">Backend</label>
+
+                <input type="checkbox" class="btn-check" name="interestsConditions" value="Unity" id="Unity" autocomplete="off">
+                <label class="btn btn-outline-success" for="Unity">Unity</label>
+
+                <input type="checkbox" class="btn-check" name="interestsConditions" value="UE5" id="UE5" autocomplete="off">
+                <label class="btn btn-outline-success" for="UE5">UE5</label>
+
+                <input type="checkbox" class="btn-check" name="interestsConditions" value="AI" id="AI" autocomplete="off">
+                <label class="btn btn-outline-success" for="AI">AI</label>
+
+                <input type="checkbox" class="btn-check" name="interestsConditions" value="TA" id="TA" autocomplete="off">
+                <label class="btn btn-outline-success" for="TA">TA</label>
+
+                <input type="checkbox" class="btn-check" name="interestsConditions" value="Object-C" id="Object-C" autocomplete="off">
+                <label class="btn btn-outline-success" for="Object-C">Object-C</label>
+            </div>
         </div>
 
         <button type="submit">검색</button>

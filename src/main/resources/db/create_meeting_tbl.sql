@@ -10,7 +10,6 @@ CREATE TABLE `tbl_meeting`
     `introduction` TEXT NOT NULL COMMENT 'introduction',
     `payment_method` VARCHAR(255) NOT NULL COMMENT 'payment_method',
     `meeting_type` VARCHAR(255) NOT NULL COMMENT 'meeting_type',
-    `interests` VARCHAR(255) NOT NULL COMMENT 'interests',
     `scheduled_date` DATETIME NOT NULL COMMENT 'scheduled_date', -- fix type DATE -> DATETIEM
     `exit_restriction_time` TIME NOT NULL COMMENT 'exit_restriction_time',
     `recruitment_number` INT NOT NULL COMMENT 'recruitment_number',
@@ -23,3 +22,21 @@ CREATE TABLE `tbl_meeting`
     `host_member_id` INT NOT NULL COMMENT 'host_member_id',
     PRIMARY KEY (`meeting_id`)
 ) COMMENT = 'meeting';
+
+DROP TABLE IF EXISTS `tbl_meeting_interest_category`;
+
+CREATE TABLE `tbl_meeting_interest_category`
+(
+    `interests` VARCHAR(255) NOT NULL COMMENT 'interests',
+    PRIMARY KEY (`interests`)
+) COMMENT = 'meeting_interest_category';
+
+DROP TABLE IF EXISTS `tbl_meeting_interest_relation`;
+
+CREATE TABLE `tbl_meeting_interest_relation`
+(
+    `relation_id` INT NOT NULL AUTO_INCREMENT COMMENT 'relation_id',
+    `interests` VARCHAR(255) NOT NULL COMMENT 'interests',
+    `meeting_id` INT NOT NULL COMMENT 'meeting_id',
+    PRIMARY KEY (`relation_id`)
+) COMMENT = 'meeting_interest_relation';
