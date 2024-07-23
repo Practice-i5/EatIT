@@ -50,6 +50,25 @@
             ON  A.MEETING_ID = B.MEETING_ID
             LEFT JOIN TBL_MEETING_INTEREST_CATEGORY AS C
             ON  B.INTERESTS = C.INTERESTS
+        GROUP BY
+            A.MEETING_ID
+            ,A.TITLE
+            ,A.LOCATION_NAME
+            ,A.LOCATION_LATITUDE
+            ,A.LOCATION_LONGITUDE
+            ,A.INTRODUCTION
+            ,A.PAYMENT_METHOD
+            ,A.MEETING_TYPE
+            ,A.SCHEDULED_DATE
+            ,A.EXIT_RESTRICTION_TIME
+            ,A.RECRUITMENT_NUMBER
+            ,A.GENDER
+            ,A.ELIGIBLE_AGE
+            ,A.CREATED_DATE
+            ,A.PARTICIPATION_METHOD
+            ,A.STATUS
+            ,A.END_DATE
+            ,A.HOST_MEMBER_ID
         ORDER BY
             A.MEETING_ID DESC;
     </select>
@@ -95,6 +114,25 @@
             </if>
             AND A.STATUS = 'Open'
         </trim>
+        GROUP BY
+            A.MEETING_ID
+            , A.TITLE
+            , A.LOCATION_NAME
+            , A.LOCATION_LATITUDE
+            , A.LOCATION_LONGITUDE
+            , A.INTRODUCTION
+            , A.PAYMENT_METHOD
+            , A.MEETING_TYPE
+            , A.SCHEDULED_DATE
+            , A.EXIT_RESTRICTION_TIME
+            , A.RECRUITMENT_NUMBER
+            , A.GENDER
+            , A.ELIGIBLE_AGE
+            , A.CREATED_DATE
+            , A.PARTICIPATION_METHOD
+            , A.STATUS
+            , A.END_DATE
+            , A.HOST_MEMBER_ID
     </select>
 
     <insert id="registMeeting" parameterType="com.i7.eatit.domain.meeting.model.dto.MeetingDTO"  useGeneratedKeys="true" keyProperty="lastId">
