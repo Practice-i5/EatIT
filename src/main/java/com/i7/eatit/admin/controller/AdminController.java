@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/admin")
@@ -19,14 +20,19 @@ public class AdminController {
     }
 
     @GetMapping("/login")
-    public String adminLogin() {
+    public String adminLogin(/*HttpServletRequest httpServletRequest*/) {
+//        Session session = httpServletRequest.getSession().getAttribute();
+//        if (session == null) {
+//            return "redirect:/login";
+//        }
         return "admin/adminLogin";
     }
 
-    // TODO: 회원 전체를 조회하기 위한 메서드
     @GetMapping("/members")
-    public String getMembers(Model model) {
-        List<AdminMemberDto> adminMemberDtoList = adminService.findAllMember();
+    public String getMembers(Model model, @RequestParam(required = false) String sort,
+        @RequestParam(name = "searchEmail", required = false) String searchEmail) {
+        // TODO : 내일 와서 검색 기능 추가해야 함.
+        List<AdminMemberDto> adminMemberDtoList = adminService.findAllMember(sort, searchEmail);
         model.addAttribute("adminMemberDtoList", adminMemberDtoList);
         return "admin/members";
     }

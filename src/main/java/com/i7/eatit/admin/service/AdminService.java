@@ -14,7 +14,7 @@ public class AdminService {
         this.adminMapper = adminMapper;
     }
 
-    public List<AdminMemberDto> findAllMember() {
-        return adminMapper.findAllMember();
+    public List<AdminMemberDto> findAllMember(String sort, String searchEmail) {
+        return adminMapper.findAllMember(sort, searchEmail);
     }
 }
