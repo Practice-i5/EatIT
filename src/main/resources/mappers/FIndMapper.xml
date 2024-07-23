@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.i7.eatit.domain.user.dao.FindMapper">
+        <resultMap id="UserINfoMap" type="com.i7.eatit.domain.user.dto.UserInfoDTO">
+
+            <id property="member_id" column="member_id"/>
+
+            <result property="email" column="email"/>
+            <result property="password" column="password"/>
+            <result property="name" column="name"/>
+
+            <result property="nickname" column="nickname"/>
+            <result property="loginMethod" column="login_method"/>
+            <result property="phoneNumber" column="phone_number"/>
+
+            <result property="createdDate" column="created_date"/>
+            <result property="withdrawalStatus" column="withdrawal_status"/>
+            <result property="reportedCount" column="reported_count"/>
+
+        </resultMap>
+
+    <select id="selectUser" resultMap="UserInfoMap" parameterType="hashmap">
+    SELECT
+            MEMBER_ID
+            , EMAIL
+            , PASSWORD
+            , NAME
+            , NICKNAME
+            , LOGIN_METHOD
+            , PHONE_NUMBER
+            , CREATED_DATE
+            , WITHDRAWAL_STATUS
+            , REPORTED_COUNT
+    from
+            TBL_MEMBER
+    where
+            EMAIL = #{ email }
+    </select>
+</mapper>
