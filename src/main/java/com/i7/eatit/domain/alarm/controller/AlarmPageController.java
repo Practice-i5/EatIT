@@ -52,11 +52,9 @@ public class AlarmPageController {
         List<AlarmDTO> alarmList = alarmService.findAllAlarm(member_id);
         model.addAttribute("alarmList", alarmList);
 
-        for (AlarmDTO alarmDTO : alarmList) {
-            System.out.println(alarmDTO.getAlarmId());
-        }
 
-        boolean isAlarmRinging = false;
+
+        boolean isAlarmRinging = alarmService.checkNewAlarm();
 
         model.addAttribute("isAlarmRinging" , isAlarmRinging);
 

@@ -18,5 +18,6 @@ function isAlarmExist(){
     let receive;
     const alarmCheckElement = document.getElementById('alarmCheck');
     receive = alarmCheckElement.innerText;
+    // console.log(receive);
     return receive;
 }
