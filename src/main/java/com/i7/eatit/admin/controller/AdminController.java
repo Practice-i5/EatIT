@@ -20,13 +20,19 @@ public class AdminController {
     }
 
     @GetMapping("/login")
-    public String adminLogin() {
+    public String adminLogin(/*HttpServletRequest httpServletRequest*/) {
+//        Session session = httpServletRequest.getSession().getAttribute();
+//        if (session == null) {
+//            return "redirect:/login";
+//        }
         return "admin/adminLogin";
     }
 
     @GetMapping("/members")
-    public String getMembers(Model model, @RequestParam(required = false) String sort) {
-        List<AdminMemberDto> adminMemberDtoList = adminService.findAllMember(sort);
+    public String getMembers(Model model, @RequestParam(required = false) String sort,
+        @RequestParam(name = "searchEmail", required = false) String searchEmail) {
+        // TODO : 내일 와서 검색 기능 추가해야 함.
+        List<AdminMemberDto> adminMemberDtoList = adminService.findAllMember(sort, searchEmail);
         model.addAttribute("adminMemberDtoList", adminMemberDtoList);
         return "admin/members";
     }
