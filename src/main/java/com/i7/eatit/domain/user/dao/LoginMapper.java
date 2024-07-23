@@ -14,6 +14,6 @@ public interface LoginMapper {
     // 이메일 찾기
     String selectUserEmail(String name, String phoneNumber);
 
-    // 비밀번호 찾기
-    String updateUserRandomPassword(Map<String, String> userPasswordMap);
+    // 비밀번호 변경 후 db에 적용
+    void updateUserRandomPassword(Map<String, String> userPasswordMap);
 }
