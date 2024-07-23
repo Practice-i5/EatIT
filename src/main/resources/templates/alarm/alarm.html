@@ -64,6 +64,7 @@
                         </div>
                         <div class="d-flex m-3 me-0">
                             <!-- 새 알람이 있으면 배지 달리는 벨 아이콘 start -->
+                            <div id="alarmCheck" style="display:none" th:text="${isAlarmRinging}">Ring!</div>
                             <a href="/alarm/alarm" class="btn-notification my-auto me-4 position-relative">
                                 <i class="fas fa-bell fa-2x ">
                                 </i>

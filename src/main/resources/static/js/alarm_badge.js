@@ -1,17 +1,22 @@
 
 
 const alarm_badge = document.getElementById('alarm-badge')
-console.log(alarm_badge);
 
-let isBadgeVisible = false;
-controlAlarmBadge();
+switchAlarmBadge();
 
+function switchAlarmBadge(){
 
-function controlAlarmBadge(){
-    if (isBadgeVisible){    //true
+    if (isAlarmExist() === "true"){
         alarm_badge.style.visibility = "visible";
-    }else {                 //false
+    }else {
         alarm_badge.style.visibility = "hidden"
     }
 
+}
+
+function isAlarmExist(){
+    let receive;
+    const alarmCheckElement = document.getElementById('alarmCheck');
+    receive = alarmCheckElement.innerText;
+    return receive;
 }
