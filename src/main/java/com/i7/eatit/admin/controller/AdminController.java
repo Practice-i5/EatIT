@@ -45,11 +45,11 @@ public class AdminController {
         }
 
         // 2. Session 에 (UUID, email) 형태로 값을 저장한다.
-        String uuid = UUID.randomUUID().toString();
-        request.getSession().setAttribute(uuid, adminLoginDto.getAdminEmail());
+        String loginUUID = UUID.randomUUID().toString();
+        request.getSession().setAttribute(loginUUID, adminLoginDto.getAdminEmail());
 
         // 3. 사용자에게 key 값을 Cookie 형태로 전달
-        Cookie uuidCookie = new Cookie("uuid", uuid);
+        Cookie uuidCookie = new Cookie("loginUUID", loginUUID);
         response.addCookie(uuidCookie);
 
         return "redirect:/admin/members";
@@ -60,7 +60,7 @@ public class AdminController {
         @RequestParam(name = "searchEmail", required = false) String searchEmail,
         HttpServletRequest request) {
 
-        String uuid = adminService.getUuidCookie(request);
+        String uuid = adminService.getUUIDCookie(request);
 
         if (uuid == null) {
             return "redirect:/admin/login";
