@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @RequestMapping("/my-page/*")
 @Controller
@@ -41,9 +43,10 @@ public class ProfileController {
         //System.out.println();
 
 
-
         for (var it: request.getParameterMap().keySet()) {
+
             System.out.println(it +":" + request.getParameter(it));
+
 
         }
 
@@ -62,20 +65,24 @@ public class ProfileController {
         //System.out.println("singleFile : " + singleFile);
         //System.out.println("singleFileDescription : " + singleFileDescription);
         System.out.println("시도");
+        String gdriveUrl = "";
 
         String uploadedUrl = photoService.uploadMemberPhoto(singleFile, 7);
         if (uploadedUrl != null){
-            rttr.addFlashAttribute("profileImage", uploadedUrl);
-            rttr.addFlashAttribute("tst", "텍스트테스트");
+            gdriveUrl = "https://drive.google.com/uc?export=view&id=" + uploadedUrl;
+            rttr.addFlashAttribute("profileImage", gdriveUrl);
+            System.out.println("결과 url");
+            System.out.println(gdriveUrl);
+
         }
-        System.out.println("결과 url");
-        System.out.println(uploadedUrl);
+
         //rttr.addFlashAttribute("profileImage", uploadedUrl);
         return "redirect:/my-page/uploadResult";
     }
 
     @GetMapping("uploadResult")
     public void uploadResultPage(Model model){
+        model.addAttribute("profileImage","https://drive.google.com/thumbnail?id=13G0IwZ4hbnisyGlsN4r297BZlcLLDvn1&sz=w200");
 
         System.out.println(model.getAttribute("profileImage"));
     }
