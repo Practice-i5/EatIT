@@ -41,9 +41,9 @@
                     <li>
                         <div class="form-item">
                             <div class="block-info">
-                                <img th:src="${followUser.url}"
+                                <img th:src="${followUser.detailProfile.memberPhoto.photoPath+followUser.detailProfile.memberPhoto.photoName}"
                                      src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"/>
-                                <div class="block-info-text" th:text="${followUser.name}">
+                                <div class="block-info-text" th:text="${followUser.detailProfile.nickname}">
                                     닉네임1
                                 </div>
                             </div>

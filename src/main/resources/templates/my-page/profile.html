@@ -52,7 +52,7 @@
             </div>
             <div class="form-item">
                 <label class="profile-label" for="get-nickname">닉네임</label>
-                <input id="get-nickname" type="text" placeholder="닉네임을 입력하세요." name=nickName th:value="${nickName}">
+                <input id="get-nickname" type="text" placeholder="닉네임을 입력하세요." name=nickName th:value="${session.loginUser.nickname}">
             </div>
             <p class="form-message warn">주의사항 같은 것 작성</p>
 
