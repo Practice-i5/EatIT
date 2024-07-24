@@ -43,37 +43,6 @@
     </div>
 </form>
 
-<!-- 다이얼로그 추가 -->
-<div id="resultDialog" style="display:none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
-    <div style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 300px; max-width: 80%; text-align: center; border-radius: 5px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-        <p id="dialogMessage" th:text="${message}" style="margin-bottom: 20px;"></p>
-        <button id="dialogConfirm" onclick="closeDialog()" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 3px; cursor: pointer;">확인</button>
-    </div>
-</div>
-
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    var message = /*[[${message}]]*/ null;
-    var redirectUrl = /*[[${redirectUrl}]]*/ null;
-
-    window.onload = function() {
-        if (message) {
-            document.getElementById('dialogMessage').textContent = message;
-            var dialog = document.getElementById('resultDialog');
-            dialog.style.display = 'flex';
-            dialog.style.alignItems = 'center';
-            dialog.style.justifyContent = 'center';
-        }
-    }
-
-    function closeDialog() {
-        document.getElementById('resultDialog').style.display = 'none';
-        if (redirectUrl) {
-            window.location.href = redirectUrl;
-        }
-    }
-    /*]]>*/
-</script>
 </body>
 
 </html>
