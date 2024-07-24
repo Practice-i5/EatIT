@@ -16,5 +16,6 @@
         , STACK_NAME
         FROM
         TBL_TECH_STACK_TYPE
+        ORDER BY STACK_CODE
     </select>
 </mapper>

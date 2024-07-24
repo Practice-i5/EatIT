@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS `TBL_TECH_STACK_TYPE`
+DROP TABLE IF EXISTS `TBL_TECH_STACK_TYPE`;
 
 create table tbl_tech_stack_type
 (

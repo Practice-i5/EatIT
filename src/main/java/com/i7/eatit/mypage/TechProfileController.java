@@ -28,7 +28,10 @@ public class TechProfileController {
     public void techProfile() {}
 
     @GetMapping("tech-profile-modify")
-    public void techProfileModify() {}
+    public void techProfileModify(Model model) {
+        List<TechStackTypeDTO> techStackList = techStackTypeService.findAllTechStack();
+        model.addAttribute("techStackList", techStackList);
+    }
 
     @GetMapping("tech-profile/test")
     public String getTechStack(Model model) {

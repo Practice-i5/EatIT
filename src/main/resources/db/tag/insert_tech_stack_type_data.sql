@@ -10,7 +10,7 @@ VALUES
       , ('Kotlin')
       , ('Unity')
       , ('Unreal')
-      , ('Spring Boot')
+      , ('Spring')
       , ('Go')
       , ('FastApi')
       , ('TypeScript')

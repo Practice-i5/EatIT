@@ -1,7 +1,7 @@
 package com.i7.eatit.domain.picture.service;
 
 import com.i7.eatit.domain.picture.dao.PhotoMapper;
-import com.i7.eatit.domain.picture.drive.DriveExample;
+//import com.i7.eatit.domain.picture.drive.DriveExample;
 import com.i7.eatit.domain.picture.dto.MeetingPhotoDTO;
 import com.i7.eatit.domain.picture.dto.MemberPhotoDTO;
 import org.springframework.core.io.Resource;
@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.GeneralSecurityException;
+//import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -84,12 +84,12 @@ public class PhotoService {
             System.out.println("파일 업로드 실패");
         }
 
-        try{
-            DriveExample.uploadFile(singleImageFile);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("업로드 실패");
-        }
+//        try{
+//            DriveExample.uploadFile(singleImageFile);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            System.out.println("업로드 실패");
+//        }
 
         return resultMessage;
     }

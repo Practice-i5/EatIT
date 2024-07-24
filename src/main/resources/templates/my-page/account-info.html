@@ -61,7 +61,8 @@
                         th:value="${session.loginUser.email}"/>
                 </div>
 
-                <div class="form-item">
+
+                <div  th:unless="${loginMethod == 'homepage'}" class="form-item">
                     <label class="profile-label">소셜로그인 정보</label>
                     네이버 계정임
                 </div>
