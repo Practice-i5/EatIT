@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!--내가 만든 Mapper이름과 동일하게 지정-->
-<mapper namespace="com.i7.eatit.admin.mapper.AdminMapper">
+<mapper namespace="com.i7.eatit.admin.mapper.AdminMemberMapper">
 
   <resultMap id="AdminMemberResultMap" type="com.i7.eatit.admin.dto.AdminMemberDto">
     <result property="memberId" column="member_id"/>
@@ -25,7 +25,7 @@
 
   <select id="findAllMember" resultMap="AdminMemberResultMap">
     SELECT *
-      FROM tbl_member A
+    FROM tbl_member A
 
     <if test="searchEmail != null">
       WHERE A.email LIKE CONCAT('%', #{ searchEmail }, '%')

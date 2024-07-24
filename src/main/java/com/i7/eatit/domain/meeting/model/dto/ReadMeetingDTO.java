@@ -3,7 +3,7 @@ package com.i7.eatit.domain.meeting.model.dto;
 import java.sql.Time;
 import java.sql.Timestamp;
 
-public class MeetingDTO {
+public class ReadMeetingDTO {
 
     private int meetingId;
     private String title;
@@ -13,6 +13,7 @@ public class MeetingDTO {
     private String introduction;
     private String paymentMethod;
     private String meetingType;
+    private String interests;
     private Timestamp scheduledDate;
     private Time exitRestrictionTime;
     private int recruitmentNumber;
@@ -25,9 +26,9 @@ public class MeetingDTO {
     private int hostMemberId;
     private int lastId;
 
-    public MeetingDTO() {}
+    public ReadMeetingDTO() {}
 
-    public MeetingDTO(int meetingId, String title, String locationName, double locationLatitude, double locationLongitude, String introduction, String paymentMethod, String meetingType, Timestamp scheduledDate, Time exitRestrictionTime, int recruitmentNumber, String gender, String eligibleAge, Timestamp createdDate, String participationMethod, String status, Timestamp endDate, int hostMemberId, int lastId) {
+    public ReadMeetingDTO(int meetingId, String title, String locationName, double locationLatitude, double locationLongitude, String introduction, String paymentMethod, String meetingType, String interests, Timestamp scheduledDate, Time exitRestrictionTime, int recruitmentNumber, String gender, String eligibleAge, Timestamp createdDate, String participationMethod, String status, Timestamp endDate, int hostMemberId, int lastId) {
         this.meetingId = meetingId;
         this.title = title;
         this.locationName = locationName;
@@ -36,6 +37,7 @@ public class MeetingDTO {
         this.introduction = introduction;
         this.paymentMethod = paymentMethod;
         this.meetingType = meetingType;
+        this.interests = interests;
         this.scheduledDate = scheduledDate;
         this.exitRestrictionTime = exitRestrictionTime;
         this.recruitmentNumber = recruitmentNumber;
@@ -112,6 +114,10 @@ public class MeetingDTO {
     public void setMeetingType(String meetingType) {
         this.meetingType = meetingType;
     }
+
+    public String getInterests() { return interests; }
+
+    public void setInterests(String interests) { this.interests = interests; }
 
     public Timestamp getScheduledDate() {
         return scheduledDate;
@@ -212,6 +218,7 @@ public class MeetingDTO {
                 ", introduction='" + introduction + '\'' +
                 ", paymentMethod='" + paymentMethod + '\'' +
                 ", meetingType='" + meetingType + '\'' +
+                ", interests='" + interests + '\'' +
                 ", scheduledDate=" + scheduledDate +
                 ", exitRestrictionTime=" + exitRestrictionTime +
                 ", recruitmentNumber=" + recruitmentNumber +

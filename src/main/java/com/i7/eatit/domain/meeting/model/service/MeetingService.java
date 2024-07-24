@@ -3,7 +3,7 @@ package com.i7.eatit.domain.meeting.model.service;
 import com.i7.eatit.domain.meeting.model.common.SearchCriteria;
 import com.i7.eatit.domain.meeting.model.dao.MeetingMapper;
 import com.i7.eatit.domain.meeting.model.dto.MeetingDTO;
-import org.apache.ibatis.annotations.Mapper;
+import com.i7.eatit.domain.tag.dto.InsertInterestRelDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,9 +23,15 @@ public class MeetingService {
         meetingMapper.registMeeting(meeting);
     }
 
+    @Transactional
+    public void createNewInterestsRel(InsertInterestRelDTO interestsRelDTO) {
+        meetingMapper.registInterests(interestsRelDTO);
+    }
+
     public List<MeetingDTO> findAllMeetings() { return meetingMapper.findAllMeetings(); }
 
     public List<MeetingDTO> searchMeetings(SearchCriteria searchCriteria) { return meetingMapper.findMeetings(searchCriteria); }
+
 //    public MeetingDTO searchMeetingById(Long id) {}
 
 }
