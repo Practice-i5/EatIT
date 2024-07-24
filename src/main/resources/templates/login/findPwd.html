@@ -1,19 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!--비밀번호 조회 후 난수로 비밀번호 변경 후 이메일로 변경된 비밀번호(난수) 알려주기-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>바말번호 초기화</title>
+    <title>비밀번호 초기화</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../static/css/login.css" th:href="@{/css/login.css}">
 </head>
 
 <body>
-<form action="/login/findPwd" method="post"> <!--조회 후 난수 비밀번호로 변경-->
+<form action="/login/findPwd" method="post" id="findPwdForm">
 
     <div class="wrap">
         <div class="login">
@@ -48,6 +46,37 @@
     </div>
 </form>
 
+<!-- 다이얼로그 추가 -->
+<div id="resultDialog" style="display:none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+    <div style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 300px; max-width: 80%; text-align: center; border-radius: 5px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <p id="dialogMessage" th:text="${message}" style="margin-bottom: 20px;"></p>
+        <button id="dialogConfirm" onclick="closeDialog()" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 3px; cursor: pointer;">확인</button>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var message = /*[[${message}]]*/ null;
+    var redirectUrl = /*[[${redirectUrl}]]*/ null;
+
+    window.onload = function() {
+        if (message) {
+            document.getElementById('dialogMessage').textContent = message;
+            var dialog = document.getElementById('resultDialog');
+            dialog.style.display = 'flex';
+            dialog.style.alignItems = 'center';
+            dialog.style.justifyContent = 'center';
+        }
+    }
+
+    function closeDialog() {
+        document.getElementById('resultDialog').style.display = 'none';
+        if (redirectUrl) {
+            window.location.href = redirectUrl;
+        }
+    }
+    /*]]>*/
+</script>
 </body>
 
 </html>
