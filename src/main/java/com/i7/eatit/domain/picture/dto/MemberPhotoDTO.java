@@ -2,7 +2,7 @@ package com.i7.eatit.domain.picture.dto;
 
 public class MemberPhotoDTO {
 
-    private int memberPhotoID;
+    private int memberPhotoId;
     private int memberId;
     private String photoPath;
     private String photoName;
@@ -10,19 +10,19 @@ public class MemberPhotoDTO {
 
     public MemberPhotoDTO(){}
 
-    public MemberPhotoDTO(int memberPhotoID, int memberId, String photoPath, String photoName) {
-        this.memberPhotoID = memberPhotoID;
+    public MemberPhotoDTO(int memberPhotoId, int memberId, String photoPath, String photoName) {
+        this.memberPhotoId = memberPhotoId;
         this.memberId = memberId;
         this.photoPath = photoPath;
         this.photoName = photoName;
     }
 
-    public int getMemberPhotoID() {
-        return memberPhotoID;
+    public int getMemberPhotoId() {
+        return memberPhotoId;
     }
 
-    public void setMemberPhotoID(int memberPhotoID) {
-        this.memberPhotoID = memberPhotoID;
+    public void setMemberPhotoId(int memberPhotoId) {
+        this.memberPhotoId = memberPhotoId;
     }
 
     public int getMemberId() {
@@ -52,7 +52,7 @@ public class MemberPhotoDTO {
     @Override
     public String toString() {
         return "MemberPhotoDTO{" +
-                "memberPhotoID=" + memberPhotoID +
+                "memberPhotoId=" + memberPhotoId +
                 ", memberId=" + memberId +
                 ", photoPath='" + photoPath + '\'' +
                 ", photoName='" + photoName + '\'' +

@@ -32,12 +32,13 @@
     </resultMap>
 
 
-    <!-- 난수 비밀번호로 변경 -->
+    <!-- 비밀번호 찾기 -->
     <resultMap id="userPasswordMap" type="string">
 
         <result property="password" column="PASSWORD"/>
 
     </resultMap>
+
 
     <!--로그인-->
 
@@ -84,7 +85,7 @@
     </select>
 
 
-    <!-- 비밀번호 변경 -->
+    <!-- 비밀번호 조회 -->
 
     <!-- id : 구문을 찾기 위해 사용될 수 있는 namespace 내 유일한 구분자.
      resultMap : 사용할 resultMap 의 id

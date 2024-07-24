@@ -13,7 +13,6 @@ public class MeetingDTO {
     private String introduction;
     private String paymentMethod;
     private String meetingType;
-    private String interests;
     private Timestamp scheduledDate;
     private Time exitRestrictionTime;
     private int recruitmentNumber;
@@ -24,10 +23,11 @@ public class MeetingDTO {
     private String status;
     private Timestamp endDate;
     private int hostMemberId;
+    private int lastId;
 
     public MeetingDTO() {}
 
-    public MeetingDTO(int meetingId, String title, String locationName, double locationLatitude, double locationLongitude, String introduction, String paymentMethod, String meetingType, String interests, Timestamp scheduledDate, Time exitRestrictionTime, int recruitmentNumber, String gender, String eligibleAge, Timestamp createdDate, String participationMethod, String status, Timestamp endDate, int hostMemberId) {
+    public MeetingDTO(int meetingId, String title, String locationName, double locationLatitude, double locationLongitude, String introduction, String paymentMethod, String meetingType, Timestamp scheduledDate, Time exitRestrictionTime, int recruitmentNumber, String gender, String eligibleAge, Timestamp createdDate, String participationMethod, String status, Timestamp endDate, int hostMemberId, int lastId) {
         this.meetingId = meetingId;
         this.title = title;
         this.locationName = locationName;
@@ -46,6 +46,7 @@ public class MeetingDTO {
         this.status = status;
         this.endDate = endDate;
         this.hostMemberId = hostMemberId;
+        this.lastId = lastId;
     }
 
     public int getMeetingId() {
@@ -111,10 +112,6 @@ public class MeetingDTO {
     public void setMeetingType(String meetingType) {
         this.meetingType = meetingType;
     }
-
-    public String getInterests() { return interests; }
-
-    public void setInterests(String interests) { this.interests = interests; }
 
     public Timestamp getScheduledDate() {
         return scheduledDate;
@@ -196,6 +193,14 @@ public class MeetingDTO {
         this.hostMemberId = hostMemberId;
     }
 
+    public int getLastId() {
+        return lastId;
+    }
+
+    public void setLastId(int lastId) {
+        this.lastId = lastId;
+    }
+
     @Override
     public String toString() {
         return "MeetingDTO{" +
@@ -207,7 +212,6 @@ public class MeetingDTO {
                 ", introduction='" + introduction + '\'' +
                 ", paymentMethod='" + paymentMethod + '\'' +
                 ", meetingType='" + meetingType + '\'' +
-                ", interests='" + interests + '\'' +
                 ", scheduledDate=" + scheduledDate +
                 ", exitRestrictionTime=" + exitRestrictionTime +
                 ", recruitmentNumber=" + recruitmentNumber +

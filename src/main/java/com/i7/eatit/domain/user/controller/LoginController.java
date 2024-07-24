@@ -1,6 +1,7 @@
 package com.i7.eatit.domain.user.controller;
 
 import com.i7.eatit.domain.user.dto.UserInfoDTO;
+import com.i7.eatit.domain.user.dto.UserPwdDTO;
 import org.springframework.ui.Model;
 import com.i7.eatit.domain.user.dto.UserLoginDTO;
 import com.i7.eatit.domain.user.service.LoginService;
@@ -52,12 +53,16 @@ public class LoginController {
         UserInfoDTO loginUser = loginService.checkUser(userLoginDTO);
 
         // 응답 확인용
-        System.out.println("loginUser = " + loginUser); // 확인용
+        System.out.println(loginUser); // 확인용
 
         if (loginUser != null) {    // 성공
+
             model.addAttribute("loginUser", loginUser);
+
             return "redirect:/login/successLogin";
+
         } else {                    // 실패
+
             return "redirect:/login/loginMain";
         }
     }
@@ -75,7 +80,6 @@ public class LoginController {
         return "redirect:/login/loginMain";
     }
 
-
     // 이메일 찾기
     @PostMapping("/findEmail")
     public String findEmail(@RequestParam String name,
@@ -87,7 +91,6 @@ public class LoginController {
         String email = loginService.findEmail(name, phoneNumber);
 
         System.out.println("email = " + email);
-
         if (email != null) {    // 이메일 조회 성공
             model.addAttribute("message", "찾은 이메일: " + email);
             model.addAttribute("redirectUrl", "/login/loginMain");
@@ -106,10 +109,12 @@ public class LoginController {
                                @RequestParam String phoneNumber,
                                Model model) {
 
+        // UserPwdDTO userPwdDTO = new UserPwdDTO();
+
         // 비밀번호 조회
         String password = loginService.findPassword(email, name, phoneNumber);
 
-        System.out.println("password = " + password); // 확인용
+        System.out.println("email = " + password);
 
         if (password != null) { // 비밀번호 재설정 성공
             model.addAttribute("message", "비밀번호가" + password + "로 변경되었습니다.");
