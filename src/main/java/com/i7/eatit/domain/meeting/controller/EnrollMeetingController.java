@@ -35,6 +35,7 @@ public class EnrollMeetingController {
         Timestamp now = new Timestamp(System.currentTimeMillis());
         meeting.setCreatedDate(now);
         meeting.setStatus("Open");
+//        meeting.setRecruitMemberNumber(0);
 //        meeting.setScheduledDate(Timestamp.valueOf(scheduledDate));
 //        meeting.setEndDate(Timestamp.valueOf(endDate));
         meeting.setScheduledDate(now);
