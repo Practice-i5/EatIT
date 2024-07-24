@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,15 +23,20 @@
           <ul class="chat-sidebar-menu">
             <li class="menu-group-2">
               <!------------ 그룹 채팅 버튼 ------------>
-              <a
-                href="#"
-                data-title="#groupChat"
-                data-target="#groupChat"
-              >
-                <i class="ri-group-line"></i> <br /><span class="menu-text"
-                  >단톡방</span
-                >
-              </a>
+              <ul th:each="groupChat : ${groupChats}">
+                <li>
+                  <a href="#" th:data-conversation="'#group-conversation-' + ${groupChat.id}">
+                                    <span class="content-message-info">
+                                        <span class="content-message-name" th:text="${groupChat.name}">개발자 그룹</span>
+                                        <span class="content-message-text">전체 개발자 모임</span>
+                                    </span>
+                    <span class="content-message-more">
+                                        <span class="content-message-unread">3</span>
+                                        <span class="content-message-time">16:20</span>
+                                    </span>
+                  </a>
+                </li>
+              </ul>
             </li>
             <li class="chat-sidebar-profile">
               <!------------ 왼쪽 하단 프로필 버튼 ------------>
@@ -76,36 +81,25 @@
               <ul class="content-messages-list">
                 <li class="content-message-title">
                     <span>그룹 채팅</span
-                    ><!-------------------- 그룹 채팅  ---------------------->
+                    >
                 </li>
-                <li>
-                  <!-------------------- 첫 번째 그룹 채팅 ---------------------->
-                  <a href="#" data-conversation="#group-conversation-1">
-                    <img
-                            class="content-message-image"
-                            src="https://cdn.pixabay.com/photo/2015/10/12/15/16/meeting-984032_1280.jpg"
-                            alt="개발자 그룹"
-                    />
-                    <span class="content-message-info">
-                        <span class="content-message-name">개발자 그룹</span>
-                        <span class="content-message-text"
-                        >전체 개발자 모임</span
-                        >
-                      </span>
-                    <span class="content-message-more">
-                        <span class="content-message-unread">3</span>
-                        <span class="content-message-time">16:20</span>
-                      </span>
-                  </a>
-                </li>
+                <ul th:each="groupChat : ${groupChats}">
+                  <li>
+                    <a href="#" th:data-conversation="'#group-conversation-' + ${groupChat.id}">
+                                        <span class="content-message-info">
+                                            <span class="content-message-name" th:text="${groupChat.name}">개발자 그룹</span>
+                                            <span class="content-message-text">전체 개발자 모임</span>
+                                        </span>
+                      <span class="content-message-more">
+                                            <span class="content-message-unread">3</span>
+                                            <span class="content-message-time">16:20</span>
+                                        </span>
+                    </a>
+                  </li>
+                </ul>
                 <li>
                   <a href="#" data-conversation="#group-conversation-2"
                   ><!-------------------- 두 번째 그룹 채팅  ---------------------->
-                    <img
-                            class="content-message-image"
-                            src="https://cdn.pixabay.com/photo/2016/11/08/05/26/morning-1804597_1280.jpg"
-                            alt="커피 애호가 그룹"
-                    />
                     <span class="content-message-info">
                         <span class="content-message-name">커피 애호가</span>
                         <span class="content-message-text">커피와 개발</span>
@@ -126,8 +120,8 @@
             <p>Select chat and view conversation!</p>
           </div>
 
+          <!-------------------- 첫 번째 그룹 대화 ---------------------->
           <div class="conversation" id="group-conversation-1">
-            <!-------------------- 첫 번째 그룹 대화 ---------------------->
             <div class="conversation-top">
               <button type="button" class="conversation-back">
                 <i class="ri-arrow-left-line"></i>
@@ -176,128 +170,6 @@
               </form>
             <!--------------------  ---------------------->
           </div>
-          <!--------------------  ---------------------->
-<!--          <div class="conversation" id="group-conversation-2">-->
-<!--            &lt;!&ndash;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; 두 번째 그룹 대화 &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
-<!--            <div class="conversation-top">-->
-<!--              <button type="button" class="conversation-back">-->
-<!--                <i class="ri-arrow-left-line"></i>-->
-<!--              </button>-->
-<!--              <div class="conversation-user">-->
-<!--                <img-->
-<!--                        class="conversation-user-image"-->
-<!--                        src="https://cdn.pixabay.com/photo/2016/11/08/05/26/morning-1804597_1280.jpg"-->
-<!--                        alt="커피 애호가"-->
-<!--                />-->
-<!--                <div>-->
-<!--                  <div class="conversation-user-name">커피 애호가</div>-->
-<!--                  <div class="conversation-user-status online">online</div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="conversation-buttons">-->
-<!--                <button type="button">-->
-<!--                  <i class="ri-information-line"></i>-->
-<!--                </button>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="conversation-main">-->
-<!--              <ul class="conversation-wrapper">-->
-<!--                <div class="coversation-divider"><span>Today</span></div>-->
-<!--                <li class="conversation-item me">-->
-<!--                  <div class="conversation-item-side">-->
-<!--                    <img-->
-<!--                            class="conversation-item-image"-->
-<!--                            src="https://cdn.pixabay.com/photo/2016/11/08/05/26/morning-1804597_1280.jpg"-->
-<!--                            alt=""-->
-<!--                    />-->
-<!--                  </div>-->
-<!--                  <div class="conversation-item-content">-->
-<!--                    <div class="conversation-item-wrapper">-->
-<!--                      &lt;!&ndash; 대화 하나 &ndash;&gt;-->
-<!--                      <div class="conversation-item-box">-->
-<!--                        <div class="conversation-item-text">-->
-<!--                          <p>-->
-<!--                            안녕하세요! 커피 애호가 그룹에 오신 것을-->
-<!--                            환영합니다!-->
-<!--                          </p>-->
-<!--                          <div class="conversation-item-time">12:30</div>-->
-<!--                        </div>-->
-<!--                        <div class="conversation-item-dropdown">-->
-<!--                          <button-->
-<!--                                  type="button"-->
-<!--                                  class="conversation-item-dropdown-toggle"-->
-<!--                          >-->
-<!--                            <i class="ri-more-2-line"></i>-->
-<!--                          </button>-->
-<!--                          <ul class="conversation-item-dropdown-list">-->
-<!--                            <li>-->
-<!--                              <a href="#"-->
-<!--                              ><i class="ri-share-forward-line"></i>-->
-<!--                                Forward</a-->
-<!--                              >-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                              <a href="#"-->
-<!--                              ><i class="ri-delete-bin-line"></i> Delete</a-->
-<!--                              >-->
-<!--                            </li>-->
-<!--                          </ul>-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                    <div class="conversation-item-wrapper">-->
-<!--                      &lt;!&ndash; 대화 하나 &ndash;&gt;-->
-<!--                      <div class="conversation-item-box">-->
-<!--                        <div class="conversation-item-text">-->
-<!--                          <p>오늘 새로운 커피 레시피를 공유하고 싶습니다.</p>-->
-<!--                          <div class="conversation-item-time">12:35</div>-->
-<!--                        </div>-->
-<!--                        <div class="conversation-item-dropdown">-->
-<!--                          <button-->
-<!--                                  type="button"-->
-<!--                                  class="conversation-item-dropdown-toggle"-->
-<!--                          >-->
-<!--                            <i class="ri-more-2-line"></i>-->
-<!--                          </button>-->
-<!--                          <ul class="conversation-item-dropdown-list">-->
-<!--                            <li>-->
-<!--                              <a href="#"-->
-<!--                              ><i class="ri-share-forward-line"></i>-->
-<!--                                Forward</a-->
-<!--                              >-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                              <a href="#"-->
-<!--                              ><i class="ri-delete-bin-line"></i> Delete</a-->
-<!--                              >-->
-<!--                            </li>-->
-<!--                          </ul>-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </li>-->
-<!--              </ul>-->
-<!--            </div>-->
-<!--            <div class="conversation-form">-->
-<!--              <button type="button" class="conversation-form-button">-->
-<!--                <i class="ri-emotion-line"></i>-->
-<!--              </button>-->
-<!--              <div class="conversation-form-group">-->
-<!--                  <textarea-->
-<!--                          class="conversation-form-input"-->
-<!--                          rows="1"-->
-<!--                          placeholder="Type here..."-->
-<!--                  ></textarea>-->
-<!--              </div>-->
-<!--              <button-->
-<!--                      type="button"-->
-<!--                      class="conversation-form-button conversation-form-submit"-->
-<!--              >-->
-<!--                <i class="ri-send-plane-2-line"></i>-->
-<!--              </button>-->
-<!--            </div>-->
-<!--          </div>-->
         </div>
         <!-- end: 그룹 채팅 Conversation -->
         <!-- end: Content -->
@@ -305,6 +177,7 @@
     </section>
     <!-- end: Chat -->
 
-    <script src="/js/chat/chat.js"></script>
+    <script th:src="@{/js/chat/chat.js}"></script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
   </body>
 </html>

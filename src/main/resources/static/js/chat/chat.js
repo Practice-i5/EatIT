@@ -1,8 +1,8 @@
-const chatNamespace = io("/chat", {
-    auth: {
-        token: 123456,
-    },
-});
+// const chatNamespace = io("/chatGroup/", {
+//     auth: {
+//         token: 123456,
+//     },
+// });
 
 
 // Query DOM
@@ -184,3 +184,6 @@ chatForm.addEventListener("submit", (e) => {
         messageInput.value = "";
     }
 });
+
+//*******************************************************로그인 이벤트 발생
+chatNamespace.emit("login", { nickname, roomNumber });
