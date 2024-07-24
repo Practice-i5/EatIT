@@ -17,6 +17,7 @@ public class JoinService {
     // 회원가입
     @Transactional
     public void UserSignUp(UserInfoDTO userInfoDTO) {
+        System.out.println(userInfoDTO);
         joinMapper.userInsert(userInfoDTO);
     }
 }

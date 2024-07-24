@@ -58,6 +58,8 @@
                 , CREATED_DATE
                 , WITHDRAWAL_STATUS
                 , REPORTED_COUNT
+                , GENDER
+                , AGE
         from
                 TBL_MEMBER
         where
