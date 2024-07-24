@@ -8,10 +8,11 @@
         <id property="alarmId" column="alarm_id"/>
         <result property="alarmDetail" column="alarm_detail"/>
         <result property="alarmTime" column="alarm_date"/>
-        <result property="member_id" column="member_id"/>
+        <result property="memberId" column="member_id"/>
         <result property="participationId" column="participation_id"/>
         <result property="alarmStatus" column="alarm_status"/>
         <result property="alarmChecked" column="alarm_checked"/>
+        <result property="meetingId" column="meeting_id"/>
     </resultMap>
 
     <select id="findAllAlarm" resultMap="alarmAllResultMap">
@@ -23,9 +24,36 @@
             , participation_id
             , alarm_status
             , alarm_checked
+            , meeting_id
         from tbl_alarm
         where member_id = #{ memberId }
         order by alarm_date
     </select>
 
+    <insert id="createNewAlarms" parameterType="com.i7.eatit.domain.alarm.dto.AlarmDTO"
+            useGeneratedKeys="true" keyProperty="alarmId">
+        insert into tbl_alarm
+        (
+              alarm_id
+            , alarm_detail
+            , alarm_date
+            , member_id
+            , participation_id
+            , alarm_status
+            , alarm_checked
+            , meeting_id
+        )
+        values
+        (
+              #{ alarmId }
+            , #{ alarmDetail }
+            , #{ alarmTime }
+            , #{ memberId }
+            , #{ participationId }
+            , #{ alarmStatus }
+            , #{ alarmChecked }
+            , #{ meetingId }
+        )
+
+    </insert>
 </mapper>

@@ -9,4 +9,6 @@ import java.util.List;
 @Mapper
 public interface AlarmMapper {
     List<AlarmDTO> findAllAlarm(@Param("memberId") int member_id);
+
+    void createNewAlarm(AlarmDTO newAlarm);
 }

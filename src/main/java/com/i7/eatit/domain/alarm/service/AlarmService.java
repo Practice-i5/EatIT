@@ -37,4 +37,14 @@ public class AlarmService {
         return alarmCount > 0;
 //        return false;
     }
+
+    public void createNewAlarm(AlarmDTO newAlarm){
+        alarmMapper.createNewAlarm(newAlarm);
+    }
+
+
+
+
+
+
 }

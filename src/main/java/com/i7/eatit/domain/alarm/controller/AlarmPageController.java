@@ -61,6 +61,13 @@ public class AlarmPageController {
         return "/alarm/alarm";
     }
 
+    //생성 테스트
+    public void createNewAlarm(AlarmDTO alarmDTO) {
+        alarmService.createNewAlarm(alarmDTO);
+    }
+
+
+
 
     static class FollowAlarm{
         String followname;
