@@ -13,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -33,13 +35,13 @@ public class EnrollMeetingController {
     @PostMapping("enroll-meeting")
     public String createNewMeeting(MeetingDTO meeting, @RequestParam("file") MultipartFile request, @RequestParam("inputScheduledDate") String scheduledDate, @RequestParam("inputEndDate") String endDate, RedirectAttributes rttr, @RequestParam("interestsConditions") List<String> interestsConditions) {
         Timestamp now = new Timestamp(System.currentTimeMillis());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        LocalDateTime reformScheduledTime = LocalDateTime.parse(scheduledDate, formatter);
+        LocalDateTime reformEndTime = LocalDateTime.parse(endDate, formatter);
         meeting.setCreatedDate(now);
         meeting.setStatus("Open");
-//        meeting.setRecruitMemberNumber(0);
-//        meeting.setScheduledDate(Timestamp.valueOf(scheduledDate));
-//        meeting.setEndDate(Timestamp.valueOf(endDate));
-        meeting.setScheduledDate(now);
-        meeting.setEndDate(now);
+        meeting.setScheduledDate(Timestamp.valueOf(reformScheduledTime));
+        meeting.setEndDate(Timestamp.valueOf(reformEndTime));
 
         meetingService.createNewMeeting(meeting);
 
