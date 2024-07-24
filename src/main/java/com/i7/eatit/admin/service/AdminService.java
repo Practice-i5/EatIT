@@ -47,7 +47,7 @@ public class AdminService {
         return true;
     }
 
-    public String getUuidCookie(HttpServletRequest request) {
+    public String getUUIDCookie(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
