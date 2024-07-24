@@ -21,25 +21,11 @@
             <i class="ri-chat-1-fill"></i>
           </a>
           <ul class="chat-sidebar-menu">
-            <li class="menu-group-1">
-              <!------------ 1대1 채팅 버튼 ------------>
-              <a
-                href="#"
-                data-title="#personalChat"
-                class="chat-toggle"
-                data-target="#personalChat"
-              >
-                <i class="ri-chat-3-line"></i> <br /><span class="menu-text"
-                  >1:1채팅</span
-                >
-              </a>
-            </li>
             <li class="menu-group-2">
               <!------------ 그룹 채팅 버튼 ------------>
               <a
                 href="#"
                 data-title="#groupChat"
-                class="chat-toggle"
                 data-target="#groupChat"
               >
                 <i class="ri-group-line"></i> <br /><span class="menu-text"
@@ -69,527 +55,8 @@
         </aside>
         <!-- end: Sidebar -->
         <!-- start: Content -->
-        <!-------------------------------------------- start: 1on1 Conversation side -------------------------------------------->
-        <div class="chat-content" id="personalChat" style="display: block;">
-          <div class="content-sidebar">
-            <div class="content-sidebar-title">Chats</div>
-            <!---------- 제목 ------------>
-            <form action="" class="content-sidebar-form">
-              <!---------- 검색창 ------------>
-              <input
-                type="search"
-                class="content-sidebar-input"
-                placeholder="Search..."
-              />
-              <button type="submit" class="content-sidebar-submit">
-                <i class="ri-search-line"></i>
-              </button>
-            </form>
-            <!--------------------  ---------------------->
-            <div class="content-messages">
-              <ul class="content-messages-list">
-                <li class="content-message-title">
-                  <span>1:1 채팅</span
-                  >
-                </li>
-                <li><!-------------------- 1대1 채팅  ---------------------->
-                  <!-------------------- 최상단 강아지1 채팅 ---------------------->
-                  <a href="#" data-conversation="#conversation-1">
-                    <img
-                      class="content-message-image"
-                      src="https://cdn.pixabay.com/photo/2020/06/30/22/34/dog-5357794_1280.jpg"
-                      alt="모임장 강아지1"
-                    />
-                    <span class="content-message-info">
-                      <span class="content-message-name">강아지1</span>
-                      <span class="content-message-text"
-                        >백엔드 개발자 모임</span
-                      >
-                    </span>
-                    <span class="content-message-more">
-                      <span class="content-message-unread">5</span>
-                      <span class="content-message-time">17:47</span>
-                    </span>
-                  </a>
-                </li>
-                <!--------------------  ---------------------->
-                <li>
-                  <a href="#" data-conversation="#conversation-2"
-                    ><!-------------------- 2번째 고양이 채팅  ---------------------->
-                    <img
-                      class="content-message-image"
-                      src="https://cdn.pixabay.com/photo/2016/01/20/13/05/cat-1151519_1280.jpg"
-                      alt=""
-                    />
-                    <span class="content-message-info">
-                      <span class="content-message-name">고양이</span>
-                      <span class="content-message-text"
-                        >프론트엔드 개발자 모임</span
-                      >
-                    </span>
-                    <span class="content-message-more">
-                      <span class="content-message-time">12:30</span>
-                    </span>
-                  </a>
-                </li>
-                <!--------------------  ---------------------->
-              </ul>
-            </div>
-          </div>
-          <!-- end: Content side -->
-
-          <!-- start: Conversation -->
-          <div class="conversation conversation-default active">
-            <i class="ri-chat-3-line"></i>
-            <p>Select chat and view conversation!</p>
-          </div>
-
-          <div class="conversation" id="conversation-1">
-            <!-------------------- 강아지1대화  ---------------------->
-            <div class="conversation-top">
-              <button type="button" class="conversation-back">
-                <i class="ri-arrow-left-line"></i>
-              </button>
-              <div class="conversation-user">
-                <img
-                  class="conversation-user-image"
-                  src="https://cdn.pixabay.com/photo/2020/06/30/22/34/dog-5357794_1280.jpg"
-                  alt="모임장 강아지"
-                />
-                <div>
-                  <div class="conversation-user-name">강아지</div>
-                  <!--대화상대이름-->
-                  <div class="conversation-user-status online">online</div>
-                  <!--접속유무-->
-                </div>
-              </div>
-              <div class="conversation-buttons">
-                <button type="button">
-                  <i class="ri-information-line"></i>
-                </button>
-              </div>
-            </div>
-            <div class="conversation-main">
-              <ul class="conversation-wrapper">
-                <div class="coversation-divider"><span>Today</span></div>
-                <!--대화 날짜-->
-                <li class="conversation-item me">
-                  <div class="conversation-item-side">
-                    <img
-                      class="conversation-item-image"
-                      src="https://cdn.pixabay.com/photo/2020/06/30/22/34/dog-5357794_1280.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="conversation-item-content">
-                    <div class="conversation-item-wrapper">
-                      <div class="conversation-item-box">
-                        <div class="conversation-item-text">
-                          <p>안녕하세요! ooo 개발자 모임 모임장입니다!</p>
-                          <div class="conversation-item-time">12:30</div>
-                        </div>
-                        <div class="conversation-item-dropdown">
-                          <button
-                            type="button"
-                            class="conversation-item-dropdown-toggle"
-                          >
-                            <i class="ri-more-2-line"></i>
-                          </button>
-                          <ul class="conversation-item-dropdown-list">
-                            <li>
-                              <a href="#"
-                                ><i class="ri-share-forward-line"></i>
-                                Forward</a
-                              >
-                            </li>
-                            <li>
-                              <a href="#"
-                                ><i class="ri-delete-bin-line"></i> Delete</a
-                              >
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="conversation-item-wrapper">
-                      <div class="conversation-item-box">
-                        <div class="conversation-item-text">
-                          <p>저희 모임에 합류하려고 연락 주신걸까요?</p>
-                          <div class="conversation-item-time">12:30</div>
-                        </div>
-                        <div class="conversation-item-dropdown">
-                          <button
-                            type="button"
-                            class="conversation-item-dropdown-toggle"
-                          >
-                            <i class="ri-more-2-line"></i>
-                          </button>
-                          <ul class="conversation-item-dropdown-list">
-                            <li>
-                              <a href="#"
-                                ><i class="ri-share-forward-line"></i>
-                                Forward</a
-                              >
-                            </li>
-                            <li>
-                              <a href="#"
-                                ><i class="ri-delete-bin-line"></i> Delete</a
-                              >
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="conversation-item">
-                  <div class="conversation-item-side">
-                    <img
-                      class="conversation-item-image"
-                      src="https://cdn.pixabay.com/photo/2024/03/14/08/52/pug-8632718_1280.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="conversation-item-content">
-                    <div class="conversation-item-wrapper">
-                      <div class="conversation-item-box">
-                        <div class="conversation-item-text">
-                          <p>
-                            네~! 안녕하세요! 저도 모임에 참여할 수 있을까요?
-                          </p>
-                          <div class="conversation-item-time">12:35</div>
-                        </div>
-                        <div class="conversation-item-dropdown">
-                          <button
-                            type="button"
-                            class="conversation-item-dropdown-toggle"
-                          >
-                            <i class="ri-more-2-line"></i>
-                          </button>
-                          <ul class="conversation-item-dropdown-list">
-                            <li>
-                              <a href="#"
-                                ><i class="ri-share-forward-line"></i>
-                                Forward</a
-                              >
-                            </li>
-                            <li>
-                              <a href="#"
-                                ><i class="ri-delete-bin-line"></i> Delete</a
-                              >
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="conversation-item-wrapper">
-                      <div class="conversation-item-box">
-                        <div class="conversation-item-text">
-                          <p>
-                            보니까 판교 스타벅스에서 만나는 것 같은데, 저도 근처
-                            회사에서 일하고 있어서요!
-                          </p>
-                          <div class="conversation-item-time">12:30</div>
-                        </div>
-                        <div class="conversation-item-dropdown">
-                          <button
-                            type="button"
-                            class="conversation-item-dropdown-toggle"
-                          >
-                            <i class="ri-more-2-line"></i>
-                          </button>
-                          <ul class="conversation-item-dropdown-list">
-                            <li>
-                              <a href="#"
-                                ><i class="ri-share-forward-line"></i>
-                                Forward</a
-                              >
-                            </li>
-                            <li>
-                              <a href="#"
-                                ><i class="ri-delete-bin-line"></i> Delete</a
-                              >
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="conversation-item-wrapper">
-                      <div class="conversation-item-box">
-                        <div class="conversation-item-text">
-                          <p>
-                            저는 현재 네이버 개발자이고, 경력 1년차 신입입니다!
-                            시니어 개발자분들과 이야기 나누고 싶습니다!
-                          </p>
-                          <div class="conversation-item-time">12:30</div>
-                        </div>
-                        <div class="conversation-item-dropdown">
-                          <button
-                            type="button"
-                            class="conversation-item-dropdown-toggle"
-                          >
-                            <i class="ri-more-2-line"></i>
-                          </button>
-                          <ul class="conversation-item-dropdown-list">
-                            <li>
-                              <a href="#"
-                                ><i class="ri-share-forward-line"></i>
-                                Forward</a
-                              >
-                            </li>
-                            <li>
-                              <a href="#"
-                                ><i class="ri-delete-bin-line"></i> Delete</a
-                              >
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="conversation-form">
-              <!-------------------- 텍스트 보내는 창 ---------------------->
-              <button type="button" class="conversation-form-button">
-                <i class="ri-emotion-line"></i>
-              </button>
-              <div class="conversation-form-group">
-                <textarea
-                  class="conversation-form-input"
-                  rows="1"
-                  placeholder="Type here..."
-                ></textarea>
-              </div>
-              <button
-                type="button"
-                class="conversation-form-button conversation-form-submit"
-              >
-                <i class="ri-send-plane-2-line"></i>
-              </button>
-            </div>
-            <!--------------------  ---------------------->
-          </div>
-          <!--------------------  ---------------------->
-          <div class="conversation" id="conversation-2">
-            <!-------------------- 고양이 대화 ---------------------->
-            <div class="conversation-top">
-              <button type="button" class="conversation-back">
-                <i class="ri-arrow-left-line"></i>
-              </button>
-              <div class="conversation-user">
-                <img
-                  class="conversation-user-image"
-                  src="https://cdn.pixabay.com/photo/2024/03/14/08/52/pug-8632718_1280.jpg"
-                  alt=""
-                />
-                <div>
-                  <div class="conversation-user-name">고양이</div>
-                  <div class="conversation-user-status online">online</div>
-                </div>
-              </div>
-              <div class="conversation-buttons">
-                <button type="button">
-                  <i class="ri-information-line"></i>
-                </button>
-              </div>
-            </div>
-            <div class="conversation-main">
-              <ul class="conversation-wrapper">
-                <div class="coversation-divider"><span>Today</span></div>
-                <li class="conversation-item me">
-                  <div class="conversation-item-side">
-                    <img
-                      class="conversation-item-image"
-                      src="https://cdn.pixabay.com/photo/2024/03/14/08/52/pug-8632718_1280.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="conversation-item-content">
-                    <div class="conversation-item-wrapper">
-                      <!-- 대화 하나 -->
-                      <div class="conversation-item-box">
-                        <div class="conversation-item-text">
-                          <p>
-                            Lorem ipsum dolor sit, amet consectetur adipisicing
-                            elit.
-                          </p>
-                          <div class="conversation-item-time">12:30</div>
-                        </div>
-                        <div class="conversation-item-dropdown">
-                          <button
-                            type="button"
-                            class="conversation-item-dropdown-toggle"
-                          >
-                            <i class="ri-more-2-line"></i>
-                          </button>
-                          <ul class="conversation-item-dropdown-list">
-                            <li>
-                              <a href="#"
-                                ><i class="ri-share-forward-line"></i>
-                                Forward</a
-                              >
-                            </li>
-                            <li>
-                              <a href="#"
-                                ><i class="ri-delete-bin-line"></i> Delete</a
-                              >
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="conversation-item-wrapper">
-                      <!-- 대화 하나 -->
-                      <div class="conversation-item-box">
-                        <div class="conversation-item-text">
-                          <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Eaque, tenetur!
-                          </p>
-                          <div class="conversation-item-time">12:30</div>
-                        </div>
-                        <div class="conversation-item-dropdown">
-                          <button
-                            type="button"
-                            class="conversation-item-dropdown-toggle"
-                          >
-                            <i class="ri-more-2-line"></i>
-                          </button>
-                          <ul class="conversation-item-dropdown-list">
-                            <li>
-                              <a href="#"
-                                ><i class="ri-share-forward-line"></i>
-                                Forward</a
-                              >
-                            </li>
-                            <li>
-                              <a href="#"
-                                ><i class="ri-delete-bin-line"></i> Delete</a
-                              >
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="conversation-item">
-                  <div class="conversation-item-side">
-                    <img
-                      class="conversation-item-image"
-                      src="https://cdn.pixabay.com/photo/2024/03/14/08/52/pug-8632718_1280.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="conversation-item-content">
-                    <div class="conversation-item-wrapper">
-                      <!-- 대화 하나 -->
-                      <div class="conversation-item-box">
-                        <div class="conversation-item-text">
-                          <p>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing
-                            elit.
-                          </p>
-                          <div class="conversation-item-time">12:30</div>
-                        </div>
-                        <div class="conversation-item-dropdown">
-                          <button
-                            type="button"
-                            class="conversation-item-dropdown-toggle"
-                          >
-                            <i class="ri-more-2-line"></i>
-                          </button>
-                          <ul class="conversation-item-dropdown-list">
-                            <li>
-                              <a href="#"
-                                ><i class="ri-share-forward-line"></i>
-                                Forward</a
-                              >
-                            </li>
-                            <li>
-                              <a href="#"
-                                ><i class="ri-delete-bin-line"></i> Delete</a
-                              >
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="conversation-item me">
-                  <div class="conversation-item-side">
-                    <img
-                      class="conversation-item-image"
-                      src="https://cdn.pixabay.com/photo/2024/03/14/08/52/pug-8632718_1280.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="conversation-item-content">
-                    <div class="conversation-item-wrapper">
-                      <!-- 대화 하나 -->
-                      <div class="conversation-item-box">
-                        <div class="conversation-item-text">
-                          <p>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing
-                            elit.
-                          </p>
-                          <div class="conversation-item-time">12:30</div>
-                        </div>
-                        <div class="conversation-item-dropdown">
-                          <button
-                            type="button"
-                            class="conversation-item-dropdown-toggle"
-                          >
-                            <i class="ri-more-2-line"></i>
-                          </button>
-                          <ul class="conversation-item-dropdown-list">
-                            <li>
-                              <a href="#"
-                                ><i class="ri-share-forward-line"></i>
-                                Forward</a
-                              >
-                            </li>
-                            <li>
-                              <a href="#"
-                                ><i class="ri-delete-bin-line"></i> Delete</a
-                              >
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <!--  -->
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="conversation-form">
-              <button type="button" class="conversation-form-button">
-                <i class="ri-emotion-line"></i>
-              </button>
-              <div class="conversation-form-group">
-                <textarea
-                  class="conversation-form-input"
-                  rows="1"
-                  placeholder="Type here..."
-                ></textarea>
-              </div>
-              <button
-                type="button"
-                class="conversation-form-button conversation-form-submit"
-              >
-                <i class="ri-send-plane-2-line"></i>
-              </button>
-            </div>
-          </div>
-          <!--------------------  ---------------------->
-          <!-- end: 1on1 Conversation -->
-        </div>
         <!---------------------------------------- 그룹 채팅 Content ---------------------------------------->
-        <div class="chat-content" id="groupChat" style="display: none;">
+        <div class="chat-content" id="groupChat" style="display: block;">
           <!-- id를 'groupChat'으로 설정 -->
           <div class="content-sidebar">
             <div class="content-sidebar-title">Chats</div>
@@ -666,16 +133,9 @@
                 <i class="ri-arrow-left-line"></i>
               </button>
               <div class="conversation-user">
-                <img
-                        class="conversation-user-image"
-                        src="https://cdn.pixabay.com/photo/2015/10/12/15/16/meeting-984032_1280.jpg"
-                        alt="개발자 그룹"
-                />
                 <div>
                   <div class="conversation-user-name">개발자 그룹</div>
                   <!--대화상대이름-->
-                  <div class="conversation-user-status online">online</div>
-                  <!--접속유무-->
                 </div>
               </div>
               <div class="conversation-buttons">
@@ -686,224 +146,158 @@
             </div>
             <div class="conversation-main">
               <ul class="conversation-wrapper">
-                <div class="coversation-divider"><span>Today</span></div>
                 <!--대화 날짜-->
+                <div class="coversation-divider"><span>Today</span></div>
                 <li class="conversation-item me">
-                  <div class="conversation-item-side">
-                    <img
-                            class="conversation-item-image"
-                            src="https://cdn.pixabay.com/photo/2015/10/12/15/16/meeting-984032_1280.jpg"
-                            alt=""
-                    />
-                  </div>
-                  <div class="conversation-item-content">
-                    <div class="conversation-item-wrapper">
-                      <div class="conversation-item-box">
-                        <div class="conversation-item-text">
-                          <p>
-                            안녕하세요! 개발자 그룹에 오신 것을 환영합니다!
-                          </p>
-                          <div class="conversation-item-time">12:30</div>
-                        </div>
-                        <div class="conversation-item-dropdown">
-                          <button
-                                  type="button"
-                                  class="conversation-item-dropdown-toggle"
-                          >
-                            <i class="ri-more-2-line"></i>
-                          </button>
-                          <ul class="conversation-item-dropdown-list">
-                            <li>
-                              <a href="#"
-                              ><i class="ri-share-forward-line"></i>
-                                Forward</a
-                              >
-                            </li>
-                            <li>
-                              <a href="#"
-                              ><i class="ri-delete-bin-line"></i> Delete</a
-                              >
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="conversation-item-wrapper">
-                      <div class="conversation-item-box">
-                        <div class="conversation-item-text">
-                          <p>새로운 프로젝트에 대해 이야기하고 싶습니다.</p>
-                          <div class="conversation-item-time">12:35</div>
-                        </div>
-                        <div class="conversation-item-dropdown">
-                          <button
-                                  type="button"
-                                  class="conversation-item-dropdown-toggle"
-                          >
-                            <i class="ri-more-2-line"></i>
-                          </button>
-                          <ul class="conversation-item-dropdown-list">
-                            <li>
-                              <a href="#"
-                              ><i class="ri-share-forward-line"></i>
-                                Forward</a
-                              >
-                            </li>
-                            <li>
-                              <a href="#"
-                              ><i class="ri-delete-bin-line"></i> Delete</a
-                              >
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <!---------------------------- 대화창 ------------------------------>
+                  <ul id="chat-box" class="conversation-item-content">
+                  </ul>
+                  <div id="feedback"></div>
                 </li>
               </ul>
             </div>
-            <div class="conversation-form">
+              <form id="chatForm" class="conversation-form">
               <!-------------------- 텍스트 보내는 창 ---------------------->
-              <button type="button" class="conversation-form-button">
-                <i class="ri-emotion-line"></i>
-              </button>
               <div class="conversation-form-group">
-                  <textarea
+                  <input
+                          type="text"
+                          name="message"
+                          id="messageInput"
                           class="conversation-form-input"
-                          rows="1"
                           placeholder="Type here..."
-                  ></textarea>
+                  >
               </div>
               <button
-                      type="button"
+                      type="submit"
                       class="conversation-form-button conversation-form-submit"
               >
                 <i class="ri-send-plane-2-line"></i>
               </button>
-            </div>
+              </form>
             <!--------------------  ---------------------->
           </div>
           <!--------------------  ---------------------->
-          <div class="conversation" id="group-conversation-2">
-            <!-------------------- 두 번째 그룹 대화 ---------------------->
-            <div class="conversation-top">
-              <button type="button" class="conversation-back">
-                <i class="ri-arrow-left-line"></i>
-              </button>
-              <div class="conversation-user">
-                <img
-                        class="conversation-user-image"
-                        src="https://cdn.pixabay.com/photo/2016/11/08/05/26/morning-1804597_1280.jpg"
-                        alt="커피 애호가"
-                />
-                <div>
-                  <div class="conversation-user-name">커피 애호가</div>
-                  <div class="conversation-user-status online">online</div>
-                </div>
-              </div>
-              <div class="conversation-buttons">
-                <button type="button">
-                  <i class="ri-information-line"></i>
-                </button>
-              </div>
-            </div>
-            <div class="conversation-main">
-              <ul class="conversation-wrapper">
-                <div class="coversation-divider"><span>Today</span></div>
-                <li class="conversation-item me">
-                  <div class="conversation-item-side">
-                    <img
-                            class="conversation-item-image"
-                            src="https://cdn.pixabay.com/photo/2016/11/08/05/26/morning-1804597_1280.jpg"
-                            alt=""
-                    />
-                  </div>
-                  <div class="conversation-item-content">
-                    <div class="conversation-item-wrapper">
-                      <!-- 대화 하나 -->
-                      <div class="conversation-item-box">
-                        <div class="conversation-item-text">
-                          <p>
-                            안녕하세요! 커피 애호가 그룹에 오신 것을
-                            환영합니다!
-                          </p>
-                          <div class="conversation-item-time">12:30</div>
-                        </div>
-                        <div class="conversation-item-dropdown">
-                          <button
-                                  type="button"
-                                  class="conversation-item-dropdown-toggle"
-                          >
-                            <i class="ri-more-2-line"></i>
-                          </button>
-                          <ul class="conversation-item-dropdown-list">
-                            <li>
-                              <a href="#"
-                              ><i class="ri-share-forward-line"></i>
-                                Forward</a
-                              >
-                            </li>
-                            <li>
-                              <a href="#"
-                              ><i class="ri-delete-bin-line"></i> Delete</a
-                              >
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="conversation-item-wrapper">
-                      <!-- 대화 하나 -->
-                      <div class="conversation-item-box">
-                        <div class="conversation-item-text">
-                          <p>오늘 새로운 커피 레시피를 공유하고 싶습니다.</p>
-                          <div class="conversation-item-time">12:35</div>
-                        </div>
-                        <div class="conversation-item-dropdown">
-                          <button
-                                  type="button"
-                                  class="conversation-item-dropdown-toggle"
-                          >
-                            <i class="ri-more-2-line"></i>
-                          </button>
-                          <ul class="conversation-item-dropdown-list">
-                            <li>
-                              <a href="#"
-                              ><i class="ri-share-forward-line"></i>
-                                Forward</a
-                              >
-                            </li>
-                            <li>
-                              <a href="#"
-                              ><i class="ri-delete-bin-line"></i> Delete</a
-                              >
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="conversation-form">
-              <button type="button" class="conversation-form-button">
-                <i class="ri-emotion-line"></i>
-              </button>
-              <div class="conversation-form-group">
-                  <textarea
-                          class="conversation-form-input"
-                          rows="1"
-                          placeholder="Type here..."
-                  ></textarea>
-              </div>
-              <button
-                      type="button"
-                      class="conversation-form-button conversation-form-submit"
-              >
-                <i class="ri-send-plane-2-line"></i>
-              </button>
-            </div>
-          </div>
+<!--          <div class="conversation" id="group-conversation-2">-->
+<!--            &lt;!&ndash;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; 두 번째 그룹 대화 &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
+<!--            <div class="conversation-top">-->
+<!--              <button type="button" class="conversation-back">-->
+<!--                <i class="ri-arrow-left-line"></i>-->
+<!--              </button>-->
+<!--              <div class="conversation-user">-->
+<!--                <img-->
+<!--                        class="conversation-user-image"-->
+<!--                        src="https://cdn.pixabay.com/photo/2016/11/08/05/26/morning-1804597_1280.jpg"-->
+<!--                        alt="커피 애호가"-->
+<!--                />-->
+<!--                <div>-->
+<!--                  <div class="conversation-user-name">커피 애호가</div>-->
+<!--                  <div class="conversation-user-status online">online</div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="conversation-buttons">-->
+<!--                <button type="button">-->
+<!--                  <i class="ri-information-line"></i>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="conversation-main">-->
+<!--              <ul class="conversation-wrapper">-->
+<!--                <div class="coversation-divider"><span>Today</span></div>-->
+<!--                <li class="conversation-item me">-->
+<!--                  <div class="conversation-item-side">-->
+<!--                    <img-->
+<!--                            class="conversation-item-image"-->
+<!--                            src="https://cdn.pixabay.com/photo/2016/11/08/05/26/morning-1804597_1280.jpg"-->
+<!--                            alt=""-->
+<!--                    />-->
+<!--                  </div>-->
+<!--                  <div class="conversation-item-content">-->
+<!--                    <div class="conversation-item-wrapper">-->
+<!--                      &lt;!&ndash; 대화 하나 &ndash;&gt;-->
+<!--                      <div class="conversation-item-box">-->
+<!--                        <div class="conversation-item-text">-->
+<!--                          <p>-->
+<!--                            안녕하세요! 커피 애호가 그룹에 오신 것을-->
+<!--                            환영합니다!-->
+<!--                          </p>-->
+<!--                          <div class="conversation-item-time">12:30</div>-->
+<!--                        </div>-->
+<!--                        <div class="conversation-item-dropdown">-->
+<!--                          <button-->
+<!--                                  type="button"-->
+<!--                                  class="conversation-item-dropdown-toggle"-->
+<!--                          >-->
+<!--                            <i class="ri-more-2-line"></i>-->
+<!--                          </button>-->
+<!--                          <ul class="conversation-item-dropdown-list">-->
+<!--                            <li>-->
+<!--                              <a href="#"-->
+<!--                              ><i class="ri-share-forward-line"></i>-->
+<!--                                Forward</a-->
+<!--                              >-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                              <a href="#"-->
+<!--                              ><i class="ri-delete-bin-line"></i> Delete</a-->
+<!--                              >-->
+<!--                            </li>-->
+<!--                          </ul>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                    <div class="conversation-item-wrapper">-->
+<!--                      &lt;!&ndash; 대화 하나 &ndash;&gt;-->
+<!--                      <div class="conversation-item-box">-->
+<!--                        <div class="conversation-item-text">-->
+<!--                          <p>오늘 새로운 커피 레시피를 공유하고 싶습니다.</p>-->
+<!--                          <div class="conversation-item-time">12:35</div>-->
+<!--                        </div>-->
+<!--                        <div class="conversation-item-dropdown">-->
+<!--                          <button-->
+<!--                                  type="button"-->
+<!--                                  class="conversation-item-dropdown-toggle"-->
+<!--                          >-->
+<!--                            <i class="ri-more-2-line"></i>-->
+<!--                          </button>-->
+<!--                          <ul class="conversation-item-dropdown-list">-->
+<!--                            <li>-->
+<!--                              <a href="#"-->
+<!--                              ><i class="ri-share-forward-line"></i>-->
+<!--                                Forward</a-->
+<!--                              >-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                              <a href="#"-->
+<!--                              ><i class="ri-delete-bin-line"></i> Delete</a-->
+<!--                              >-->
+<!--                            </li>-->
+<!--                          </ul>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--            <div class="conversation-form">-->
+<!--              <button type="button" class="conversation-form-button">-->
+<!--                <i class="ri-emotion-line"></i>-->
+<!--              </button>-->
+<!--              <div class="conversation-form-group">-->
+<!--                  <textarea-->
+<!--                          class="conversation-form-input"-->
+<!--                          rows="1"-->
+<!--                          placeholder="Type here..."-->
+<!--                  ></textarea>-->
+<!--              </div>-->
+<!--              <button-->
+<!--                      type="button"-->
+<!--                      class="conversation-form-button conversation-form-submit"-->
+<!--              >-->
+<!--                <i class="ri-send-plane-2-line"></i>-->
+<!--              </button>-->
+<!--            </div>-->
+<!--          </div>-->
         </div>
         <!-- end: 그룹 채팅 Conversation -->
         <!-- end: Content -->
