@@ -48,4 +48,12 @@ public class HomeController {
         return "alarm/alarm"; // 알람 페이지
     }
 
+    @GetMapping("/chat")
+    public String chat() { return "chat/chat-page"; // 1:1채팅 페이지
+    }
+
+    @GetMapping("/chatGroup")
+    public String chatGroup() { return "chatGroup/chat-page"; // 그룹 채팅 페이지
+    }
+
 }
