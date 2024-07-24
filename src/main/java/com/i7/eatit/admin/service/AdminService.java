@@ -8,6 +8,7 @@ import com.i7.eatit.admin.mapper.AdminMapper;
 import com.i7.eatit.admin.mapper.AdminMemberMapper;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -47,15 +48,29 @@ public class AdminService {
         return true;
     }
 
-    public String getUUIDCookie(HttpServletRequest request) {
+    public boolean isAdminLoggedIn(HttpServletRequest request) {
+
+        // 1. Cookie 가 없으면 로그인을 할 수 없다.
         Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("uuid")) {
-                    return cookie.getValue();
+        if (cookies == null) {
+            return false;
+        }
+
+        // 2. Cookie 는 있는데 세션이 없어도 로그인을 할 수 없다.
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("adminLoginCookie")) {
+                String sessionId = cookie.getValue();
+                HttpSession session = request.getSession();
+                if (session.getAttribute("adminSession_" + sessionId) != null) {
+                    // 3. 정상적으로 로그인을 잘 했다면, 세션과 쿠키의 만료 시간을 늘려 준다.
+                    session.setMaxInactiveInterval(60 * 30);
+                    cookie.setMaxAge(60 * 30);
+                    return true;
                 }
             }
         }
-        return null;
+
+        // 4. 이 외의 모든 경우에는 로그인을 허용하지 않는다.
+        return false;
     }
 }

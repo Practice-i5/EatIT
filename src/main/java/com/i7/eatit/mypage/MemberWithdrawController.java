@@ -9,5 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MemberWithdrawController {
     @GetMapping("withdraw")
-    public void withdraw(){}
+    public void withdrawPage(){}
+
+//    @PostMapping("widthdraw")
+//    public String widthdraw(@SessionAttribute("loginUser") UserInfoDTO loginUser, RedirectAttributes rttr){
+//
+//    }
 }

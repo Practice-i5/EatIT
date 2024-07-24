@@ -188,6 +188,51 @@
 
     </insert>
 
+
+    <select id="findMeetingById" parameterType="int" resultMap="meetingResultMap">
+        SELECT
+            A.MEETING_ID
+            , A.TITLE
+            , A.LOCATION_NAME
+            , A.LOCATION_LATITUDE
+            , A.LOCATION_LONGITUDE
+            , A.INTRODUCTION
+            , A.PAYMENT_METHOD
+            , A.MEETING_TYPE
+            , A.SCHEDULED_DATE
+            , A.EXIT_RESTRICTION_TIME
+            , A.RECRUITMENT_NUMBER
+            , A.GENDER
+            , A.ELIGIBLE_AGE
+            , A.CREATED_DATE
+            , A.PARTICIPATION_METHOD
+            , A.STATUS
+            , A.END_DATE
+            , A.HOST_MEMBER_ID
+        FROM
+            TBL_MEETING A
+        WHERE
+            MEETING_ID = #{ meetingId }
+    </select>
+
+    <select id="findInterestsById" parameterType="int">
+        SELECT
+            INTERESTS
+        FROM
+            TBL_MEETING_INTEREST_RELATION
+        WHERE
+            MEETING_ID = #{ meetingId }
+    </select>
+
+    <select id="findMeetingNameById" parameterType="int">
+        SELECT
+            TITLE
+        FROM
+            TBL_MEETING
+        WHERE
+            MEETING_ID = #{ meetingId }
+    </select>
+
     <!-- test mapper start -->
     <select id="testFindMeetings" parameterType="com.i7.eatit.domain.meeting.model.common.SearchCriteria" resultMap="meetingResultMap">
         SELECT

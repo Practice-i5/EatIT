@@ -61,16 +61,16 @@
         <div class="container px-0">
             <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                    <a href="../main-page/home.html" class="navbar-brand"><img class=logo src="/img/logo.png" alt="logo"/></a>
+                    <a th:href="@{main-page/home.html}" class="navbar-brand"><img class=logo src="/img/logo.png" alt="logo"/></a>
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>
                     </button>
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
-                            <a href="../main-page/home.html" class="nav-item nav-link">홈</a>
-                            <a href="../enroll-meeting/index.html" class="nav-item nav-link">모임 등록하기</a>
-                            <a href="../search/list.html" class="nav-item nav-link header-menu-active">모임 찾기</a>
+                            <a th:href="@{main-page/home.html}" class="nav-item nav-link">홈</a>
+                            <a th:href="@{enroll-meeting/index.html}" class="nav-item nav-link">모임 등록하기</a>
+                            <a th:href="@{search/list.html}" class="nav-item nav-link header-menu-active">모임 찾기</a>
                             <!-- <div class="nav-item dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                     <div class="dropdown-menu m-0 bg-secondary rounded-0">
@@ -83,7 +83,7 @@
                             <!-- <a href="contact.html" class="nav-item nav-link">Contact</a> -->
                             <!-- <a href="#" class="nav-item nav-link btn-open-modal" data-bs-toggle="modal"
                                 data-bs-target="#searchModal">검색</a> -->
-                            <a id="open" href="../meetingList-page/like-page.html" class="nav-item nav-link">모임목록</a>
+                            <a id="open" th:href="@{meetingList-page/like-page.html}" class="nav-item nav-link">모임목록</a>
                         </div>
                         <div class="d-flex m-3 me-0">
                             <a href="#" class="btn-notification my-auto me-4">
@@ -233,7 +233,7 @@
     <div class="container-fluid py-5 mt-5">
         <div class="container py-5">
             <div class="row g-4 mb-5">
-                <h1 th:text="${groupName}">모임 이름</h1>
+                <h1 th:text="${meetingDTO.title}">모임 이름</h1>
                 <hr />
                 <div class="col-lg-8 col-xl-9">
                     <div class="row g-4">
@@ -245,36 +245,23 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <h4 class="fw-bold mb-3">장소명</h4>
-                            <p class="mb-3" th:text="${groupLocation}">모임 장소 상세 주소</p>
+                            <h4 class="fw-bold mb-3">장소</h4>
+                            <p class="mb-3" th:text="${meetingDTO.locationName}">모임 장소 상세 주소</p>
                             <h5 class="fw-bold mb-3">약속일자</h5>
-                            <p class="mb-3" th:text="${groupDate}">2024.06.20(목) 오후 10:09</p>
+                            <p class="mb-3" th:text="${meetingDTO.scheduledDate}">2024.06.20(목) 오후 10:09</p>
                             <span class="expected-amount">
-                                <div class="padding-bottom-20px">
-                                    <span class="fw-bold mb-3">예상금액</span>
-                                    <span>
-                                        <img src="/img/payments.png" class="payments-logo" alt="payments-logo" />
-                                        <span th:text="|${expectPayments}원|"></span>
-                                    </span>
-                                </div>
-                                <span>
-                                    <div class="contents-container">
-                                        <div class="contents-container-item">
-                                            <p class="align-center fw-bold mb-3">음주여부</p>
-                                            <p class="round-corner-print-green" th:text="${isDrink}">마셔요</p>
-                                        </div>
-                                        <div class="contents-container-item">
-                                            <p class="align-center fw-bold mb-3">성별</p>
-                                            <p class="round-corner-print-green" th:text="${gender}">상관없음</p>
-                                        </div>
-                                        <div class="contents-container-item">
-                                            <p class="align-center fw-bold mb-3">참여가능나이</p>
-                                            <div class="align-center">
-                                                <span th:text="|${enterAge}대|"></span>
-                                            </div>
+                                <div class="contents-container">
+                                    <div class="contents-container-item">
+                                        <p class="align-center fw-bold mb-3">성별</p>
+                                        <p class="round-corner-print-green" th:text="${meetingDTO.gender}">상관없음</p>
+                                    </div>
+                                    <div class="contents-container-item">
+                                        <p class="align-center fw-bold mb-3">참여가능나이</p>
+                                        <div class="align-center">
+                                            <span th:text="|${meetingDTO.eligibleAge}대|"></span>
                                         </div>
                                     </div>
-                                </span>
+                                </div>
                             </span>
                             <!-- <div class="d-flex mb-4">
                                     <i class="fa fa-star text-secondary"></i>
@@ -412,16 +399,16 @@
                             </div> -->
                         <div>
                             <h4 class="mb-5 fw-bold">소개글</h4>
-                            <p th:text="${intro}"></p>
+                            <p th:text="${meetingDTO.introduction}"></p>
                         </div>
                         <div>
                             <h4 class="mb-5 fw-bold">대화주제</h4>
-                            <p th:text="${theme}"></p>
+                            <p th:text="${meetingDTO.meetingType}"></p>
                         </div>
                         <div>
                             <h5 class="mb-5 fw-bold">#관심 개발분야</h5>
                             <div class="contents-container">
-                                <div class="contents-container-item hashtag"th:each="category : ${categories}">
+                                <div class="contents-container-item hashtag" th:each="category : ${interests}">
                                     <p class="align-center" th:text="${category}"></p>
                                 </div>
                             </div>
@@ -477,7 +464,7 @@
                                     <div class="padding-bottom-20px padding-left-20px">
                                         <a id="open-img" value="button"><img src="/img/sakura_doguri.png"
                                                 class="profile-image" /></a>
-                                        <a id="open-search" value="button" th:text="${leaderId}">리더 닉네임</a>
+                                        <a id="open-search" value="button" th:text="${meetingDTO.hostMemberId}">리더 닉네임</a>
                                     </div>
                                     <div class="leader-data-details">
                                         <div class="padding-bottom-20px padding-left-20px">
@@ -494,7 +481,7 @@
                                             <p>81</p>
                                         </div>
                                         <div class="align-center padding-bottom-20px">
-                                            <button class="active-red normal-btn" type="submit" th:text="${buttonStr}">바로신청</button>
+                                            <button class="active-red normal-btn" type="submit" th:text="${meetingDTO.participationMethod}">바로신청</button>
                                         </div>
                                     </div>
                                 </div>
