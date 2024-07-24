@@ -18,4 +18,9 @@ public interface MeetingMapper {
 
     void registInterests(InsertInterestRelDTO interestRel);
 
+    List<String> findInterestsById(int meetingId);
+
+    MeetingDTO findMeetingById(int meetingId);
+
+    String findMeetingNameById(int meetingId);
 }
