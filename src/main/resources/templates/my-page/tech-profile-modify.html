@@ -4,7 +4,7 @@
         layout:decorate="~{my-page/layout}">
     <head>
         <title>기술 프로필 설정</title>
-        <link rel="stylesheet" href="css/modal.css" th:href="@{/static/css/my-page/modal.css}">
+        <link rel="stylesheet" href="css/modal.css" th:href="@{/css/my-page/modal.css}">
     </head>
 
     <aside layout:fragment="sidebar" class="bar">
@@ -91,50 +91,6 @@
                             <label class="btn-choice-mid interest-label" for="interest-1113">기획</label>
                         </div>
                     </li>
-                    <li style="margin-top:5px; margin-bottom: 10px;">
-                        <div>
-                            <input id="interest-1114" class="interest-check" type="checkbox" value="game-client">
-                            <label class="btn-choice-mid interest-label" for="interest-1114">모바일</label>
-                        </div>
-                    </li>
-
-                    <li style="margin-top:5px; margin-bottom: 10px;">
-                        <div>
-                            <input id="interest-1115" class="interest-check" type="checkbox" value="game-client">
-                            <label class="btn-choice-mid interest-label" for="interest-1115">게임 클라이언트</label>
-                        </div>
-                    </li>
-                    <li style="margin-top:5px; margin-bottom: 10px;">
-                        <div>
-                            <input id="interest-1116" class="interest-check" type="checkbox" value="game-client">
-                            <label class="btn-choice-mid interest-label" for="interest-1116">임베디드</label>
-                        </div>
-                    </li>
-                    <li style="margin-top:5px; margin-bottom: 10px;">
-                        <div>
-                            <input id="interest-1117" class="interest-check" type="checkbox" value="game-client">
-                            <label class="btn-choice-mid interest-label" for="interest-1117">보안</label>
-                        </div>
-                    </li>
-                    <li style="margin-top:5px; margin-bottom: 10px;">
-                        <div>
-                            <input id="interest-1118" class="interest-check" type="checkbox" value="game-client">
-                            <label class="btn-choice-mid interest-label" for="interest-1118">데이터 엔지니어링</label>
-                        </div>
-                    </li>
-                    <li style="margin-top:5px; margin-bottom: 10px;">
-                        <div>
-                            <input id="interest-1119" class="interest-check" type="checkbox" value="game-client">
-                            <label class="btn-choice-mid interest-label" for="interest-1119">게임 서버</label>
-                        </div>
-                    </li>
-
-                    <li style="margin-top:5px; margin-bottom: 10px;">
-                        <div>
-                            <input id="interest-1110" class="interest-check" type="checkbox" value="game-client">
-                            <label class="btn-choice-mid interest-label" for="interest-1110">UI/UX</label>
-                        </div>
-                    </li>
                 </ul>
             </div>
             <!-- <a href="./tech-stack.html" > 기술 스택 수정</a> -->
@@ -170,6 +126,6 @@
             </div>
             <button class="btn-rw btn-submit" type="submit">제출</button>
         </form>
-        <script src="js/tech-profile-modal.js" th:src="@{/static/js/my-page/tech-profile-modal.js}"></script>
+        <script src="js/tech-profile-modal.js" th:src="@{js/my-page/tech-profile-modal.js}"></script>
     </div>
 </html>

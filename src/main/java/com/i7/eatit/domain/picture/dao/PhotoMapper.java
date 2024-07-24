@@ -14,8 +14,6 @@ public interface PhotoMapper {
 
     void uploadMemberPhoto(MemberPhotoDTO memberPhoto);
 
-    //List<MeetingPhotoDTO> findPhotoByMeetingId(int meetingId);
-
     List<MeetingPhotoDTO> findPhotoByMeetingId(int meetingId);
 
 
