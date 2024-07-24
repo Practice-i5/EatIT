@@ -22,21 +22,19 @@
           </a>
           <ul class="chat-sidebar-menu">
             <li class="menu-group-2">
-              <!------------ 그룹 채팅 버튼 ------------>
-              <ul th:each="groupChat : ${groupChats}">
+              <!----------- 그룹 채팅 버튼 ------------>
                 <li>
-                  <a href="#" th:data-conversation="'#group-conversation-' + ${groupChat.id}">
-                                    <span class="content-message-info">
-                                        <span class="content-message-name" th:text="${groupChat.name}">개발자 그룹</span>
-                                        <span class="content-message-text">전체 개발자 모임</span>
-                                    </span>
-                    <span class="content-message-more">
-                                        <span class="content-message-unread">3</span>
-                                        <span class="content-message-time">16:20</span>
-                                    </span>
+                  <a
+                          href="#"
+                          data-title="#groupChat"
+                          class="chat-toggle"
+                          data-target="#groupChat"
+                  >
+                    <i class="ri-group-line"></i> <br /><span class="menu-text"
+                  >단톡방</span
+                  >
                   </a>
                 </li>
-              </ul>
             </li>
             <li class="chat-sidebar-profile">
               <!------------ 왼쪽 하단 프로필 버튼 ------------>
