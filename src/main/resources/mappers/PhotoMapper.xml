@@ -23,17 +23,20 @@
         <result property="meetingId" column="MEETING_ID"/>
     </resultMap>
 
-    <select id="findPhotoByMemberID" resultMap="MemberPhotoMap">
+    <select id="findPhotoByMemberId" resultMap="MemberPhotoMap" parameterType="_int">
         SELECT
                PHOTO_ID
             ,  PHOTO_PATH
             ,  PHOTO_NAME
             ,  MEMBER_ID
-        FROM
+          FROM
                TBL_MEMBER_PHOTO
+         WHERE
+               MEMBER_ID = #{memberId}
+
     </select>
 
-    <select id="findPhotoByMeetingId" resultMap="MeetingPhotoMap">
+    <select id="findPhotoByMeetingId" resultMap="MeetingPhotoMap" parameterType="_int">
         SELECT
                PHOTO_ID
             ,  PHOTO_PATH
@@ -41,6 +44,8 @@
             ,  MEETING_ID
           FROM
                TBL_MEETING_PHOTO
+         WHERE
+               MEETING_ID = #{meetingId}
     </select>
 
     <insert id="uploadMemberPhoto" parameterType="com.i7.eatit.domain.picture.dto.MemberPhotoDTO"

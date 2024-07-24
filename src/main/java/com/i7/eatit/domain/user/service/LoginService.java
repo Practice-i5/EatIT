@@ -28,14 +28,19 @@ public class LoginService {
         userMap.put("email", loginUser.getEmail());
         userMap.put("password", loginUser.getPassword());
 
-        // 요청 확인용
-        System.out.println("===" + loginMapper.selectUser(userMap) + "===");
-
         return loginMapper.selectUser(userMap);
     }
 
-    // 이메일 찾기
+    // 이메일 조회
     public String findEmail(String name, String phoneNumber) {
+
+        // 문자열 형태로 이메일을 반환
+        return loginMapper.selectUserEmail(name, phoneNumber);
+
+    }
+
+    // 비밀번호 조회
+    public String findPassword(String name, String phoneNumber) {
 
         // 문자열 형태로 이메일을 반환
         return loginMapper.selectUserEmail(name, phoneNumber);
@@ -50,8 +55,13 @@ public class LoginService {
         userPasswordMap.put("name", name);
         userPasswordMap.put("phoneNumber", phoneNumber);
         userPasswordMap.put("password", randomPassword());
+
         // 문자열 형태로 비밀번호를 반환
-        return loginMapper.updateUserRandomPassword(userPasswordMap);
+        if (loginMapper.updateUserRandomPassword(userPasswordMap) > 0) {
+            return userPasswordMap.get("password");
+        }
+
+        return null;
     }
 
     // 영어 + 숫자 랜덤 난수 생성

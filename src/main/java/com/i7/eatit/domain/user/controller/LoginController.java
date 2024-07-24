@@ -1,7 +1,6 @@
 package com.i7.eatit.domain.user.controller;
 
 import com.i7.eatit.domain.user.dto.UserInfoDTO;
-import com.i7.eatit.domain.user.dto.UserPwdDTO;
 import org.springframework.ui.Model;
 import com.i7.eatit.domain.user.dto.UserLoginDTO;
 import com.i7.eatit.domain.user.service.LoginService;
@@ -53,16 +52,12 @@ public class LoginController {
         UserInfoDTO loginUser = loginService.checkUser(userLoginDTO);
 
         // 응답 확인용
-        System.out.println(loginUser); // 확인용
+        System.out.println("loginUser = " + loginUser); // 확인용
 
         if (loginUser != null) {    // 성공
-
             model.addAttribute("loginUser", loginUser);
-
             return "redirect:/login/successLogin";
-
         } else {                    // 실패
-
             return "redirect:/login/loginMain";
         }
     }
@@ -74,28 +69,34 @@ public class LoginController {
     // 로그아웃
     @GetMapping("/logout")
     public String logout(SessionStatus sessionStatus) {
-        sessionStatus.setComplete();
+
+        sessionStatus.setComplete(); // 세션 종료
 
         return "redirect:/login/loginMain";
     }
+
 
     // 이메일 찾기
     @PostMapping("/findEmail")
     public String findEmail(@RequestParam String name,
                             @RequestParam String phoneNumber,
-                            RedirectAttributes redirectAttributes) {
+                            RedirectAttributes redirectAttributes,
+                            Model model) {
 
         // 이메일 조회
         String email = loginService.findEmail(name, phoneNumber);
 
         System.out.println("email = " + email);
-        if (email != null) { // 이메일 조회 성공
-            redirectAttributes.addFlashAttribute("email", email);
-            return "redirect:/login/findEmail";
-        } else { // 이메일 조회 실패
-            redirectAttributes.addFlashAttribute("error", "이메일을 찾을 수 없습니다.");
-            return "redirect:/login/findEmail";
+
+        if (email != null) {    // 이메일 조회 성공
+            model.addAttribute("message", "찾은 이메일: " + email);
+            model.addAttribute("redirectUrl", "/login/loginMain");
+        } else {                // 이메일 조회 실패
+            model.addAttribute("message", "이메일을 찾을 수 없습니다.");
+            model.addAttribute("redirectUrl", "/login/findEmail");
         }
+
+        return "login/findEmail";  // 같은 페이지로 돌아감
     }
 
     // 비밀번호 찾기
@@ -103,22 +104,22 @@ public class LoginController {
     public String findPassword(@RequestParam String email,
                                @RequestParam String name,
                                @RequestParam String phoneNumber,
-                               RedirectAttributes redirectAttributes) {
-
-        // UserPwdDTO userPwdDTO = new UserPwdDTO();
+                               Model model) {
 
         // 비밀번호 조회
         String password = loginService.findPassword(email, name, phoneNumber);
 
-        System.out.println("email = " + password);
+        System.out.println("password = " + password); // 확인용
 
         if (password != null) { // 비밀번호 재설정 성공
-            redirectAttributes.addFlashAttribute("password", password);
-            return "redirect:/login/loginMain";
+            model.addAttribute("message", "비밀번호가" + password + "로 변경되었습니다.");
+            model.addAttribute("redirectUrl", "/login/loginMain");
         } else { // 비밀번호 조회 실패
-            redirectAttributes.addFlashAttribute("error", "비밀번호를 찾을 수 없습니다.");
-            return "redirect:/login/findPwd";
+            model.addAttribute("message", "입력하신 정보와 일치한 정보가 없습니다.");
+            model.addAttribute("redirectUrl", "/login/findPwd");
         }
+
+        return "login/findPwd";  // 같은 페이지로 돌아감
     }
 
 }

@@ -2,12 +2,10 @@ package com.i7.eatit.mypage;
 
 import com.i7.eatit.domain.picture.dto.MemberPhotoDTO;
 import com.i7.eatit.domain.picture.service.PhotoService;
+import com.i7.eatit.domain.user.dto.UserInfoDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -25,7 +23,18 @@ public class ProfileController {
     }
 
     @GetMapping("profile")
-    public void profile() {}
+    public void profile(@SessionAttribute(name = "loginUser", required = false) UserInfoDTO loginUser, Model model) {
+        System.out.println(loginUser);
+
+        if (loginUser!=null){
+            System.out.println(photoService.findPhotoByMemberId(loginUser.getMember_id()));
+
+            MemberPhotoDTO photoInfo = photoService.findPhotoByMemberId(loginUser.getMember_id());
+            String photoUrl = photoInfo.getPhotoPath()+photoInfo.getPhotoName();
+
+            model.addAttribute("profileImage", photoUrl);
+        }
+    }
 
     @PostMapping("profile")
     public String modifyProfile(Model model, WebRequest request) {
@@ -59,13 +68,9 @@ public class ProfileController {
             rttr.addFlashAttribute("profileImage", uploadedUrl);
             rttr.addFlashAttribute("tst", "텍스트테스트");
         }
-//        rttr.addFlashAttribute("profileImage", "static/img/single/018706e1412f4220ab197cce62bfab59.png");
         System.out.println("결과 url");
         System.out.println(uploadedUrl);
-        //System.out.println(uploadedUrl);
         //rttr.addFlashAttribute("profileImage", uploadedUrl);
-        System.out.println("업로드 된듯");
-
         return "redirect:/my-page/uploadResult";
     }
 
@@ -74,7 +79,6 @@ public class ProfileController {
 
         System.out.println(model.getAttribute("profileImage"));
     }
-
 
     @GetMapping("profile/test")
     public String profileTest(Model model){

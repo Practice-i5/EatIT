@@ -1,6 +1,7 @@
 package com.i7.eatit.mypage;
 
 import com.i7.eatit.domain.tag.dto.MemberTechStackDTO;
+import com.i7.eatit.domain.tag.dto.MemberTechStackDetailDTO;
 import com.i7.eatit.domain.tag.dto.TechStackTypeDTO;
 import com.i7.eatit.domain.tag.service.MemberTechStackService;
 import com.i7.eatit.domain.tag.service.TechStackTypeService;
@@ -28,7 +29,10 @@ public class TechProfileController {
     public void techProfile() {}
 
     @GetMapping("tech-profile-modify")
-    public void techProfileModify() {}
+    public void techProfileModify(Model model) {
+        List<TechStackTypeDTO> techStackList = techStackTypeService.findAllTechStack();
+        model.addAttribute("techStackList", techStackList);
+    }
 
     @GetMapping("tech-profile/test")
     public String getTechStack(Model model) {
@@ -45,8 +49,10 @@ public class TechProfileController {
     }
 
     @GetMapping("member-stack-test")
-    public String stackTestPage(){
-        System.out.println(memberTechStackService.findMemberTechStack(2));
+    public String stackTestPage(Model model){
+        List<MemberTechStackDetailDTO> stackList = memberTechStackService.findMemberTechStack(2);
+        System.out.println(stackList);
+        model.addAttribute("memberStack",stackList );
 
         return "my-page/tech-profile";
     }
