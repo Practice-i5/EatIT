@@ -9,11 +9,8 @@ import java.util.List;
 
 @Service
 public class UserService {
+    @Autowired
     private UserMapper userMapper;
-
-    public UserService(UserMapper userMapper) {
-        this.userMapper = userMapper;
-    }
 
     public UserInfoDTO getUserByUsername(String username) {
         return userMapper.findByUsername(username);
