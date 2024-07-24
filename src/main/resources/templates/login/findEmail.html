@@ -42,46 +42,35 @@
     </div>
 </form>
 
-<!-- 커스텀 다이얼로그와 오버레이 -->
-<div class="overlay" id="overlay"></div>
-<div class="custom-dialog" id="customDialog">
-    <div class="dialog-header" id="dialogTitle"></div>
-    <p id="dialogMessage"></p>
-    <button onclick="closeDialog()">확인</button>
+<!-- 다이얼로그 추가 -->
+<div id="resultDialog" style="display:none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+    <div style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 300px; max-width: 80%; text-align: center; border-radius: 5px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <p id="dialogMessage" th:text="${message}" style="margin-bottom: 20px;"></p>
+        <button id="dialogConfirm" onclick="closeDialog()" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 3px; cursor: pointer;">확인</button>
+    </div>
 </div>
 
 <script th:inline="javascript">
     /*<![CDATA[*/
-    var email = /*[[${email}]]*/ '';
-    var error = /*[[${error}]]*/ '';
-    var redirectUrl = /*[[${redirectUrl}]]*/ ''; // 서버에서 전달받은 URL
+    var message = /*[[${message}]]*/ null;
+    var redirectUrl = /*[[${redirectUrl}]]*/ null;
 
-    function showDialog(title, message) {
-        document.getElementById('dialogTitle').innerText = title;
-        document.getElementById('dialogMessage').innerText = message;
-        document.getElementById('customDialog').classList.add('active');
-        document.getElementById('overlay').classList.add('active');
+    window.onload = function() {
+        if (message) {
+            document.getElementById('dialogMessage').textContent = message;
+            var dialog = document.getElementById('resultDialog');
+            dialog.style.display = 'flex';
+            dialog.style.alignItems = 'center';
+            dialog.style.justifyContent = 'center';
+        }
     }
 
     function closeDialog() {
-        document.getElementById('customDialog').classList.remove('active');
-        document.getElementById('overlay').classList.remove('active');
-        // 이메일이 존재하면 로그인 페이지로 이동
-        if (email) {
-            window.location.href = redirectUrl || '/login/loginMain';
-        } else if (error) {
-            // 오류가 존재하면 페이지 새로고침
-            window.location.reload();
+        document.getElementById('resultDialog').style.display = 'none';
+        if (redirectUrl) {
+            window.location.href = redirectUrl;
         }
     }
-
-    window.onload = function() {
-        if (email) {
-            showDialog("이메일 찾기 성공", "가입한 이메일: " + email);
-        } else if (error) {
-            showDialog("이메일 찾기 실패", error);
-        }
-    };
     /*]]>*/
 </script>
 </body>
