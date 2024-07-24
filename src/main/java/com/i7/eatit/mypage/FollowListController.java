@@ -24,6 +24,7 @@ public class FollowListController {
 
         if (loginUser != null){
             List<FollowInfoDetailDTO> followList = userFollowService.findFollowMember(loginUser.getMember_id());
+            System.out.println(followList);
             model.addAttribute("followList", followList);
         }
     }

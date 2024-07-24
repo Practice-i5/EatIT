@@ -29,12 +29,15 @@ public class ProfileController {
         System.out.println(loginUser);
 
         if (loginUser!=null){
+
             System.out.println(photoService.findPhotoByMemberId(loginUser.getMember_id()));
 
             MemberPhotoDTO photoInfo = photoService.findPhotoByMemberId(loginUser.getMember_id());
-            String photoUrl = photoInfo.getPhotoPath()+photoInfo.getPhotoName();
 
-            model.addAttribute("profileImage", photoUrl);
+            if(photoInfo!=null){
+                //String photoUrl = photoInfo.getPhotoPath()+photoInfo.getPhotoName();
+                model.addAttribute("profileImage", photoInfo.getPhotoPath());
+            }
         }
     }
 
@@ -69,7 +72,7 @@ public class ProfileController {
 
         String uploadedUrl = photoService.uploadMemberPhoto(singleFile, 7);
         if (uploadedUrl != null){
-            gdriveUrl = "https://drive.google.com/uc?export=view&id=" + uploadedUrl;
+            gdriveUrl = "https://drive.google.com/thumbnail?id=" + uploadedUrl + "&sz=w300";
             rttr.addFlashAttribute("profileImage", gdriveUrl);
             System.out.println("결과 url");
             System.out.println(gdriveUrl);
@@ -82,7 +85,7 @@ public class ProfileController {
 
     @GetMapping("uploadResult")
     public void uploadResultPage(Model model){
-        model.addAttribute("profileImage","https://drive.google.com/thumbnail?id=13G0IwZ4hbnisyGlsN4r297BZlcLLDvn1&sz=w200");
+        //model.addAttribute("profileImage","https://drive.google.com/thumbnail?id=13G0IwZ4hbnisyGlsN4r297BZlcLLDvn1&sz=w200");
 
         System.out.println(model.getAttribute("profileImage"));
     }

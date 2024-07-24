@@ -41,7 +41,7 @@
                 <li>
                     <div class="form-item">
                         <div class="block-info">
-                            <img th:src="${followUser.detailProfile.memberPhoto.photoPath+followUser.detailProfile.memberPhoto.photoName}"
+                            <img th:src="${followUser.detailProfile.memberPhoto.photoPath}"
                                  src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"/>
                             <div class="block-info-text" th:text="${followUser.detailProfile.nickname}">
                                 닉네임1
@@ -58,7 +58,7 @@
                     </div>
                 </li>
             </th:block>
-            <li>
+            <!-- <li>
                 <form>
                     <div class="form-item">
                         <div class="block-info">
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                 </form>
-            </li>
+            </li> -->
         </ul>
 
         <ul class="list-no-pad" style="display: flex; justify-content: center;">
