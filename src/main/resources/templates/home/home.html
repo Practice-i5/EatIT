@@ -70,22 +70,17 @@
                     >
                 </div>
                 <!-- 알림, 로그인, 회원가입 버튼 추가 -->
-                <a href="#" class="btn-notification my-auto me-4">
+                <a th:href="@{/alarm}" class="btn-notification my-auto me-4">
                     <i class="fas fa-bell fa-2x"></i>
-                    <span
-                            class="position-absolute bg-danger rounded-circle"
-                            style="top: 0; right: 0; width: 10px; height: 10px"
-                    ></span>
+                    <span class="position-absolute bg-danger rounded-circle"
+                          style="top: 0; right: 0; width: 10px; height: 10px"></span>
                 </a>
-                <button class="btn btn-danger rounded-pill me-2" id="loginButton">
+                <a th:href="@{/login}" class="btn btn-danger rounded-pill me-2" id="loginButton">
                     로그인
-                </button>
-                <button
-                        class="btn btn-outline-danger rounded-pill"
-                        id="signupButton"
-                >
+                </a>
+                <a th:href="@{/signup}" class="btn btn-outline-danger rounded-pill" id="signupButton">
                     회원가입
-                </button>
+                </a>
             </div>
         </nav>
     </div>
