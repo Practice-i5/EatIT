@@ -32,6 +32,13 @@ public class MeetingService {
 
     public List<MeetingDTO> searchMeetings(SearchCriteria searchCriteria) { return meetingMapper.findMeetings(searchCriteria); }
 
+    public List<String> findInterestsById(int meetingId) { return meetingMapper.findInterestsById(meetingId);  }
+
+    public MeetingDTO findMeetingById(int meetingId) { return meetingMapper.findMeetingById(meetingId);}
+
+    public String findMeetingNameById(int meetingId) { return meetingMapper.findMeetingNameById(meetingId); }
+
+
 //    public MeetingDTO searchMeetingById(Long id) {}
 
 }

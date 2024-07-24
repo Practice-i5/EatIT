@@ -30,6 +30,8 @@
     <link th:href="@{/css/template.css}" rel="stylesheet">
     <link th:href="@{/css/alarm.css}" rel="stylesheet">
 
+
+
 </head>
 
 
@@ -48,23 +50,32 @@
         <div class="container px-0">
             <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                    <a href="../main-page/home.html" class="navbar-brand"><img class=logo src="/img/logo.png" alt="logo"/></a>
+                    <a href="../home/home.html" class="navbar-brand"><img class=logo src="/img/logo.png" alt="logo"/></a>
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>
                     </button>
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
-                            <a href="../main-page/home.html" class="nav-item nav-link">홈</a>
+                            <a href="../home/home.html" class="nav-item nav-link">홈</a>
                             <a href="../enroll-meeting/index.html" class="nav-item nav-link">모임 등록하기</a>
                             <a href="../search/list.html" class="nav-item nav-link header-menu-active">모임 찾기</a>
                             <a id="open" href="../meetingList-page/like-page.html" class="nav-item nav-link">모임목록</a>
                         </div>
                         <div class="d-flex m-3 me-0">
-                            <a href="#" class="btn-notification my-auto me-4">
-                                <i class="fas fa-bell fa-2x"></i>
+                            <!-- 새 알람이 있으면 배지 달리는 벨 아이콘 start -->
+                            <div id="alarmCheck" style="display:none" th:text="${isAlarmRinging}">Ring!</div>
+                            <a href="/alarm/alarm" class="btn-notification my-auto me-4 position-relative">
+                                <i class="fas fa-bell fa-2x ">
+                                </i>
+                                <div id="alarm-badge">
+                                    <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                                        <span class="visually-hidden">New alerts</span>
+                                    </span>
+                                </div>
                             </a>
-                            <!-- JavaScript 파일 연결 -->
+                            <script src="/js/alarm_badge.js"></script>
+                            <!-- 새 알람이 있으면 배지 달리는 벨 아이콘 End -->
                             <button class="btn btn-danger rounded-pill me-2"
                                 onclick="location.href='../newPagetemplate/newlogin.html'" id="loginButton">로그인</button>
                             <button class="btn btn-outline-danger rounded-pill"
@@ -77,25 +88,6 @@
         </div>
     </div>
     <!-- Navbar End -->
-
-    <!-- Modal Search Start -->
-    <!-- <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content rounded-0">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body d-flex align-items-center">
-                    <div class="input-group w-75 mx-auto d-flex">
-                        <input type="search" class="form-control p-3" placeholder="keywords"
-                            aria-describedby="search-icon-1">
-                        <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
 
     <!-- Single Page Header start -->
     <div class="container-fluid page-header py-5">

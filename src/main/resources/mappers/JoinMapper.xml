@@ -21,6 +21,10 @@
 
         <result property="createdDate" column="created_date"/>
         <result property="withdrawalStatus" column="withdrawal_status"/>
+        <result property="reportedCount" column="reported_count"/>
+
+        <result property="gender" column="gender"/>
+        <result property="age" column="age"/>
 
     </resultMap>
 
@@ -38,6 +42,9 @@
                     , phone_number
                     , created_date
                     , withdrawal_status
+                    , reported_count
+                    , gender
+                    , age
                     )
         values
                     (
@@ -49,6 +56,9 @@
                     , #{ phoneNumber }
                     , #{ createdDate }
                     , #{ withdrawalStatus }
+                    , #{ reportedCount }
+                    , #{ gender }
+                    , #{ age }
                     )
     </insert>
 
