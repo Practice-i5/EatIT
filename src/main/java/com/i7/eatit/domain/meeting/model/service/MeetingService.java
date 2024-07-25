@@ -31,6 +31,9 @@ public class MeetingService {
         meetingMapper.registInterests(interestsRelDTO);
     }
 
+    @Transactional
+    public void registMeeting(int meetingId, int member_id)
+
     public List<MeetingDTO> findAllMeetings() { return meetingMapper.findAllMeetings(); }
 
     public List<MeetingDTO> searchMeetings(SearchCriteria searchCriteria) { return meetingMapper.findMeetings(searchCriteria); }
