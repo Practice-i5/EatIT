@@ -33,7 +33,7 @@
 </aside>
 
 <div layout:fragment="content" class="profile">
-    <form class="form-content">
+    <div class="form-content">
         <h2>팔로우 유저 목록</h2>
         <!-- <p class="form-message">날짜 순으로 최근 5개가 표시됩니다.</p> -->
         <ul class="form-list-block">
@@ -41,9 +41,29 @@
                 <li>
                     <div class="form-item">
                         <div class="block-info">
-                            <img th:src="${followUser.detailProfile.memberPhoto.photoPath+followUser.detailProfile.memberPhoto.photoName}"
+                            <img th:src="${followUser.detailProfile.memberPhoto.photoPath}"
                                  src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"/>
                             <div class="block-info-text" th:text="${followUser.detailProfile.nickname}">
+                                닉네임1
+                            </div>
+                        </div>
+
+                        <div class="block-modify">
+                            <button class="btn-choice-small btn-wb">프로필</button>
+                            <form action="/my-page/follow-user-delete" method="post">
+                                <button class="btn-choice-small btn-wb" th:name="memberId" th:value="${followUser.followeeId}">삭제</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </li>
+            </th:block>
+            <!-- <li>
+                <form>
+                    <div class="form-item">
+                        <div class="block-info">
+                            <img src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"/>
+                            <div class="block-info-text">
                                 닉네임1
                             </div>
                         </div>
@@ -53,25 +73,11 @@
                             <button class="btn-choice-small btn-wb">삭제</button>
                         </div>
                     </div>
-                </li>
-            </th:block>
-            <li>
-                <div class="form-item">
-                    <div class="block-info">
-                        <img src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"/>
-                        <div class="block-info-text">
-                            닉네임1
-                        </div>
-                    </div>
-
-                    <div class="block-modify">
-                        <button class="btn-choice-small btn-wb">프로필</button>
-                        <button class="btn-choice-small btn-wb">삭제</button>
-                    </div>
-                </div>
+                </form>
             </li>
 
             <li>
+                <form>
                 <div class="form-item">
                     <div class="block-info">
                         <img src="images/ellipse_56.png" th:src="@{/img/my-page/ellipse_56.png}"/>
@@ -85,22 +91,25 @@
                         <button class="btn-choice-small btn-wb">삭제</button>
                     </div>
                 </div>
+                </form>
             </li>
             <li>
-                <div class="form-item">
-                    <div class="block-info">
-                        <img id="img-preview" src="images/ellipse_51.png" th:src="@{/img/my-page/ellipse_51.png}"/>
-                        <div class="block-info-text">
-                            래빗
+                <form>
+                    <div class="form-item">
+                        <div class="block-info">
+                            <img id="img-preview" src="images/ellipse_51.png" th:src="@{/img/my-page/ellipse_51.png}"/>
+                            <div class="block-info-text">
+                                래빗
+                            </div>
+                        </div>
+
+                        <div class="block-modify">
+                            <button class="btn-choice-small btn-wb">프로필</button>
+                            <button class="btn-choice-small btn-wb">삭제</button>
                         </div>
                     </div>
-
-                    <div class="block-modify">
-                        <button class="btn-choice-small btn-wb">프로필</button>
-                        <button class="btn-choice-small btn-wb">삭제</button>
-                    </div>
-                </div>
-            </li>
+                </form>
+            </li> -->
         </ul>
 
         <ul class="list-no-pad" style="display: flex; justify-content: center;">
@@ -110,6 +119,6 @@
             <li style="width: 40px;">4</li>
             <li style="width: 40px;">5</li>
         </ul>
-    </form>
+    </div>
 </div>
 </html>

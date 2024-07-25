@@ -5,9 +5,7 @@ import com.i7.eatit.domain.relationship.service.UserBlockService;
 import com.i7.eatit.domain.user.dto.UserInfoDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +27,17 @@ public class BlackListController {
         model.addAttribute("blockUserList", blockUserList);
 
 
+    }
+
+    @PostMapping("block-user-delete")
+    public String followUserDelete(@RequestParam("memberId") int blockedMemberId, @SessionAttribute("loginUser") UserInfoDTO loginUser){
+
+        //System.out.println("받음");
+        System.out.println("로그인 유저 id : " +loginUser.getMember_id());
+        System.out.println("차단 취소 대상 id : "+blockedMemberId);
+        userBlockService.deleteBlockMember(loginUser.getMember_id(),blockedMemberId);
+
+        return "redirect:/my-page/black-list";
     }
 
     @GetMapping("black-list-test")

@@ -7,6 +7,7 @@ public class UserPhotoProfileDTO {
 
     private String nickname;
     private String phoneNumber;
+    private String gender;
 
     private String withdrawalStatus = "N";
     private int reportedCount;
@@ -15,10 +16,11 @@ public class UserPhotoProfileDTO {
 
     public UserPhotoProfileDTO() {}
 
-    public UserPhotoProfileDTO(int memberId, String nickname, String phoneNumber, String withdrawalStatus, int reportedCount, MemberPhotoDTO memberPhoto) {
+    public UserPhotoProfileDTO(int memberId, String nickname, String phoneNumber, String gender, String withdrawalStatus, int reportedCount, MemberPhotoDTO memberPhoto) {
         this.memberId = memberId;
         this.nickname = nickname;
         this.phoneNumber = phoneNumber;
+        this.gender = gender;
         this.withdrawalStatus = withdrawalStatus;
         this.reportedCount = reportedCount;
         this.memberPhoto = memberPhoto;
@@ -46,6 +48,14 @@ public class UserPhotoProfileDTO {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getWithdrawalStatus() {
@@ -78,6 +88,7 @@ public class UserPhotoProfileDTO {
                 "memberId=" + memberId +
                 ", nickname='" + nickname + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", gender='" + gender + '\'' +
                 ", withdrawalStatus='" + withdrawalStatus + '\'' +
                 ", reportedCount=" + reportedCount +
                 ", memberPhoto=" + memberPhoto +
