@@ -51,13 +51,13 @@
         WHERE A. BLOCKING_MEMBER_ID=#{memberID}
     </select>
 
-    <delete id="deleteBlockedMember>" parameterType="hashmap">
+    <delete id="deleteBlockedMember" parameterType="hashmap">
         DELETE FROM TBL_BLOCK
         WHERE BLOCKING_MEMBER_ID= #{blockingMemberId}
         AND BLOCKED_MEMBER_ID = #{blockedMemberId}
     </delete>
 
-    <insert id="insertBlockMember" parameterType="hashMap"
+    <insert id="insertBlockMember" parameterType="hashmap"
         useGeneratedKeys="true" keyProperty="blockId">
 
         INSERT TBL_BLOCK

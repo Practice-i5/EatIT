@@ -26,6 +26,16 @@ public class SearchController {
     @GetMapping("search_test")
     public void search_test() {}
 
+    @GetMapping("list")
+    public void searchListPage() {}
+
+    @PostMapping("list")
+    public String searchListPage(SearchCriteria searchCriteria, Model model) {
+
+        model.addAttribute("meetingList", meetingService.findPreviewBySearch(searchCriteria));
+        return "search/list";
+    }
+
 //    @PostMapping("search_test")
 //    public String searchMeetingList(SearchCriteria searchCriteria, Model model) {
 //

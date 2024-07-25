@@ -98,9 +98,19 @@ img{
     align-items: center;
 }
 
+.header a{
+    text-decoration: none;
+    color: #747d88;
+    transition: color 0.3s ease;
+}
 
 .header a:hover {
-    color: red;
+    color: #dcb335;
+
+}
+
+.header button:hover{
+    cursor:pointer;
 }
 
 .bar {

@@ -63,15 +63,24 @@
             </div>
         </div>
 
-        <form class="form-content">
+        <form class="form-content" action="/my-page/tech-profile-modify" method="post">
             <h2>기술 프로필 설정</h2>
             <div class="form-item">
                 <label class="profile-label">기술 스택</label>
                 <ul class="list-no-pad form-size-limit chip-btn-list">
                     <th:block th:each="stack:${techStackList}">
                         <li style="margin-top:5px; margin-bottom: 10px;">
-                            <input th:id="|interest-${stack.code}|" class="interest-check" type="checkbox" th:value="${stack.name}">
-                            <label class="btn-choice-mid interest-label" th:for="|interest-${stack.code}|" th:text="${stack.name}"></label>
+                            <th:block th:if="${#lists.contains(memberStackCode, stack.code)}">
+                                <input th:id="|stack-${stack.code}|" class="interest-check" type="checkbox"
+                                       th:name="|stack-${stack.code}|" th:value="${stack.name}" checked>
+
+                                <label class="btn-choice-mid interest-label" th:for="|stack-${stack.code}|" th:text="${stack.name}"></label>
+                            </th:block>
+                            <th:block th:unless="${#lists.contains(memberStackCode, stack.code)}">
+                                <input th:id="|stack-${stack.code}|" class="interest-check" type="checkbox"
+                                       th:name="|stack-${stack.code}|" th:value="${stack.name}">
+                                <label class="btn-choice-mid interest-label" th:for="|stack-${stack.code}|" th:text="${stack.name}"></label>
+                            </th:block>
                         </li>
                     </th:block>
 

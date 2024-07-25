@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>모임 목록</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <style>
+        .fruite-item {
+            overflow: hidden;
+        }
+
+        .fruite-img img {
+            height: 140px;
+            object-fit: cover;
+        }
+
+        .profile-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .profile-text {
+            font-size: 14px;
+        }
+
+        .text-white {
+            color: white !important;
+        }
+
+        .bg-secondary {
+            background-color: #6c757d !important;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container py-5">
+    <div class="row">
+        <!-- 모임 개수 출력 -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4>총 모임 개수 : <span th:text="${#lists.size(meetingList)}"></span></h4>
+        </div>
+
+        <!-- 모임 목록 출력 -->
+        <div class="row">
+            <div class="col-md-6 col-lg-4 col-xl-3" th:each="meeting : ${meetingList}">
+                <div class="rounded position-relative fruite-item">
+                    <div class="fruite-img">
+                        <img class="other-image img-fluid w-100 rounded-top" alt=""/><!-- th:src="@{${meeting.imageUrl}}"-->
+                    </div>
+
+                    <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                        <h4 th:text="${meeting.title}">피자맛집</h4>
+                        <!--<p th:text="${meeting.description}">
+                            맛있는 피자 먹고 취뽀 가보자!!!
+                            <br>
+                            [메타버스 수강생 & 개발 멘토 모임]
+                        </p>-->
+                        <div class="d-flex justify-content-between flex-lg-wrap">
+                            <!-- 프로필 추가하는 부분 -->
+                            <div class="profile-container">
+                                <img th:src="@{${meeting.profileImageUrl}}" alt="Profile Picture" class="profile-image">
+                                <span class="profile-text" th:text="${meeting.participants}">1/3명</span>
+                            </div>
+                            <div class="meeting-status text-info fw-bold" th:text="${meeting.status}">모임 시작 전</div>
+                            <p class="text-dark fs-5 fw-bold mb-0" th:text="${meeting.date}">2024.06.30(일) 오후 1:00</p>
+                            <!-- toggleFavorite와 id의 heartIcon[N] N변경-->
+                            <a href="#" class="icon" onclick="toggleFavorite(event, 'heartIcon1')">
+                                <i id="heartIcon1" class="fas fa-heart me-2 text-primary"></i> 찜하기
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    function toggleFavorite(event, iconId) {
+        event.preventDefault();
+        const icon = document.getElementById(iconId);
+        icon.classList.toggle('fas');
+        icon.classList.toggle('far');
+        // 추가적인 찜하기 로직을 여기에 구현하세요.
+    }
+</script>
+</body>
+
+</html>

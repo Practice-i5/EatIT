@@ -241,3 +241,33 @@ input[type='number']::-webkit-inner-spin-button {
     float: left;
     padding-left: 0px;
 }
+
+
+/* gender 선택창 */
+.SelectForm {
+    margin-bottom: 15px;
+}
+
+.SelectForm input,
+.SelectForm select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+    border-bottom: 2px solid #adadad;
+}
+
+.SelectForm input::placeholder,
+.SelectForm select::placeholder {
+    color: #aaa;
+}
+
+.gender-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='292.362' height='292.362' viewBox='0 0 292.362 292.362'%3E%3Cpath fill='%23aaa' d='M287.818 69.404l-14.274-14.273c-2.688-2.688-5.897-4.035-9.655-4.035-3.759 0-6.967 1.347-9.656 4.035L146.181 163.181 38.129 55.131c-2.688-2.688-5.896-4.035-9.655-4.035s-6.967 1.347-9.656 4.035L4.544 69.404c-2.688 2.688-4.035 5.896-4.035 9.655s1.347 6.967 4.035 9.655l132 132c2.688 2.688 5.896 4.035 9.655 4.035s6.967-1.347 9.656-4.035l132-132c2.688-2.688 4.035-5.896 4.035-9.655s-1.347-6.967-4.035-9.655z'/%3E%3C/svg%3E") no-repeat right 10px center;
+    background-size: 12px;
+}
