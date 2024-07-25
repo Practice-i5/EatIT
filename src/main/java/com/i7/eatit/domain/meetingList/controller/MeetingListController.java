@@ -29,13 +29,13 @@ public class MeetingListController {
     @GetMapping("/meetingList/participatingList")
     public String ParticipatingMeeting(@SessionAttribute("loginUser") UserInfoDTO userInfoDTO, Model model) {
 
+        System.out.println(userInfoDTO.getMember_id());
 
-        int memberId =  userInfoDTO.getMember_id();
-        System.out.println(memberId);
-
-        List<PreviewMeetingDTO> meetingList = meetingService.findPreviewByMemberIdOpen(memberId);
+        List<PreviewMeetingDTO> meetingList = meetingService.findPreviewByMemberIdOpen(userInfoDTO.getMember_id());
 
         model.addAttribute("meetingList", meetingList);
+
+        System.out.println(meetingList);
 
         return "meetingList/participatingList";
     }
@@ -45,10 +45,9 @@ public class MeetingListController {
     @GetMapping("/meetingList/endList")
     public String EndMeeting(@SessionAttribute("loginUser") UserInfoDTO userInfoDTO, Model model) {
 
-        int memberId =  userInfoDTO.getMember_id();
-        System.out.println(memberId);
+        System.out.println(userInfoDTO.getMember_id());
 
-        List<PreviewMeetingDTO> meetingList = meetingService.findPreviewByMemberIdClosed(1);
+        List<PreviewMeetingDTO> meetingList = meetingService.findPreviewByMemberIdClosed(userInfoDTO.getMember_id());
 
         model.addAttribute("meetingList", meetingList);
 
@@ -58,8 +57,7 @@ public class MeetingListController {
     }
 
 
-
-
+/*
 
     // 팔로잉한 모임 목록
     @GetMapping("/meetingList/followList")
@@ -86,5 +84,6 @@ public class MeetingListController {
         model.addAttribute("meetingList", meetingList);
         return "meetingList/likeList2";  // HTML 파일의 이름(확장자 제외)
     }
+*/
 
 }
