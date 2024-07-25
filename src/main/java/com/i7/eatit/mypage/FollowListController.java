@@ -5,9 +5,7 @@ import com.i7.eatit.domain.relationship.service.UserFollowService;
 import com.i7.eatit.domain.user.dto.UserInfoDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,8 +24,20 @@ public class FollowListController {
 
         if (loginUser != null){
             List<FollowInfoDetailDTO> followList = userFollowService.findFollowMember(loginUser.getMember_id());
+            System.out.println(followList);
             model.addAttribute("followList", followList);
         }
+    }
+
+    @PostMapping("follow-user-delete")
+    public String followUserDelete(@RequestParam("memberId") int followeeId, @SessionAttribute("loginUser") UserInfoDTO loginUser){
+
+        System.out.println("받음");
+        System.out.println("로그인 유저 id : " +loginUser.getMember_id());
+        System.out.println("팔로우 취소 대상 id : "+followeeId);
+        userFollowService.deleteFollowMember(loginUser.getMember_id(),followeeId);
+
+        return "redirect:/my-page/follow-list";
     }
 
     @GetMapping("follow-list-test")

@@ -58,3 +58,8 @@ document.querySelectorAll('.conversation-back').forEach(function(item) {
     })
 })
 // end: Coversation
+document.addEventListener('DOMContentLoaded', function() {
+    // 초기 상태에서 1대1 채팅을 보이도록 설정
+    document.querySelector('#1on1chat').style.display = 'block';
+    document.querySelector('#groupChat').style.display = 'none';
+});

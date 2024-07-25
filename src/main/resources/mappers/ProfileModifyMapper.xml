@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.i7.eatit.domain.user.dao.ProfileModifyMapper">
+    <update id="updateProfile" parameterType="com.i7.eatit.domain.user.dto.ProfileModifyDTO">
+        UPDATE
+               TBL_MEMBER
+           SET
+               NICKNAME=#{nickname}
+            ,  GENDER=#{gender}
+            ,  AGE=#{age}
+         WHERE
+               MEMBER_ID=#{memberId}
+    </update>
+
+    <update id="updatePassword" parameterType="hashmap">
+        UPDATE
+               TBL_MEMBER
+           SET
+               PASSWORD=#{newPassword}
+         WHERE
+               MEMBER_ID=#{memberId}
+    </update>
+
+    <update id="softDeleteMember" parameterType="_int">
+        UPDATE
+               TBL_MEMBER
+           SET
+               WITHDRAWAL_STATUS='Y'
+         WHERE
+               MEMBER_ID=#{memberId}
+    </update>
+</mapper>

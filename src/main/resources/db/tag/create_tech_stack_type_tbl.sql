@@ -6,6 +6,4 @@ create table tbl_tech_stack_type
         primary key auto_increment,
     stack_name varchar(255) null comment 'stack_name',
     UNIQUE KEY unique_stack_name (stack_name)
-)
-    comment 'tech_stack_type';
-
+) comment 'tech_stack_type';

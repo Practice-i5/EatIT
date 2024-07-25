@@ -3,6 +3,7 @@ package com.i7.eatit.domain.meeting.controller;
 import com.i7.eatit.domain.meeting.model.common.SearchCriteria;
 import com.i7.eatit.domain.meeting.model.dto.MeetingDTO;
 import com.i7.eatit.domain.meeting.model.service.MeetingService;
+import com.i7.eatit.domain.user.dto.UserInfoDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import java.util.List;
 public class DetailController {
 
     MeetingService meetingService;
+//    UserInfoService userInfoService;
 
     public DetailController(MeetingService meetingService) {
         this.meetingService = meetingService;
@@ -86,7 +88,6 @@ public class DetailController {
     @GetMapping("detail")
     public String writeDoneDetail(Model model, @RequestParam("meetingId") int meetingId) {
 
-
 //        List<MeetingDTO> meetingList = meetingService.findAllMeeting();
         String leaderId = "임시 닉네임";
 
@@ -96,12 +97,14 @@ public class DetailController {
 //        String groupDate = sdf.format(date);
 
         int temp = 81;
+//        model.addAttribute("careers", userinfoservice....(member_id));
+//
+//        model.addAttribute("evaluates", userInfoService....(member_id));
 
         List<String> careers = new ArrayList<>();
         careers.add("우리은행 백엔드");
         careers.add("농협은행 백엔드");
         careers.add("토스뱅크 백엔드");
-
         List<String> evaluates = new ArrayList<>();
         evaluates.add("시간 약속을 잘 지켜요");
         evaluates.add("질문에 대한 답변이 빨라요");

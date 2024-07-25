@@ -14,10 +14,11 @@ public class AdminMemberDto {
     private LocalDateTime createdDate;  // 가입 일시
     private String withdrawalStatus;    // 탈퇴 여부
     private int reportedCount;          // 누적 신고 횟수
+    private int isStoppedByAdmin;
 
     public AdminMemberDto(int memberId, String email, String password, String name, String nickname,
-        String loginMethod, String phoneNumber, LocalDateTime createdDate,
-        String withdrawalStatus, int reportedCount) {
+        String loginMethod, String phoneNumber, LocalDateTime createdDate, String withdrawalStatus,
+        int reportedCount, int isStoppedByAdmin) {
         this.memberId = memberId;
         this.email = email;
         this.password = password;
@@ -28,6 +29,7 @@ public class AdminMemberDto {
         this.createdDate = createdDate;
         this.withdrawalStatus = withdrawalStatus;
         this.reportedCount = reportedCount;
+        this.isStoppedByAdmin = isStoppedByAdmin;
     }
 
     public AdminMemberDto() {
@@ -111,5 +113,13 @@ public class AdminMemberDto {
 
     public void setReportedCount(int reportedCount) {
         this.reportedCount = reportedCount;
+    }
+
+    public int getIsStoppedByAdmin() {
+        return isStoppedByAdmin;
+    }
+
+    public void setIsStoppedByAdmin(int isStoppedByAdmin) {
+        this.isStoppedByAdmin = isStoppedByAdmin;
     }
 }

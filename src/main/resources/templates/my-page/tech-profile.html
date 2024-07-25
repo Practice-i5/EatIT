@@ -74,7 +74,7 @@
                 <ul class="list-no-pad form-size-limit chip-btn-list" style="min-width:60%">
 
                     <th:block th:if="${memberStack != null}">
-                        <li th:each="stack:${memberStack}">
+                        <li style="margin-top:5px; margin-bottom: 10px;" th:each="stack:${memberStack}">
                             <input th:id="|stack-${stack.techStack.code}|" class="interest-check" type="checkbox" th:value="${stack.techStack.name}" checked disabled>
                             <label class="btn-choice-mid interest-label" th:for="|stack-${stack.techStack.code}|"
                                 th:text="${stack.techStack.name}"></label>
@@ -120,18 +120,12 @@
                                 <p class="form-message-mini warn"> 백엔드 개발</p>
                                 <p class="form-message-mini warn">2023.11~재직 중</p>
                             </div>
-                            <!--                                    <div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">-->
-                            <!--                                        <button class="btn-choice-small btn-wb">수정</button>-->
-                            <!--                                        <button class="btn-choice-small btn-wb">삭제</button>-->
-                            <!--                                    </div> -->
                         </li>
-                        <li style="float: right;"><button type="button" class="btn-choice-small btn-wb" id="add-experience">경력 사항 추가</button></li>
                     </ul>
                 </div>
             </div>
             <button class="btn-rw btn-submit" type="button" onclick="location.href='tech-profile-modify'">수정</button>
         </form>
-        <script src="js/tech-profile-modal.js" th:src="@{/js/my-page/tech-profile-modal.js}"></script>
     </div>
 
 </html>
