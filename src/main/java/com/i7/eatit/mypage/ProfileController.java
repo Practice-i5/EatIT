@@ -2,7 +2,9 @@ package com.i7.eatit.mypage;
 
 import com.i7.eatit.domain.picture.dto.MemberPhotoDTO;
 import com.i7.eatit.domain.picture.service.PhotoService;
+import com.i7.eatit.domain.user.dto.ProfileModifyDTO;
 import com.i7.eatit.domain.user.dto.UserInfoDTO;
+import com.i7.eatit.domain.user.service.ProfileModifyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,53 +15,65 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RequestMapping("/my-page/*")
 @Controller
 public class ProfileController {
 
     private PhotoService photoService;
+    private ProfileModifyService profileModifyService;
 
-    public ProfileController(PhotoService photoService) {
+    public ProfileController(PhotoService photoService, ProfileModifyService profileModifyService) {
         this.photoService = photoService;
+        this.profileModifyService = profileModifyService;
     }
 
     @GetMapping("profile")
-    public void profile(@SessionAttribute(name = "loginUser", required = false) UserInfoDTO loginUser, Model model) {
-        System.out.println(loginUser);
+    public void profile(@SessionAttribute(name = "loginUser") UserInfoDTO loginUser, Model model) {
+        MemberPhotoDTO photoInfo = photoService.findPhotoByMemberId(loginUser.getMember_id());
 
-        if (loginUser!=null){
-
-            System.out.println(photoService.findPhotoByMemberId(loginUser.getMember_id()));
-
-            MemberPhotoDTO photoInfo = photoService.findPhotoByMemberId(loginUser.getMember_id());
-
-            if(photoInfo!=null){
-                //String photoUrl = photoInfo.getPhotoPath()+photoInfo.getPhotoName();
-                model.addAttribute("profileImage", photoInfo.getPhotoPath());
-            }
+        if(photoInfo!=null){
+            //String photoUrl = photoInfo.getPhotoPath()+photoInfo.getPhotoName();
+            model.addAttribute("profileImage", photoInfo.getPhotoPath());
         }
     }
 
-    @PostMapping("profile")
-    public String modifyProfile(Model model, WebRequest request) {
-        //System.out.println();
+    @PostMapping("profile-img-modify" )
+    public String modifyMemberImage(Model model) {
 
+        return "redirect:/my-page/profile";
+    }
 
-        for (var it: request.getParameterMap().keySet()) {
+    @PostMapping("profile-modify")
+    public String modifyProfile(@ModelAttribute ProfileModifyDTO newProfile, @SessionAttribute("loginUser") UserInfoDTO loginUser
+            , RedirectAttributes rttr) {
 
-            System.out.println(it +":" + request.getParameter(it));
-
-
+        if(Objects.equals(newProfile.getGender(), "")){
+            rttr.addFlashAttribute("error_gender", "해당 값은 빈 값일 수 없습니다.");
+        } else{
+            System.out.println(loginUser);
+            newProfile.setMemberId(loginUser.getMember_id());
+            System.out.println(newProfile);
+            profileModifyService.modifyProfile(newProfile);
+            loginUser.setGender(newProfile.getGender());
+            loginUser.setAge(newProfile.getAge());
+            loginUser.setNickname(newProfile.getNickname());
         }
 
+//        for (var it: request.getParameterMap().keySet()) {
+//            System.out.println(it +":" + request.getParameter(it));
+//            if (request.getParameter(it) == null || request.getParameter(it).isEmpty()) {
+//                rttr.addFlashAttribute("error_"+it, "해당 값은 빈 값일 수 없습니다.");
+//            }
+//        }
+
         //System.out.println(request.getParameter("nickName"));
-        return "my-page/profile";
+        return "redirect:/my-page/profile";
     }
 
     @GetMapping("uploadTest")
     public void uploadTest(Model model){
-        //model.addAttribute("profileImage","static/img/single/018706e1412f4220ab197cce62bfab59.png");
     }
 
     @PostMapping("uploadTest")
@@ -76,7 +90,6 @@ public class ProfileController {
             rttr.addFlashAttribute("profileImage", gdriveUrl);
             System.out.println("결과 url");
             System.out.println(gdriveUrl);
-
         }
 
         //rttr.addFlashAttribute("profileImage", uploadedUrl);

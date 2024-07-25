@@ -33,7 +33,7 @@
 </aside>
 
 <div layout:fragment="content" class="profile">
-    <form class="form-content">
+    <form class="form-content" action="/my-page/account-info-modify" method="post">
         <h2>로그인 정보 보기</h2>
         <div class="form-item">
             <label class="profile-label">이름</label>
@@ -70,16 +70,20 @@
         <th:block th:if="${loginMethod == 'homepage'}">
             <div class="form-item">
                 <label class="profile-label">기존 비밀번호</label>
-                <input class="form-input get-nickname" type="password" placeholder="기존 비밀번호 입력">
+                <input class="form-input get-nickname" type="password" name="passwordBefore"
+                       placeholder="기존 비밀번호 입력" required>
             </div>
             <div class="form-item">
                 <label class="profile-label">새 비밀번호</label>
-                <input class="form-input get-password" type="password" placeholder="새 비밀번호 입력">
+                <input class="form-input get-password" type="password" name="passwordAfter"
+                       placeholder="새 비밀번호 입력">
             </div>
             <div class="form-item">
-                <label class="profile-label">새 비밀번호</label>
-                <input class="form-input get-password" type="password" placeholder="새 비밀번호 입력">
+                <label class="profile-label">새 비밀번호 재입력</label>
+                <input class="form-input get-password" type="password" name="passwordAfterAgain"
+                       placeholder="새 비밀번호 재입력">
             </div>
+            <p th:text="${error_passwordAgain}"></p>
         </th:block>
 
         <th:block th:unless="${loginMethod == 'homepage'}">
