@@ -5,8 +5,7 @@ import com.i7.eatit.domain.alarm.dto.AlarmDTO;
 import com.i7.eatit.domain.alarm.service.AlarmService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -48,13 +47,13 @@ public class AlarmPageController {
 
 
         //Todo : 로그인 정보 받아 와야 함
-        int member_id = 4;
-        List<AlarmDTO> alarmList = alarmService.findAllAlarm(member_id);
+        int memberId = 4;
+        List<AlarmDTO> alarmList = alarmService.findAllAlarm(memberId);
         model.addAttribute("alarmList", alarmList);
 
 
 
-        boolean isAlarmRinging = alarmService.checkNewAlarm();
+        boolean isAlarmRinging = alarmService.checkNewAlarm(memberId);
 
         model.addAttribute("isAlarmRinging" , isAlarmRinging);
 
@@ -67,6 +66,12 @@ public class AlarmPageController {
     }
 
 
+    @PostMapping(value="alarmDetail", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public List<AlarmDTO> findCategoryList(@RequestParam int alarmId) {
+        System.out.println(alarmId);
+        return alarmService.findAlarmDatail(alarmId);
+    }
 
 
     static class FollowAlarm{

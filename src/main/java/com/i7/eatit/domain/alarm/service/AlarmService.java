@@ -19,11 +19,9 @@ public class AlarmService {
        return alarmMapper.findAllAlarm(member_id);
     }
 
-    public boolean checkNewAlarm(){
-        //Todo : 로그인 정보 받아 와야 함
-        int member_id = 1;
+    public boolean checkNewAlarm(int memberId){
 
-        List<AlarmDTO> alarmList = this.findAllAlarm(member_id);
+        List<AlarmDTO> alarmList = this.findAllAlarm(memberId);
 
         int alarmCount = 0;
         for (AlarmDTO alarmDTO : alarmList) {
@@ -43,8 +41,7 @@ public class AlarmService {
     }
 
 
-
-
-
-
+    public List<AlarmDTO> findAlarmDatail(int alarmId) {
+        return null;
+    }
 }
