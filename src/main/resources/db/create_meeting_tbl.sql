@@ -12,6 +12,7 @@ CREATE TABLE `tbl_meeting`
     `meeting_type` VARCHAR(255) NOT NULL COMMENT 'meeting_type',
     `scheduled_date` DATETIME NOT NULL COMMENT 'scheduled_date', -- fix type DATE -> DATETIEM
     `exit_restriction_time` TIME NOT NULL COMMENT 'exit_restriction_time',
+    `recruit_member_number` INT NOT NULL DEFAULT 0 COMMENT 'recruit_member_number',
     `recruitment_number` INT NOT NULL COMMENT 'recruitment_number',
     `gender` VARCHAR(255) NOT NULL COMMENT 'gender',
     `eligible_age` VARCHAR(255) NOT NULL COMMENT 'eligible_age',
