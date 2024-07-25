@@ -1,10 +1,4 @@
---create_member_tbl.sql
-
-DROP TABLE IF EXISTS `tbl_member`;
-
---create_member_tbl.sql
-
-DROP TABLE IF EXISTS `tbl_member`;
+-- create_member_tbl.sql
 
 CREATE TABLE `tbl_member`
 (
@@ -20,6 +14,7 @@ CREATE TABLE `tbl_member`
     `reported_count` INT DEFAULT 0 NULL COMMENT '누적 신고 횟수',
     `gender` VARCHAR(255) NOT NULL COMMENT 'gender',
     `age` INT NOT NULL COMMENT 'age',
+    `is_stopped_by_admin` INT NOT NULL COMMENT 'is_stopped_by_admin',
 
     PRIMARY KEY (`member_id`)
 ) COMMENT = 'member';
