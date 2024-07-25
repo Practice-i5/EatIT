@@ -32,7 +32,7 @@ public class SearchController {
     @PostMapping("list")
     public String searchListPage(SearchCriteria searchCriteria, Model model) {
 
-        model.addAttribute("meetingList", meetingService.searchMeetings(searchCriteria));
+        model.addAttribute("meetingList", meetingService.findPreviewBySearch(searchCriteria));
         return "search/list";
     }
 
