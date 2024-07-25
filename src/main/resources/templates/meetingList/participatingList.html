@@ -26,7 +26,7 @@
   <link href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
 
   <!-- Template Stylesheet -->
-  <link th:href="@{/css/meetingList.css}" href="/css/meetingList.css" rel="stylesheet"/>
+  <link href="/css/meetingList.css" th:href="@{/css/meetingList.css}" rel="stylesheet"/>
 
   <style>
     .main-image {
@@ -52,7 +52,7 @@
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="lib/lightbox/js/lightbox.min.js"></script>
 <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-<script th:src="@{/js/meetingList.js}" src="/js/meetingList.js"></script> <!-- Link to your meetingList.js file -->
+<script src="/js/meetingList.js" th:src="@{/js/meetingList.js}"></script> <!-- Link to your meetingList.js file -->
 <!-- Spinner Start -->
 <div id="spinner"
      class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50 d-flex align-items-center justify-content-center">
@@ -64,7 +64,7 @@
 <div class="container-fluid fixed-top">
   <div class="container px-0">
     <nav class="navbar navbar-light bg-white navbar-expand-xl">
-      <img th:src="@{/img/image_145.png}" src="/img/image_145.png" width="80" alt="Eat-IT Logo">
+      <img src="/img/image_145.png" th:src="@{/img/image_145.png}" width="80" alt="Eat-IT Logo">
       <h1 class="text-primary display-6">Eat-IT</h1>
 
       <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
@@ -75,10 +75,10 @@
       <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
 
         <div class="navbar-nav mx-auto">
-          <a th:src="@{/img/image_146.png}" href="home.html" class="nav-item nav-link">홈</a>
-          <a th:href="@{/enroll-meeting/enroll-meeting}" href="enroll-meeting.html" class="nav-item nav-link">모임등록</a>
-          <a th:href="@{/search/list}" href="search.html" class="nav-item nav-link">모임찾기</a>
-          <a th:href="@{/meetingList/likeList}" href="/templates/meetingList/likeList.html"
+          <a href="home.html" th:href="@{/home/home}" class="nav-item nav-link">홈</a>
+          <a href="enroll-meeting.html" th:href="@{/enroll-meeting/enroll-meeting}" class="nav-item nav-link">모임등록</a>
+          <a href="search.html" th:href="@{/search/list}" class="nav-item nav-link">모임찾기</a>
+          <a href="/templates/meetingList/likeList.html" th:href="@{/meetingList/likeList}"
              class="nav-item nav-link active">모임 목록</a>
         </div>
         <!-- 알림, 로그인, 회원가입 버튼 추가 -->
@@ -105,7 +105,7 @@
 
 
 <!-- 일단 이렇게 해야 페이지 이동될 수 있어서 이 방식으로 했는데, 추후에 js로 분리시켜야 함-->
-<script th:src="@{/js/meetingList}" src="/js/meetingList.js"></script>
+<script src="/js/meetingList.js" th:src="@{/js/meetingList}"></script>
 <script>
   // JavaScript for login and signup buttons
   document.addEventListener('DOMContentLoaded', function () {
@@ -211,13 +211,8 @@
 
                     <!-- 모임 이미지 -->
                     <div class="fruit-img">
-                      <img th:src="@{/img/image_146.png}"
+                      <img th:src="${meeting.meetingImageURL}"
                            class="other-image img-fluid w-100 rounded-top" alt=""/>
-                    </div>
-
-                    <!-- 모임 카테고리 -->
-                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                         style="top: 10px; left: 10px" th:text="${meeting.meetingType}">
                     </div>
 
                     <!-- 모임 정보 -->
@@ -228,10 +223,10 @@
 
                         <!-- 호스트 프로필과 참가 인원 -->
                         <div class="profile-container">
-                          <img th:src="@{/img/image_146.png}" alt="Profile Picture"
+                          <img th:src="${meeting.hostImageURL}" alt="Profile Picture"
                                class="profile-image">
                           <span class="profile-text"
-                                th:text="${meeting.currentMembers + '/' + meeting.recruitmentNumber + '명'}">참가 인원</span>
+                                th:text="${meeting.recruitMemberNumber + '/' + meeting.recruitmentNumber + '명'}">참가 인원</span>
                         </div>
 
                         <!-- 모임 상태 -->
@@ -247,7 +242,7 @@
                         <!--<a href="#" class="icon" th:onclick="'toggleFavorite(event, \'heartIcon' + ${meeting.id} + '\')'">
                             <i th:id="'heartIcon' + ${meeting.id}" class="fas fa-heart me-2 text-primary"></i> 찜하기
                         </a>
--->
+                        -->
                       </div>
                     </div>
                   </div>
@@ -267,7 +262,7 @@
 
 
 <!-- JavaScript 파일 연결 -->
-<script th:src="@{/js/meetingList}" src="/js/meetingList.js"></script>
+<script src="/js/meetingList.js" th:src="@{/js/meetingList}"></script>
 <!-- Fruits Shop End-->
 
 <!-- Footer Start -->
@@ -311,7 +306,7 @@
         <h4 class="text-light mb-3">팀원 소개</h4>
         <a class="btn-link" href="#">팀원 깃허브</a>
         <div class="team-member">
-          <img th:src="@{/img/image_161.png}" src="/img/image_161.png" width="400" alt="Team Member"
+          <img src="/img/image_161.png" th:src="@{/img/image_161.png}" width="400" alt="Team Member"
                class="team-member-img">
         </div>
       </div>
