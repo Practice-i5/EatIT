@@ -13,6 +13,10 @@ public interface MeetingMapper {
 
     List<MeetingDTO> findAllMeetings();
 
+    List<String> findAllInterests();
+
+    List<String> findAllType();
+
     List<MeetingDTO> findMeetings(SearchCriteria searchCriteria);
 
     // 모임 등록
@@ -29,6 +33,9 @@ public interface MeetingMapper {
 
     // meeting 이름 검색
     String findMeetingNameById(int meetingId);
+
+    // meeting_id로 host 정보 불러오기
+    int findHostIdById(int meetingId);
 
     // 검색으로 meeting-list불러오기
     List<PreviewMeetingDTO> findPreviewBySearch(SearchCriteria searchCriteria);
