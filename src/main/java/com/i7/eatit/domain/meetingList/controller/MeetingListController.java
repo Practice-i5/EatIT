@@ -29,9 +29,11 @@ public class MeetingListController {
     @GetMapping("/meetingList/participatingList")
     public String ParticipatingMeeting(@SessionAttribute("loginUser") UserInfoDTO userInfoDTO, Model model) {
 
-        System.out.println(userInfoDTO.getMember_id());
 
-        List<PreviewMeetingDTO> meetingList = meetingService.findPreviewByMemberIdOpen(userInfoDTO.getMember_id());
+        int memberId =  userInfoDTO.getMember_id();
+        System.out.println(memberId);
+
+        List<PreviewMeetingDTO> meetingList = meetingService.findPreviewByMemberIdOpen(memberId);
 
         model.addAttribute("meetingList", meetingList);
 
@@ -43,9 +45,10 @@ public class MeetingListController {
     @GetMapping("/meetingList/endList")
     public String EndMeeting(@SessionAttribute("loginUser") UserInfoDTO userInfoDTO, Model model) {
 
-        System.out.println(userInfoDTO.getMember_id());
+        int memberId =  userInfoDTO.getMember_id();
+        System.out.println(memberId);
 
-        List<PreviewMeetingDTO> meetingList = meetingService.findPreviewByMemberIdClosed(userInfoDTO.getMember_id());
+        List<PreviewMeetingDTO> meetingList = meetingService.findPreviewByMemberIdClosed(1);
 
         model.addAttribute("meetingList", meetingList);
 

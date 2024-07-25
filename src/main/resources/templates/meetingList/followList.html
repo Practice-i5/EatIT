@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -8,24 +9,24 @@
     <meta content="" name="keywords" />
     <meta content="" name="description" />
 
-    <!-- Google Web Fonts -->
+    &lt;!&ndash; Google Web Fonts &ndash;&gt;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap"
           rel="stylesheet" />
 
-    <!-- Icon Font Stylesheet -->s
+    &lt;!&ndash; Icon Font Stylesheet &ndash;&gt;s
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
 
-    <!-- Libraries Stylesheet -->
+    &lt;!&ndash; Libraries Stylesheet &ndash;&gt;
     <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
 
-    <!-- Customized Bootstrap Stylesheet -->
+    &lt;!&ndash; Customized Bootstrap Stylesheet &ndash;&gt;
     <link href=/"css/bootstrap.min.css" rel="stylesheet" />
 
-    <!-- Template Stylesheet -->
+    &lt;!&ndash; Template Stylesheet &ndash;&gt;
     <link href="/css/meetingList.css" rel="stylesheet" />
 
     <style>
@@ -52,15 +53,15 @@
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="lib/lightbox/js/lightbox.min.js"></script>
 <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-<script src="js/meetingList.js"></script> <!-- Link to your meetingList.js file -->
-<!-- Spinner Start -->
+<script src="js/meetingList.js"></script> &lt;!&ndash; Link to your meetingList.js file &ndash;&gt;
+&lt;!&ndash; Spinner Start &ndash;&gt;
 <div id="spinner"
      class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50 d-flex align-items-center justify-content-center">
     <div class="spinner-grow text-primary" role="status"></div>
 </div>
-<!-- Spinner End -->
+&lt;!&ndash; Spinner End &ndash;&gt;
 
-<!-- Navbar start  수정한 부분-- 헤더 부분!-->
+&lt;!&ndash; Navbar start  수정한 부분&#45;&#45; 헤더 부분!&ndash;&gt;
 <div class="container-fluid fixed-top">
     <div class="container px-0">
         <nav class="navbar navbar-light bg-white navbar-expand-xl">
@@ -78,24 +79,24 @@
                     <a href="/templates/meetingList/likeList.html" class="nav-item nav-link active">모임 목록</a>
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
-                <!-- 알림, 로그인, 회원가입 버튼 추가 -->
+                &lt;!&ndash; 알림, 로그인, 회원가입 버튼 추가 &ndash;&gt;
 
                 <a href="#" class="btn-notification my-auto me-4">
                     <i class="fas fa-bell fa-2x"></i>
                     <span class="position-absolute bg-danger rounded-circle"
                           style="top: 0; right: 0; width: 10px; height: 10px;"></span>
                 </a>
-                <!-- JavaScript 파일 연결 -->
+                &lt;!&ndash; JavaScript 파일 연결 &ndash;&gt;
                 <button class="btn btn-danger rounded-pill me-2" id="loginButton">로그인</button>
                 <button class="btn btn-outline-danger rounded-pill" id="signupButton">회원가입</button>
             </div>
         </nav>
     </div>
 </div>
-<!-- Navbar End -->
+&lt;!&ndash; Navbar End &ndash;&gt;
 
 
-<!-- 일단 이렇게 해야 페이지 이동될 수 있어서 이 방식으로 했는데, 추후에 js로 분리시켜야 함-->
+&lt;!&ndash; 일단 이렇게 해야 페이지 이동될 수 있어서 이 방식으로 했는데, 추후에 js로 분리시켜야 함&ndash;&gt;
 <script src="/js/meetingList.js"></script>
 <script>
     // JavaScript for login and signup buttons
@@ -111,7 +112,7 @@
 </script>
 
 
-<!-- Modal Search Start -->
+&lt;!&ndash; Modal Search Start &ndash;&gt;
 <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content rounded-0">
@@ -130,9 +131,9 @@
         </div>
     </div>
 </div>
-<!-- Modal Search End -->
+&lt;!&ndash; Modal Search End &ndash;&gt;
 
-<!-- Hero Start -->
+&lt;!&ndash; Hero Start &ndash;&gt;
 
 <div>
     <h1>
@@ -140,8 +141,8 @@
     </h1>
 </div>
 
-<!-- Hero End -->
-<!-- 관심 개발 분야 목록-->
+&lt;!&ndash; Hero End &ndash;&gt;
+&lt;!&ndash; 관심 개발 분야 목록&ndash;&gt;
 <div class="container-fluid fruite py-5">
     <div class="container py-5">
         <div class="tab-class text-center">
@@ -167,7 +168,7 @@
 
                         <li class="nav-item">
                             <a class="d-flex py-2 m-2 bg-light rounded-pill" data-bs-toggle="pill"
-                               href="participatingList.html">
+                               href="/patingList">
                                 <span class="text-dark" style="width: 130px">참여중인 모임</span>
                             </a>
                         </li>
@@ -187,13 +188,13 @@
 
 
 
-            <!-- 관심 개발 분야 음식점 목록 나오는 곳-->
+            &lt;!&ndash; 관심 개발 분야 음식점 목록 나오는 곳&ndash;&gt;
             <div class="tab-content">
                 <div id="tab-1" class="tab-pane fade show p-0 active">
                     <div class="row g-4">
                         <div class="col-lg-12">
                             <div class="row g-4">
-                                <!-- 이 부분이 관심 개발 분야 네모 상자인데, 클래스 이름 변경 해야 함!-->
+                                &lt;!&ndash; 이 부분이 관심 개발 분야 네모 상자인데, 클래스 이름 변경 해야 함!&ndash;&gt;
 
                                 <div class="col-md-6 col-lg-4 col-xl-3">
                                     <div class="rounded position-relative fruite-item">
@@ -213,7 +214,7 @@
                                                 [개발자 지망생 & 개발 멘토 모임]
                                             </p>
                                             <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <!-- 프로필 추가하는 부분-->
+                                                &lt;!&ndash; 프로필 추가하는 부분&ndash;&gt;
                                                 <div class="profile-container">
                                                     <img src="https://cdn.pixabay.com/photo/2020/06/30/22/34/dog-5357794_640.jpg"
                                                          alt="Profile Picture" class="profile-image">
@@ -225,7 +226,7 @@
                                                 <p class="text-dark fs-5 fw-bold mb-0">
                                                     2024.06.30(일) 오후 1:00
                                                 </p>
-                                                <!-- toggleFavorite와 id의 heartIcon[N] N변경-->
+                                                &lt;!&ndash; toggleFavorite와 id의 heartIcon[N] N변경&ndash;&gt;
                                                 <a href="#" class="icon" onclick="toggleFavorite(event, 'heartIcon1')">
                                                     <i id="heartIcon1" class="far fa-heart me-2 text-primary"></i> 찜하기
                                                 </a>
@@ -255,7 +256,7 @@
                                                 [신입 프론트 개발자 모임]
                                             </p>
                                             <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <!-- 프로필 추가하는 부분-->
+                                                &lt;!&ndash; 프로필 추가하는 부분&ndash;&gt;
                                                 <div class="profile-container">
                                                     <img src="https://cdn.pixabay.com/photo/2020/06/30/22/34/dog-5357794_640.jpg"
                                                          alt="Profile Picture" class="profile-image">
@@ -267,7 +268,7 @@
                                                 <p class="text-dark fs-5 fw-bold mb-0">
                                                     2024.06.29(토) 오후 5:00
                                                 </p>
-                                                <!-- toggleFavorite와 id의 heartIcon[N] N변경-->
+                                                &lt;!&ndash; toggleFavorite와 id의 heartIcon[N] N변경&ndash;&gt;
                                                 <a href="#" class="icon" onclick="toggleFavorite(event, 'heartIcon2')">
                                                     <i id="heartIcon2" class="far fa-heart me-2 text-primary"></i> 찜하기
                                                 </a>
@@ -296,7 +297,7 @@
                                                 <br> [판교 프론트 개발자 모임]
                                             </p>
                                             <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <!-- 프로필 추가하는 부분-->
+                                                &lt;!&ndash; 프로필 추가하는 부분&ndash;&gt;
                                                 <div class="profile-container">
                                                     <img src="https://cdn.pixabay.com/photo/2020/06/30/22/34/dog-5357794_640.jpg"
                                                          alt="Profile Picture" class="profile-image">
@@ -308,7 +309,7 @@
                                                 <p class="text-dark fs-5 fw-bold mb-0">
                                                     2024.06.29(토) 오후 1:00
                                                 </p>
-                                                <!-- toggleFavorite와 id의 heartIcon[N] N변경-->
+                                                &lt;!&ndash; toggleFavorite와 id의 heartIcon[N] N변경&ndash;&gt;
                                                 <a href="#" class="icon" onclick="toggleFavorite(event, 'heartIcon3')">
                                                     <i id="heartIcon3" class="far fa-heart me-2 text-primary"></i> 찜하기
                                                 </a>
@@ -338,7 +339,7 @@
                                                 [시니어 프론트 개발자 모임]
                                             </p>
                                             <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <!-- 프로필 추가하는 부분-->
+                                                &lt;!&ndash; 프로필 추가하는 부분&ndash;&gt;
                                                 <div class="profile-container">
                                                     <img src="https://cdn.pixabay.com/photo/2020/06/30/22/34/dog-5357794_640.jpg"
                                                          alt="Profile Picture" class="profile-image">
@@ -350,7 +351,7 @@
                                                 <p class="text-dark fs-5 fw-bold mb-0">
                                                     2024.07.01(월) 오후 12:00
                                                 </p>
-                                                <!-- toggleFavorite와 id의 heartIcon[N] N변경-->
+                                                &lt;!&ndash; toggleFavorite와 id의 heartIcon[N] N변경&ndash;&gt;
                                                 <a href="#" class="icon" onclick="toggleFavorite(event, 'heartIcon4')">
                                                     <i id="heartIcon4" class="far fa-heart me-2 text-primary"></i> 찜하기
                                                 </a>
@@ -371,11 +372,11 @@
     </div>
 </div>
 
-<!-- JavaScript 파일 연결 -->
+&lt;!&ndash; JavaScript 파일 연결 &ndash;&gt;
 <script src="/meetingList.js"></script>
-<!-- Fruits Shop End-->
+&lt;!&ndash; Fruits Shop End&ndash;&gt;
 
-<!-- Footer Start -->
+&lt;!&ndash; Footer Start &ndash;&gt;
 <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
     <div class="container py-5">
         <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5)">
@@ -431,9 +432,9 @@
 </div>
 </div>
 </div>
-<!-- Footer End -->
+&lt;!&ndash; Footer End &ndash;&gt;
 
-<!-- Copyright Start -->
+&lt;!&ndash; Copyright Start &ndash;&gt;
 <div class="container-fluid copyright bg-dark py-4">
     <div class="container">
         <div class="row">
@@ -442,9 +443,9 @@
             reserved.</span>
             </div>
             <div class="col-md-6 my-auto text-center text-md-end text-white">
-                <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
+                &lt;!&ndash;/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/&ndash;&gt;
+                &lt;!&ndash;/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/&ndash;&gt;
+                &lt;!&ndash;/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/&ndash;&gt;
                 Designed By
                 <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
                 Distributed By
@@ -453,8 +454,9 @@
         </div>
     </div>
 </div>
-<!-- Copyright End -->
+&lt;!&ndash; Copyright End &ndash;&gt;
 
 </body>
 
 </html>
+-->
