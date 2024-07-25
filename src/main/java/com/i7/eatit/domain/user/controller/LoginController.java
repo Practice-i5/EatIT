@@ -77,7 +77,6 @@ public class LoginController {
     @ResponseBody
     public UserInfoDTO getSessionUser(@SessionAttribute(value = "loginUser", required = false) UserInfoDTO loginUser,  HttpSession session) {
         UserInfoDTO userInfo = loginUser;
-        System.out.println(userInfo);
         if (userInfo == null) {
             userInfo = new UserInfoDTO();
         }

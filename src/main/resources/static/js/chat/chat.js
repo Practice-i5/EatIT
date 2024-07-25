@@ -1,57 +1,48 @@
-var socket = io("http://192.168.0.15:3000");
+var socket = io("http://localhost:3000");
 var messages = document.getElementById("messages");
 
-var userId = null;
 
-// 세션에서 사용자 정보를 가져오는 함수
-function getSessionUser() {
-  return fetch("http://192.168.0.15:8888/login/getSessionUser") // Spring 서버의 API 주소
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.text(); // 먼저 텍스트로 읽기
-    })
-    .then((text) => {
-      if (!text) {
-        return {}; // 비어있는 응답 처리
-      }
-      return JSON.parse(text); // JSON 파싱
-    })
-    .then((data) => {
-      console.log(data);
-      if (data && data.member_id) {
-        userId = data.member_id / 1;
-        sessionStorage.setItem("userId", userId); // 세션 스토리지에 사용자 ID 저장
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching session user:", error);
-    });
+// 사용자 ID를 세션에서 가져오는 함수
+function getSessionUser(callback) {
+  return fetch("http://localhost:8888/login/getSessionUser", { credentials: 'include' }) // 세션 정보를 포함하여 요청
+      .then((response) => response.json())
+      .then((data) => {
+        if (data && data.member_id) {
+          sessionStorage.setItem("userId", data.member_id); // 세션 스토리지에 사용자 ID 저장
+          callback(data.member_id);
+        } else {
+          callback('익명');
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching session user:", error);
+        callback('익명');
+      });
 }
 
-// 세션 스토리지에서 사용자 ID 가져오기 함수
-function getUserIdFromSessionStorage() {
-  return sessionStorage.getItem("userId");
-}
+// 클라이언트 초기화 시 사용자 정보를 가져옴
+let userId = null;
+getSessionUser((id) => {
+  userId = id;
 
-(function () {
   $("form").submit(function (e) {
-    e.preventDefault(); // prevents page reloading
+    e.preventDefault(); // 페이지 리로딩 방지
 
     let li = document.createElement("li");
-    let userId = getUserIdFromSessionStorage(); // 세션 스토리지에서 사용자 ID 가져오기
 
     socket.emit("chat message", {
       message: $("#message").val(),
-      sender: userId,
+      sender: userId || '익명', // 수정: userId가 없을 경우 '익명'으로 설정
     });
 
     messages.appendChild(li).append($("#message").val());
     let span = document.createElement("span");
-    messages.appendChild(span).append("by " + userId + ": " + "just now");
+    messages.appendChild(span).append("by " + (userId || '익명') + ": " + "just now");
 
     $("#message").val("");
+
+    // 스크롤을 가장 아래로 이동
+    li.scrollIntoView({ behavior: "smooth" });
 
     return false;
   });
@@ -62,15 +53,42 @@ function getUserIdFromSessionStorage() {
     var messages = document.getElementById("messages");
     messages.appendChild(li).append(data.message);
     messages.appendChild(span).append("by " + data.sender + ": " + "just now");
+    // 스크롤을 가장 아래로 이동
+    li.scrollIntoView({ behavior: "smooth" });
+  });
+  //타이핑 이벤트 설정
+
+  let messageInput = document.getElementById("message");
+  let typing = document.getElementById("typing");
+
+//isTyping 이벤트
+  messageInput.addEventListener("keypress", () => {
+    socket.emit("typing", {
+      user: sessionStorage.getItem("userId"),
+      message: "is typing...",
+    });
   });
 
-  // // 초기화 시 사용자 정보 가져오기
-  // getSessionUser();
-})();
-getSessionUser();
-// fetching initial chat messages from the database
+  socket.on("notifyTyping", (data) => {
+    typing.innerText = data.user + " " + data.message;
+    console.log(data.user + data.message);
+  });
+
+//타이핑 멈춤 이벤트
+  messageInput.addEventListener("keyup", () => {
+    socket.emit("stopTyping", "");
+  });
+
+  socket.on("notifyStopTyping", () => {
+    typing.innerText = "";
+  });
+
+
+});
+
+// 초기 채팅 메시지를 데이터베이스에서 가져오기
 (function () {
-  fetch("http://192.168.0.15:3000/chats")
+  fetch("http://localhost:3000/chats")
     .then((data) => data.json())
     .then((json) => {
       json.map((data) => {
@@ -84,29 +102,4 @@ getSessionUser();
     });
 })();
 
-//is typing...
 
-let messageInput = document.getElementById("message");
-let typing = document.getElementById("typing");
-
-//isTyping event
-messageInput.addEventListener("keypress", () => {
-  socket.emit("typing", {
-    user: sessionStorage.getItem("userId"),
-    message: "is typing...",
-  });
-});
-
-socket.on("notifyTyping", (data) => {
-  typing.innerText = data.user + " " + data.message;
-  console.log(data.user + data.message);
-});
-
-//stop typing
-messageInput.addEventListener("keyup", () => {
-  socket.emit("stopTyping", "");
-});
-
-socket.on("notifyStopTyping", () => {
-  typing.innerText = "";
-});
