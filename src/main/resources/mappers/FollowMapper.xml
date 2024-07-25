@@ -43,13 +43,13 @@
         WHERE A.FOLLOWER_ID=#{memberID}
     </select>
 
-    <delete id="deleteFollowMember>" parameterType="hashmap">
+    <delete id="deleteFollowMember" parameterType="hashmap">
         DELETE FROM TBL_FOLLOW
         WHERE FOLLOWER_ID= #{followerId}
         AND FOLLOWEE_ID = #{followeeId}
     </delete>
 
-    <insert id="insertFollowMember" parameterType="hashMap"
+    <insert id="insertFollowMember" parameterType="hashmap"
             useGeneratedKeys="true" keyProperty="followId">
         INSERT TBL_FOLLOW
         (FOLLOW_DATE, FOLLOWER_ID, FOLLOWEE_ID)
