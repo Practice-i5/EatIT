@@ -58,12 +58,12 @@ public class AdminController {
         HttpSession httpSession = request.getSession();
         httpSession.setAttribute("adminSession_" + httpSession.getId(),
             adminLoginDto.getAdminEmail());
-        httpSession.setMaxInactiveInterval(60 * 60);
+        httpSession.setMaxInactiveInterval(60 * 30);
 
         // 3. 사용자가 세션에 접근할 수 있도록 Session 의 Key 값을 Cookie 의 Value 값으로 전달.
         Cookie adminLoginCookie = new Cookie("adminLoginCookie", httpSession.getId());
         adminLoginCookie.setPath("/admin"); // admin 으로 시작하는 path 에서만 쿠키가 유효함.
-        adminLoginCookie.setMaxAge(60 * 60);
+        adminLoginCookie.setMaxAge(60 * 30);
         response.addCookie(adminLoginCookie);
 
         return "redirect:/admin/members";
