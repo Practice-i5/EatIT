@@ -6,7 +6,7 @@
   <title>익명 실시간 채팅</title>
   <link th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css" />
   <!------ 위의 내용을 HEAD 태그에 포함 ---------->
-  <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet" />
+  <link th:href="@{/css/groupChat.css}" type="text/css" rel="stylesheet" />
 </head>
 <body>
 <div class="chat_window">
@@ -35,9 +35,9 @@
 </div>
 
 <script th:src="@{https://cdn.socket.io/4.7.5/socket.io.min.js}"></script>
-<script th:src="@{/js/socket.js}"></script>
+<script th:src="@{/js/chat/socket.js}"></script>
 <script th:src="@{https://code.jquery.com/jquery-1.11.1.min.js}"></script>
 <script th:src="@{https://cdn.jsdelivr.net/gh/yourusername/TimeLeap/src/index-cdn.js}"></script>
-<script th:src="@{/js/chat.js}"></script>
+<script th:src="@{/js/chat/chat.js}"></script>
 </body>
 </html>

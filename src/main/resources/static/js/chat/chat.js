@@ -1,189 +1,112 @@
-// const chatNamespace = io("/chatGroup/", {
-//     auth: {
-//         token: 123456,
-//     },
-// });
+var socket = io("http://192.168.0.15:3000");
+var messages = document.getElementById("messages");
 
+var userId = null;
 
-// Query DOM
-const messageInput = document.getElementById("messageInput");
-const chatForm = document.getElementById("chatForm");
-const chatBox = document.getElementById("chat-box");
-const feedback = document.getElementById("feedback");
-const onlineUsers = document.getElementById("online-users-list");
-const chatContainer = document.getElementById("chatContainer");
-
-
-
-
-
-
-// start: Sidebar
-/**
- * 왼쪽 하단 클릭하면
- */
-document.querySelector('.chat-sidebar-profile-toggle').addEventListener('click', function(e) {
-    e.preventDefault();
-    this.parentElement.classList.toggle('active');
-});
-
-document.addEventListener('click', function(e) {
-    if(!e.target.matches('.chat-sidebar-profile, .chat-sidebar-profile *')) {
-        document.querySelector('.chat-sidebar-profile').classList.remove('active');
-    }
-});
-// end: Sidebar
-
-// start: Conversation
-/**
- * 클릭시 delete, forward toggle activce기능
- */
-document.querySelectorAll('.conversation-item-dropdown-toggle').forEach(function(item) {
-    item.addEventListener('click', function(e) {
-        e.preventDefault();
-        if(this.parentElement.classList.contains('active')) {
-            this.parentElement.classList.remove('active');
-        } else {
-            document.querySelectorAll('.conversation-item-dropdown').forEach(function(i) {
-                i.classList.remove('active');
-            });
-            this.parentElement.classList.add('active');
-        }
+// 세션에서 사용자 정보를 가져오는 함수
+function getSessionUser() {
+  return fetch("http://192.168.0.15:8888/login/getSessionUser") // Spring 서버의 API 주소
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.text(); // 먼저 텍스트로 읽기
+    })
+    .then((text) => {
+      if (!text) {
+        return {}; // 비어있는 응답 처리
+      }
+      return JSON.parse(text); // JSON 파싱
+    })
+    .then((data) => {
+      console.log(data);
+      if (data && data.member_id) {
+        userId = data.member_id / 1;
+        sessionStorage.setItem("userId", userId); // 세션 스토리지에 사용자 ID 저장
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching session user:", error);
     });
-});
+}
 
-/**
- * 외부를 클릭 시 delete, forward toggle deactivce기능
- */
-document.addEventListener('click', function(e) {
-    if(!e.target.matches('.conversation-item-dropdown, .conversation-item-dropdown *')) {
-        document.querySelectorAll('.conversation-item-dropdown').forEach(function(i) {
-            i.classList.remove('active');
-        });
-    }
-});
+// 세션 스토리지에서 사용자 ID 가져오기 함수
+function getUserIdFromSessionStorage() {
+  return sessionStorage.getItem("userId");
+}
 
-/**
- * 텍스트 입력 시 행 조절
- */
-document.querySelectorAll('.conversation-form-input').forEach(function(item) {
-    item.addEventListener('input', function() {
-        this.rows = this.value.split('\n').length;
+(function () {
+  $("form").submit(function (e) {
+    e.preventDefault(); // prevents page reloading
+
+    let li = document.createElement("li");
+    let userId = getUserIdFromSessionStorage(); // 세션 스토리지에서 사용자 ID 가져오기
+
+    socket.emit("chat message", {
+      message: $("#message").val(),
+      sender: userId,
     });
-});
 
-/**
- * 클릭시 대화 오픈
- */
-document.querySelectorAll('[data-conversation]').forEach(function(item) {
-    item.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelectorAll('.conversation').forEach(function(i) {
-            i.classList.remove('active');
-        });
-        document.querySelector(this.dataset.conversation).classList.add('active');
+    messages.appendChild(li).append($("#message").val());
+    let span = document.createElement("span");
+    messages.appendChild(span).append("by " + userId + ": " + "just now");
+
+    $("#message").val("");
+
+    return false;
+  });
+
+  socket.on("received", (data) => {
+    let li = document.createElement("li");
+    let span = document.createElement("span");
+    var messages = document.getElementById("messages");
+    messages.appendChild(li).append(data.message);
+    messages.appendChild(span).append("by " + data.sender + ": " + "just now");
+  });
+
+  // // 초기화 시 사용자 정보 가져오기
+  // getSessionUser();
+})();
+getSessionUser();
+// fetching initial chat messages from the database
+(function () {
+  fetch("http://192.168.0.15:3000/chats")
+    .then((data) => data.json())
+    .then((json) => {
+      json.map((data) => {
+        let li = document.createElement("li");
+        let span = document.createElement("span");
+        messages.appendChild(li).append(data.message);
+        messages
+          .appendChild(span)
+          .append("by " + data.sender + ": " + formatTimeAgo(data.createdAt));
+      });
     });
+})();
+
+//is typing...
+
+let messageInput = document.getElementById("message");
+let typing = document.getElementById("typing");
+
+//isTyping event
+messageInput.addEventListener("keypress", () => {
+  socket.emit("typing", {
+    user: sessionStorage.getItem("userId"),
+    message: "is typing...",
+  });
 });
 
-/**
- * 클릭시 대화 close
- */
-document.querySelectorAll('.conversation-back').forEach(function(item) {
-    item.addEventListener('click', function(e) {
-        e.preventDefault();
-        this.closest('.conversation').classList.remove('active');
-        document.querySelector('.conversation-default').classList.add('active');
-    });
-});
-// end: Conversation
-
-
-/**
- * 클릭시 1대1채팅, 단톡방 오픈
- */
-// document.querySelectorAll('.chat-toggle').forEach(function(item) {
-//     item.addEventListener('click', function(e) {
-//         e.preventDefault();
-//         const target = this.dataset.target;
-//
-//         // 모든 chat-content를 숨김
-//         document.querySelectorAll('.chat-content').forEach(function(content) {
-//             content.style.display = 'none';
-//         });
-//
-//         // 선택된 chat-content를 표시
-//         const targetElement = document.querySelector(target);
-//         if (targetElement) {
-//             targetElement.style.display = 'block';
-//         }
-//
-//         // 1대1 채팅 버튼을 클릭했을 때 초기 상태로 설정
-//
-//     });
-// });
-
-// *******************************************************서버로부터의 이벤트 리스닝
-
-chatNamespace.on("chat message", (data) => {
-    feedback.innerHTML = "";
-    chatBox.innerHTML += `<li class="conversation-item-wrapper">
-                      <div class="conversation-item-box">
-                        <div class="conversation-item-text">
-                          <p>
-                            ${data.message}  <!--보내는 메세지 -->
-                          </p>
-                          <div class="conversation-item-time">${data.date}</div><!--보내는 시간 -->
-                        </div>
-                        <div class="conversation-item-dropdown">
-                          <button
-                                  type="button"
-                                  class="conversation-item-dropdown-toggle"
-                          >
-                            <i class="ri-more-2-line"></i>
-                          </button>
-                          <ul class="conversation-item-dropdown-list">
-                            <li>
-                              <a href="#"
-                              ><i class="ri-share-forward-line"></i>
-                                Forward</a
-                              >
-                            </li>
-                            <li>
-                              <a href="#"
-                              ><i class="ri-delete-bin-line"></i> Delete</a
-                              >
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </li>`;
-    chatContainer.scrollTop =
-        chatContainer.scrollHeight - chatContainer.clientHeight;
+socket.on("notifyTyping", (data) => {
+  typing.innerText = data.user + " " + data.message;
+  console.log(data.user + data.message);
 });
 
-//*******************************************************타이핑 이벤트
-messageInput.addEventListener("keypress", (e) => {
-    chatNamespace.emit("typing", { name: nickname, roomNumber });
+//stop typing
+messageInput.addEventListener("keyup", () => {
+  socket.emit("stopTyping", "");
 });
 
-chatNamespace.on("typing", (data) => {
-    if (roomNumber == data.roomNumber) {
-        feedback.innerHTML = data;
-    }
+socket.on("notifyStopTyping", () => {
+  typing.innerText = "";
 });
-
-//*******************************************************공용 채팅 메시지 전송 이벤트
-chatForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    if (messageInput.value) {
-        chatNamespace.emit("chat message", {
-            message: messageInput.value,
-            nickname,
-            roomNumber,
-        });
-        messageInput.value = "";
-    }
-});
-
-//*******************************************************로그인 이벤트 발생
-chatNamespace.emit("login", { nickname, roomNumber });
