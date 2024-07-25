@@ -41,20 +41,21 @@ public class ProfileController {
         }
     }
 
-    @PostMapping("profile")
-    public String modifyProfile(Model model, WebRequest request) {
+    @PostMapping("profile-modify")
+    public String modifyProfile(Model model, WebRequest request, RedirectAttributes rttr) {
         //System.out.println();
 
-
+        boolean isValid = true;
         for (var it: request.getParameterMap().keySet()) {
-
             System.out.println(it +":" + request.getParameter(it));
-
-
+            if (request.getParameter(it) == null || request.getParameter(it).isEmpty()) {
+                rttr.addFlashAttribute("error_"+it, "해당 값은 빈 값일 수 없습니다.");
+                isValid = false;
+            }
         }
 
         //System.out.println(request.getParameter("nickName"));
-        return "my-page/profile";
+        return "redirect:/my-page/profile";
     }
 
     @GetMapping("uploadTest")

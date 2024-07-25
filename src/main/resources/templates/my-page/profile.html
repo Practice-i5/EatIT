@@ -33,64 +33,66 @@
     </aside>
 
     <div layout:fragment="content" class="profile">
-        <form class="form-content" method="post" action="profile">
+        <div class="form-content" >
             <h2>프로필 수정</h2>
-            <div class="form-item">
-                <label class="profile-label">프로필 사진</label>
-                <div class="form-input" style="width: 70%; display: flex; align-items: center; justify-content: space-between;">
-
-                    <img id="img-preview" src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"
-                         th:src="${profileImage}"/>
-                    <div>
-                        <input id="img-file" style="display: none; width:0px; margin: 0px; padding: 0px;" type="file" accept="image/*"/>
-                        <label for="img-file" class="upload-btn btn-choice-small btn-wb">수정</label>
-                        <label class="reset-img btn-choice-small btn-wb">초기화</label>
+            <form method="post" action="/my-page/profile-img-modify" enctype="multipart/form-data">
+                <div class="form-item">
+                    <label class="profile-label">프로필 사진</label>
+                    <div class="form-input" style="width: 70%; display: flex; align-items: center; justify-content: space-between;">
+                        <img id="img-preview" src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"
+                             th:src="${profileImage}"/>
+                        <div>
+                            <input id="img-file" style="display: none; width:0px; margin: 0px; padding: 0px;" type="file" accept="image/*" name="imgFile"/>
+                            <label for="img-file" class="upload-btn btn-choice-small btn-wb">수정</label>
+                            <label class="reset-img btn-choice-small btn-wb">초기화</label>
+                        </div>
                     </div>
-
                 </div>
+            </form>
 
-            </div>
-            <div class="form-item">
-                <label class="profile-label" for="get-nickname">닉네임</label>
-                <input id="get-nickname" type="text" placeholder="닉네임을 입력하세요." name=nickName
-                       th:value="${session.loginUser.nickname}">
-            </div>
-            <p class="form-message warn">주의사항 같은 것 작성</p>
 
-            <div class="form-item">
-                <label class="profile-label">성별</label>
-                <select name="gender" th:switch="${session.loginUser.gender}">
-                    <option value="">성별</option>
-                    <th:block th:case="male">
-                        <option selected value="male">남성</option>
-                        <option value="female">여성</option>
-                    </th:block>
-                    <th:block th:case="female">
-                        <!--                            <th:block th:if="${gender == 'female'}">-->
-                        <option value="male">남성</option>
-                        <option selected value="female">여성</option>
-                    </th:block>
+            <form method="post" action="/my-page/profile-modify">
+                <div class="form-item">
+                    <label class="profile-label" for="get-nickname">닉네임</label>
+                    <input id="get-nickname" type="text" placeholder="닉네임을 입력하세요." name=nickName required
+                           th:value="${session.loginUser.nickname}">
+                </div>
+                <p class="form-message warn">주의사항 같은 것 작성</p>
+                <p class="form-message error" th:text="${error_nickName}"></p>
 
-                    <th:block th:case="*">
-                        <!--                            <th:block th:unless="${gender=='feamle' or gender=='male'}">-->
-                        <option value="male">남성</option>
-                        <option value="female">여성</option>
-                    </th:block>
-                </select>
-            </div>
-            <div class="form-item">
-                <label class="profile-label" for="age">나이</label>
-                <input class="form-input" id="age" type="number" placeholder="나이를 입력하세요." name=age
-                       th:value="${session.loginUser.age}">
-            </div>
+                <div class="form-item">
+                    <label class="profile-label">성별</label>
+                    <select name="gender" th:switch="${session.loginUser.gender}">
+                        <option value="">성별</option>
+                        <th:block th:case="male">
+                            <option selected value="male">남성</option>
+                            <option value="female">여성</option>
+                        </th:block>
+                        <th:block th:case="female">
+                            <option value="male">남성</option>
+                            <option selected value="female">여성</option>
+                        </th:block>
 
-<!--            <div class="form-item">-->
-<!--                <label class="profile-label" for="intro">소개글</label>-->
-<!--                <textarea class="form-input" id="intro" placeholder="소개글을 입력하세요." rows="5" name=introduce th:text="${introduce}"></textarea>-->
-<!--            </div>-->
-            <p class="form-message error">에러 메시지</p>
-            <button class="btn-rw btn-submit" type="submit">제출</button>
-        </form>
+                        <th:block th:case="*">
+                            <option value="male">남성</option>
+                            <option value="female">여성</option>
+                        </th:block>
+                    </select>
+                </div>
+                <p class="form-message error" th:text="${error_gender}"></p>
+                <div class="form-item">
+                    <label class="profile-label" for="age">나이</label>
+                    <input class="form-input" id="age" type="number" placeholder="나이를 입력하세요." name=age min="0"
+                           th:value="${session.loginUser.age}">
+                </div>
+                <p class="form-message error" th:text="${error_age}"></p>
+
+                <button class="btn-rw btn-submit" type="submit">제출</button>
+            </form>
+
+
+
+        </div>
         <script src="js/upload-image.js" th:src="@{/js/my-page/upload-image.js}"></script>
     </div>
 

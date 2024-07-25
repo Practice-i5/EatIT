@@ -58,58 +58,61 @@
                     </div>
                 </li>
             </th:block>
-            <!-- <li>
-                <form>
-                    <div class="form-item">
-                        <div class="block-info">
-                            <img src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"/>
-                            <div class="block-info-text">
-                                닉네임1
+            <th:block th:if="${followList == null}">
+                <li>
+                    <form>
+                        <div class="form-item">
+                            <div class="block-info">
+                                <img src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"/>
+                                <div class="block-info-text">
+                                    닉네임1
+                                </div>
+                            </div>
+
+                            <div class="block-modify">
+                                <button class="btn-choice-small btn-wb">프로필</button>
+                                <button class="btn-choice-small btn-wb">삭제</button>
                             </div>
                         </div>
+                    </form>
+                </li>
 
-                        <div class="block-modify">
-                            <button class="btn-choice-small btn-wb">프로필</button>
-                            <button class="btn-choice-small btn-wb">삭제</button>
-                        </div>
-                    </div>
-                </form>
-            </li>
+                <li>
+                    <form>
+                        <div class="form-item">
+                            <div class="block-info">
+                                <img src="images/ellipse_56.png" th:src="@{/img/my-page/ellipse_56.png}"/>
+                                <div class="block-info-text">
+                                    화성남
+                                </div>
+                            </div>
 
-            <li>
-                <form>
-                <div class="form-item">
-                    <div class="block-info">
-                        <img src="images/ellipse_56.png" th:src="@{/img/my-page/ellipse_56.png}"/>
-                        <div class="block-info-text">
-                            화성남
-                        </div>
-                    </div>
-
-                    <div class="block-modify">
-                        <button class="btn-choice-small btn-wb">프로필</button>
-                        <button class="btn-choice-small btn-wb">삭제</button>
-                    </div>
-                </div>
-                </form>
-            </li>
-            <li>
-                <form>
-                    <div class="form-item">
-                        <div class="block-info">
-                            <img id="img-preview" src="images/ellipse_51.png" th:src="@{/img/my-page/ellipse_51.png}"/>
-                            <div class="block-info-text">
-                                래빗
+                            <div class="block-modify">
+                                <button class="btn-choice-small btn-wb">프로필</button>
+                                <button class="btn-choice-small btn-wb">삭제</button>
                             </div>
                         </div>
+                    </form>
+                </li>
+                <li>
+                    <form>
+                        <div class="form-item">
+                            <div class="block-info">
+                                <img id="img-preview" src="images/ellipse_51.png" th:src="@{/img/my-page/ellipse_51.png}"/>
+                                <div class="block-info-text">
+                                    래빗
+                                </div>
+                            </div>
 
-                        <div class="block-modify">
-                            <button class="btn-choice-small btn-wb">프로필</button>
-                            <button class="btn-choice-small btn-wb">삭제</button>
+                            <div class="block-modify">
+                                <button class="btn-choice-small btn-wb">프로필</button>
+                                <button class="btn-choice-small btn-wb">삭제</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
-            </li> -->
+                    </form>
+                </li>
+            </th:block>
+
         </ul>
 
         <ul class="list-no-pad" style="display: flex; justify-content: center;">
