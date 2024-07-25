@@ -7,5 +7,4 @@ CREATE TABLE tbl_member_photo
     photo_name VARCHAR(255) NOT NULL COMMENT 'photo_name',
     member_id  INT          NOT NULL COMMENT 'member_id',
     UNIQUE (member_id)
-)
-    COMMENT 'member_photo';
+) COMMENT 'member_photo';

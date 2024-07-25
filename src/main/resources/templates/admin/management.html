@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원 정지</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    @layer base {
+      :root {
+        --background: 0 0% 100%;
+        --foreground: 240 10% 3.9%;
+        --card: 0 0% 100%;
+        --card-foreground: 240 10% 3.9%;
+        --border: 240 5.9% 90%;
+      }
+    }
+
+    @layer base {
+      * {
+        @apply border-border;
+      }
+
+      body {
+        @apply bg-background text-foreground font-body;
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        @apply font-heading;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="w-full max-w-3xl mx-auto">
+  <div class="border rounded-lg">
+    <div class="p-4 border-b">
+      <h2 class="text-xl font-bold">User Suspension Management</h2>
+      <p class="text-gray-500">View the suspension status of a single user.</p>
+    </div>
+    <div class="p-4">
+      <table class="w-full">
+        <thead>
+        <tr>
+          <th class="text-left">회원 아이디</th>
+          <th class="text-left">현재 상태</th>
+          <th class="text-left">변경하고 싶은 상태</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td th:text="${userId}"></td>
+          <td>
+            <span class="inline-block px-2 py-1 bg-red-500 text-white rounded-full">Suspended</span>
+          </td>
+          <td>
+            <div class="flex items-center gap-2">
+              <button class="px-2 py-1 border rounded-full bg-green-500 text-white hover:bg-green-600">
+                Unsuspend
+              </button>
+              <button class="px-2 py-1 bg-red-500 text-white border rounded-full hover:bg-red-600">Suspend</button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>
