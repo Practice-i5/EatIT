@@ -328,8 +328,6 @@
                 ON          A.MEETING_ID = B.MEETING_ID
                 LEFT JOIN   TBL_MEMBER_PHOTO AS C
                 ON          A.HOST_MEMBER_ID = C.MEMBER_ID
-                LEFT JOIN   TBL_MEETING AS D
-                ON          A.MEETING_ID = D.MEETING_ID
         WHERE   D.MEMBER_ID = #{ memberId }
             AND A.STATUS = 'Open'
         GROUP BY
@@ -361,8 +359,6 @@
         ON          A.MEETING_ID = B.MEETING_ID
         LEFT JOIN   TBL_MEMBER_PHOTO AS C
         ON          A.HOST_MEMBER_ID = C.MEMBER_ID
-        LEFT JOIN   TBL_MEETING AS D
-        ON          A.MEETING_ID = D.MEETING_ID
         WHERE   D.MEMBER_ID = #{ memberId }
         AND A.STATUS = 'Closed'
         GROUP BY

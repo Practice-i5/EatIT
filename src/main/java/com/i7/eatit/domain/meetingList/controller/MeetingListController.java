@@ -29,6 +29,8 @@ public class MeetingListController {
     @GetMapping("/meetingList/participatingList")
     public String ParticipatingMeeting(@SessionAttribute("loginUser") UserInfoDTO userInfoDTO, Model model) {
 
+        System.out.println(userInfoDTO.getMember_id());
+
         List<PreviewMeetingDTO> meetingList = meetingService.findPreviewByMemberIdOpen(userInfoDTO.getMember_id());
 
         model.addAttribute("meetingList", meetingList);
@@ -41,7 +43,9 @@ public class MeetingListController {
     @GetMapping("/meetingList/endList")
     public String EndMeeting(@SessionAttribute("loginUser") UserInfoDTO userInfoDTO, Model model) {
 
-        List<PreviewMeetingDTO> meetingList = meetingService.findPreviewByMemberIdOpen(userInfoDTO.getMember_id());
+        System.out.println(userInfoDTO.getMember_id());
+
+        List<PreviewMeetingDTO> meetingList = meetingService.findPreviewByMemberIdClosed(userInfoDTO.getMember_id());
 
         model.addAttribute("meetingList", meetingList);
 
@@ -72,6 +76,7 @@ public class MeetingListController {
     }
 
 
+    // like2 연습용 url
     @GetMapping("/meetingList/like2")
     public String Like2Meeting(Model model) {
         List<MeetingDTO> meetingList = meetingService.findAllMeetings();
