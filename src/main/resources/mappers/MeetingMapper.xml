@@ -25,6 +25,18 @@
         <result property="hostMemberId" column="host_member_id"/>
     </resultMap>
 
+    <resultMap id="previewMeetingResultMap" type="com.i7.eatit.domain.meeting.model.dto.PreviewMeetingDTO">
+        <id property="meetingId" column="meeting_id"/>
+        <result property="title" column="title"/>
+        <result property="locationName" column="location_name"/>
+        <result property="meetingImageURL" column="meeting_url"/>
+        <result property="status" column="status"/>
+        <result property="hostImageURL" column="member_url"/>
+        <result property="scheduledDate" column="scheduled_date"/>
+        <result property="recruitMemberNumber" column="recruit_member_number"/>
+        <result property="recruitmentNumber" column="recruitment_number"/>
+    </resultMap>
+
     <select id="findAllMeetings" resultMap="meetingResultMap">
         SELECT
                 A.MEETING_ID
@@ -237,6 +249,86 @@
             TBL_MEETING
         WHERE
             MEETING_ID = #{ meetingId }
+    </select>
+
+    <select id="findPreviewBySearch" parameterType="com.i7.eatit.domain.meeting.model.common.SearchCriteria" resultMap="previewMeetingResultMap">
+        SELECT
+            A.MEETING_ID
+            , A.TITLE
+            , A.LOCATION_NAME
+            , B.PHOTO_PATH meeting_url
+            , C.PHOTO_PATH member_url
+            , A.STATUS
+            , A.SCHEDULED_DATE
+            , A.RECRUIT_MEMBER_NUMBER
+            , A.RECRUITMENT_NUMBER
+        FROM
+                        TBL_MEETING AS A
+            LEFT JOIN   TBL_MEETING_PHOTO AS B
+            ON          A.MEETING_ID = B.MEETING_ID
+            LEFT JOIN   TBL_MEMBER_PHOTO AS C
+            ON          A.HOST_MEMBER_ID = C.MEMBER_ID
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="word != null and word != ''">
+                A.TITLE LIKE CONCAT('%', #{ word }, '%')
+            </if>
+            <if test="interestsConditions != null and interestsConditions.size() != 0">
+                AND C.INTERESTS IN
+                <foreach collection="interestsConditions" item="condition" open="(" close=")" separator=", ">
+                    #{ condition }
+                </foreach>
+            </if>
+            <if test="typeCondition != null and typeCondition != ''">
+                AND A.MEETING_TYPE = #{ typeCondition }
+            </if>
+            AND A.STATUS = 'Open'
+        </trim>
+    </select>
+
+    <select id="findPreviewByMemberIdOpen" parameterType="int" resultMap="previewMeetingResultMap">
+        SELECT
+                A.MEETING_ID
+                , A.TITLE
+                , A.LOCATION_NAME
+                , B.PHOTO_PATH meeting_url
+                , C.PHOTO_PATH member_url
+                , A.STATUS
+                , A.SCHEDULED_DATE
+                , A.RECRUIT_MEMBER_NUMBER
+                , A.RECRUITMENT_NUMBER
+        FROM
+                TBL_MEETING AS A
+                LEFT JOIN   TBL_MEETING_PHOTO AS B
+                ON          A.MEETING_ID = B.MEETING_ID
+                LEFT JOIN   TBL_MEMBER_PHOTO AS C
+                ON          A.HOST_MEMBER_ID = C.MEMBER_ID
+                LEFT JOIN   TBL_MEETING AS D
+                ON          A.MEETING_ID = D.MEETING_ID
+        WHERE   D.MEMBER_ID = #{ memberId }
+            AND A.STATUS = 'Open'
+    </select>
+
+    <select id="findPreviewByMemberIdClosed" parameterType="int" resultMap="previewMeetingResultMap">
+        SELECT
+        A.MEETING_ID
+        , A.TITLE
+        , A.LOCATION_NAME
+        , B.PHOTO_PATH meeting_url
+        , C.PHOTO_PATH member_url
+        , A.STATUS
+        , A.SCHEDULED_DATE
+        , A.RECRUIT_MEMBER_NUMBER
+        , A.RECRUITMENT_NUMBER
+        FROM
+        TBL_MEETING AS A
+        LEFT JOIN   TBL_MEETING_PHOTO AS B
+        ON          A.MEETING_ID = B.MEETING_ID
+        LEFT JOIN   TBL_MEMBER_PHOTO AS C
+        ON          A.HOST_MEMBER_ID = C.MEMBER_ID
+        LEFT JOIN   TBL_MEETING AS D
+        ON          A.MEETING_ID = D.MEETING_ID
+        WHERE   D.MEMBER_ID = #{ memberId }
+        AND A.STATUS = 'Closed'
     </select>
 
     <!-- test mapper start -->
