@@ -22,10 +22,13 @@ public class BlackListController {
 
     @GetMapping("black-list")
     public void blackList(@SessionAttribute(name = "loginUser", required = false) UserInfoDTO loginUser, Model model ) {
-        List<BlockInfoDetailDTO> blockUserList = userBlockService.findBlockedMemberById(2);
-        System.out.println(blockUserList);
-        model.addAttribute("blockUserList", blockUserList);
 
+        if (loginUser != null) {
+            List<BlockInfoDetailDTO> blockUserList = userBlockService.findBlockedMemberById(loginUser.getMember_id());
+            System.out.println(blockUserList);
+            model.addAttribute("blockUserList", blockUserList);
+
+        }
 
     }
 
@@ -41,9 +44,12 @@ public class BlackListController {
     }
 
     @GetMapping("black-list-test")
-    public String blackListTest(){
+    public String blackListTest(Model model){
+        List<BlockInfoDetailDTO> blockUserList = userBlockService.findBlockedMemberById(2);
+        //System.out.println(userBlockService.findBlockedMemberById(1));
+        System.out.println(blockUserList);
+        model.addAttribute("blockUserList", blockUserList);
 
-        System.out.println(userBlockService.findBlockedMemberById(1));
 
         return "my-page/black-list";
     }

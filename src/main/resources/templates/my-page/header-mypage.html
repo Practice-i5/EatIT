@@ -3,15 +3,16 @@
     <th:block th:fragment="headerFragment">
         <div class="header-bar">
             <img class="header-item logo" src="images/logo.png" th:src="@{/img/my-page/logo.png}" >
-            <a class="header-item">홈</a>
-            <a class="header-item">모임 등록</a>
-            <a class="header-item">모임 찾기</a>
-            <a class="header-item">후기</a>
+            <a class="header-item" href="/">홈</a>
+            <a class="header-item" href="/enroll-meeting">모임 등록</a>
+            <a class="header-item" href="/search">모임 찾기</a>
+            <a class="header-item" >후기</a>
+<!--            href="/participatingList"-->
             <div class="header-item">
                 <button id="notification-icon">
                     <img class="icon-image" src="images/notification.png" th:src="@{/img/my-page/notification.png}">
                 </button>
-                <button class="btn-choice-mid btn-wb">마이페이지</button>
+                <button class="btn-choice-mid btn-wb" onclick="location.href='/my-page/profile'">마이페이지</button>
                 <button class="btn-choice-mid btn-wb">로그아웃</button>
             </div>
         </div>
