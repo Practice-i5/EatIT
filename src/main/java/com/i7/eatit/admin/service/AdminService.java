@@ -40,7 +40,8 @@ public class AdminService {
                 return false;
             }
 
-            if (!adminDto.getPassword().equals(SHA256Util.encryptSHA256(adminLoginDto.getAdminPassword()))) {
+            if (!adminDto.getPassword()
+                .equals(SHA256Util.encryptSHA256(adminLoginDto.getAdminPassword()))) {
                 log.info("비밀번호가 일치하지 않습니다.");
                 return false;
             }
