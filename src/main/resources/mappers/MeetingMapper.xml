@@ -251,13 +251,27 @@
             MEETING_ID = #{ meetingId }
     </select>
 
+    <select id="findAllInterests">
+        SELECT
+            INTERESTS
+        FROM
+            TBL_MEETING_INTEREST_CATEGORY
+    </select>
+
+    <select id="findAllType">
+        SELECT
+            MEETING_TYPE
+        FROM
+            TBL_MEETING
+    </select>
+
     <select id="findPreviewBySearch" parameterType="com.i7.eatit.domain.meeting.model.common.SearchCriteria" resultMap="previewMeetingResultMap">
         SELECT
             A.MEETING_ID
             , A.TITLE
             , A.LOCATION_NAME
-            , B.PHOTO_PATH meeting_url
-            , C.PHOTO_PATH member_url
+            , B.PHOTO_PATH AS meeting_url
+            , C.PHOTO_PATH AS member_url
             , A.STATUS
             , A.SCHEDULED_DATE
             , A.RECRUIT_MEMBER_NUMBER
@@ -268,12 +282,14 @@
             ON          A.MEETING_ID = B.MEETING_ID
             LEFT JOIN   TBL_MEMBER_PHOTO AS C
             ON          A.HOST_MEMBER_ID = C.MEMBER_ID
+            LEFT JOIN   TBL_MEETING_INTEREST_RELATION AS D
+            ON          A.MEETING_ID = D.MEETING_ID
         <trim prefix="WHERE" prefixOverrides="AND">
             <if test="word != null and word != ''">
                 A.TITLE LIKE CONCAT('%', #{ word }, '%')
             </if>
             <if test="interestsConditions != null and interestsConditions.size() != 0">
-                AND C.INTERESTS IN
+                AND D.INTERESTS IN
                 <foreach collection="interestsConditions" item="condition" open="(" close=")" separator=", ">
                     #{ condition }
                 </foreach>
@@ -283,6 +299,16 @@
             </if>
             AND A.STATUS = 'Open'
         </trim>
+        GROUP BY
+            A.MEETING_ID
+            , A.TITLE
+            , A.LOCATION_NAME
+            , B.PHOTO_PATH
+            , C.PHOTO_PATH
+            , A.STATUS
+            , A.SCHEDULED_DATE
+            , A.RECRUIT_MEMBER_NUMBER
+            , A.RECRUITMENT_NUMBER
     </select>
 
     <select id="findPreviewByMemberIdOpen" parameterType="int" resultMap="previewMeetingResultMap">
@@ -290,8 +316,8 @@
                 A.MEETING_ID
                 , A.TITLE
                 , A.LOCATION_NAME
-                , B.PHOTO_PATH meeting_url
-                , C.PHOTO_PATH member_url
+                , B.PHOTO_PATH AS meeting_url
+                , C.PHOTO_PATH AS member_url
                 , A.STATUS
                 , A.SCHEDULED_DATE
                 , A.RECRUIT_MEMBER_NUMBER
@@ -306,6 +332,16 @@
                 ON          A.MEETING_ID = D.MEETING_ID
         WHERE   D.MEMBER_ID = #{ memberId }
             AND A.STATUS = 'Open'
+        GROUP BY
+            A.MEETING_ID
+            , A.TITLE
+            , A.LOCATION_NAME
+            , B.PHOTO_PATH
+            , C.PHOTO_PATH
+            , A.STATUS
+            , A.SCHEDULED_DATE
+            , A.RECRUIT_MEMBER_NUMBER
+            , A.RECRUITMENT_NUMBER
     </select>
 
     <select id="findPreviewByMemberIdClosed" parameterType="int" resultMap="previewMeetingResultMap">
@@ -313,8 +349,8 @@
         A.MEETING_ID
         , A.TITLE
         , A.LOCATION_NAME
-        , B.PHOTO_PATH meeting_url
-        , C.PHOTO_PATH member_url
+        , B.PHOTO_PATH AS meeting_url
+        , C.PHOTO_PATH AS member_url
         , A.STATUS
         , A.SCHEDULED_DATE
         , A.RECRUIT_MEMBER_NUMBER
@@ -329,6 +365,25 @@
         ON          A.MEETING_ID = D.MEETING_ID
         WHERE   D.MEMBER_ID = #{ memberId }
         AND A.STATUS = 'Closed'
+        GROUP BY
+            A.MEETING_ID
+            , A.TITLE
+            , A.LOCATION_NAME
+            , B.PHOTO_PATH
+            , C.PHOTO_PATH
+            , A.STATUS
+            , A.SCHEDULED_DATE
+            , A.RECRUIT_MEMBER_NUMBER
+            , A.RECRUITMENT_NUMBER
+    </select>
+
+    <select id="findHostIdById" parameterType="int" resultType="int">
+        SELECT
+            HOST_MEMBER_ID
+        FROM
+            TBL_MEETING
+        WHERE
+            MEETING_ID = #{ meetingId }
     </select>
 
     <!-- test mapper start -->

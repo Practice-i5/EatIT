@@ -53,6 +53,13 @@ public class MeetingService {
     // 닫혀있는 참여한 목록 불러오기
     public List<PreviewMeetingDTO> findPreviewByMemberIdClosed(int memberId) {return meetingMapper.findPreviewByMemberIdClosed(memberId); };
 
+    public int findHostIdById(int meetingId) { return meetingMapper.findHostIdById(meetingId); }
+
+    public List<String> findAllInterests() { return meetingMapper.findAllInterests();}
+
+    public List<String> findAllType() { return meetingMapper.findAllType(); }
+
+
 
 
 //    public MeetingDTO searchMeetingById(Long id) {}
