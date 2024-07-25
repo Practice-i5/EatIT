@@ -580,8 +580,10 @@ VALUES (1, 1, 2),
        (10, 10, 1);
 
 -- 회원 테이블 데이터 삽입
-INSERT INTO `tbl_member` (`member_id`, `email`, `password`, `name`, `nickname`, `login_method`, `phone_number`,
-                          `created_date`, `withdrawal_status`, `reported_count`, `gender`, `age`, `is_stopped_by_admin`)
+INSERT INTO `tbl_member` (`member_id`, `email`, `password`, `name`, `nickname`, `login_method`,
+                          `phone_number`,
+                          `created_date`, `withdrawal_status`, `reported_count`, `gender`, `age`,
+                          `is_stopped_by_admin`)
 VALUES (1, 'user1@example.com', 'password1', 'User One', 'user1', 'email', '01012345678',
         '2024-07-01 10:00:00', 'N', 1, "F", 19, 0),
        (2, 'user2@example.com', 'password2', 'User Two', 'user2', 'email', '01023456789',
