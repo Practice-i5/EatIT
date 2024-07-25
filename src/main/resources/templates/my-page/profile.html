@@ -33,6 +33,11 @@
     </aside>
 
     <div layout:fragment="content" class="profile">
+        <script>
+            const profileChangeMessage = `[[${profileChangeMessage}]]`;
+            if (profileChangeMessage) alert(profileChangeMessage);
+        </script>
+
         <div class="form-content" >
             <h2>프로필 수정</h2>
             <form method="post" action="/my-page/profile-img-modify" enctype="multipart/form-data">

@@ -33,6 +33,10 @@
 </aside>
 
 <div layout:fragment="content" class="profile">
+    <script>
+        const passwordChangeMessage = `[[${passwordChangeMessage}]]`;
+        if (passwordChangeMessage) alert(passwordChangeMessage);
+    </script>
     <form class="form-content" action="/my-page/account-info-modify" method="post">
         <h2>로그인 정보 보기</h2>
         <div class="form-item">
@@ -73,17 +77,18 @@
                 <input class="form-input get-nickname" type="password" name="passwordBefore"
                        placeholder="기존 비밀번호 입력" required>
             </div>
+            <p class="form-message error" th:text="${error_passwordBefore}"></p>
             <div class="form-item">
                 <label class="profile-label">새 비밀번호</label>
                 <input class="form-input get-password" type="password" name="passwordAfter"
-                       placeholder="새 비밀번호 입력">
+                       placeholder="새 비밀번호 입력" required>
             </div>
             <div class="form-item">
                 <label class="profile-label">새 비밀번호 재입력</label>
                 <input class="form-input get-password" type="password" name="passwordAfterAgain"
-                       placeholder="새 비밀번호 재입력">
+                       placeholder="새 비밀번호 재입력" required>
             </div>
-            <p th:text="${error_passwordAgain}"></p>
+            <p class="form-message error" th:text="${error_passwordAgain}"></p>
         </th:block>
 
         <th:block th:unless="${loginMethod == 'homepage'}">
