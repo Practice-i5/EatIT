@@ -497,17 +497,19 @@ CREATE TABLE tbl_member_photo
 ) COMMENT 'member_photo';
 
 -- 회원사진 테이블 데이터 삽입
-INSERT INTO `tbl_member_photo` (`photo_id`, `photo_path`, `photo_name`, `member_id`)
-VALUES (1, '/img/dog1.png', 'dog1.png', 1),
-       (2, '/img/dog2.png', 'dog2.png', 2),
-       (3, '/img/flower_doguri.png', 'flower_doguri.png', 3),
-       (4, '/img/honeybee_doguri', 'honeybee_doguri', 4),
-       (5, '/img/dog1.png', 'dog1.png', 5),
-       (6, '/img/dog1.png', 'dog1.png', 6),
-       (7, '/img/dog1.png', 'dog1.png', 7),
-       (8, '/img/dog1.png', 'dog1.png', 8),
-       (9, '/img/dog1.png', 'dog1.png', 9),
-       (10, '/img/dog1.png', 'dog1.png', 10);
+INSERT INTO tbl_member_photo (photo_path, photo_name, member_id)
+VALUES ('https://drive.google.com/thumbnail?id=1lae75gYaxba4Jf_zXqrNKUoe4w57TuNE&sz=w300',
+        'rainbow.jpg', 1),
+       ('https://drive.google.com/thumbnail?id=1wnMVXMgV1zm-HPg7_7zQnUUDJcNIoYNx&sz=w300',
+        'voodoo.jpg', 2),
+       ('https://drive.google.com/thumbnail?id=1wnMVXMgV1zm-HPg7_7zQnUUDJcNIoYNx&sz=w300',
+        'user3.jpg', 3),
+       ('https://drive.google.com/thumbnail?id=10dVyCi7JOmh25HmLvt9IWuH9xfjBwinN&sz=w300',
+        'rabbit.png', 4),
+       ('https://drive.google.com/thumbnail?id=1zNbaC_tEsqZ2S6M5OA7myn3l_SzvRWJn&sz=w300',
+        'al_nassr.svg', 5),
+       ('https://drive.google.com/thumbnail?id=1FZQ9JgaNE1zriEtcPz1co4KyZoQ9vH_o&sz=w300',
+        'bocchi.webp', 6);
 
 
 DROP TABLE IF EXISTS `tbl_review`;
