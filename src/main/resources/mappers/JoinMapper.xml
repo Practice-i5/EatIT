@@ -25,6 +25,7 @@
 
         <result property="gender" column="gender"/>
         <result property="age" column="age"/>
+        <result property="isStoppedByAdmin" column="is_stopped_by_admin"/>
 
     </resultMap>
 
@@ -45,6 +46,7 @@
                     , reported_count
                     , gender
                     , age
+                    , is_stopped_by_admin
                     )
         values
                     (
@@ -59,6 +61,7 @@
                     , #{ reportedCount }
                     , #{ gender }
                     , #{ age }
+                    ,#{ isStoppedByAdmin }
                     )
     </insert>
 
