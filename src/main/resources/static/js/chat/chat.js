@@ -32,7 +32,7 @@ getSessionUser((id) => {
 
     socket.emit("chat message", {
       message: $("#message").val(),
-      sender: userId || '익명', // 수정: userId가 없을 경우 '익명'으로 설정
+      sender: userId || '익명', // userId가 없을 경우 '익명'으로 설정
     });
 
     messages.appendChild(li).append($("#message").val());
@@ -88,7 +88,7 @@ getSessionUser((id) => {
 
 // 초기 채팅 메시지를 데이터베이스에서 가져오기
 (function () {
-  fetch("http://localhost:3000/chats")
+  fetch("http://localhost:3000/chats")// Node.js 서버와 연결하여 초기 채팅 메시지를 가져옴
     .then((data) => data.json())
     .then((json) => {
       json.map((data) => {
