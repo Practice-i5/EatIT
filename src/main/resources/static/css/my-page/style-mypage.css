@@ -1,6 +1,6 @@
 body {
     margin: auto;
-    min-width: 850px;
+    min-width: 880px;
 
 }
 
@@ -57,7 +57,7 @@ img{
         ". . ."
         "footer footer footer"
     ;
-    grid-template-columns: 2fr 3fr 2fr;
+    grid-template-columns: 3fr 5fr 3fr;
     grid-template-rows: auto 1fr auto;
     /* grid-template-columns: 1fr 2fr 3fr  2fr 1fr; */
 }
@@ -98,9 +98,19 @@ img{
     align-items: center;
 }
 
+.header a{
+    text-decoration: none;
+    color: #747d88;
+    transition: color 0.3s ease;
+}
 
 .header a:hover {
-    color: red;
+    color: #dcb335;
+
+}
+
+.header button:hover{
+    cursor:pointer;
 }
 
 .bar {

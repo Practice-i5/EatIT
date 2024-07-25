@@ -12,7 +12,8 @@
     <img src="/img/test/testJang1.jpeg" alt="jang1">
     <img src="/img/test/testJang2.jpeg" alt="jang2">
 
-    <form action="/detail/meeting-list" method="POST">
+<!--    <form action="/detail/meeting-list" method="POST">-->
+    <form action="/search/list" method="POST">
         <label>검색어를 입력해주세요 : <input name="word" type="text" placeholder="정상적인 걸로 입력해주세요 please..." /></label>
         <div class="tag-group">
             <div class="time-group">
@@ -68,5 +69,11 @@
 
         <button type="submit">검색</button>
     </form>
+    <div>
+        <form action="/detail/detail" method="GET">
+            <label>보려는 모임의 id를 입력해주세요 : </label><input name="meetingId" type="number" placeholder="1">
+            <button type="submit">상세페이지 보기</button>
+        </form>
+    </div>
 </body>
 </html>

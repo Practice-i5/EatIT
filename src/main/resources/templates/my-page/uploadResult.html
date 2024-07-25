@@ -40,19 +40,47 @@
                 <div class="form-input" style="width: 70%; display: flex; align-items: center; justify-content: space-between;">
 
                     <img id="img-preview" src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"
-                         th:src="${profileImage}"/>
-                    <p th:text="${tst}"></p>
+                         th:src="${profileImage}"
+                         />
+<!--                    <iframe th:src="${profileImage}"></iframe>-->
                     <div>
                         <input id="img-file" style="display: none; width:0px; margin: 0px; padding: 0px;" type="file" name="singleFile" accept="image/*"/>
                         <label for="img-file" class="upload-btn btn-choice-small btn-wb">수정</label>
                         <label class="reset-img btn-choice-small btn-wb">초기화</label>
                     </div>
 
+
                 </div>
 
             </div>
             <a href="/my-page/uploadTest">되돌아가기</a>
         </form>
+        <script>
+            let imgPreview=document.querySelector('#img-preview');
+            document.addEventListener('DOMContentLoaded', function() {
+                loadGoogleDriveImage(`[[${profileImage}]]`);
+            });
+
+            function loadGoogleDriveImage(fileId) {
+
+                // 이미지 URL 생성
+                const imageUrl = `https://lh3.googleusercontent.com/${fileId}?authuser=0`;
+
+                // 새 이미지 요소 생성
+                const img = new Image();
+
+
+                // 이미지 로드 성공 시
+                img.onload = function () {
+                    console.log("이미지 로드 성공")
+                    imgPreview.src=imageUrl;
+                };
+
+                // 이미지 로딩 시작
+                //img.src = imageUrl;
+            }
+        </script>
     </div>
+
 
 </html>

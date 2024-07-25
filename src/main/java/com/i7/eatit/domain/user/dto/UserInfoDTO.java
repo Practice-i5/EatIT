@@ -19,6 +19,10 @@ public class UserInfoDTO {
     private String withdrawalStatus = "N";
     private int reportedCount;
 
+    private String gender;
+    private int age;
+    private int isStoppedByAdmin;
+
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 
     public UserInfoDTO() {
@@ -26,7 +30,8 @@ public class UserInfoDTO {
     }
 
     public UserInfoDTO(int member_id, String name, String email, String password, String phoneNumber,
-                       String nickname, String loginMethod, String withdrawalStatus, int reportedCount) {
+                       String nickname, String loginMethod, String withdrawalStatus, int reportedCount,
+                       String gender, int age, int isStoppedByAdmin) {
 
         this.member_id = member_id;
         this.name = name;
@@ -38,6 +43,33 @@ public class UserInfoDTO {
         this.createdDate = DATE_FORMAT.format(new Date());
         this.withdrawalStatus = withdrawalStatus;
         this.reportedCount = reportedCount;
+        this.gender = gender;
+        this.age = age;
+        this.isStoppedByAdmin = isStoppedByAdmin;
+    }
+
+    public int getIsStoppedByAdmin() {
+        return isStoppedByAdmin;
+    }
+
+    public void setIsStoppedByAdmin(int isStoppedByAdmin) {
+        this.isStoppedByAdmin = isStoppedByAdmin;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public int getMember_id() {
@@ -128,7 +160,10 @@ public class UserInfoDTO {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", createdDate='" + createdDate + '\'' +
                 ", withdrawalStatus='" + withdrawalStatus + '\'' +
-                ", reportCount=" + reportedCount +
+                ", reportedCount=" + reportedCount +
+                ", gender='" + gender + '\'' +
+                ", age=" + age +
+                ", isStoppedByAdmin=" + isStoppedByAdmin +
                 '}';
     }
 }

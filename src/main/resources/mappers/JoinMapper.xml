@@ -21,6 +21,11 @@
 
         <result property="createdDate" column="created_date"/>
         <result property="withdrawalStatus" column="withdrawal_status"/>
+        <result property="reportedCount" column="reported_count"/>
+
+        <result property="gender" column="gender"/>
+        <result property="age" column="age"/>
+        <result property="isStoppedByAdmin" column="is_stopped_by_admin"/>
 
     </resultMap>
 
@@ -38,6 +43,10 @@
                     , phone_number
                     , created_date
                     , withdrawal_status
+                    , reported_count
+                    , gender
+                    , age
+                    , is_stopped_by_admin
                     )
         values
                     (
@@ -49,6 +58,10 @@
                     , #{ phoneNumber }
                     , #{ createdDate }
                     , #{ withdrawalStatus }
+                    , #{ reportedCount }
+                    , #{ gender }
+                    , #{ age }
+                    ,#{ isStoppedByAdmin }
                     )
     </insert>
 

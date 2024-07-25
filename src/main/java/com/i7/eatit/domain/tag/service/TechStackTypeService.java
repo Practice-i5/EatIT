@@ -15,6 +15,10 @@ public class TechStackTypeService {
         this.techStackTypeMapper = techStackTypeMapper;
     }
 
+    public void addNewTechStack(String techStackName){
+
+    }
+
     public List<TechStackTypeDTO> findAllTechStack() {
         return techStackTypeMapper.findAllTechStack();
     }

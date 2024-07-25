@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.i7.eatit.domain.alarm.dao.AlarmMapper">
+
+    <resultMap id="alarmAllResultMap" type="com.i7.eatit.domain.alarm.dto.AlarmDTO">
+        <id property="alarmId" column="alarm_id"/>
+        <result property="alarmDetail" column="alarm_detail"/>
+        <result property="alarmTime" column="alarm_date"/>
+        <result property="member_id" column="member_id"/>
+        <result property="participationId" column="participation_id"/>
+        <result property="alarmStatus" column="alarm_status"/>
+        <result property="alarmChecked" column="alarm_checked"/>
+    </resultMap>
+
+    <select id="findAllAlarm" resultMap="alarmAllResultMap">
+        select
+              alarm_id
+            , alarm_detail
+            , alarm_date
+            , member_id
+            , participation_id
+            , alarm_status
+            , alarm_checked
+        from tbl_alarm
+        where member_id = #{ memberId }
+        order by alarm_date
+    </select>
+
+</mapper>

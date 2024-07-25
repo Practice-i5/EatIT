@@ -4,7 +4,7 @@
         layout:decorate="~{my-page/layout}">
     <head>
         <title>기술 프로필 설정</title>
-        <link rel="stylesheet" href="css/modal.css" th:href="@{/static/css/my-page/modal.css}">
+        <link rel="stylesheet" href="css/modal.css" th:href="@{/css/my-page/modal.css}">
     </head>
 
     <aside layout:fragment="sidebar" class="bar">
@@ -71,24 +71,35 @@
             <h2>기술 프로필 설정</h2>
             <div class="form-item">
                 <label class="profile-label">기술 스택</label>
-                <ul class="list-no-pad form-size-limit chip-btn-list">
+                <ul class="list-no-pad form-size-limit chip-btn-list" style="min-width:60%">
 
-                    <li style="margin-top:5px; margin-bottom: 10px;">
-                        <input id="interest-1" class="interest-check" type="checkbox" value="frontend" checked disabled>
-                        <label class="btn-choice-mid interest-label" for="interest-1">프론트엔드</label>
-                    </li>
-                    <li style="margin-top:5px; margin-bottom: 10px;">
-                        <div>
-                            <input id="interest-2" class="interest-check" type="checkbox" value="backend" checked disabled>
-                            <label class="btn-choice-mid interest-label" for="interest-2">백엔드</label>
-                        </div>
-                    </li>
-                    <li style="margin-top:5px; margin-bottom: 10px;">
-                        <div>
-                            <input id="interest-8" class="interest-check" type="checkbox" value="game-client" disabled checked>
-                            <label class="btn-choice-mid interest-label" for="interest-8">데이터 엔지니어링</label>
-                        </div>
-                    </li>
+                    <th:block th:if="${memberStack != null}">
+                        <li style="margin-top:5px; margin-bottom: 10px;" th:each="stack:${memberStack}">
+                            <input th:id="|stack-${stack.techStack.code}|" class="interest-check" type="checkbox" th:value="${stack.techStack.name}" checked disabled>
+                            <label class="btn-choice-mid interest-label" th:for="|stack-${stack.techStack.code}|"
+                                th:text="${stack.techStack.name}"></label>
+                        </li>
+                    </th:block>
+                    <th:block th:unless="${memberStack != null}">
+
+                        <li style="margin-top:5px; margin-bottom: 10px;">
+                            <input id="interest-1" class="interest-check" type="checkbox" value="frontend" checked disabled>
+                            <label class="btn-choice-mid interest-label" for="interest-1">프론트엔드</label>
+                        </li>
+                        <li style="margin-top:5px; margin-bottom: 10px;">
+                            <div>
+                                <input id="interest-2" class="interest-check" type="checkbox" value="backend" checked disabled>
+                                <label class="btn-choice-mid interest-label" for="interest-2">백엔드</label>
+                            </div>
+                        </li>
+                        <li style="margin-top:5px; margin-bottom: 10px;">
+                            <div>
+                                <input id="interest-8" class="interest-check" type="checkbox" value="game-client" disabled checked>
+                                <label class="btn-choice-mid interest-label" for="interest-8">데이터 엔지니어링</label>
+                            </div>
+                        </li>
+                    </th:block>
+
                 </ul>
             </div>
             <!-- <a href="./tech-stack.html" > 기술 스택 수정</a> -->
@@ -109,18 +120,12 @@
                                 <p class="form-message-mini warn"> 백엔드 개발</p>
                                 <p class="form-message-mini warn">2023.11~재직 중</p>
                             </div>
-                            <!--                                    <div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">-->
-                            <!--                                        <button class="btn-choice-small btn-wb">수정</button>-->
-                            <!--                                        <button class="btn-choice-small btn-wb">삭제</button>-->
-                            <!--                                    </div> -->
                         </li>
-                        <li style="float: right;"><button type="button" class="btn-choice-small btn-wb" id="add-experience">경력 사항 추가</button></li>
                     </ul>
                 </div>
             </div>
             <button class="btn-rw btn-submit" type="button" onclick="location.href='tech-profile-modify'">수정</button>
         </form>
-        <script src="js/tech-profile-modal.js" th:src="@{/static/js/my-page/tech-profile-modal.js}"></script>
     </div>
 
 </html>

@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface TechStackTypeMapper {
     List<TechStackTypeDTO> findAllTechStack();
+
+    void insertTechStack(String stackName);
 }

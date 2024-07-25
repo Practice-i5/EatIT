@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--내가 만든 Mapper이름과 동일하게 지정-->
+<mapper namespace="com.i7.eatit.domain.tag.dao.MeetingInterestMapper">
+
+    <insert id="insertMeetingInterest" parameterType="hashmap">
+        INSERT INTO
+        TBL_MEETING_INTEREST_RELATION(CATEGORY_TYPE, MEETING_ID)
+        VALUES (#{interest},#{meetingId})
+    </insert>
+
+    <delete id="deleteMeetingInterestByMeetingId" parameterType="_int">
+        DELETE FROM
+        TBL_MEETING_INTEREST_RELATION
+        WHERE MEETING_ID=#{meetingId}
+    </delete>
+
+</mapper>

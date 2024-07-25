@@ -5,29 +5,30 @@ import java.sql.Timestamp;
 
 public class MeetingDTO {
 
-    private int meetingId;
-    private String title;
-    private String locationName;
-    private double locationLatitude;
-    private double locationLongitude;
-    private String introduction;
-    private String paymentMethod;
-    private String meetingType;
-    private Timestamp scheduledDate;
-    private Time exitRestrictionTime;
-    private int recruitmentNumber;
-    private String gender;
-    private String eligibleAge;
-    private Timestamp createdDate;
-    private String participationMethod;
-    private String status;
-    private Timestamp endDate;
-    private int hostMemberId;
-    private int lastId;
+    private int meetingId;          // 모임 id
+    private String title;           // 모임 제목
+    private String locationName;    // 모임 장소명
+    private double locationLatitude;// 모임 위도
+    private double locationLongitude;// 모임 경도
+    private String introduction;        // 모임 설명
+    private String paymentMethod;       // 지불 방식
+    private String meetingType;         // 모임 종류
+    private Timestamp scheduledDate;    // 모임 일시
+    private Time exitRestrictionTime;   // 퇴장 가능시간
+    private int recruitMemberNumber;    // 참가중인 인원
+    private int recruitmentNumber;      // 모집 인원
+    private String gender;              // 가능 성별
+    private String eligibleAge;         // 가능 연령대
+    private Timestamp createdDate;      // 생성 일자
+    private String participationMethod; // 참여 방식
+    private String status;              // 모임 상태
+    private Timestamp endDate;          // 종료 일시
+    private int hostMemberId;           // 호스트 멤버 id
+    private int lastId;                 // 이건 이전 auto_i
 
     public MeetingDTO() {}
 
-    public MeetingDTO(int meetingId, String title, String locationName, double locationLatitude, double locationLongitude, String introduction, String paymentMethod, String meetingType, Timestamp scheduledDate, Time exitRestrictionTime, int recruitmentNumber, String gender, String eligibleAge, Timestamp createdDate, String participationMethod, String status, Timestamp endDate, int hostMemberId, int lastId) {
+    public MeetingDTO(int meetingId, String title, String locationName, double locationLatitude, double locationLongitude, String introduction, String paymentMethod, String meetingType, Timestamp scheduledDate, Time exitRestrictionTime, int recruitMemberNumber, int recruitmentNumber, String gender, String eligibleAge, Timestamp createdDate, String participationMethod, String status, Timestamp endDate, int hostMemberId, int lastId) {
         this.meetingId = meetingId;
         this.title = title;
         this.locationName = locationName;
@@ -38,6 +39,7 @@ public class MeetingDTO {
         this.meetingType = meetingType;
         this.scheduledDate = scheduledDate;
         this.exitRestrictionTime = exitRestrictionTime;
+        this.recruitMemberNumber = recruitMemberNumber;
         this.recruitmentNumber = recruitmentNumber;
         this.gender = gender;
         this.eligibleAge = eligibleAge;
@@ -129,6 +131,14 @@ public class MeetingDTO {
         this.exitRestrictionTime = exitRestrictionTime;
     }
 
+    public int getRecruitMemberNumber() {
+        return recruitMemberNumber;
+    }
+
+    public void setRecruitMemberNumber(int recruitMemberNumber) {
+        this.recruitMemberNumber = recruitMemberNumber;
+    }
+
     public int getRecruitmentNumber() {
         return recruitmentNumber;
     }
@@ -204,7 +214,7 @@ public class MeetingDTO {
     @Override
     public String toString() {
         return "MeetingDTO{" +
-                "meetingId='" + meetingId + '\'' +
+                "meetingId=" + meetingId +
                 ", title='" + title + '\'' +
                 ", locationName='" + locationName + '\'' +
                 ", locationLatitude=" + locationLatitude +
@@ -214,6 +224,7 @@ public class MeetingDTO {
                 ", meetingType='" + meetingType + '\'' +
                 ", scheduledDate=" + scheduledDate +
                 ", exitRestrictionTime=" + exitRestrictionTime +
+                ", recruitMemberNumber=" + recruitMemberNumber +
                 ", recruitmentNumber=" + recruitmentNumber +
                 ", gender='" + gender + '\'' +
                 ", eligibleAge='" + eligibleAge + '\'' +
@@ -222,6 +233,7 @@ public class MeetingDTO {
                 ", status='" + status + '\'' +
                 ", endDate=" + endDate +
                 ", hostMemberId=" + hostMemberId +
+                ", lastId=" + lastId +
                 '}';
     }
 }
