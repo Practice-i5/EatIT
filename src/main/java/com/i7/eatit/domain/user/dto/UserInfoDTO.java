@@ -21,6 +21,7 @@ public class UserInfoDTO {
 
     private String gender;
     private int age;
+    private int isStoppedByAdmin;
 
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 
@@ -30,7 +31,7 @@ public class UserInfoDTO {
 
     public UserInfoDTO(int member_id, String name, String email, String password, String phoneNumber,
                        String nickname, String loginMethod, String withdrawalStatus, int reportedCount,
-                       String gender, int age) {
+                       String gender, int age, int isStoppedByAdmin) {
 
         this.member_id = member_id;
         this.name = name;
@@ -44,6 +45,15 @@ public class UserInfoDTO {
         this.reportedCount = reportedCount;
         this.gender = gender;
         this.age = age;
+        this.isStoppedByAdmin = isStoppedByAdmin;
+    }
+
+    public int getIsStoppedByAdmin() {
+        return isStoppedByAdmin;
+    }
+
+    public void setIsStoppedByAdmin(int isStoppedByAdmin) {
+        this.isStoppedByAdmin = isStoppedByAdmin;
     }
 
     public String getGender() {
@@ -153,6 +163,7 @@ public class UserInfoDTO {
                 ", reportedCount=" + reportedCount +
                 ", gender='" + gender + '\'' +
                 ", age=" + age +
+                ", isStoppedByAdmin=" + isStoppedByAdmin +
                 '}';
     }
 }
