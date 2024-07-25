@@ -90,9 +90,12 @@
                 </a>
 
                 <!-- JavaScript 파일 연결 -->
-                <button onclick="location.href='/login/loginMain'" class="btn btn-danger rounded-pill me-2" id="loginButton">로그인
+                <button onclick="location.href='/login/loginMain'" class="btn btn-danger rounded-pill me-2"
+                        id="loginButton">로그인
                 </button>
-                <button onclick="location.href='/login/regist'" class="btn btn-outline-danger rounded-pill" id="signupButton">회원가입</button>
+                <button onclick="location.href='/login/regist'" class="btn btn-outline-danger rounded-pill"
+                        id="signupButton">회원가입
+                </button>
 
             </div>
         </nav>
@@ -201,174 +204,67 @@
                     <div class="row g-4">
                         <div class="col-lg-12">
                             <div class="row g-4">
-                                <!-- 이 부분이 관심 개발 분야 네모 상자인데, 클래스 이름 변경 해야 함!-->
 
-                                <div class="col-md-6 col-lg-4 col-xl-3">
+                                <!-- 타임리프를 사용하여 저장된 데이터만큼 반복 -->
+                                <div th:each="meeting : ${meetingList}" class="col-md-6 col-lg-4 col-xl-3">
                                     <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="https://cdn.pixabay.com/photo/2017/09/30/15/10/plate-2802332_640.jpg"
+
+                                        <!-- 모임 이미지 -->
+                                        <div class="fruit-img">
+                                            <img th:src="@{/img/image_146.png}"
                                                  class="other-image img-fluid w-100 rounded-top" alt=""/>
                                         </div>
+
+                                        <!-- 모임 카테고리 -->
                                         <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                             style="top: 10px; left: 10px">
-                                            프론트엔드
+                                             style="top: 10px; left: 10px" th:text="${meeting.meetingType}">
                                         </div>
+
+                                        <!-- 모임 정보 -->
                                         <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>피자맛집</h4>
-                                            <p>
-                                                맛있는 피자 먹고 취뽀 가보자!!!
-                                                <br>
-                                                [메타버스 수강생 & 개발 멘토 모임]
-                                            </p>
+                                            <h4 th:text="${meeting.title}">모임 제목</h4>
+                                            <p th:text="${meeting.locationName}">모임 위치</p>
                                             <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <!-- 프로필 추가하는 부분-->
+
+                                                <!-- 호스트 프로필과 참가 인원 -->
                                                 <div class="profile-container">
-                                                    <img src="https://cdn.pixabay.com/photo/2020/06/30/22/34/dog-5357794_640.jpg"
-                                                         alt="Profile Picture" class="profile-image">
-                                                    <span class="profile-text">1/3명</span>
+                                                    <img th:src="@{/img/image_146.png}" alt="Profile Picture"
+                                                         class="profile-image">
+                                                    <span class="profile-text"
+                                                          th:text="${meeting.currentMembers + '/' + meeting.recruitmentNumber + '명'}">참가 인원</span>
                                                 </div>
-                                                <div class="meeting-status text-info fw-bold">
-                                                    모임 시작 전
+
+                                                <!-- 모임 상태 -->
+                                                <div class="meeting-status text-info fw-bold"
+                                                     th:text="${meeting.status}">모임 상태
                                                 </div>
-                                                <p class="text-dark fs-5 fw-bold mb-0">
-                                                    2024.06.30(일) 오후 1:00
-                                                </p>
-                                                <!-- toggleFavorite와 id의 heartIcon[N] N변경-->
-                                                <a href="#" class="icon" onclick="toggleFavorite(event, 'heartIcon1')">
-                                                    <i id="heartIcon1" class="fas fa-heart me-2 text-primary"></i> 찜하기
+
+                                                <!-- 모임 날짜 및 시간 -->
+                                                <p class="text-dark fs-5 fw-bold mb-0"
+                                                   th:text="${meeting.scheduledDate}">모임 날짜 및 시간</p>
+
+                                                <!-- 찜하기 기능 -->
+                                                <!--<a href="#" class="icon" th:onclick="'toggleFavorite(event, \'heartIcon' + ${meeting.id} + '\')'">
+                                                    <i th:id="'heartIcon' + ${meeting.id}" class="fas fa-heart me-2 text-primary"></i> 찜하기
                                                 </a>
+-->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="https://cdn.pixabay.com/photo/2017/09/30/15/10/plate-2802332_640.jpg"
-                                                 class="other-image img-fluid w-100 rounded-top" alt=""/>
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                             style="top: 10px; left: 10px">
-                                            프론트엔드
-                                        </div>
-                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>피자맛집</h4>
-                                            <p>
-                                                맛있는 피자 먹고 취뽀 가보자!!!
-                                                <br>
-                                                [메타버스 수강생 & 개발 멘토 모임]
-                                            </p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <!-- 프로필 추가하는 부분-->
-                                                <div class="profile-container">
-                                                    <img src="https://cdn.pixabay.com/photo/2020/06/30/22/34/dog-5357794_640.jpg"
-                                                         alt="Profile Picture" class="profile-image">
-                                                    <span class="profile-text">1/3명</span>
-                                                </div>
-                                                <div class="meeting-status text-info fw-bold">
-                                                    모임 시작 전
-                                                </div>
-                                                <p class="text-dark fs-5 fw-bold mb-0">
-                                                    2024.06.30(일) 오후 1:00
-                                                </p>
-                                                <!-- toggleFavorite와 id의 heartIcon[N] N변경-->
-                                                <a href="#" class="icon" onclick="toggleFavorite(event, 'heartIcon2')">
-                                                    <i id="heartIcon2" class="fas fa-heart me-2 text-primary"></i> 찜하기
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="https://cdn.pixabay.com/photo/2017/09/30/15/10/plate-2802332_640.jpg"
-                                                 class="other-image img-fluid w-100 rounded-top" alt=""/>
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                             style="top: 10px; left: 10px">
-                                            프론트엔드
-                                        </div>
-                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>피자맛집</h4>
-                                            <p>
-                                                맛있는 피자 먹고 취뽀 가보자!!!
-                                                <br>
-                                                [메타버스 수강생 & 개발 멘토 모임]
-                                            </p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <!-- 프로필 추가하는 부분-->
-                                                <div class="profile-container">
-                                                    <img src="https://cdn.pixabay.com/photo/2020/06/30/22/34/dog-5357794_640.jpg"
-                                                         alt="Profile Picture" class="profile-image">
-                                                    <span class="profile-text">1/3명</span>
-                                                </div>
-                                                <div class="meeting-status text-info fw-bold">
-                                                    모임 시작 전
-                                                </div>
-                                                <p class="text-dark fs-5 fw-bold mb-0">
-                                                    2024.06.30(일) 오후 1:00
-                                                </p>
-                                                <!-- toggleFavorite와 id의 heartIcon[N] N변경-->
-                                                <a href="#" class="icon" onclick="toggleFavorite(event, 'heartIcon3')">
-                                                    <i id="heartIcon3" class="fas fa-heart me-2 text-primary"></i> 찜하기
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="https://cdn.pixabay.com/photo/2017/09/30/15/10/plate-2802332_640.jpg"
-                                                 class="other-image img-fluid w-100 rounded-top" alt=""/>
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                             style="top: 10px; left: 10px">
-                                            프론트엔드
-                                        </div>
-                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>피자맛집</h4>
-                                            <p>
-                                                맛있는 피자 먹고 취뽀 가보자!!!
-                                                <br>
-                                                [메타버스 수강생 & 개발 멘토 모임]
-                                            </p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <!-- 프로필 추가하는 부분-->
-                                                <div class="profile-container">
-                                                    <img src="https://cdn.pixabay.com/photo/2020/06/30/22/34/dog-5357794_640.jpg"
-                                                         alt="Profile Picture" class="profile-image">
-                                                    <span class="profile-text">1/3명</span>
-                                                </div>
-                                                <div class="meeting-status text-info fw-bold">
-                                                    모임 시작 전
-                                                </div>
-                                                <p class="text-dark fs-5 fw-bold mb-0">
-                                                    2024.06.30(일) 오후 1:00
-                                                </p>
-                                                <!-- toggleFavorite와 id의 heartIcon[N] N변경-->
-                                                <a href="#" class="icon" onclick="toggleFavorite(event, 'heartIcon4')">
-                                                    <i id="heartIcon4" class="fas fa-heart me-2 text-primary"></i> 찜하기
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                <!-- 타임리프 반복문 종료 -->
 
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 </div>
+
 
 <!-- JavaScript 파일 연결 -->
 <script th:src="@{/js/meetingList}" src="/js/meetingList.js"></script>
