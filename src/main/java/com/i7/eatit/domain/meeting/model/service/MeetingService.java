@@ -31,7 +31,9 @@ public class MeetingService {
         meetingMapper.registInterests(interestsRelDTO);
     }
 
-    public List<MeetingDTO> findAllMeetings() { return meetingMapper.findAllMeetings(); }
+    public List<MeetingDTO> findAllMeetings() {
+        System.out.println(meetingMapper.findAllMeetings());
+        return meetingMapper.findAllMeetings(); }
 
     public List<MeetingDTO> searchMeetings(SearchCriteria searchCriteria) { return meetingMapper.findMeetings(searchCriteria); }
 
