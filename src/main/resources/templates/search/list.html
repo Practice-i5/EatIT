@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -25,10 +25,10 @@
 
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link th:href="@{css/style.css}" rel="stylesheet">
     <style>
         .logo {
             width: 100px;
@@ -184,7 +184,7 @@
         <div class="container px-0">
             <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                    <a href="index.html" class="navbar-brand"><img class=logo src="img/logo.png" /></a>
+                    <a th:href="@{/home/home}" class="navbar-brand"><img class=logo src="img/logo.png" alt="logoImage"/></a>
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>
@@ -509,240 +509,36 @@
                         </div> -->
                         <div class="col-lg-9">
                             <div class="row g-4 justify-content-center">
-                                <div class="col-md-6 col-lg-6 col-xl-4">
-                                    <div class="rounded position-relative fruite-item"
-                                        onclick="location.href='../detail/detail.html'">
-                                        <div class="fruite-img">
-                                            <img src="img/test_image.png" class="img-fluid w-100 rounded-top" alt="" />
-                                        </div>
-                                        <div class="active-red px-3 py-1 rounded position-absolute"
-                                            style="top: 10px; left: 10px;">모집중</div>
-                                        <div class="p-4 border  border-top-0 rounded-bottom">
-                                            <h4>모임 이름</h4>
-                                            <p>2024.06.20(목) 오후 10:09</p>
-                                            <!-- <div class="d-flex justify-content-between flex-lg-wrap"> -->
-                                            <div class="contents-container">
-                                                <p class="cont text-dark fs-5 fw-bold mb-0">1 / 3</p>
-                                                <img src="img/honeybee_doguri.png" class="search-profile-img" />
-                                                <!-- <div class="padding-left-100px"></div> -->
-                                                <img src="img/like.png" class="conte search-profile-img" />
-                                                <img src="img/share.png" class="search-profile-img" />
-                                                <!-- <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a> -->
+                                <tr th:each="meeting : ${meetingList}">
+                                    <td>
+                                        <div class="col-md-6 col-lg-6 col-xl-4">
+                                            <div class="rounded position-relative fruite-item"
+                                                 th:onclick="|location.href='@{/detail/detail}'|" th:value=${meeting.meetingId}>
+                                                <div class="fruite-img">
+                                                    <img th:src="@{img/test_image.png}" class="img-fluid w-100 rounded-top" alt="meetingImage" />
+                                                </div>
+                                                <div class="active-red px-3 py-1 rounded position-absolute"
+                                                     style="top: 10px; left: 10px;" th:text="${meeting.status}">모집중</div>
+                                                <div class="p-4 border  border-top-0 rounded-bottom">
+                                                    <h4 th:text="${meeting.title}">모임 이름</h4>
+                                                    <p th:datetime="${meeting.scheduledDate}">2024.06.20(목) 오후 10:09</p>
+                                                    <!-- <div class="d-flex justify-content-between flex-lg-wrap"> -->
+                                                    <div class="contents-container">
+                                                        <p class="cont text-dark fs-5 fw-bold mb-0">1 / 3</p>
+                                                        <img th:src="@{img/honeybee_doguri.png}" class="search-profile-img" />
+                                                        <!-- <div class="padding-left-100px"></div> -->
+                                                        <img src="img/like.png" class="conte search-profile-img" />
+                                                        <img src="img/share.png" class="search-profile-img" />
+                                                        <!-- <a href="#"
+                                                            class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to
+                                                            cart</a> -->
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-6 col-xl-4">
-                                    <div class="rounded position-relative fruite-item"
-                                        onclick="location.href='../detail/detail.html'">
-                                        <div class="fruite-img">
-                                            <img src="img/test_image.png" class="img-fluid w-100 rounded-top" alt="" />
-                                        </div>
-                                        <div class="active-red px-3 py-1 rounded position-absolute"
-                                            style="top: 10px; left: 10px;">모집중</div>
-                                        <div class="p-4 border  border-top-0 rounded-bottom">
-                                            <h4>모임 이름</h4>
-                                            <p>2024.06.20(목) 오후 10:09</p>
-                                            <!-- <div class="d-flex justify-content-between flex-lg-wrap"> -->
-                                            <div class="contents-container">
-                                                <p class="cont text-dark fs-5 fw-bold mb-0">1 / 3</p>
-                                                <img src="img/honeybee_doguri.png" class="search-profile-img" />
-                                                <!-- <div class="padding-left-100px"></div> -->
-                                                <img src="img/like.png" class="conte search-profile-img" />
-                                                <img src="img/share.png" class="search-profile-img" />
-                                                <!-- <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-6 col-xl-4">
-                                    <div class="rounded position-relative fruite-item"
-                                        onclick="location.href='../detail/detail.html'">
-                                        <div class="fruite-img">
-                                            <img src="img/test_image.png" class="img-fluid w-100 rounded-top" alt="" />
-                                        </div>
-                                        <div class="active-red px-3 py-1 rounded position-absolute"
-                                            style="top: 10px; left: 10px;">모집중</div>
-                                        <div class="p-4 border  border-top-0 rounded-bottom">
-                                            <h4>모임 이름</h4>
-                                            <p>2024.06.20(목) 오후 10:09</p>
-                                            <!-- <div class="d-flex justify-content-between flex-lg-wrap"> -->
-                                            <div class="contents-container">
-                                                <p class="cont text-dark fs-5 fw-bold mb-0">1 / 3</p>
-                                                <img src="img/honeybee_doguri.png" class="search-profile-img" />
-                                                <!-- <div class="padding-left-100px"></div> -->
-                                                <img src="img/like.png" class="conte search-profile-img" />
-                                                <img src="img/share.png" class="search-profile-img" />
-                                                <!-- <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-6 col-xl-4">
-                                    <div class="rounded position-relative fruite-item"
-                                        onclick="location.href='../detail/detail.html'">
-                                        <div class="fruite-img">
-                                            <img src="img/test_image.png" class="img-fluid w-100 rounded-top" alt="" />
-                                        </div>
-                                        <div class="active-red px-3 py-1 rounded position-absolute"
-                                            style="top: 10px; left: 10px;">모집중</div>
-                                        <div class="p-4 border  border-top-0 rounded-bottom">
-                                            <h4>모임 이름</h4>
-                                            <p>2024.06.20(목) 오후 10:09</p>
-                                            <!-- <div class="d-flex justify-content-between flex-lg-wrap"> -->
-                                            <div class="contents-container">
-                                                <p class="cont text-dark fs-5 fw-bold mb-0">1 / 3</p>
-                                                <img src="img/honeybee_doguri.png" class="search-profile-img" />
-                                                <!-- <div class="padding-left-100px"></div> -->
-                                                <img src="img/like.png" class="conte search-profile-img" />
-                                                <img src="img/share.png" class="search-profile-img" />
-                                                <!-- <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-6 col-xl-4">
-                                    <div class="rounded position-relative fruite-item"
-                                        onclick="location.href='../detail/detail.html'">
-                                        <div class="fruite-img">
-                                            <img src="img/test_image.png" class="img-fluid w-100 rounded-top" alt="" />
-                                        </div>
-                                        <div class="active-red px-3 py-1 rounded position-absolute"
-                                            style="top: 10px; left: 10px;">모집중</div>
-                                        <div class="p-4 border  border-top-0 rounded-bottom">
-                                            <h4>모임 이름</h4>
-                                            <p>2024.06.20(목) 오후 10:09</p>
-                                            <!-- <div class="d-flex justify-content-between flex-lg-wrap"> -->
-                                            <div class="contents-container">
-                                                <p class="cont text-dark fs-5 fw-bold mb-0">1 / 3</p>
-                                                <img src="img/honeybee_doguri.png" class="search-profile-img" />
-                                                <!-- <div class="padding-left-100px"></div> -->
-                                                <img src="img/like.png" class="conte search-profile-img" />
-                                                <img src="img/share.png" class="search-profile-img" />
-                                                <!-- <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-6 col-xl-4">
-                                    <div class="rounded position-relative fruite-item"
-                                        onclick="location.href='../detail/detail.html'">
-                                        <div class="fruite-img">
-                                            <img src="img/test_image.png" class="img-fluid w-100 rounded-top" alt="" />
-                                        </div>
-                                        <div class="active-red px-3 py-1 rounded position-absolute"
-                                            style="top: 10px; left: 10px;">모집중</div>
-                                        <div class="p-4 border  border-top-0 rounded-bottom">
-                                            <h4>모임 이름</h4>
-                                            <p>2024.06.20(목) 오후 10:09</p>
-                                            <!-- <div class="d-flex justify-content-between flex-lg-wrap"> -->
-                                            <div class="contents-container">
-                                                <p class="cont text-dark fs-5 fw-bold mb-0">1 / 3</p>
-                                                <img src="img/honeybee_doguri.png" class="search-profile-img" />
-                                                <!-- <div class="padding-left-100px"></div> -->
-                                                <img src="img/like.png" class="conte search-profile-img" />
-                                                <img src="img/share.png" class="search-profile-img" />
-                                                <!-- <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-6 col-xl-4">
-                                    <div class="rounded position-relative fruite-item"
-                                        onclick="location.href='../detail/detail.html'">
-                                        <div class="fruite-img">
-                                            <img src="img/test_image.png" class="img-fluid w-100 rounded-top" alt="" />
-                                        </div>
-                                        <div class="active-red px-3 py-1 rounded position-absolute"
-                                            style="top: 10px; left: 10px;">모집중</div>
-                                        <div class="p-4 border  border-top-0 rounded-bottom">
-                                            <h4>모임 이름</h4>
-                                            <p>2024.06.20(목) 오후 10:09</p>
-                                            <!-- <div class="d-flex justify-content-between flex-lg-wrap"> -->
-                                            <div class="contents-container">
-                                                <p class="cont text-dark fs-5 fw-bold mb-0">1 / 3</p>
-                                                <img src="img/honeybee_doguri.png" class="search-profile-img" />
-                                                <!-- <div class="padding-left-100px"></div> -->
-                                                <img src="img/like.png" class="conte search-profile-img" />
-                                                <img src="img/share.png" class="search-profile-img" />
-                                                <!-- <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-6 col-xl-4">
-                                    <div class="rounded position-relative fruite-item"
-                                        onclick="location.href='../detail/detail.html'">
-                                        <div class="fruite-img">
-                                            <img src="img/test_image.png" class="img-fluid w-100 rounded-top" alt="" />
-                                        </div>
-                                        <div class="active-red px-3 py-1 rounded position-absolute"
-                                            style="top: 10px; left: 10px;">모집중</div>
-                                        <div class="p-4 border  border-top-0 rounded-bottom">
-                                            <h4>모임 이름</h4>
-                                            <p>2024.06.20(목) 오후 10:09</p>
-                                            <!-- <div class="d-flex justify-content-between flex-lg-wrap"> -->
-                                            <div class="contents-container">
-                                                <p class="cont text-dark fs-5 fw-bold mb-0">1 / 3</p>
-                                                <img src="img/honeybee_doguri.png" class="search-profile-img" />
-                                                <!-- <div class="padding-left-100px"></div> -->
-                                                <img src="img/like.png" class="conte search-profile-img" />
-                                                <img src="img/share.png" class="search-profile-img" />
-                                                <!-- <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-6 col-xl-4">
-                                    <div class="rounded position-relative fruite-item"
-                                        onclick="location.href='../detail/detail.html'">
-                                        <div class="fruite-img">
-                                            <img src="img/test_image.png" class="img-fluid w-100 rounded-top" alt="" />
-                                        </div>
-                                        <div class="active-red px-3 py-1 rounded position-absolute"
-                                            style="top: 10px; left: 10px;">모집중</div>
-                                        <div class="p-4 border  border-top-0 rounded-bottom">
-                                            <h4>모임 이름</h4>
-                                            <p>2024.06.20(목) 오후 10:09</p>
-                                            <!-- <div class="d-flex justify-content-between flex-lg-wrap"> -->
-                                            <div class="contents-container">
-                                                <p class="cont text-dark fs-5 fw-bold mb-0">1 / 3</p>
-                                                <img src="img/honeybee_doguri.png" class="search-profile-img" />
-                                                <!-- <div class="padding-left-100px"></div> -->
-                                                <img src="img/like.png" class="conte search-profile-img" />
-                                                <img src="img/share.png" class="search-profile-img" />
-                                                <!-- <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                    cart</a> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    </td>
+                                </tr>
                                 <div class="col-12">
                                     <div class="pagination d-flex justify-content-center mt-5">
                                         <a href="#" class="rounded">&laquo;</a>

@@ -14,6 +14,7 @@
         <result property="meetingType" column="meeting_type"/>
         <result property="scheduledDate" column="scheduled_date"/>
         <result property="exitRestrictionTime" column="exit_restriction_time"/>
+        <result property="recruitMemberNumber" column="recruit_member_number"/>
         <result property="recruitmentNumber" column="recruitment_number"/>
         <result property="gender" column="gender"/>
         <result property="eligibleAge" column="eligible_age"/>
@@ -36,6 +37,7 @@
                 ,A.MEETING_TYPE
                 ,A.SCHEDULED_DATE
                 ,A.EXIT_RESTRICTION_TIME
+                ,A.RECRUIT_MEMBER_NUMBER
                 ,A.RECRUITMENT_NUMBER
                 ,A.GENDER
                 ,A.ELIGIBLE_AGE
@@ -61,6 +63,7 @@
             ,A.MEETING_TYPE
             ,A.SCHEDULED_DATE
             ,A.EXIT_RESTRICTION_TIME
+            ,A.RECRUIT_MEMBER_NUMBER
             ,A.RECRUITMENT_NUMBER
             ,A.GENDER
             ,A.ELIGIBLE_AGE
@@ -85,6 +88,7 @@
                 , A.MEETING_TYPE
                 , A.SCHEDULED_DATE
                 , A.EXIT_RESTRICTION_TIME
+                , A.RECRUIT_MEMBER_NUMBER
                 , A.RECRUITMENT_NUMBER
                 , A.GENDER
                 , A.ELIGIBLE_AGE
@@ -125,6 +129,7 @@
             , A.MEETING_TYPE
             , A.SCHEDULED_DATE
             , A.EXIT_RESTRICTION_TIME
+            , A.RECRUIT_MEMBER_NUMBER
             , A.RECRUITMENT_NUMBER
             , A.GENDER
             , A.ELIGIBLE_AGE
@@ -201,6 +206,7 @@
             , A.MEETING_TYPE
             , A.SCHEDULED_DATE
             , A.EXIT_RESTRICTION_TIME
+            , A.RECRUIT_MEMBER_NUMBER
             , A.RECRUITMENT_NUMBER
             , A.GENDER
             , A.ELIGIBLE_AGE
