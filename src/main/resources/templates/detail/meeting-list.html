@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    const successMessage = `[[${successMessage}]]`
+    if(successMessage) alert(successMessage)
+</script>
+<h2>메뉴 목록 페이지</h2>
+<table>
+    <tr>
+        <th>모임 id</th>
+        <th>모임제목</th>
+        <th>장소명</th>
+        <th>장소위도</th>
+        <th>장소경도</th>
+        <th>설명</th>
+        <th>지불방식</th>
+        <th>모임유형</th>
+<!--        <th>모임태그</th>-->
+        <th>모임일시</th>
+        <th>퇴장시간</th>
+        <th>모집인원</th>
+        <th>성별</th>
+        <th>모집연령대</th>
+        <th>생성일자</th>
+        <th>참여방식</th>
+        <th>모임상태</th>
+        <th>종료일시</th>
+        <th>호스트멤버ID</th>
+    </tr>
+    <tr th:each="meeting : ${meetingList}">
+        <td th:text="${meeting.meetingId}"></td>
+        <td th:text="${meeting.title}"></td>
+        <td th:text="${meeting.locationName}"></td>
+        <td th:text="${meeting.locationLatitude}"></td>
+        <td th:text="${meeting.locationLongitude}"></td>
+        <td th:text="${meeting.introduction}"></td>
+        <td th:text="${meeting.paymentMethod}"></td>
+        <td th:text="${meeting.meetingType}"></td>
+<!--        <td th:text="${meeting.interests}"></td>-->
+        <td th:text="${meeting.scheduledDate}"></td>
+        <td th:text="${meeting.exitRestrictionTime}"></td>
+        <td th:text="${meeting.recruitmentNumber}"></td>
+        <td th:text="${meeting.gender}"></td>
+        <td th:text="${meeting.eligibleAge}"></td>
+        <td th:text="${meeting.createdDate}"></td>
+        <td th:text="${meeting.participationMethod}"></td>
+        <td th:text="${meeting.status}"></td>
+        <td th:text="${meeting.endDate}"></td>
+        <td th:text="${meeting.hostMemberId}"></td>
+    </tr>
+</table>
+</body>
+</html>

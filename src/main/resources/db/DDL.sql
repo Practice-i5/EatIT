@@ -174,6 +174,8 @@ CREATE TABLE `tbl_member`
     `phone_number` VARCHAR(255) COMMENT 'phone_number',
     `created_date` DATETIME NOT NULL COMMENT 'created_date',
     `withdrawal_status` VARCHAR(255) NOT NULL COMMENT 'withdrawal_status',
+    `reported_count` INT DEFAULT 0 NULL COMMENT '누적 신고 횟수',
+    `is_stopped_by_admin` INT DEFAULT 0 NOT NULL COMMENT '정지 계정 여부',
     PRIMARY KEY (`member_id`)
 ) COMMENT = 'member';
 

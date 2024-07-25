@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.i7.eatit.domain.user.dao.UserInfoMapper">
+
+    <resultMap id="userInfoMap" type="com.i7.eatit.domain.user.dto.UserInfoDTO">
+        <id property="member_id" column="MEMBER_ID"/>
+
+        <result property="email" column="EMAIL"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="name" column="NAME"/>
+        <result property="nickname" column="NICKNAME"/>
+        <result property="loginMethod" column="LOGIN_METHOD"/>
+        <result property="phoneNumber" column="PHONE_NUMBER"/>
+        <result property="createdDate" column="CREATED_DATE"/>
+        <result property="withdrawalStatus" column="WITHDRAWAL_STATUS"/>
+        <result property="reportedCount" column="REPORTED_COUNT"/>
+        <result property="age" column="AGE"/>
+        <result property="gender" column="GENDER"/>
+        <result property="isStoppedByAdmin" column="IS_STOPPED_BY_ADMIN"/>
+
+    </resultMap>
+
+    <select id="selectUserInfo" resultMap="userInfoMap" parameterType="_int">
+        SELECT
+                MEMBER_ID
+                , EMAIL
+                , PASSWORD
+                , NAME
+                , NICKNAME
+                , LOGIN_METHOD
+                , PHONE_NUMBER
+                , CREATED_DATE
+                , WITHDRAWAL_STATUS
+                , REPORTED_COUNT
+                , GENDER
+                , AGE
+                , IS_STOPPED_BY_ADMIN
+        from
+                TBL_MEMBER
+        where
+                MEMBER_ID = #{ member_id }
+    </select>
+</mapper>

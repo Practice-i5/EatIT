@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>프로필 수정</title>
+    <link rel="stylesheet" href="css/style-mypage.css" th:href="@{/css/my-page/style-mypage.css}">
+    <link rel="stylesheet" href="css/button.css" th:href="@{/css/my-page/button.css}">
+</head>
+<body>
+<div class="container">
+    <nav th:insert="~{my-page/header-mypage::headerFragment}" class="header">
+    </nav>
+
+    <aside layout:fragment="sidebar"></aside>
+    <div layout:fragment="content"></div>
+
+    <footer th:replace="~{my-page/footer-mypage::footerFragment}">
+    </footer>
+</div>
+<script src="js/upload-image.js" th:src="@{/js/my-page/upload-image.js}"></script>
+</body>
+</html>

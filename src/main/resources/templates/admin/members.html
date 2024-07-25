@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clients Management</title>
+  <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+
+<body>
+<div class="container">
+  <div class="sidebar">
+    <ul>
+      <li><a th:href="@{/admin/members}">회원 관리</a></li>
+      <li><a th:href="@{/admin/login}">로그아웃</a></li>
+    </ul>
+  </div>
+  <div class="main">
+    <div class="header">
+<!--      <input type="text" id="search" placeholder="search by Email">-->
+<!--      <button id="searchBtn" class="add-user">조회</button>-->
+      <form action="/admin/members" method="GET">
+        <input type="text" name="searchEmail" id="search" placeholder="search by Email" required>
+        <button type="submit" class="add-user">조회</button>
+      </form>
+    </div>
+    <table>
+      <thead>
+      <tr>
+        <th>회원 번호</th>
+        <th>이메일</th>
+        <th>이름</th>
+        <th>닉네임</th>
+        <th>로그인 수단</th>
+        <th>전화번호</th>
+        <th>가입 일시</th>
+        <th>탈퇴 여부</th>
+        <th>
+          <a th:href="@{/admin/members?sort=reportedCount}" th:text="'누적 신고 횟수'"></a>
+        </th>
+        <th>정지 여부</th>
+        <th>관리</th>
+      </tr>
+      </thead>
+      <tbody id="userTableBody">
+      <tr th:each="adminMemberDto : ${adminMemberDtoList}">
+        <td th:text="${adminMemberDto.memberId}"></td>
+        <td th:text="${adminMemberDto.email}"></td>
+        <td th:text="${adminMemberDto.name}"></td>
+        <td th:text="${adminMemberDto.nickname}"></td>
+        <td th:text="${adminMemberDto.loginMethod}"></td>
+        <td th:text="${adminMemberDto.phoneNumber}"></td>
+        <td th:text="${#temporals.format(adminMemberDto.createdDate, 'yyyy-MM-dd-hh-mm-ss')}"></td>
+        <td th:text="${adminMemberDto.withdrawalStatus}"></td>
+        <td th:text="${adminMemberDto.reportedCount}"></td>
+        <td th:text="${adminMemberDto.isStoppedByAdmin == 0 ? 'false' : 'true'}"></td>
+
+        <td>
+          <a th:href="@{/admin/members/{memberId}/management(memberId=${adminMemberDto.memberId})}" class="management-button" style="display: inline-block; padding: 5px 10px; background-color: #007bff; color: white; text-align: center; text-decoration: none; border-radius: 5px;">관리</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

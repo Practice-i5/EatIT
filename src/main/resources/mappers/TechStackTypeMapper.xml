@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.i7.eatit.domain.tag.dao.TechStackTypeMapper">
+    <resultMap id="TechStackTypeMap" type="com.i7.eatit.domain.tag.dto.TechStackTypeDTO">
+        <id property="code" column="STACK_CODE"/>
+        <result property="name" column="STACK_NAME"/>
+    </resultMap>
+
+    <select id="findAllTechStack" resultMap="TechStackTypeMap">
+        SELECT
+        STACK_CODE
+        , STACK_NAME
+        FROM
+        TBL_TECH_STACK_TYPE
+    </select>
+
+    <insert id="insertTechStack" parameterType="String">
+        INSERT TBL_TECH_STACK_TYPE (STACK_NAME)
+        VALUES(stackName)
+    </insert>
+</mapper>

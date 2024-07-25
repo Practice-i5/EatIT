@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--내가 만든 Mapper이름과 동일하게 지정-->
+<mapper namespace="com.i7.eatit.domain.user.dao.JoinMapper">
+
+    <!-- <resultMap id="아이디명" type="대상 DTO" > -->
+    <resultMap id="UserInfoMap" type="com.i7.eatit.domain.user.dto.UserInfoDTO">
+
+        <id property="member_id" column="member_id"/>
+
+        <result property="email" column="email"/>
+        <result property="password" column="password"/>
+        <result property="name" column="name"/>
+
+        <result property="nickname" column="nickname"/>
+        <result property="loginMethod" column="login_method"/>
+        <result property="phoneNumber" column="phone_number"/>
+
+        <result property="createdDate" column="created_date"/>
+        <result property="withdrawalStatus" column="withdrawal_status"/>
+        <result property="reportedCount" column="reported_count"/>
+
+        <result property="gender" column="gender"/>
+        <result property="age" column="age"/>
+
+    </resultMap>
+
+    <!--회원가입-->
+    <insert id="userInsert" parameterType="com.i7.eatit.domain.user.dto.UserInfoDTO"
+            useGeneratedKeys="true" keyProperty="member_id">
+
+        insert into tbl_member
+                    (
+                    email
+                    , password
+                    , name
+                    , nickname
+                    , login_method
+                    , phone_number
+                    , created_date
+                    , withdrawal_status
+                    , reported_count
+                    , gender
+                    , age
+                    )
+        values
+                    (
+                    #{ email }
+                    , #{ password }
+                    , #{ name }
+                    , #{ nickname }
+                    , #{ loginMethod }
+                    , #{ phoneNumber }
+                    , #{ createdDate }
+                    , #{ withdrawalStatus }
+                    , #{ reportedCount }
+                    , #{ gender }
+                    , #{ age }
+                    )
+    </insert>
+
+</mapper>

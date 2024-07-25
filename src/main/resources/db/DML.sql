@@ -2,8 +2,7 @@
 
 -- 관리자 테이블 데이터 삽입
 INSERT INTO `tbl_admin` (`admin_id`, `email`, `password`, `created_date`)
-VALUES (1, 'admin1@example.com', 'password1', '2024-01-01 10:00:00'),
-       (2, 'admin2@example.com', 'password2', '2024-01-02 11:00:00');
+VALUES (1, 'admin1234@admin.com', 'ac9689e2272427085e35b9d3e3e8bed88cb3434828b43b86fc0596cad4c6e270', NOW());
 
 -- 기술스택종류 테이블 데이터 삽입
 INSERT INTO `tbl_tech_stack_type` (`stack_code`, `stack_name`)
@@ -202,27 +201,28 @@ VALUES (1, 1, 2),
 
 -- 회원 테이블 데이터 삽입
 INSERT INTO `tbl_member` (`member_id`, `email`, `password`, `name`, `nickname`, `login_method`,
-                          `phone_number`, `created_date`, `withdrawal_status`)
+                          `phone_number`, `created_date`, `withdrawal_status`, `reported_count`,
+                          `is_stopped_by_admin`)
 VALUES (1, 'user1@example.com', 'password1', 'User One', 'user1', 'email', '010-1234-5678',
-        '2024-07-01 10:00:00', 'N'),
+        '2024-07-01 10:00:00', 'N', 1, 0),
        (2, 'user2@example.com', 'password2', 'User Two', 'user2', 'email', '010-2345-6789',
-        '2024-07-02 11:00:00', 'N'),
+        '2024-07-02 11:00:00', 'N', 2, 0),
        (3, 'user3@example.com', 'password3', 'User Three', 'user3', 'email', '010-3456-7890',
-        '2024-07-03 12:00:00', 'N'),
+        '2024-07-03 12:00:00', 'N', 3, 0),
        (4, 'user4@example.com', 'password4', 'User Four', 'user4', 'email', '010-4567-8901',
-        '2024-07-04 13:00:00', 'N'),
+        '2024-07-04 13:00:00', 'N', 4, 0),
        (5, 'user5@example.com', 'password5', 'User Five', 'user5', 'email', '010-5678-9012',
-        '2024-07-05 14:00:00', 'N'),
+        '2024-07-05 14:00:00', 'N', 5, 0),
        (6, 'user6@example.com', 'password6', 'User Six', 'user6', 'email', '010-6789-0123',
-        '2024-07-06 15:00:00', 'N'),
+        '2024-07-06 15:00:00', 'N', 6, 0),
        (7, 'user7@example.com', 'password7', 'User Seven', 'user7', 'email', '010-7890-1234',
-        '2024-07-07 16:00:00', 'N'),
+        '2024-07-07 16:00:00', 'N', 7, 0),
        (8, 'user8@example.com', 'password8', 'User Eight', 'user8', 'email', '010-8901-2345',
-        '2024-07-08 17:00:00', 'N'),
+        '2024-07-08 17:00:00', 'N', 8, 0),
        (9, 'user9@example.com', 'password9', 'User Nine', 'user9', 'email', '010-9012-3456',
-        '2024-07-09 18:00:00', 'N'),
+        '2024-07-09 18:00:00', 'N', 9, 0),
        (10, 'user10@example.com', 'password10', 'User Ten', 'user10', 'email', '010-0123-4567',
-        '2024-07-10 19:00:00', 'N');
+        '2024-07-10 19:00:00', 'N', 10, 0);
 
 -- 회원기술스택 테이블 데이터 삽입
 INSERT INTO `tbl_member_tech_stack` (`stack_code`, `member_id`)

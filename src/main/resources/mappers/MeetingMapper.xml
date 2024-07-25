@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.i7.eatit.domain.meeting.model.dao.MeetingMapper">
+    <resultMap id="meetingResultMap" type="com.i7.eatit.domain.meeting.model.dto.MeetingDTO">
+        <id property="meetingId" column="meeting_id"/>
+        <result property="title" column="title"/>
+        <result property="locationName" column="location_name"/>
+        <result property="locationLatitude" column="location_latitude"/>
+        <result property="locationLongitude" column="location_longitude"/>
+        <result property="introduction" column="introduction"/>
+        <result property="paymentMethod" column="payment_method"/>
+        <result property="meetingType" column="meeting_type"/>
+        <result property="scheduledDate" column="scheduled_date"/>
+        <result property="exitRestrictionTime" column="exit_restriction_time"/>
+        <result property="recruitMemberNumber" column="recruit_member_number"/>
+        <result property="recruitmentNumber" column="recruitment_number"/>
+        <result property="gender" column="gender"/>
+        <result property="eligibleAge" column="eligible_age"/>
+        <result property="createdDate" column="created_date"/>
+        <result property="participationMethod" column="participation_method"/>
+        <result property="status" column="status"/>
+        <result property="endDate" column="end_date"/>
+        <result property="hostMemberId" column="host_member_id"/>
+    </resultMap>
+
+    <resultMap id="previewMeetingResultMap" type="com.i7.eatit.domain.meeting.model.dto.PreviewMeetingDTO">
+        <id property="meetingId" column="meeting_id"/>
+        <result property="title" column="title"/>
+        <result property="locationName" column="location_name"/>
+        <result property="meetingImageURL" column="meeting_url"/>
+        <result property="status" column="status"/>
+        <result property="hostImageURL" column="member_url"/>
+        <result property="scheduledDate" column="scheduled_date"/>
+        <result property="recruitMemberNumber" column="recruit_member_number"/>
+        <result property="recruitmentNumber" column="recruitment_number"/>
+    </resultMap>
+
+    <select id="findAllMeetings" resultMap="meetingResultMap">
+        SELECT
+                A.MEETING_ID
+                ,A.TITLE
+                ,A.LOCATION_NAME
+                ,A.LOCATION_LATITUDE
+                ,A.LOCATION_LONGITUDE
+                ,A.INTRODUCTION
+                ,A.PAYMENT_METHOD
+                ,A.MEETING_TYPE
+                ,A.SCHEDULED_DATE
+                ,A.EXIT_RESTRICTION_TIME
+                ,A.RECRUIT_MEMBER_NUMBER
+                ,A.RECRUITMENT_NUMBER
+                ,A.GENDER
+                ,A.ELIGIBLE_AGE
+                ,A.CREATED_DATE
+                ,A.PARTICIPATION_METHOD
+                ,A.STATUS
+                ,A.END_DATE
+                ,A.HOST_MEMBER_ID
+        FROM
+            TBL_MEETING AS A
+            LEFT JOIN TBL_MEETING_INTEREST_RELATION AS B
+            ON  A.MEETING_ID = B.MEETING_ID
+            LEFT JOIN TBL_MEETING_INTEREST_CATEGORY AS C
+            ON  B.INTERESTS = C.INTERESTS
+        GROUP BY
+            A.MEETING_ID
+            ,A.TITLE
+            ,A.LOCATION_NAME
+            ,A.LOCATION_LATITUDE
+            ,A.LOCATION_LONGITUDE
+            ,A.INTRODUCTION
+            ,A.PAYMENT_METHOD
+            ,A.MEETING_TYPE
+            ,A.SCHEDULED_DATE
+            ,A.EXIT_RESTRICTION_TIME
+            ,A.RECRUIT_MEMBER_NUMBER
+            ,A.RECRUITMENT_NUMBER
+            ,A.GENDER
+            ,A.ELIGIBLE_AGE
+            ,A.CREATED_DATE
+            ,A.PARTICIPATION_METHOD
+            ,A.STATUS
+            ,A.END_DATE
+            ,A.HOST_MEMBER_ID
+        ORDER BY
+            A.MEETING_ID DESC;
+    </select>
+
+    <select id="findMeetings" parameterType="com.i7.eatit.domain.meeting.model.common.SearchCriteria" resultMap="meetingResultMap">
+        SELECT
+                A.MEETING_ID
+                , A.TITLE
+                , A.LOCATION_NAME
+                , A.LOCATION_LATITUDE
+                , A.LOCATION_LONGITUDE
+                , A.INTRODUCTION
+                , A.PAYMENT_METHOD
+                , A.MEETING_TYPE
+                , A.SCHEDULED_DATE
+                , A.EXIT_RESTRICTION_TIME
+                , A.RECRUIT_MEMBER_NUMBER
+                , A.RECRUITMENT_NUMBER
+                , A.GENDER
+                , A.ELIGIBLE_AGE
+                , A.CREATED_DATE
+                , A.PARTICIPATION_METHOD
+                , A.STATUS
+                , A.END_DATE
+                , A.HOST_MEMBER_ID
+        FROM
+                TBL_MEETING AS A
+            LEFT JOIN TBL_MEETING_INTEREST_RELATION AS B
+            ON  A.MEETING_ID = B.MEETING_ID
+            LEFT JOIN TBL_MEETING_INTEREST_CATEGORY AS C
+            ON  B.INTERESTS = C.INTERESTS
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="word != null and word != ''">
+                A.TITLE LIKE CONCAT('%', #{ word }, '%')
+            </if>
+            <if test="interestsConditions != null and interestsConditions.size() != 0">
+                AND C.INTERESTS IN
+                <foreach collection="interestsConditions" item="condition" open="(" close=")" separator=", ">
+                    #{ condition }
+                </foreach>
+            </if>
+            <if test="typeCondition != null and typeCondition != ''">
+                AND A.MEETING_TYPE = #{ typeCondition }
+            </if>
+            AND A.STATUS = 'Open'
+        </trim>
+        GROUP BY
+            A.MEETING_ID
+            , A.TITLE
+            , A.LOCATION_NAME
+            , A.LOCATION_LATITUDE
+            , A.LOCATION_LONGITUDE
+            , A.INTRODUCTION
+            , A.PAYMENT_METHOD
+            , A.MEETING_TYPE
+            , A.SCHEDULED_DATE
+            , A.EXIT_RESTRICTION_TIME
+            , A.RECRUIT_MEMBER_NUMBER
+            , A.RECRUITMENT_NUMBER
+            , A.GENDER
+            , A.ELIGIBLE_AGE
+            , A.CREATED_DATE
+            , A.PARTICIPATION_METHOD
+            , A.STATUS
+            , A.END_DATE
+            , A.HOST_MEMBER_ID
+    </select>
+
+    <insert id="registMeeting" parameterType="com.i7.eatit.domain.meeting.model.dto.MeetingDTO"  useGeneratedKeys="true" keyProperty="lastId">
+        INSERT INTO TBL_MEETING
+        (
+            TITLE
+            , LOCATION_NAME
+            , LOCATION_LATITUDE
+            , LOCATION_LONGITUDE
+            , INTRODUCTION
+            , PAYMENT_METHOD
+            , MEETING_TYPE
+            , SCHEDULED_DATE
+            , EXIT_RESTRICTION_TIME
+            , RECRUITMENT_NUMBER
+            , GENDER
+            , ELIGIBLE_AGE
+            , CREATED_DATE
+            , PARTICIPATION_METHOD
+            , STATUS
+            , END_DATE
+            , HOST_MEMBER_ID
+        )
+        VALUES
+        (
+            #{ title }
+            , #{ locationName }
+            , #{ locationLatitude }
+            , #{ locationLongitude }
+            , #{ introduction }
+            , #{ paymentMethod }
+            , #{ meetingType }
+            , #{ scheduledDate }
+            , #{ exitRestrictionTime }
+            , #{ recruitmentNumber }
+            , #{ gender }
+            , #{ eligibleAge }
+            , #{ createdDate }
+            , #{ participationMethod }
+            , #{ status }
+            , #{ endDate }
+            , #{ hostMemberId }
+        )
+    </insert>
+
+    <insert id="registInterests" parameterType="com.i7.eatit.domain.tag.dto.InsertInterestRelDTO">
+        INSERT INTO TBL_MEETING_INTEREST_RELATION
+        ( INTERESTS, MEETING_ID )
+        VALUES
+        <foreach collection="interestsConditions" item="condition" separator=", ">
+            (#{ condition }, #{ meeting_id })
+        </foreach>
+
+    </insert>
+
+
+    <select id="findMeetingById" parameterType="int" resultMap="meetingResultMap">
+        SELECT
+            A.MEETING_ID
+            , A.TITLE
+            , A.LOCATION_NAME
+            , A.LOCATION_LATITUDE
+            , A.LOCATION_LONGITUDE
+            , A.INTRODUCTION
+            , A.PAYMENT_METHOD
+            , A.MEETING_TYPE
+            , A.SCHEDULED_DATE
+            , A.EXIT_RESTRICTION_TIME
+            , A.RECRUIT_MEMBER_NUMBER
+            , A.RECRUITMENT_NUMBER
+            , A.GENDER
+            , A.ELIGIBLE_AGE
+            , A.CREATED_DATE
+            , A.PARTICIPATION_METHOD
+            , A.STATUS
+            , A.END_DATE
+            , A.HOST_MEMBER_ID
+        FROM
+            TBL_MEETING A
+        WHERE
+            MEETING_ID = #{ meetingId }
+    </select>
+
+    <select id="findInterestsById" parameterType="int">
+        SELECT
+            INTERESTS
+        FROM
+            TBL_MEETING_INTEREST_RELATION
+        WHERE
+            MEETING_ID = #{ meetingId }
+    </select>
+
+    <select id="findMeetingNameById" parameterType="int">
+        SELECT
+            TITLE
+        FROM
+            TBL_MEETING
+        WHERE
+            MEETING_ID = #{ meetingId }
+    </select>
+
+    <select id="findPreviewBySearch" parameterType="com.i7.eatit.domain.meeting.model.common.SearchCriteria" resultMap="previewMeetingResultMap">
+        SELECT
+            A.MEETING_ID
+            , A.TITLE
+            , A.LOCATION_NAME
+            , B.PHOTO_PATH meeting_url
+            , C.PHOTO_PATH member_url
+            , A.STATUS
+            , A.SCHEDULED_DATE
+            , A.RECRUIT_MEMBER_NUMBER
+            , A.RECRUITMENT_NUMBER
+        FROM
+                        TBL_MEETING AS A
+            LEFT JOIN   TBL_MEETING_PHOTO AS B
+            ON          A.MEETING_ID = B.MEETING_ID
+            LEFT JOIN   TBL_MEMBER_PHOTO AS C
+            ON          A.HOST_MEMBER_ID = C.MEMBER_ID
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="word != null and word != ''">
+                A.TITLE LIKE CONCAT('%', #{ word }, '%')
+            </if>
+            <if test="interestsConditions != null and interestsConditions.size() != 0">
+                AND C.INTERESTS IN
+                <foreach collection="interestsConditions" item="condition" open="(" close=")" separator=", ">
+                    #{ condition }
+                </foreach>
+            </if>
+            <if test="typeCondition != null and typeCondition != ''">
+                AND A.MEETING_TYPE = #{ typeCondition }
+            </if>
+            AND A.STATUS = 'Open'
+        </trim>
+    </select>
+
+    <select id="findPreviewByMemberIdOpen" parameterType="int" resultMap="previewMeetingResultMap">
+        SELECT
+                A.MEETING_ID
+                , A.TITLE
+                , A.LOCATION_NAME
+                , B.PHOTO_PATH meeting_url
+                , C.PHOTO_PATH member_url
+                , A.STATUS
+                , A.SCHEDULED_DATE
+                , A.RECRUIT_MEMBER_NUMBER
+                , A.RECRUITMENT_NUMBER
+        FROM
+                TBL_MEETING AS A
+                LEFT JOIN   TBL_MEETING_PHOTO AS B
+                ON          A.MEETING_ID = B.MEETING_ID
+                LEFT JOIN   TBL_MEMBER_PHOTO AS C
+                ON          A.HOST_MEMBER_ID = C.MEMBER_ID
+                LEFT JOIN   TBL_MEETING AS D
+                ON          A.MEETING_ID = D.MEETING_ID
+        WHERE   D.MEMBER_ID = #{ memberId }
+            AND A.STATUS = 'Open'
+    </select>
+
+    <select id="findPreviewByMemberIdClosed" parameterType="int" resultMap="previewMeetingResultMap">
+        SELECT
+        A.MEETING_ID
+        , A.TITLE
+        , A.LOCATION_NAME
+        , B.PHOTO_PATH meeting_url
+        , C.PHOTO_PATH member_url
+        , A.STATUS
+        , A.SCHEDULED_DATE
+        , A.RECRUIT_MEMBER_NUMBER
+        , A.RECRUITMENT_NUMBER
+        FROM
+        TBL_MEETING AS A
+        LEFT JOIN   TBL_MEETING_PHOTO AS B
+        ON          A.MEETING_ID = B.MEETING_ID
+        LEFT JOIN   TBL_MEMBER_PHOTO AS C
+        ON          A.HOST_MEMBER_ID = C.MEMBER_ID
+        LEFT JOIN   TBL_MEETING AS D
+        ON          A.MEETING_ID = D.MEETING_ID
+        WHERE   D.MEMBER_ID = #{ memberId }
+        AND A.STATUS = 'Closed'
+    </select>
+
+    <!-- test mapper start -->
+    <select id="testFindMeetings" parameterType="com.i7.eatit.domain.meeting.model.common.SearchCriteria" resultMap="meetingResultMap">
+        SELECT
+        A.MEETING_ID
+        , A.TITLE
+        , A.LOCATION_NAME
+        , A.LOCATION_LATITUDE
+        , A.LOCATION_LONGITUDE
+        , A.INTRODUCTION
+        , A.PAYMENT_METHOD
+        , A.MEETING_TYPE
+        , C.INTERESTS
+        , A.SCHEDULED_DATE
+        , A.EXIT_RESTRICTION_TIME
+        , A.RECRUITMENT_NUMBER
+        , A.GENDER
+        , A.ELIGIBLE_AGE
+        , A.CREATED_DATE
+        , A.PARTICIPATION_METHOD
+        , A.STATUS
+        , A.END_DATE
+        , A.HOST_MEMBER_ID
+        FROM
+        TBL_MEETING AS A
+        LEFT JOIN TBL_MEETING_INTEREST_RELATION AS B
+        ON  A.MEETING_ID = B.MEETING_ID
+        LEFT JOIN TBL_MEETING_INTEREST_CATEGORY AS C
+        ON  B.INTERESTS = C.INTERESTS
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="word != null and word != ''">
+                A.TITLE LIKE CONCAT('%', #{ word }, '%')
+            </if>
+            <if test="interestsConditions != null and interestsConditions.size() != 0">
+                AND C.INTERESTS IN
+                <foreach collection="interestsConditions" item="condition" open="(" close=")" separator=", ">
+                    #{ condition }
+                </foreach>
+            </if>
+            <if test="typeCondition != null and typeCondition != ''">
+                AND A.MEETING_TYPE = #{ typeCondition }
+            </if>
+            AND A.STATUS = 'Open'
+        </trim>
+    </select>
+
+    <select id="testFindAllMeetings" resultMap="meetingResultMap">
+        SELECT
+        A.MEETING_ID
+        ,A.TITLE
+        ,A.LOCATION_NAME
+        ,A.LOCATION_LATITUDE
+        ,A.LOCATION_LONGITUDE
+        ,A.INTRODUCTION
+        ,A.PAYMENT_METHOD
+        ,A.MEETING_TYPE
+        ,C.INTERESTS
+        ,A.SCHEDULED_DATE
+        ,A.EXIT_RESTRICTION_TIME
+        ,A.RECRUITMENT_NUMBER
+        ,A.GENDER
+        ,A.ELIGIBLE_AGE
+        ,A.CREATED_DATE
+        ,A.PARTICIPATION_METHOD
+        ,A.STATUS
+        ,A.END_DATE
+        ,A.HOST_MEMBER_ID
+        FROM
+        TBL_MEETING AS A
+        LEFT JOIN TBL_MEETING_INTEREST_RELATION AS B
+        ON  A.MEETING_ID = B.MEETING_ID
+        LEFT JOIN TBL_MEETING_INTEREST_CATEGORY AS C
+        ON  B.INTERESTS = C.INTERESTS
+        ORDER BY
+        A.MEETING_ID DESC;
+    </select>
+    <!-- test mapper end -->
+</mapper>
