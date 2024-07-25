@@ -50,7 +50,10 @@
                         </div>
                         <div class="block-modify">
                             <!-- <button class="btn-choice-small btn-wb">수정</button> -->
-                            <button class="btn-choice-small btn-wb">삭제</button>
+                            <form action="/my-page/block-user-delete" method="post">
+                                <button class="btn-choice-small btn-wb"
+                                    th:name="memberId" th:value="${blockUser.memberId}">삭제</button>
+                            </form>
                         </div>
                     </div>
                 </li>
@@ -67,7 +70,7 @@
                             </div>
                         </div>
                         <div class="block-modify">
-                            <button class="btn-choice-small btn-wb">수정</button>
+<!--                            <button class="btn-choice-small btn-wb">수정</button>-->
                             <button class="btn-choice-small btn-wb">삭제</button>
                         </div>
                     </div>
