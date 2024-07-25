@@ -1,6 +1,8 @@
 package com.i7.eatit.domain.user.controller;
 
 import com.i7.eatit.domain.user.dto.UserInfoDTO;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 import com.i7.eatit.domain.user.dto.UserLoginDTO;
 import com.i7.eatit.domain.user.service.LoginService;
@@ -8,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/login/*")
@@ -47,7 +51,7 @@ public class LoginController {
 
     // 로그인 - 이메일, 비밀번호
     @PostMapping("/successLogin")
-    public String login(UserLoginDTO userLoginDTO, Model model) {
+    public String login(UserLoginDTO userLoginDTO, Model model, HttpSession session) {
 
         UserInfoDTO loginUser = loginService.checkUser(userLoginDTO);
 
@@ -56,6 +60,7 @@ public class LoginController {
 
         if (loginUser != null) {    // 성공
             model.addAttribute("loginUser", loginUser);
+            session.setAttribute("loginUser", loginUser); // 세션에 사용자 정보 저장
             return "redirect:/login/successLogin";
         } else {                    // 실패
             return "redirect:/login/loginMain";
@@ -64,6 +69,20 @@ public class LoginController {
 
     @GetMapping("/successLogin")
     public void successLogin() {
+    }
+
+
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true") // 클라이언트의 주소를 허용
+    @GetMapping("/getSessionUser")
+    @ResponseBody
+    public UserInfoDTO getSessionUser(@SessionAttribute(value = "loginUser", required = false) UserInfoDTO loginUser,  HttpSession session) {
+        UserInfoDTO userInfo = loginUser;
+        System.out.println(userInfo);
+        if (userInfo == null) {
+            userInfo = new UserInfoDTO();
+        }
+        System.out.println(userInfo);
+        return userInfo;
     }
 
     // 로그아웃

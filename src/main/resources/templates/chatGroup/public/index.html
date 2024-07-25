@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>익명 실시간 채팅</title>
+  <link th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css" />
+  <!------ 위의 내용을 HEAD 태그에 포함 ---------->
+  <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div class="chat_window">
+  <div class="top_menu">
+    <div class="buttons">
+      <div class="button close"></div>
+      <div class="button minimize"></div>
+      <div class="button maximize"></div>
+    </div>
+    <div class="title">채팅</div>
+  </div>
+  <ul id="messages" class="messages">
+    <!-- 메시지 목록은 서버에서 채워짐 -->
+    <li th:each="message : ${messages}" th:text="${message.content}"></li>
+  </ul>
+
+  <div class="bottom_wrapper clearfix">
+    <i id="typing"></i>
+    <form id="form" th:action="@{/send}" method="post">
+      <div class="message_input_wrapper">
+        <input id="message" class="message_input" placeholder="메시지를 입력하세요..." name="message" />
+      </div>
+      <button class="send_message">전송</button>
+    </form>
+  </div>
+</div>
+
+<script th:src="@{https://cdn.socket.io/4.7.5/socket.io.min.js}"></script>
+<script th:src="@{/js/socket.js}"></script>
+<script th:src="@{https://code.jquery.com/jquery-1.11.1.min.js}"></script>
+<script th:src="@{https://cdn.jsdelivr.net/gh/yourusername/TimeLeap/src/index-cdn.js}"></script>
+<script th:src="@{/js/chat.js}"></script>
+</body>
+</html>

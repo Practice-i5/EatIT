@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
-<header>
+<head>
     <title>유저 페이지</title>
-</header>
+    <script>
+        // 세션 스토리지에 userId 저장
+        sessionStorage.setItem('userId', /*[[${loginUser.member_id}]]*/'');
+    </script>
+</head>
 
 <body>
 <!--<h1 th:text="|${session.loginUser.member_id} 환영합니다|"></h1>-->
