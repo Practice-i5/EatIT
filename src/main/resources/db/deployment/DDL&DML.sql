@@ -222,7 +222,7 @@ DROP TABLE IF EXISTS `tbl_meeting_participation`;
 
 CREATE TABLE `tbl_meeting_participation`
 (
-    `participation_id` INT          NOT NULL COMMENT 'participation_id',
+    `participation_id` INT          NOT NULL AUTO_INCREMENT COMMENT 'participation_id',
     `role`             VARCHAR(255) NOT NULL COMMENT 'role',
     `meeting_id`       INT          NOT NULL COMMENT 'meeting_id',
     `member_id`        INT          NOT NULL COMMENT 'member_id',

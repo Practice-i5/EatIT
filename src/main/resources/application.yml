@@ -15,3 +15,7 @@ spring:
 
 mybatis:
   mapper-locations: mappers/**/*.xml
+
+app:
+  firebase-configuration-file: ./serviceAccount.json
+  firebase-bucket: eatit-70ba1.appspot.com

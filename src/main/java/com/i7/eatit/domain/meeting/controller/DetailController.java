@@ -7,6 +7,7 @@ import com.i7.eatit.domain.user.dto.UserInfoDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -86,7 +87,7 @@ public class DetailController {
 
 //    @PostMapping("detail")
     @GetMapping("detail")
-    public String writeDoneDetail(Model model, @RequestParam("meetingId") int meetingId) {
+    public String writeDoneDetail(Model model, @RequestParam("meetingId") int meetingId, @SessionAttribute("loginUser") UserInfoDTO userInfoDTO) {
 
 //        List<MeetingDTO> meetingList = meetingService.findAllMeeting();
         String leaderId = "임시 닉네임";
@@ -116,15 +117,47 @@ public class DetailController {
         model.addAttribute("temp", temp);
         model.addAttribute("meetingDTO", meetingService.findMeetingById(meetingId));
         model.addAttribute("interests", meetingService.findInterestsById(meetingId));
+        model.addAttribute("userInfo", userInfoDTO);
+        model.addAttribute("meetingImage", meetingService.findPreviewById(meetingId));
 
         return "detail/detail";
     }
+    // 모임 참가
+    @PostMapping("detail")
+    public String writeDetail(Model model, @RequestParam("meetingId") int meetingId, @RequestParam("memberId") int memberId, @SessionAttribute("loginUser") UserInfoDTO userInfoDTO) {
+        //        List<MeetingDTO> meetingList = meetingService.findAllMeeting();
+        if ("바로참가".equals(meetingService.findMeetingById(meetingId).getParticipationMethod())) {
+            meetingService.participateGuest(meetingId, memberId);
+        }
+//        else
+//            meetingService.partic
+        String leaderId = "임시 닉네임";
 
-//    @PostMapping("detail")
-//    public String writeDetail(Model model, MeetingDTO meetingDTO) {
-//
-//
-//    }
+
+
+//        int temp = 81;
+
+//        List<String> careers = new ArrayList<>();
+//        careers.add("우리은행 백엔드");
+//        careers.add("농협은행 백엔드");
+//        careers.add("토스뱅크 백엔드");
+//        List<String> evaluates = new ArrayList<>();
+//        evaluates.add("시간 약속을 잘 지켜요");
+//        evaluates.add("질문에 대한 답변이 빨라요");
+//        evaluates.add("모임종료");
+
+
+//        model.addAttribute("careers", careers);
+//        model.addAttribute("evaluates", evaluates);
+//        model.addAttribute("temp", temp);
+        model.addAttribute("meetingDTO", meetingService.findMeetingById(meetingId));
+        model.addAttribute("interests", meetingService.findInterestsById(meetingId));
+        model.addAttribute("userInfo", userInfoDTO);
+        model.addAttribute("meetingImage", meetingService.findMeetingPhotoById(meetingId));
+
+        return "detail/detail";
+
+    }
 
     @GetMapping(value = "meeting-list")
     public String allMeetings(Model model) {

@@ -32,4 +32,8 @@
          WHERE
                MEMBER_ID=#{memberId}
     </update>
+
+    <update id="insertTechExperience">
+
+    </update>
 </mapper>
