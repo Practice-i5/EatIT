@@ -48,4 +48,16 @@
     WHERE A.member_id = #{ memberId }
   </select>
 
+  <update id="updateMemberStatus">
+    UPDATE tbl_member A
+    SET A.is_stopped_by_admin = CASE
+    WHEN A.is_stopped_by_admin = 0 THEN 1
+    WHEN A.is_stopped_by_admin = 1 THEN 0
+    ELSE A.is_stopped_by_admin
+    END
+    WHERE A.member_id = #{ memberId }
+  </update>
+
+
+
 </mapper>

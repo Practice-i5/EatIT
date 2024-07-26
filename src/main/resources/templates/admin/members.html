@@ -58,7 +58,7 @@
         <td th:text="${adminMemberDto.reportedCount}"></td>
         <td th:text="${adminMemberDto.gender}"></td>
         <td th:text="${adminMemberDto.age}"></td>
-        <td th:text="${adminMemberDto.isStoppedByAdmin == 0 ? 'false' : 'true'}"></td>
+        <td th:text="${adminMemberDto.isStoppedByAdmin == 0 ? 'X' : 'O'}"></td>
 
         <td>
           <a th:href="@{/admin/members/{memberId}(memberId=${adminMemberDto.memberId})}" class="management-button" style="display: inline-block; padding: 5px 10px; background-color: #007bff; color: white; text-align: center; text-decoration: none; border-radius: 5px;">관리</a>

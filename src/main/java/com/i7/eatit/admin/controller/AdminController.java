@@ -97,14 +97,16 @@ public class AdminController {
         return "admin/member";
     }
 
-    // TODO: 회원 관리 위한 메서드 (정지 혹은 복구) [미완성~!~!~!~!]
+    // 회원을 정지시키기 위한 페이지
     @GetMapping("/members/{memberId}/management")
-    public String clientManagement(@PathVariable int memberId, HttpServletRequest request) {
+    public String clientManagement(@PathVariable(name = "memberId") int memberId,
+        HttpServletRequest request
+    ) {
         if (!adminService.isAdminLoggedIn(request)) {
             return "redirect:/admin/login";
         }
-
-        return "admin/management";
+        adminService.updateMemberStatus(memberId);
+        return "redirect:/admin/members";
     }
 
     // TODO: 신고 조회 위한 메서드 [미완성~!~!~!]

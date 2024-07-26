@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Member Details</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+        rel="stylesheet">
   <style>
     @tailwind base;
     @tailwind components;
@@ -60,17 +61,34 @@
 </head>
 
 <body>
-<div class="flex min-h-screen w-full flex-col items-center justify-center bg-background px-4 py-12 sm:px-6 lg:px-8">
+<div
+    class="flex min-h-screen w-full flex-col items-center justify-center bg-background px-4 py-12 sm:px-6 lg:px-8">
   <div class="mx-auto w-full max-w-4xl rounded-lg border bg-card p-6 shadow-lg">
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-4">
         <div class="grid gap-1">
           <h2 class="text-2xl font-bold" th:text="${adminMemberDto.name}"></h2>
-          <div class="text-sm text-muted-foreground" th:text="'@' + ${adminMemberDto.nickname}"></div>
+          <div class="text-sm text-muted-foreground"
+               th:text="'@' + ${adminMemberDto.nickname}"></div>
         </div>
       </div>
+      <button
+          th:onclick="'confirmAndRedirect(\'/admin/members/' + ${adminMemberDto.memberId} + '/management\')'"
+          th:text="${adminMemberDto.isStoppedByAdmin == 0 ? '정지 시키기' : (adminMemberDto.isStoppedByAdmin == 1 ? '정지 취소하기' : '비정상적 상태')}"
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-destructive text-destructive-foreground hover:bg-red-700 hover:text-white px-4 py-2"
+      >
+      </button>
+
+      <script>
+        function confirmAndRedirect(url) {
+          if (confirm('정지 상태를 변경하시겠습니까?')) {
+            window.location.href = url;
+          }
+        }
+      </script>
     </div>
-    <div data-orientation="horizontal" role="none" class="shrink-0 bg-border h-[1px] w-full my-6"></div>
+    <div data-orientation="horizontal" role="none"
+         class="shrink-0 bg-border h-[1px] w-full my-6"></div>
     <div class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
       <div class="grid gap-1">
         <div class="text-sm font-medium text-muted-foreground">Member ID</div>

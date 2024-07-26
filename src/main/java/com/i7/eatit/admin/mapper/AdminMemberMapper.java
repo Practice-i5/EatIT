@@ -12,4 +12,6 @@ public interface AdminMemberMapper {
         @Param("searchEmail") String searchEmail);
 
     AdminMemberDto findMemberById(int memberId);
+
+    void updateMemberStatus(int memberId);
 }
