@@ -82,7 +82,7 @@
 
     </delete>
 
-    <delete id="deleteMeetingPhoto" parameterType="_map">
+    <delete id="deleteOneMeetingPhoto" parameterType="hashmap">
         DELETE FROM TBL_MEETING_PHOTO
         WHERE MEETING_ID = #{meetingId}
         AND PHOTO_ID = #{photoId}
