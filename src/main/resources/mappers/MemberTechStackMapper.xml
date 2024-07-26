@@ -35,6 +35,7 @@
         VALUES (#{stackCode},
                #{memberId})
     </insert>
+
     <delete id="deleteMemberTechStack" parameterType="_int">
         DELETE FROM
               TBL_MEMBER_TECH_STACK

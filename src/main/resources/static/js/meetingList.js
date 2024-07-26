@@ -168,14 +168,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // 로그인 버튼 클릭 시 login.html로 이동
-    document.getElementById('loginButton').addEventListener('click', function () {
+    /*document.getElementById('loginButton').addEventListener('click', function () {
         window.location.href = 'login.html';
     });
 
     // 회원가입 버튼 클릭 시 join.html로 이동
     document.getElementById('signupButton').addEventListener('click', function () {
         window.location.href = 'join.html';
-    });
+    });*/
 });
 
 // meetingList.js 파일 내부

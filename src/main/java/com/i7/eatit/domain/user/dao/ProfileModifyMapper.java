@@ -19,4 +19,8 @@ public interface ProfileModifyMapper {
     void insertTechExperience(TechExperienceDTO techExperience);
 
     List<TechExperienceDTO> selectTechExperience(int memberId);
+
+    void deleteTechExperience(Map<String, Integer> experienceInfo);
+
+    void updateTechExperience(TechExperienceDTO techExperience);
 }

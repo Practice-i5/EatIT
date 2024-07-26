@@ -79,4 +79,28 @@
         )
     </insert>
 
+    <update id="updateTechExperience" parameterType="com.i7.eatit.domain.user.dto.TechExperienceDTO">
+        UPDATE
+               TBL_MEMBER_EXPERIENCE
+           SET
+               MEMBER_ID=#{memberId}
+            ,  COMPANY_NAME=#{companyName}
+            ,  DESCRIPTION=#{description}
+            ,  START_DATE=#{startDate}
+            ,  END_DATE=#{endDate}
+         WHERE
+               EXPERIENCE_ID=#{experienceId}
+
+    </update>
+
+    <delete id="deleteTechExperience" parameterType="hashmap">
+        DELETE
+          FROM
+               TBL_MEMBER_EXPERIENCE
+         WHERE
+               EXPERIENCE_ID=#{experienceId}
+           AND
+               MEMBER_ID=#{memberId}
+
+    </delete>
 </mapper>

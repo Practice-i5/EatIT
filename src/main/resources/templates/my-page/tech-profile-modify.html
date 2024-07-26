@@ -38,26 +38,29 @@
             <div id="tech-profile">
                 <button id="close">&times;</button>
                 <div class="profile-header">
-                    <h3 class="modal-name">경력 사항 추가</h3>
+                    <h3 class="modal-name">경력 사항 작성</h3>
                 </div>
-                <form class="profile-contents" action="/my-page/tech-experience-modify">
+                <form id="tech-experience-form"  class="profile-contents" action="/my-page/tech-experience-modify" method="post">
+                    <input id="modal-num" style="display: none" name="experienceId"></input>
                     <div>
                         <div>
                             <h5>회사명</h5>
-                            <input type="text" required>
+                            <input type="text" id="companyName" name="companyName" required>
                         </div>
                         <div>
                             <h5>재직 기간</h5>
-                            <input id="employ-start" type="date"/> ~ <input id="employ-end" type="date"/>
-                            <input id="is-employ" type="checkbox"/><label for="is-employ">재직중</label>
+                            <input id="employ-start" type="date" name="startDate"/> ~ <input id="employ-end" type="date" name="endDate"/>
+                            <input id="is-employ" name="isCurrent" type="checkbox"/><label for="is-employ">재직중</label>
                         </div>
                         <div>
                             <h5>개발 업무</h5>
-                            <input type="text" required/>
+                            <input id="experience-desc" name="description" type="text" required/>
                         </div>
+                        <p id="modal-error"  style="font-size:12px;" class="error"></p>
+
                     </div>
                     <div style="display:flex; justify-content:center">
-                        <button id="experience-submit" class="btn-rw btn-choice-mid" type="button">추가</button>
+                        <button id="experience-submit" class="btn-rw btn-choice-mid" type="button">적용</button>
                     </div>
                 </form>
             </div>
@@ -65,78 +68,69 @@
 
 
 
-        <form class="form-content" action="/my-page/tech-profile-modify" method="post">
+        <div class="form-content">
             <h2>기술 프로필 설정</h2>
+            <form action="/my-page/tech-profile-modify" method="post">
             <div class="form-item">
-                <label class="profile-label">기술 스택</label>
-                <ul class="list-no-pad form-size-limit chip-btn-list">
-                    <th:block th:each="stack:${techStackList}">
+                    <label class="profile-label">기술 스택</label>
+                    <ul class="list-no-pad form-size-limit chip-btn-list">
+                        <th:block th:each="stack:${techStackList}">
+                            <li style="margin-top:5px; margin-bottom: 10px;">
+                                <th:block th:if="${#lists.contains(memberStackCode, stack.code)}">
+                                    <input th:id="|stack-${stack.code}|" class="interest-check" type="checkbox"
+                                           th:name="|stack-${stack.code}|" th:value="${stack.name}" checked>
+
+                                    <label class="btn-choice-mid interest-label" th:for="|stack-${stack.code}|" th:text="${stack.name}"></label>
+                                </th:block>
+                                <th:block th:unless="${#lists.contains(memberStackCode, stack.code)}">
+                                    <input th:id="|stack-${stack.code}|" class="interest-check" type="checkbox"
+                                           th:name="|stack-${stack.code}|" th:value="${stack.name}">
+                                    <label class="btn-choice-mid interest-label" th:for="|stack-${stack.code}|" th:text="${stack.name}"></label>
+                                </th:block>
+                            </li>
+                        </th:block>
                         <li style="margin-top:5px; margin-bottom: 10px;">
-                            <th:block th:if="${#lists.contains(memberStackCode, stack.code)}">
-                                <input th:id="|stack-${stack.code}|" class="interest-check" type="checkbox"
-                                       th:name="|stack-${stack.code}|" th:value="${stack.name}" checked>
-
-                                <label class="btn-choice-mid interest-label" th:for="|stack-${stack.code}|" th:text="${stack.name}"></label>
-                            </th:block>
-                            <th:block th:unless="${#lists.contains(memberStackCode, stack.code)}">
-                                <input th:id="|stack-${stack.code}|" class="interest-check" type="checkbox"
-                                       th:name="|stack-${stack.code}|" th:value="${stack.name}">
-                                <label class="btn-choice-mid interest-label" th:for="|stack-${stack.code}|" th:text="${stack.name}"></label>
-                            </th:block>
+                            <div>
+                                <input id="interest-1113" class="interest-check" type="checkbox" value="project-management">
+                                <label class="btn-choice-mid interest-label" for="interest-1113">기획</label>
+                            </div>
                         </li>
-                    </th:block>
+                    </ul>
+                </div>
+                <button class="btn-rw btn-submit" type="submit">제출</button>
+            </form>
 
-                    <!--                            <li style="margin-top:5px; margin-bottom: 10px;">-->
-                    <!--                                    <input id="interest-1" class="interest-check" type="checkbox" value="frontend">-->
-                    <!--                                    <label class="btn-choice-mid interest-label" for="interest-1">프론트엔드</label>-->
-                    <!--                            </li>-->
-                    <!--                            <li style="margin-top:5px; margin-bottom: 10px;">-->
-                    <!--                                <div>-->
-                    <!--                                    <input id="interest-2" class="interest-check" type="checkbox" value="backend">-->
-                    <!--                                    <label class="btn-choice-mid interest-label" for="interest-2">백엔드</label>-->
-                    <!--                                </div>-->
-                    <!--                            </li>-->
-                    <li style="margin-top:5px; margin-bottom: 10px;">
-                        <div>
-                            <input id="interest-1113" class="interest-check" type="checkbox" value="project-management">
-                            <label class="btn-choice-mid interest-label" for="interest-1113">기획</label>
-                        </div>
-                    </li>
-                </ul>
-            </div>
             <!-- <a href="./tech-stack.html" > 기술 스택 수정</a> -->
             <div class="form-item" id="nickname-form">
                 <label>개발 경력</label>
                 <div style="width: 70%;">
                     <ul style="margin-left:5px; list-style: none; padding-left: 0px; display:flex; flex-flow : column wrap; align-items: baseline;">
-                        <li style="display: flex; justify-content: space-between; width: 100%;">
-                            <div style="display: flex; flex-direction: column; align-items: baseline;">
-                                <h3 style="margin:0px;">현대오토에버</h3>
-                                <p class="form-message-mini warn"> 백엔드 개발</p>
-                                <p class="form-message-mini warn">2022.10~2023.11</p>
-                            </div>
-                            <div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
-                                <button class="btn-choice-small btn-wb">수정</button>
-                                <button class="btn-choice-small btn-wb">삭제</button>
-                            </div>
-                        </li>
-                        <li style="display: flex; justify-content: space-between; width: 100%;">
-                            <div style="display: flex; flex-direction: column; align-items: baseline;">
-                                <h3 style="margin:0px">네이버</h3>
-                                <p class="form-message-mini warn"> 백엔드 개발</p>
-                                <p class="form-message-mini warn">2023.11~재직 중</p>
-                            </div>
-                            <div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
-                                <button class="btn-choice-small btn-wb">수정</button>
-                                <button class="btn-choice-small btn-wb">삭제</button>
-                            </div>
-                        </li>
-                        <li style="float: right;"><button type="button" class="btn-choice-small btn-wb" id="add-experience">경력 사항 추가</button></li>
+                        <th:block th:if="${techExperienceList}">
+                            <li style="display: flex; justify-content: space-between; width: 100%;"
+                                    th:each="techExperience:${techExperienceList}">
+                                <div style="display: flex; flex-direction: column; align-items: baseline;">
+                                    <h3 style="margin:0px;" th:text="${techExperience.companyName}"></h3>
+                                    <p class="form-message-mini warn" th:text="${techExperience.description}"></p>
+                                    <th:block th:if="${techExperience.endDate ne null}">
+                                        <p class="form-message-mini warn" th:text="|${techExperience.startDate}~${techExperience.endDate}|"></p>
+                                    </th:block>
+                                    <th:block th:if="${techExperience.endDate eq null}">
+                                        <p class="form-message-mini warn" th:text="|${techExperience.startDate}~재직중|"></p>
+                                    </th:block>
+                                </div>
+                                <div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+                                    <button class="btn-choice-small btn-wb" name="modifyId" th:value="${techExperience.experienceId}" th:onclick="openModal([[${techExperience}]])">수정</button>
+                                    <form action="/my-page/tech-experience-delete" method="post">
+                                        <button class="btn-choice-small btn-wb" name="deleteId" th:value="${techExperience.experienceId}">삭제</button>
+                                    </form>
+                                </div>
+                            </li>
+                            <li style="float: right;"><button type="button" class="btn-choice-small btn-wb" id="add-experience">경력 사항 추가</button></li>
+                        </th:block>
                     </ul>
                 </div>
             </div>
-            <button class="btn-rw btn-submit" type="submit">제출</button>
-        </form>
+        </div>
         <script src="js/tech-profile-modal.js" th:src="@{/js/my-page/tech-profile-modal.js}"></script>
     </div>
 </html>
