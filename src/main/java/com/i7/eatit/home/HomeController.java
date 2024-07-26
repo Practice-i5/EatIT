@@ -29,7 +29,7 @@ public class HomeController {
     }
 
     @GetMapping("/meetingList")
-    public String beforeMeetingList() {
+    public String meetingList() {
         return "meetingList/participatingList"; // 모임 목록 페이지
     }
 
@@ -55,5 +55,6 @@ public class HomeController {
     @GetMapping("/chatGroup")
     public String chatGroup() { return "chatGroup/chat-page"; // 그룹 채팅 페이지
     }
+
 
 }
