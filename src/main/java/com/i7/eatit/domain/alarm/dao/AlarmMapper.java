@@ -15,4 +15,5 @@ public interface AlarmMapper {
 
     AlarmDetailDTO findAlarmDetail(@Param("alarmId") int alarmId);
 
+    int getMeetingId(int participationId);
 }

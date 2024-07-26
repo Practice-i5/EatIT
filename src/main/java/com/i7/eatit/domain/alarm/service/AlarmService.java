@@ -4,6 +4,7 @@ import com.i7.eatit.domain.alarm.dao.AlarmMapper;
 import com.i7.eatit.domain.alarm.dto.AlarmDTO;
 import com.i7.eatit.domain.alarm.dto.AlarmDetailDTO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -37,7 +38,13 @@ public class AlarmService {
 //        return false;
     }
 
+    private int getMeetingId(int ParticipationId){
+        return alarmMapper.getMeetingId(ParticipationId);
+    }
+
+    @Transactional
     public void createNewAlarm(AlarmDTO newAlarm){
+        newAlarm.setMeetingId(this.getMeetingId(newAlarm.getParticipationId()));
         alarmMapper.createNewAlarm(newAlarm);
     }
 

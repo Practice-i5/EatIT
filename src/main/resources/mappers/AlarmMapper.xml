@@ -40,12 +40,11 @@
         order by alarm_date
     </select>
 
-    <insert id="createNewAlarms" parameterType="com.i7.eatit.domain.alarm.dto.AlarmDTO"
+    <insert id="createNewAlarm" parameterType="com.i7.eatit.domain.alarm.dto.AlarmDTO"
             useGeneratedKeys="true" keyProperty="alarmId">
         insert into tbl_alarm
         (
-              alarm_id
-            , alarm_detail
+              alarm_detail
             , alarm_date
             , member_id
             , participation_id
@@ -55,8 +54,7 @@
         )
         values
         (
-              #{ alarmId }
-            , #{ alarmDetail }
+              #{ alarmDetail }
             , #{ alarmTime }
             , #{ memberId }
             , #{ participationId }
@@ -84,5 +82,14 @@
         where AM.alarm_id = #{alarmId}
     </select>
 
+
+    <select id="getMeetingId" resultType="_int">
+        select
+            meeting_id
+        from
+            tbl_meeting_participation
+        where
+            participation_id = #{participationId}
+    </select>
 
 </mapper>
