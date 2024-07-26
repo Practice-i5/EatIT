@@ -5,8 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("chatGroup")
+@RequestMapping("/chatGroup")
 public class GroupChatController {
-    @GetMapping("chat-page")
+    @GetMapping("/chat-page")
     public void chat() {}
 }
+
