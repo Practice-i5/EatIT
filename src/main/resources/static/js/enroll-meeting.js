@@ -16,7 +16,7 @@ document.getElementById('file-input').addEventListener('change', function(event)
 
     uploadedFiles = uploadedFiles.concat(newFiles);
 
-    fileCountDisplay.textContent = `${uploadedFiles.length}/5`;
+    fileCountDisplay.textContent = `${uploadedFiles.length}/1`;
 
     // 기존 이미지를 초기화
     imagePreview.innerHTML = '';
