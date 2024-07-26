@@ -37,6 +37,7 @@
 
     </resultMap>
 
+    <!--참가자 정보-->
     <select id="findJoinUser" resultMap="JoinMemberProfileMap">
         SELECT
                     A.meeting_id

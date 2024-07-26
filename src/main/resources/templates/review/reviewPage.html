@@ -19,40 +19,40 @@
 <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
 
     <!-- 모임 시간 받아오기 -->
-    <h2 class="text-xl font-bold mb-4" th:text="${meeting.time}">24년 6월 21일 금요일 16:30</h2>
+    <h2 class="text-xl font-bold mb-4" th:text="${meetingInfo.scheduledDate}">24년 6월 21일 금요일 16:30</h2>
 
     <!-- 모임 제목 받아오기 -->
     <p class="text-gray-600 mb-6" th:text="${meeting.title}">즐거운 AI 이야기(스타벅스)</p>
 
     <!-- 모임장 평가 항목 -->
-    <div class="mb-6">
-        <!-- 모임장(호스트) 이름 받아오기 -->
+    <!--<div class="mb-6">
+        &lt;!&ndash; 모임장(호스트) 이름 받아오기 &ndash;&gt;
         <h3 class="text-lg font-semibold mb-2" th:text="${meeting.host} + '님은 어땠나요?'">모임장은 어땠나요?</h3>
-        <!-- 평가 버튼 -->
+        &lt;!&ndash; 평가 버튼 &ndash;&gt;
         <div class="flex space-x-2 mb-4">
             <button class="bg-blue-500 text-white px-4 py-2 rounded openModalBtn">평가하기</button>
-            <!-- 평가 외 신고 및 차단 기능 (현재 주석 처리됨) -->
-            <!--
+            &lt;!&ndash; 평가 외 신고 및 차단 기능 (현재 주석 처리됨) &ndash;&gt;
+            &lt;!&ndash;
             <button class="bg-red-500 text-white px-4 py-2 rounded">신고하기</button>
             <button class="bg-black text-white px-4 py-2 rounded">차단하기</button>
-            -->
+            &ndash;&gt;
         </div>
         <div class="manager-feedback text-gray-700">
-            <!-- 선택한 피드백 항목 표시 (초기에는 숨김 처리) -->
+            &lt;!&ndash; 선택한 피드백 항목 표시 (초기에는 숨김 처리) &ndash;&gt;
             <div class="selected-feedback hidden mb-2">
                 <strong>선택한 항목:</strong>
                 <ul class="selected-items"></ul>
             </div>
-            <!-- 모달에서 제공된 피드백 항목 표시 -->
+            &lt;!&ndash; 모달에서 제공된 피드백 항목 표시 &ndash;&gt;
             <div class="modal-feedback"></div>
         </div>
-    </div>
+    </div>-->
 
     <!-- 모임원 평가 항목 반복 (Thymeleaf를 통해 동적으로 생성) -->
-    <div th:each="guest, iterStat : ${meeting.guest}">
+    <div th:each="member : ${memberList}">
         <div class="mb-6">
             <!-- 모임원(게스트) 이름 받아오기 -->
-            <h3 class="text-lg font-semibold mb-2" th:text="${guest.name} + '님은 어땠나요?'">모임원은 어땠나요?</h3>
+            <h3 class="text-lg font-semibold mb-2" th:text="${member.nickname} + '님은 어땠나요?'">모임원은 어땠나요?</h3>
             <!-- 평가 버튼 -->
             <div class="flex space-x-2 mb-4">
                 <button class="bg-blue-500 text-white px-4 py-2 rounded openModalBtn">평가하기</button>
@@ -82,17 +82,17 @@
 </div>
 
 <!-- 모달 시작 (Thymeleaf를 통해 동적으로 생성) -->
-<div th:each="guest, iterStat : ${meeting.guests}">
-    <div th:attr="id='myModal' + ${iterStat.index}" class="modal">
+<div th:each="member : ${memberList}">
+    <!--<div th:attr="id='myModal' + ${iterStat.index}" class="modal">-->
         <div class="modal-content">
 
             <div>
                 <div class="container">
                     <!-- 프로필 사진과 이름 표시 -->
                     <div class="text-center mb-6">
-                        <img src="/static/img/profile.png" th:src="@{/img/profile.png}" alt="프로필 사진"
+                        <img src="/static/img/profile.png" th:src="@{member.memberPhoto}" alt="프로필 사진"
                              class="profile-picture">
-                        <p class="profile-name" th:text="${guest.name}">이름</p>
+                        <p class="profile-name" th:text="${member.nickname}">이름</p>
                     </div>
                     <!-- 피드백 제출 폼 -->
                     <form action="/review/regist" method="post">
@@ -114,7 +114,7 @@
             </div>
 
         </div>
-    </div>
+    <!--</div>-->
 </div>
 <!-- 모달 끝 -->
 

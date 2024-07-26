@@ -3,11 +3,15 @@ package com.i7.eatit.domain.review.controller;
 
 import com.i7.eatit.domain.meeting.model.dto.MeetingDTO;
 import com.i7.eatit.domain.meeting.model.service.MeetingService;
+import com.i7.eatit.domain.user.dto.JoinMemberProfileDTO;
+import com.i7.eatit.domain.user.service.JoinMemberProfileService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/review/*")
@@ -24,23 +28,29 @@ public class ReviewController {
     //	2. 확인 버튼 누르면 상세창으로 돌아가기
 
     private MeetingService meetingService;
+    private JoinMemberProfileService joinMemberProfileService;
 
-    public ReviewController(MeetingService meetingService) {
+    public ReviewController(MeetingService meetingService, JoinMemberProfileService joinMemberProfileService) {
         this.meetingService = meetingService;
+        this.joinMemberProfileService = joinMemberProfileService;
     }
-
-    /*
-        미팅 번호로 호출 : 모임 타이틀, 모임 시간, 참가자 수, 호스트 아이디, 게스트 아이디
-        호스트 아이디로 호출 : 호스트 사진, 닉네임
-        게스트 아이디로 호출 : 게스트 사진, 닉네임
-    */
 
 
     // 1. 디테일 창에서 리뷰 페이지로 넘어간다.
     // 2. 리뷰페이지에 접속 시 바로 참가자와 모임의 정보를 가져와서 타임리프에 적용한다.
     @GetMapping("/reviewPage")
-    public String getJoinMemberInfo(@RequestParam("meetingId") int meetingId, Model model) {
+    public String getJoinMemberInfo(Model model, @RequestParam("meetingId") int meetingId) {
 
+        // 타이틀, 시간, 참가자 수 (나열)
+        MeetingDTO meetingInfo = meetingService.findMeetingById(meetingId);
+
+        // 참가자 - 닉네임, 사진 ( for each)
+        List<JoinMemberProfileDTO> memberList = joinMemberProfileService.getUserProfileInfo(meetingId);
+
+        // 타임리프에 적용
+        model.addAttribute("meetingInfo", meetingInfo);
+        model.addAttribute("memberList", memberList);
+        
         return "redirect:/review/ReviewPage";
     }
 
