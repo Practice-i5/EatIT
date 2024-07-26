@@ -20,6 +20,8 @@
     <result property="createdDate" column="created_date"/>
     <result property="withdrawalStatus" column="withdrawal_status"/>
     <result property="reportedCount" column="reported_count"/>
+    <result property="gender" column="gender"/>
+    <result property="age" column="age"/>
     <result property="isStoppedByAdmin" column="is_stopped_by_admin"/>
   </resultMap>
 

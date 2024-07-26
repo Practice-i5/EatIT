@@ -71,7 +71,8 @@ public class AdminController {
     }
 
     @GetMapping("/members")
-    public String getMembers(Model model, @RequestParam(name = "sort", required = false) String sort,
+    public String getMembers(Model model,
+        @RequestParam(name = "sort", required = false) String sort,
         @RequestParam(name = "searchEmail", required = false) String searchEmail,
         HttpServletRequest request) {
 

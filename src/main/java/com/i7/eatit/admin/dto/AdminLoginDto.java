@@ -5,14 +5,6 @@ public class AdminLoginDto {
     private String adminEmail;
     private String adminPassword;
 
-    public AdminLoginDto(String adminEmail, String adminPassword) {
-        this.adminEmail = adminEmail;
-        this.adminPassword = adminPassword;
-    }
-
-    public AdminLoginDto() {
-    }
-
     public String getAdminEmail() {
         return adminEmail;
     }

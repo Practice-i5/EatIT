@@ -39,6 +39,8 @@
         <th>
           <a th:href="@{/admin/members?sort=reportedCount}" th:text="'누적 신고 횟수'"></a>
         </th>
+        <th>성별</th>
+        <th>나이</th>
         <th>정지 여부</th>
         <th>관리</th>
       </tr>
@@ -54,6 +56,8 @@
         <td th:text="${#temporals.format(adminMemberDto.createdDate, 'yyyy-MM-dd-hh-mm-ss')}"></td>
         <td th:text="${adminMemberDto.withdrawalStatus}"></td>
         <td th:text="${adminMemberDto.reportedCount}"></td>
+        <td th:text="${adminMemberDto.gender}"></td>
+        <td th:text="${adminMemberDto.age}"></td>
         <td th:text="${adminMemberDto.isStoppedByAdmin == 0 ? 'false' : 'true'}"></td>
 
         <td>
