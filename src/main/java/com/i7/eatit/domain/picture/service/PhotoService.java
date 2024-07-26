@@ -30,7 +30,7 @@ public class PhotoService {
     }
 
     public String getPhotoUrlByPath(String path){
-        return fireBaseService.getFileUrl(fireBaseService.getFileUrl(path));
+        return fireBaseService.getFileUrl(path);
     }
 
     public List<MeetingPhotoDTO> findPhotoByMeetingId(int meetingId){
@@ -62,7 +62,10 @@ public class PhotoService {
             photoMapper.uploadMemberPhoto(memberPhoto);
 
             System.out.println("업로드 성공");
-            return fireBaseService.getFileUrl("memberImage/"+savedName);
+
+            String Url = fireBaseService.getFileUrl("memberImage/"+savedName);
+            System.out.println("반환 url : "+ Url);
+            return Url;
 
         } catch (Exception e) {
             e.printStackTrace();

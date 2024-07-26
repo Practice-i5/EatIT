@@ -34,7 +34,11 @@ public class ProfileController {
     public void profile(@SessionAttribute(name = "loginUser") UserInfoDTO loginUser, Model model) {
         MemberPhotoDTO photoInfo = photoService.findPhotoByMemberId(loginUser.getMember_id());
 
+        System.out.println("photoInfo:");
+        System.out.println(photoInfo);
+
         if(photoInfo!=null){
+            System.out.println("프로필 사진 url:");
             System.out.println(photoService.getPhotoUrlByPath(photoInfo.getPhotoPath()));
             model.addAttribute("profileImage", photoService.getPhotoUrlByPath(photoInfo.getPhotoPath()));
         }
