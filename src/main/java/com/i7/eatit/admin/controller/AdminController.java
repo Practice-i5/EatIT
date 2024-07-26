@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AdminController {
 
     private final AdminService adminService;
+    private static final String REDIRECT_TO_LOGIN = "redirect:/admin/login";
 
     @Autowired
     public AdminController(AdminService adminService) {
@@ -51,7 +52,7 @@ public class AdminController {
 
         // 1. 유효한 로그인인지 확인한다.
         if (!adminService.isValidAdminLogin(adminLoginDto)) {
-            return "redirect:/admin/login";
+            return REDIRECT_TO_LOGIN;
         }
 
         // 2. Session 에 ("adminSession_" + 세션 아이디, 어드민의 이메일) 형식으로 저장해 둔다.
@@ -77,7 +78,7 @@ public class AdminController {
         HttpServletRequest request) {
 
         if (!adminService.isAdminLoggedIn(request)) {
-            return "redirect:/admin/login";
+            return REDIRECT_TO_LOGIN;
         }
 
         List<AdminMemberDto> adminMemberDtoList = adminService.findAllMember(sort, searchEmail);
@@ -90,7 +91,7 @@ public class AdminController {
     public String getMember(@PathVariable(name = "memberId") int memberId, Model model,
         HttpServletRequest request) {
         if (!adminService.isAdminLoggedIn(request)) {
-            return "redirect:/admin/login";
+            return REDIRECT_TO_LOGIN;
         }
         AdminMemberDto adminMemberDto = adminService.findMemberById(memberId);
         model.addAttribute("adminMemberDto", adminMemberDto);
@@ -103,17 +104,17 @@ public class AdminController {
         HttpServletRequest request
     ) {
         if (!adminService.isAdminLoggedIn(request)) {
-            return "redirect:/admin/login";
+            return REDIRECT_TO_LOGIN;
         }
         adminService.updateMemberStatus(memberId);
         return "redirect:/admin/members";
     }
 
-    // TODO: 신고 조회 위한 메서드 [미완성~!~!~!]
+    // 신고 당한 모임을 모아서 보는 기능 추가하기
     @GetMapping("/complaints")
     public String findReports(HttpServletRequest request) {
         if (!adminService.isAdminLoggedIn(request)) {
-            return "redirect:/admin/login";
+            return REDIRECT_TO_LOGIN;
         }
 
         return "admin/complaints";
