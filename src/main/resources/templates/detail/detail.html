@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta charset="utf-8">
@@ -29,9 +29,118 @@
     <!-- Template Stylesheet -->
     <link th:href="@{/css/template.css}" rel="stylesheet">
     <link th:href="@{/css/detail.css}" rel="stylesheet">
+    <link th:thrf="@{/css/recruit.css}" rel="stylesheet">
+
+    <style>
+        #recruit-modal {
+            /*position: fixed;*/
+            position: absolute;
+            display: none ;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        #recruit-modal.active {
+            display: flex;
+        }
+
+        #recruit-template {
+            width: 90%;
+            max-width: 500px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        #recruit-close {
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        #recruit-close:hover,
+        #recruit-close:focus {
+            color: red;
+        }
+
+        .recruit-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .recruit-pic img {
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+        }
+
+        .recruit-name {
+            margin: 0;
+            text-align: center;
+        }
+
+        .recruit-contents {
+            background-color: #dff0d8;
+            padding: 20px;
+            border-radius: 10px;
+            /* margin-bottom: 10px; */
+        }
+
+        .recruit-contents h5 {
+            margin: 10px 0;
+        }
+
+        .recruit-contents p {
+            margin: 5px 0;
+        }
+
+        #recruit-now {
+            /*position: fixed;*/
+            display: none ;
+        }
+
+        #recruit-now.active {
+            display: flex;
+        }
+
+        #not-now {
+            display: none;
+        }
+
+        #not-now.active {
+            display: flex;
+        }
+    </style>
 </head>
 
 <body>
+    <script>
+        const decMessage = `[[${decMessage}]]`
+        if(decMessage) alert(decMessage)
+    </script>
 
     <!-- Spinner Start -->
     <div id="spinner"
@@ -79,145 +188,91 @@
 
     <!-- Modal Search Start -->
     <div id="recruit-modal">
-        <div id="template">
-            <button id="profile-close">&times;</button>
-            <div class="profile-header">
-                <h3 class="modal-name">프로필 상세 보기</h3>
-            </div>
-            <div class="profile-contents">
-                <div class="profile-header">
-                    <div class="profile-pic">
-                        <img th:src="${meetingImage.hostImageURL}" alt="Profile Picture">
-                    </div>
-                    <div class="profile-info">
-                        <h5 class="profile-name" th:text="${leaderId}">리더 닉네임</h5>
-                        <p>모임 횟수: 5</p>
-                    </div>
+        <div id="recruit-template">
+            <button id="recruit-close">&times;</button>
+            <form th:action="@{detail/detail.html}" method="POST">
+                <div class="recruit-header">
+                    <h3 class="modal-name">모임 신청하기</h3>
                 </div>
-                <div>
-                    <div>
-                        <!--                        <h5>경력</h5>-->
-                        <!--                        <div th:each="career : ${careers}">-->
-                        <!--                            <p th:text="${career}"></p>-->
-                        <!--                        </div>-->
+                <div class="recruit-contents">
+                    <div class="recruit-header">
+                        <div class="recruit-pic">
+                            <img th:src="${meetingImage.hostImageURL}" alt="Recruit Picture">
+                        </div>
                     </div>
                     <div>
-                        <h5>관심분야</h5>
-                        <p>백엔드</p>
-                    </div>
-                    <hr />
-                    <div>
-                        <!--                        <h5>평가</h5>-->
-                        <!--                        <div th:each="eval : ${evaluates}">-->
-                        <!--                            <p th:text="${eval}">평가</p>-->
-                        <!--                        </div>-->
+                        <div class="form-group">
+                            <label for="group-detail">모임을 소개해주세요</label>
+                            <input type="text" id="group-detail" name="introduction" style="width:100px; height: 100px;" maxlength="100" placeholder="모집인원, 메인 메뉴 등 모임에 대한 설정포함"/>
+                        </div>
+                        <div>
+                            <h5>관심분야</h5>
+                            <p>백엔드</p>
+                        </div>
+                        <hr/>
+                        <div>
+                            <!--                        <h5>평가</h5>-->
+                            <!--                        <div th:each="eval : ${evaluates}">-->
+                            <!--                            <p th:text="${eval}">평가</p>-->
+                            <!--                        </div>-->
 
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!--            <div style="text-align: center"><a th:text="${temp}">매너온도</a></div>-->
-            <div id="action-buttons">
-                <button class="follow-btn">팔로우</button>
-                <button class="report-button block-btn">차단</button>
-                <button class="report-button report-btn">신고하기</button>
-                <span><input type="button" onclick='toggleReportBtns()'/></span>
-            </div>
+            </form>
+            <button type="submit" class="follow-btn">모임신청</button>
         </div>
     </div>
-    </div> -->
     <!-- <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
     <div id="profile-modal">
         <div id="profile">
             <button id="profile-close">&times;</button>
-            <div class="profile-header">
-                <h3 class="modal-name">프로필 상세 보기</h3>
-            </div>
-            <div class="profile-contents">
+            <form th:action="@{detail/detail.html}" method="POST">
                 <div class="profile-header">
-                    <div class="profile-pic">
-                        <img th:src="${meetingImage.hostImageURL}" alt="Profile Picture">
-                    </div>
-                    <div class="profile-info">
-                        <h5 class="profile-name" th:text="${leaderId}">리더 닉네임</h5>
-                        <p>모임 횟수: 5</p>
-                    </div>
+                    <h3 class="modal-name">프로필 상세 보기</h3>
                 </div>
-                <div>
-                    <div>
-<!--                        <h5>경력</h5>-->
-<!--                        <div th:each="career : ${careers}">-->
-<!--                            <p th:text="${career}"></p>-->
-<!--                        </div>-->
+                <div class="profile-contents">
+                    <div class="profile-header">
+                        <div class="profile-pic">
+                            <img th:src="${meetingImage.hostImageURL}" alt="Profile Picture">
+                        </div>
+                        <div class="profile-info">
+                            <h5 class="profile-name" th:text="${leaderId}">리더 닉네임</h5>
+    <!--                        <p>모임 횟수: 5</p>-->
+                        </div>
                     </div>
                     <div>
-                        <h5>관심분야</h5>
-                        <p>백엔드</p>
-                    </div>
-                    <hr />
-                    <div>
-<!--                        <h5>평가</h5>-->
-<!--                        <div th:each="eval : ${evaluates}">-->
-<!--                            <p th:text="${eval}">평가</p>-->
-<!--                        </div>-->
+                        <div>
+    <!--                        <h5>경력</h5>-->
+    <!--                        <div th:each="career : ${careers}">-->
+    <!--                            <p th:text="${career}"></p>-->
+    <!--                        </div>-->
+                        </div>
+                        <div>
+                            <h5>관심분야</h5>
+                            <p>백엔드</p>
+                        </div>
+                        <hr />
+                        <div>
+    <!--                        <h5>평가</h5>-->
+    <!--                        <div th:each="eval : ${evaluates}">-->
+    <!--                            <p th:text="${eval}">평가</p>-->
+    <!--                        </div>-->
 
+                        </div>
                     </div>
                 </div>
-            </div>
-<!--            <div style="text-align: center"><a th:text="${temp}">매너온도</a></div>-->
-            <div id="action-buttons">
-                <button class="follow-btn">팔로우</button>
-                <button class="report-button block-btn">차단</button>
-                <button class="report-button report-btn">신고하기</button>
-                <span><input type="button" onclick='toggleReportBtns()'/></span>
-            </div>
+    <!--            <div style="text-align: center"><a th:text="${temp}">매너온도</a></div>-->
+<!--                <div id="action-buttons">-->
+    <!--                <button class="follow-btn">팔로우</button>-->
+                    <input name="isDecHuman" th:value="true" type="hidden">
+                    <button type="submit" class="report-button report-btn">신고하기</button>
+<!--                    <span><input type="button" onclick='toggleReportBtns()'/></span>-->
+<!--                </div>-->
+            </form>
         </div>
     </div>
     <!-- profile modal end -->
-
-    <!-- review modal start -->
-    <!-- <div id="review-modal">
-        <div id="review">
-            <button id="review-close">&times;</button>
-            <div class="profile-header">
-                <h3 class="modal-name">프로필 상세 보기</h3>
-            </div>
-            <div class="profile-contents">
-                <div class="profile-header">
-                    <div class="profile-pic">
-                        <img src="img/flower_doguri.png" alt="Profile Picture">
-                    </div>
-                    <div class="profile-info">
-                        <h5 class="profile-name">리더 닉네임</h5>
-                        <p>모임 횟수: 5</p>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <h5>경력</h5>
-                        <p>네이버 백엔드 개발자</p>
-                        <p>넥슨 백엔드 개발자</p>
-                    </div>
-                    <div>
-                        <h5>관심분야</h5>
-                        <p>백엔드</p>
-                    </div>
-                    <hr />
-                    <div>
-                        <h5>평가</h5>
-                        <p>시간 약속을 잘 지켜요</p>
-                        <p>질문에 대한 답변이 빨라요</p>
-                        <p>응답이 빨라요</p>
-                    </div>
-                </div>
-            </div>
-            <div><a>81</a></div>
-            <div class="action-buttons">
-                <button class="block-btn">차단</button>
-                <button class="report-btn">신고하기</button>
-            </div>
-        </div>
-    </div> -->
-    <!-- review modal end -->
 
 
     <!-- Single Page Header start -->
@@ -266,140 +321,6 @@
                                     </div>
                                 </div>
                             </span>
-                            <!-- <div class="d-flex mb-4">
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <p class="mb-4">The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.</p>
-                                <p class="mb-4">Susp endisse ultricies nisi vel quam suscipit. Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish snailfish</p> -->
-                            <!-- <div class="input-group quantity mb-5" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div> -->
-                            <!-- <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a> -->
-                        </div>
-                        <!-- <div class="col-lg-12">
-                                <nav>
-                                    <div class="nav nav-tabs mb-3">
-                                        <button class="nav-link active border-white border-bottom-0" type="button" role="tab"
-                                            id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about"
-                                            aria-controls="nav-about" aria-selected="true">Description</button>
-                                        <button class="nav-link border-white border-bottom-0" type="button" role="tab"
-                                            id="nav-mission-tab" data-bs-toggle="tab" data-bs-target="#nav-mission"
-                                            aria-controls="nav-mission" aria-selected="false">Reviews</button>
-                                    </div>
-                                </nav>
-                                <div class="tab-content mb-5">
-                                    <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-                                        <p>The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc. 
-                                            Susp endisse ultricies nisi vel quam suscipit </p>
-                                        <p>Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish snailfish filefish Antarctic 
-                                            icefish goldeye aholehole trumpetfish pilot fish airbreathing catfish, electric ray sweeper.</p>
-                                        <div class="px-2">
-                                            <div class="row g-4">
-                                                <div class="col-6">
-                                                    <div class="row bg-light align-items-center text-center justify-content-center py-2">
-                                                        <div class="col-6">
-                                                            <p class="mb-0">Weight</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <p class="mb-0">1 kg</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row text-center align-items-center justify-content-center py-2">
-                                                        <div class="col-6">
-                                                            <p class="mb-0">Country of Origin</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <p class="mb-0">Agro Farm</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row bg-light text-center align-items-center justify-content-center py-2">
-                                                        <div class="col-6">
-                                                            <p class="mb-0">Quality</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <p class="mb-0">Organic</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row text-center align-items-center justify-content-center py-2">
-                                                        <div class="col-6">
-                                                            <p class="mb-0">Сheck</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <p class="mb-0">Healthy</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row bg-light text-center align-items-center justify-content-center py-2">
-                                                        <div class="col-6">
-                                                            <p class="mb-0">Min Weight</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <p class="mb-0">250 Kg</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
-                                        <div class="d-flex">
-                                            <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
-                                            <div class="">
-                                                <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                                                <div class="d-flex justify-content-between">
-                                                    <h5>Jason Smith</h5>
-                                                    <div class="d-flex mb-3">
-                                                        <i class="fa fa-star text-secondary"></i>
-                                                        <i class="fa fa-star text-secondary"></i>
-                                                        <i class="fa fa-star text-secondary"></i>
-                                                        <i class="fa fa-star text-secondary"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                </div>
-                                                <p>The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic 
-                                                    words etc. Susp endisse ultricies nisi vel quam suscipit </p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex">
-                                            <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
-                                            <div class="">
-                                                <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                                                <div class="d-flex justify-content-between">
-                                                    <h5>Sam Peters</h5>
-                                                    <div class="d-flex mb-3">
-                                                        <i class="fa fa-star text-secondary"></i>
-                                                        <i class="fa fa-star text-secondary"></i>
-                                                        <i class="fa fa-star text-secondary"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                </div>
-                                                <p class="text-dark">The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic 
-                                                    words etc. Susp endisse ultricies nisi vel quam suscipit </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" id="nav-vision" role="tabpanel">
-                                        <p class="text-dark">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam
-                                            amet diam et eos labore. 3</p>
-                                        <p class="mb-0">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore.
-                                            Clita erat ipsum et lorem et sit</p>
-                                    </div>
-                                </div>
-                            </div> -->
                         <div>
                             <h4 class="mb-5 fw-bold">소개글</h4>
                             <p th:text="${meetingDTO.introduction}"></p>
@@ -421,51 +342,12 @@
                 <div class="col-lg-4 col-xl-3">
                     <div class="row g-4 fruite">
                         <div class="col-lg-12">
-                            <!-- <div class="input-group w-100 mx-auto d-flex mb-4">
-                                    <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                                    <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                                </div> -->
-                            <!-- <div class="mb-4">
-                                    <h4>Categories</h4>
-                                    <ul class="list-unstyled fruite-categorie">
-                                        <li>
-                                            <div class="d-flex justify-content-between fruite-name">
-                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>Apples</a>
-                                                <span>(3)</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="d-flex justify-content-between fruite-name">
-                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>Oranges</a>
-                                                <span>(5)</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="d-flex justify-content-between fruite-name">
-                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>Strawbery</a>
-                                                <span>(2)</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="d-flex justify-content-between fruite-name">
-                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>Banana</a>
-                                                <span>(8)</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="d-flex justify-content-between fruite-name">
-                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>Pumpkin</a>
-                                                <span>(5)</span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div> -->
                             <div class="leader-data">
                                 <h3 class="align-center padding-top-20px">리더 정보</h3>
                                 <hr />
                                 <div>
                                     <div class="padding-bottom-20px padding-left-20px">
-                                        <a id="open-img" value="button"><img src="${"
+                                        <a id="open-img" value="button"><img th:src="${meetingImage.hostImageURL}"
                                                 class="profile-image" /></a>
                                         <a id="open-search" value="button" th:text="${meetingDTO.hostMemberId}">리더 닉네임</a>
                                     </div>
@@ -484,13 +366,42 @@
 <!--                                            <p>81</p>-->
                                         </div>
                                         <div class="align-center padding-bottom-20px">
-                                            <form th:action="@{/detail/detail}" method="post">
+                                            <!-- HTML 폼 -->
+                                            <form th:action="@{/detail/detail}" method="post" id="recruit-now">
                                                 <label>
                                                     <input name="meetingId" th:value="${meetingDTO.meetingId}" type="hidden">
-                                                    <input name="memberId" th:value="${userInfo.member_id}" type="hidden">
+                                                    <input name="isParticipateFree" th:value="true" type="hidden">
                                                 </label>
-                                                <button class="active-red normal-btn" type="submit" th:text="${meetingDTO.participationMethod}">바로신청</button>
+                                                <button class="active-red normal-btn" type="submit" th:text="${meetingDTO.participationMethod}">바로등록</button>
                                             </form>
+
+                                            <!-- 버튼을 감싸는 div -->
+                                            <form th:action="@{/detail/detail}" method="post">
+                                                <div id="not-now">
+                                                    <label>
+                                                        <input name="meetingId" th:value="${meetingDTO.meetingId}" type="hidden">
+                                                        <input name="isParticipateAcc" th:value="true" type="hidden">
+                                                    </label>
+                                                    <button type="submit" class="active-red normal-btn" id="open-rct" th:text="${meetingDTO.participationMethod}">모임신청</button>
+                                                </div>
+                                            </form>
+
+                                            <!-- JavaScript 부분 -->
+                                            <script th:inline="javascript">
+                                                // HTML 요소 선택
+                                                const recruitNowBtn = document.querySelector('#recruit-now');
+                                                const notNowBtn = document.querySelector('#not-now');
+
+                                                // Thymeleaf에서 동적으로 생성된 JavaScript 변수 값 가져오기
+                                                const participationMethod =  [[${meetingDTO.participationMethod}]];
+
+                                                // 버튼 상태에 따른 클래스 추가
+                                                if (participationMethod === "자유참여") {
+                                                    recruitNowBtn.classList.add("active");
+                                                } else {
+                                                    notNowBtn.classList.add("active");
+                                                }
+                                            </script>
                                         </div>
                                     </div>
                                 </div>

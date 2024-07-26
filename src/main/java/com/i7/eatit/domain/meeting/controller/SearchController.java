@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.sql.SQLOutput;
 import java.util.List;
 
 @Controller
@@ -28,7 +29,6 @@ public class SearchController {
 
     @GetMapping("list")
     public String searchListPage(Model model) {
-
         model.addAttribute("interests", meetingService.findAllInterests());
         model.addAttribute("types", meetingService.findAllType());
         return "search/list";
