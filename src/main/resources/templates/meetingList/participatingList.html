@@ -48,11 +48,7 @@
 </head>
 
 <body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="js/bootstrap.bundle.min.js"></script>
-<script src="lib/lightbox/js/lightbox.min.js"></script>
-<script src="lib/owlcarousel/owl.carousel.min.js"></script>
-<script src="/js/meetingList.js" th:src="@{/js/meetingList.js}"></script> <!-- Link to your meetingList.js file -->
+
 <!-- Spinner Start -->
 <div id="spinner"
      class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50 d-flex align-items-center justify-content-center">
@@ -207,7 +203,7 @@
 
                                 <!-- 타임리프를 사용하여 저장된 데이터만큼 반복 --> <!--페이지 이동 추가-->
                                 <div th:each="meeting : ${meetingList}" class="col-md-6 col-lg-4 col-xl-3">
-                                    <a th:href="@{/detail/{meetingId}(meetingId=${meeting.meetingId})}"
+                                    <a th:href="@{|/detail/detail?meetingId=${meeting.meetingId}|}"
                                        class="meeting-link">
                                         <div class="rounded position-relative fruite-item">
 
@@ -265,6 +261,11 @@
 
 
 <!-- JavaScript 파일 연결 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="lib/lightbox/js/lightbox.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="/js/meetingList.js" th:src="@{/js/meetingList.js}"></script> <!-- Link to your meetingList.js file -->
 <script src="/js/meetingList.js" th:src="@{/js/meetingList}"></script>
 <!-- Fruits Shop End-->
 
