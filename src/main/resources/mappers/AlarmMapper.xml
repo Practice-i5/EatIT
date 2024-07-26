@@ -48,6 +48,38 @@
         order by alarm_date
     </select>
 
+
+    <select id="findOneAlarm" resultMap="alarmAllResultMap">
+        select
+        alarm_id
+        , alarm_detail
+        , alarm_date
+        , member_id
+        , participation_id
+        , alarm_status
+        , alarm_checked
+        , meeting_id
+        from tbl_alarm
+        where alarm_id = #{ alarmId }
+    </select>
+
+    <select id="findOneAlarmDuo" resultMap="alarmAllResultMap">
+        select
+        alarm_id
+        , alarm_detail
+        , alarm_date
+        , member_id
+        , participation_id
+        , alarm_status
+        , alarm_checked
+        , meeting_id
+        from tbl_alarm
+        where member_id = #{ memberId }
+        and meeting_id =  #{ meetingId }
+    </select>
+
+
+
     <insert id="createNewAlarm" parameterType="com.i7.eatit.domain.alarm.dto.AlarmDTO"
             useGeneratedKeys="true" keyProperty="alarmId">
         insert into tbl_alarm
@@ -123,5 +155,40 @@
             on b.meeting_id = a.meeting_id
     </select>
 
+    <update id="acceptRecruit">
+
+        update tbl_alarm
+        set
+            alarm_status = '승인'
+            , alarm_checked = true
+        where
+            alarm_id = #{alarmId};
+    </update>
+
+    <update id="refuseRecruit">
+
+        update tbl_alarm
+        set
+            alarm_status = '거절'
+            , alarm_checked = true
+        where
+            alarm_id = #{alarmId};
+    </update>
+
+    <insert id="addParticipant" parameterType="com.i7.eatit.domain.alarm.dto.AlarmUpdateDTO"
+            useGeneratedKeys="true" keyProperty="alarmId">
+        insert into tbl_meeting_participation
+        (
+        role
+        , meeting_id
+        , member_id
+        )
+        values
+        (
+        #{ role }
+        , #{ meetingId }
+        , #{ memberId }
+        )
+    </insert>
 
 </mapper>
