@@ -87,7 +87,8 @@ public class AdminController {
 
     // 회원 단일 조회 위한 Controller
     @GetMapping("/members/{memberId}")
-    public String getMember(@PathVariable int memberId, Model model, HttpServletRequest request) {
+    public String getMember(@PathVariable(name = "memberId") int memberId, Model model,
+        HttpServletRequest request) {
         if (!adminService.isAdminLoggedIn(request)) {
             return "redirect:/admin/login";
         }

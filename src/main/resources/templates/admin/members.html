@@ -61,7 +61,7 @@
         <td th:text="${adminMemberDto.isStoppedByAdmin == 0 ? 'false' : 'true'}"></td>
 
         <td>
-          <a th:href="@{/admin/members/{memberId}/management(memberId=${adminMemberDto.memberId})}" class="management-button" style="display: inline-block; padding: 5px 10px; background-color: #007bff; color: white; text-align: center; text-decoration: none; border-radius: 5px;">관리</a>
+          <a th:href="@{/admin/members/{memberId}(memberId=${adminMemberDto.memberId})}" class="management-button" style="display: inline-block; padding: 5px 10px; background-color: #007bff; color: white; text-align: center; text-decoration: none; border-radius: 5px;">관리</a>
         </td>
       </tr>
       </tbody>
