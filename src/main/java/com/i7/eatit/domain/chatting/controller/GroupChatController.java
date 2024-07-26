@@ -7,7 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/chatGroup")
 public class GroupChatController {
+
     @GetMapping("/chat-page")
     public void chat() {}
+
+    @GetMapping("/chatrooms")
+    public void chatList() {}
 }
+
+
+
 

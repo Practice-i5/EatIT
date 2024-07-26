@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>익명 실시간 채팅</title>
   <link th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css" />
-  <!------ 위의 내용을 HEAD 태그에 포함 ---------->
   <link th:href="@{/css/groupChat.css}" type="text/css" rel="stylesheet" />
 </head>
 <body>
@@ -19,13 +18,11 @@
     <div class="title">채팅</div>
   </div>
   <ul id="messages" class="messages">
-    <!-- 메시지 목록은 서버에서 채워짐 -->
-    <li th:each="message : ${messages}" th:text="${message.content}"></li>
   </ul>
 
   <div class="bottom_wrapper clearfix">
     <i id="typing"></i>
-    <form id="form" th:action="@{/send}" method="post">
+    <form id="form">
       <div class="message_input_wrapper">
         <input id="message" class="message_input" placeholder="메시지를 입력하세요..." name="message" />
       </div>
@@ -38,5 +35,28 @@
 <script th:src="@{https://code.jquery.com/jquery-1.11.1.min.js}"></script>
 <script th:src="@{https://cdn.jsdelivr.net/gh/yourusername/TimeLeap/src/index-cdn.js}"></script>
 <script th:src="@{/js/chat/chat.js}"></script>
+<script th:inline="javascript">
+  const urlParams = new URLSearchParams(window.location.search);
+  const roomId = urlParams.get('roomId');
+
+  if (roomId) {
+    fetch(`http://localhost:3000/chats/rooms/${roomId}/messages`, {
+      headers: {
+        "username": sessionStorage.getItem("userId")
+      }
+    })
+            .then(response => response.json())
+            .then(messages => {
+              const messagesList = document.getElementById("messages");
+              messagesList.innerHTML = '';
+              messages.forEach(message => {
+                const li = document.createElement("li");
+                li.textContent = message.message;
+                messagesList.appendChild(li);
+              });
+            })
+            .catch(error => console.error("Error fetching messages:", error));
+  }
+</script>
 </body>
 </html>
