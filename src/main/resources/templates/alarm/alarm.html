@@ -110,6 +110,7 @@
             </div>
         </div>
     </div>
+
     <div class="container">
         <tr th:each="alarm : ${alarmList}">
             <script>getAlarmDeatil([[${alarm.getAlarmId()}]])</script>
@@ -117,12 +118,10 @@
                 <div style="display:none;" th:text="${alarm.getAlarmId()}" />
                     <img src="/img/test_image.png">
                     <div class="text">
-                        <p th:text="${alarm.getMeetingId()}">참가 신청 한 모임 이름</p>
-                        <small class="important" th:text="${alarm.getAlarmDetail()}">모임 신청이 도착했어요!</small>
+                        <td th:text="${alarm.getMeetingId()}">참가 신청 한 모임 이름</td><td>의 참가 신청이 들어왔어요!</td>
+    <!--                        <small class="important" th:text="${alarm.getAlarmDetail()}">모임 신청이 도착했어요!</small>-->
                     </div>
             </div>
-
-
         </tr>
 
         <!-- Modal Start -->
@@ -133,12 +132,12 @@
                         <h5 class="modal-title" id="alarmModalLabel">신청</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    <div id="alarmModelBody" class="modal-body">
                         ...
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">거절</button>
+                        <button type="button" class="btn btn-primary">승인</button>
                     </div>
                 </div>
             </div>
@@ -153,43 +152,6 @@
 <!--        5. 이미지 링크-->
 
 
-
-<!--        <div class="alarm highlight">-->
-<!--            <img src="/img/test_image.png">-->
-<!--            <div class="text">-->
-<!--                <p th:text="${meetingname}">후라토식당 아브뉴프랑 판교점</p>-->
-<!--                <small class="important" th:text="${meetingMessage}">모임이 곧 시작되요!</small>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="alarm highlight">-->
-<!--            <img src="/img/test_image.png">-->
-<!--            <div class="text">-->
-<!--                <p th:text="${joinname}">기본 식당</p>-->
-<!--                <small th:text="${joinMessage}">기본 문구</small>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="alarm highlight">-->
-<!--            <img src="/img/profile.png">-->
-<!--            <div class="text">-->
-<!--                <p th:text="${followname}">아이디</p>-->
-<!--                <small th:text="${followMessage}">님이 나를 팔로우 했어요!</small>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="alarm highlight">-->
-<!--            <img src="/img/test_image.png">-->
-<!--            <div class="text">-->
-<!--                <p th:text="${joinname}">기본 식당</p>-->
-<!--                <small th:text="${joinMessage}">기본 문구</small>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="alarm highlight">-->
-<!--            <img src="/img/test_image.png">-->
-<!--            <div class="text">-->
-<!--                <p th:text="${joinname}">기본 식당</p>-->
-<!--                <small th:text="${joinMessage}">기본 문구</small>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
     <!-- Alarm List End -->
 
 

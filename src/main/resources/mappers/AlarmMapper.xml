@@ -15,6 +15,16 @@
         <result property="meetingId" column="meeting_id"/>
     </resultMap>
 
+    <resultMap id="AlarmDetailResultMap" type="com.i7.eatit.domain.alarm.dto.AlarmDetailDTO">
+        <id property="alarmId" column="alarm_id"/>
+        <result property="alarmDetail" column="alarm_detail"/>
+        <result property="memberId" column="member_id"/>
+        <result property="memberName" column="member_name"/>
+        <result property="meetingId" column="meeting_id"/>
+        <result property="meetingName" column="meeting_title"/>
+        <result property="alarmStatus" column="alarm_status"/>
+    </resultMap>
+
     <select id="findAllAlarm" resultMap="alarmAllResultMap">
         select
               alarm_id
@@ -54,6 +64,25 @@
             , #{ alarmChecked }
             , #{ meetingId }
         )
-
     </insert>
+
+
+    <select id="findAlarmDetail" resultMap="AlarmDetailResultMap">
+        SELECT
+            AM.alarm_id
+            , AM.alarm_detail
+            , AM.member_id
+            , c.name as member_name
+            , AM.meeting_id
+            , b.title as meeting_title
+            , AM.alarm_status
+        FROM tbl_alarm as AM
+            left join tbl_meeting as b
+                on b.meeting_id = AM.meeting_id
+            left join tbl_member as c
+                on c.member_id = AM.meeting_id
+        where AM.alarm_id = #{alarmId}
+    </select>
+
+
 </mapper>

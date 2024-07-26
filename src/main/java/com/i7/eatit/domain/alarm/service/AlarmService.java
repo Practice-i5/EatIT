@@ -2,6 +2,7 @@ package com.i7.eatit.domain.alarm.service;
 
 import com.i7.eatit.domain.alarm.dao.AlarmMapper;
 import com.i7.eatit.domain.alarm.dto.AlarmDTO;
+import com.i7.eatit.domain.alarm.dto.AlarmDetailDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,7 +42,11 @@ public class AlarmService {
     }
 
 
-    public List<AlarmDTO> findAlarmDatail(int alarmId) {
-        return null;
+    public AlarmDetailDTO findAlarmDetail(int alarmId) {
+        AlarmDetailDTO dto = alarmMapper.findAlarmDetail(alarmId);
+        System.out.println(dto.toString());
+        return alarmMapper.findAlarmDetail(alarmId);
     }
+
+
 }
