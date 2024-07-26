@@ -7,22 +7,24 @@ public class AlarmDTO {
     private int alarmId;
     private String alarmDetail;
     private LocalDateTime alarmTime;
-    private int member_id;
+    private int memberId;
     private int participationId;
     private String alarmStatus;
     private boolean alarmChecked;
+    private int meetingId;
 
     public AlarmDTO() {
     }
 
-    public AlarmDTO(int alarmId, String alarmDetail, LocalDateTime alarmTime, int member_id, int participationId, String alarmStatus, boolean alarmChecked) {
+    public AlarmDTO(int alarmId, String alarmDetail, LocalDateTime alarmTime, int memberId, int participationId, String alarmStatus, boolean alarmChecked, int meetingId) {
         this.alarmId = alarmId;
         this.alarmDetail = alarmDetail;
         this.alarmTime = alarmTime;
-        this.member_id = member_id;
+        this.memberId = memberId;
         this.participationId = participationId;
         this.alarmStatus = alarmStatus;
         this.alarmChecked = alarmChecked;
+        this.meetingId = meetingId;
     }
 
     public int getAlarmId() {
@@ -49,12 +51,12 @@ public class AlarmDTO {
         this.alarmTime = alarmTime;
     }
 
-    public int getMember_id() {
-        return member_id;
+    public int getMemberId() {
+        return memberId;
     }
 
-    public void setMember_id(int member_id) {
-        this.member_id = member_id;
+    public void setMemberId(int memberId) {
+        this.memberId = memberId;
     }
 
     public int getParticipationId() {
@@ -79,5 +81,13 @@ public class AlarmDTO {
 
     public void setAlarmChecked(boolean alarmChecked) {
         this.alarmChecked = alarmChecked;
+    }
+
+    public int getMeetingId() {
+        return meetingId;
+    }
+
+    public void setMeetingId(int meetingId) {
+        this.meetingId = meetingId;
     }
 }

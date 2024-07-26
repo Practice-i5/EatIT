@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Profile</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>Admin Member Details</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+        rel="stylesheet">
   <style>
     @tailwind base;
     @tailwind components;
@@ -41,102 +43,101 @@
       }
 
       body {
-        @apply bg-background text-foreground font-body;
+        @apply bg-background text-foreground;
+        font-family: sans-serif;
       }
 
-      h1, h2, h3, h4, h5, h6 {
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
         @apply font-heading;
+        font-family: sans-serif;
       }
     }
   </style>
 </head>
+
 <body>
-<div class="bg-background rounded-lg border p-6 w-full max-w-3xl">
-  <div class="flex flex-col gap-6">
+<div
+    class="flex min-h-screen w-full flex-col items-center justify-center bg-background px-4 py-12 sm:px-6 lg:px-8">
+  <div class="mx-auto w-full max-w-4xl rounded-lg border bg-card p-6 shadow-lg">
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-4">
-        <span class="relative flex shrink-0 overflow-hidden rounded-full h-12 w-12">
-          <img class="aspect-square h-full w-full" alt="@username" src="/placeholder-user.jpg" />
-        </span>
         <div class="grid gap-1">
-          <div class="text-lg font-semibold" th:text="${adminMemberDto.name}"></div>
-          <div class="text-sm text-muted-foreground" th:text="${adminMemberDto.email}"></div>
-          <div class="text-xs text-muted-foreground" th:text="${adminMemberDto.loginMethod}"></div>
+          <h2 class="text-2xl font-bold" th:text="${adminMemberDto.name}"></h2>
+          <div class="text-sm text-muted-foreground"
+               th:text="'@' + ${adminMemberDto.nickname}"></div>
         </div>
       </div>
-      <div class="flex items-center gap-2">
-        <button class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 w-10 rounded-full">
-          <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="h-5 w-5"
-          >
-            <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path>
-            <path d="m15 5 4 4"></path>
-          </svg>
-          <span class="sr-only">Edit profile</span>
-        </button>
-        <button class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 w-10 rounded-full">
-          <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="h-5 w-5"
-          >
-            <circle cx="12.1" cy="12.1" r="1"></circle>
-          </svg>
-          <span class="sr-only">More options</span>
-        </button>
-      </div>
+      <button
+          th:onclick="'confirmAndRedirect(\'/admin/members/' + ${adminMemberDto.memberId} + '/management\')'"
+          th:text="${adminMemberDto.isStoppedByAdmin == 0 ? '정지 시키기' : (adminMemberDto.isStoppedByAdmin == 1 ? '정지 취소하기' : '비정상적 상태')}"
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-destructive text-destructive-foreground hover:bg-red-700 hover:text-white px-4 py-2"
+      >
+      </button>
+
+      <script>
+        function confirmAndRedirect(url) {
+          if (confirm('정지 상태를 변경하시겠습니까?')) {
+            window.location.href = url;
+          }
+        }
+      </script>
     </div>
-    <div class="grid grid-cols-2 gap-6">
-      <div class="grid gap-2">
-        <div class="text-sm font-medium text-muted-foreground">Nickname</div>
+    <div data-orientation="horizontal" role="none"
+         class="shrink-0 bg-border h-[1px] w-full my-6"></div>
+    <div class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
+      <div class="grid gap-1">
+        <div class="text-sm font-medium text-muted-foreground">Member ID</div>
+        <div th:text="${adminMemberDto.memberId}"></div>
+      </div>
+      <div class="grid gap-1">
+        <div class="text-sm font-medium text-muted-foreground">이메일</div>
+        <div th:text="${adminMemberDto.email}"></div>
+      </div>
+      <div class="grid gap-1">
+        <div class="text-sm font-medium text-muted-foreground">이름</div>
+        <div th:text="${adminMemberDto.name}"></div>
+      </div>
+      <div class="grid gap-1">
+        <div class="text-sm font-medium text-muted-foreground">닉네임</div>
         <div th:text="${adminMemberDto.nickname}"></div>
       </div>
-      <div class="grid gap-2">
-        <div class="text-sm font-medium text-muted-foreground">Phone</div>
+      <div class="grid gap-1">
+        <div class="text-sm font-medium text-muted-foreground">로그인 방법</div>
+        <div th:text="${adminMemberDto.loginMethod}"></div>
+      </div>
+      <div class="grid gap-1">
+        <div class="text-sm font-medium text-muted-foreground">전화번호</div>
         <div th:text="${adminMemberDto.phoneNumber}"></div>
       </div>
-      <div class="grid gap-2">
-        <div class="text-sm font-medium text-muted-foreground">Account Created</div>
+      <div class="grid gap-1">
+        <div class="text-sm font-medium text-muted-foreground">가입 일자</div>
         <div th:text="${adminMemberDto.createdDate}"></div>
       </div>
-      <div class="grid gap-2">
-        <div class="text-sm font-medium text-muted-foreground">Reported Count: <span th:text="${adminMemberDto.reportedCount}"></span></div>
-        <div class="flex items-center gap-2">
-          <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="h-4 w-4 text-muted-foreground"
-          >
-            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
-            <line x1="4" x2="4" y1="22" y2="15"></line>
-          </svg>
-        </div>
+      <div class="grid gap-1">
+        <div class="text-sm font-medium text-muted-foreground">탈퇴 여부</div>
+        <div th:text="${adminMemberDto.withdrawalStatus}"></div>
       </div>
+      <div class="grid gap-1">
+        <div class="text-sm font-medium text-muted-foreground">신고 당한 횟수</div>
+        <div th:text="${adminMemberDto.reportedCount}"></div>
+      </div>
+      <div class="grid gap-1">
+        <div class="text-sm font-medium text-muted-foreground">성별</div>
+        <div th:text="${adminMemberDto.gender}"></div>
+      </div>
+      <div class="grid gap-1">
+        <div class="text-sm font-medium text-muted-foreground">나이</div>
+        <div th:text="${adminMemberDto.age}"></div>
+      </div>
+      <div class="grid gap-1"></div>
     </div>
   </div>
 </div>
 </body>
+
 </html>

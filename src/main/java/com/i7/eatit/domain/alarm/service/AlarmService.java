@@ -2,6 +2,7 @@ package com.i7.eatit.domain.alarm.service;
 
 import com.i7.eatit.domain.alarm.dao.AlarmMapper;
 import com.i7.eatit.domain.alarm.dto.AlarmDTO;
+import com.i7.eatit.domain.alarm.dto.AlarmDetailDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,11 +20,9 @@ public class AlarmService {
        return alarmMapper.findAllAlarm(member_id);
     }
 
-    public boolean checkNewAlarm(){
-        //Todo : 로그인 정보 받아 와야 함
-        int member_id = 1;
+    public boolean checkNewAlarm(int memberId){
 
-        List<AlarmDTO> alarmList = this.findAllAlarm(member_id);
+        List<AlarmDTO> alarmList = this.findAllAlarm(memberId);
 
         int alarmCount = 0;
         for (AlarmDTO alarmDTO : alarmList) {
@@ -37,4 +36,17 @@ public class AlarmService {
         return alarmCount > 0;
 //        return false;
     }
+
+    public void createNewAlarm(AlarmDTO newAlarm){
+        alarmMapper.createNewAlarm(newAlarm);
+    }
+
+
+    public AlarmDetailDTO findAlarmDetail(int alarmId) {
+        AlarmDetailDTO dto = alarmMapper.findAlarmDetail(alarmId);
+//        System.out.println(dto.toString());
+        return alarmMapper.findAlarmDetail(alarmId);
+    }
+
+
 }

@@ -10,16 +10,18 @@ public class TechExperienceDTO {
     private String description;
     private java.sql.Date startDate;
     private java.sql.Date endDate;
+    private String isCurrent;
 
     public TechExperienceDTO() {}
 
-    public TechExperienceDTO(int experienceId, int memberId, String companyName, String description, Date startDate, Date endDate) {
+    public TechExperienceDTO(int experienceId, int memberId, String companyName, String description, Date startDate, Date endDate, String isCurrent) {
         this.experienceId = experienceId;
         this.memberId = memberId;
         this.companyName = companyName;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.isCurrent = isCurrent;
     }
 
     public int getExperienceId() {
@@ -70,6 +72,14 @@ public class TechExperienceDTO {
         this.endDate = endDate;
     }
 
+    public String getIsCurrent() {
+        return isCurrent;
+    }
+
+    public void setIsCurrent(String isCurrent) {
+        this.isCurrent = isCurrent;
+    }
+
     @Override
     public String toString() {
         return "TechExperienceDTO{" +
@@ -79,6 +89,7 @@ public class TechExperienceDTO {
                 ", description='" + description + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
+                ", isCurrent='" + isCurrent + '\'' +
                 '}';
     }
 }
