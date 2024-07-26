@@ -21,6 +21,8 @@ function getSessionUser(callback) {
 
 // 클라이언트 초기화 시 사용자 정보를 가져옴
 let userId = null;
+let roomId = new URLSearchParams(window.location.search).get('roomId'); // roomId 가져오기
+
 getSessionUser((id) => {
   userId = id;
 
@@ -121,7 +123,7 @@ getSessionUser((id) => {
     clearTimeout(typingTimeout);
     typingTimeout = setTimeout(() => {
       socket.emit("stopTyping", "");
-    }, 2000); // 1초 동안 입력이 없으면 stopTyping 이벤트 발생
+    }, 2000); // 2초 동안 입력이 없으면 stopTyping 이벤트 발생
   });
 
   socket.on("notifyStopTyping", () => {
@@ -150,7 +152,7 @@ function formatTimeAgo(dateString) {
       "username": sessionStorage.getItem("userId")
     }
   }) // Node.js 서버와 연결하여 초기 채팅 메시지를 가져옴
-      .then(data => data.json())
+      .then(response => response.json())
       .then(json => {
         json.forEach(data => {
           let div = document.createElement("div");
