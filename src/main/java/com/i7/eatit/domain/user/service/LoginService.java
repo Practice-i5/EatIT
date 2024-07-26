@@ -28,7 +28,13 @@ public class LoginService {
         userMap.put("email", loginUser.getEmail());
         userMap.put("password", loginUser.getPassword());
 
-        return loginMapper.selectUser(userMap);
+        UserInfoDTO userInfoDTO = loginMapper.selectUser(userMap);
+
+        if (userInfoDTO == null || userInfoDTO.getIsStoppedByAdmin() != 0 || !userInfoDTO.getWithdrawalStatus().equals("N")) {
+            return null;
+        }
+
+        return userInfoDTO;
     }
 
     // 이메일 조회

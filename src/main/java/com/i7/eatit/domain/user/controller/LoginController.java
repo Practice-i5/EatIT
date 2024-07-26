@@ -55,14 +55,16 @@ public class LoginController {
 
         UserInfoDTO loginUser = loginService.checkUser(userLoginDTO);
 
-        // 응답 확인용
+
         System.out.println("loginUser = " + loginUser); // 확인용
 
-        if (loginUser != null) {    // 성공
+        if (loginUser != null) {    // 성공시 메인페이지로 이동
             model.addAttribute("loginUser", loginUser);
             session.setAttribute("loginUser", loginUser); // 세션에 사용자 정보 저장
             return "redirect:/";
-        } else {                    // 실패
+
+        } else {                    // 실패시 로그인 페이지로 이동
+          
             return "redirect:/login/loginMain";
         }
     }

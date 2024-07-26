@@ -15,11 +15,12 @@ public interface PhotoMapper {
 
     void uploadMemberPhoto(MemberPhotoDTO memberPhoto);
 
-    List<MeetingPhotoDTO> findPhotoByMeetingId(int meetingId);
+    MeetingPhotoDTO findPhotoByMeetingId(int meetingId);
 
     void uploadMeetingPhoto(MeetingPhotoDTO meetingPhoto);
 
+    void deleteMemberPhoto(int memberId);
+
     void deleteMeetingPhoto(int meetingId);
 
-    void deleteOneMeetingPhoto(Map<String, Integer> photoMap);
 }

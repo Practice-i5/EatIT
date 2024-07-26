@@ -8,10 +8,29 @@
         <id property="alarmId" column="alarm_id"/>
         <result property="alarmDetail" column="alarm_detail"/>
         <result property="alarmTime" column="alarm_date"/>
-        <result property="member_id" column="member_id"/>
+        <result property="memberId" column="member_id"/>
         <result property="participationId" column="participation_id"/>
         <result property="alarmStatus" column="alarm_status"/>
         <result property="alarmChecked" column="alarm_checked"/>
+        <result property="meetingId" column="meeting_id"/>
+    </resultMap>
+
+    <resultMap id="AlarmDetailResultMap" type="com.i7.eatit.domain.alarm.dto.AlarmDetailDTO">
+        <id property="alarmId" column="alarm_id"/>
+        <result property="alarmDetail" column="alarm_detail"/>
+        <result property="memberId" column="member_id"/>
+        <result property="memberName" column="member_name"/>
+        <result property="meetingId" column="meeting_id"/>
+        <result property="meetingName" column="meeting_title"/>
+        <result property="alarmStatus" column="alarm_status"/>
+    </resultMap>
+
+    <resultMap id="SimpleAllResultMap" type="com.i7.eatit.domain.alarm.dto.AlarmSimpleDTO">
+        <id property="alarmId" column="alarm_id"/>
+        <result property="memberId" column="memberWhoJoin"/>
+        <result property="meetingId" column="meeting_id"/>
+        <result property="meetingName" column="meetingName"/>
+        <result property="alarmTime" column="alarm_date"/>
     </resultMap>
 
     <select id="findAllAlarm" resultMap="alarmAllResultMap">
@@ -23,9 +42,86 @@
             , participation_id
             , alarm_status
             , alarm_checked
+            , meeting_id
         from tbl_alarm
         where member_id = #{ memberId }
         order by alarm_date
     </select>
+
+    <insert id="createNewAlarm" parameterType="com.i7.eatit.domain.alarm.dto.AlarmDTO"
+            useGeneratedKeys="true" keyProperty="alarmId">
+        insert into tbl_alarm
+        (
+              alarm_detail
+            , alarm_date
+            , member_id
+            , participation_id
+            , alarm_status
+            , alarm_checked
+            , meeting_id
+        )
+        values
+        (
+              #{ alarmDetail }
+            , #{ alarmTime }
+            , #{ memberId }
+            , #{ participationId }
+            , #{ alarmStatus }
+            , #{ alarmChecked }
+            , #{ meetingId }
+        )
+    </insert>
+
+
+    <select id="findAlarmDetail" resultMap="AlarmDetailResultMap">
+        SELECT
+            AM.alarm_id
+            , AM.alarm_detail
+            , AM.member_id
+            , c.name as member_name
+            , AM.meeting_id
+            , b.title as meeting_title
+            , AM.alarm_status
+        FROM tbl_alarm as AM
+            left join tbl_meeting as b
+                on b.meeting_id = AM.meeting_id
+            left join tbl_member as c
+                on c.member_id = AM.meeting_id
+        where AM.alarm_id = #{alarmId}
+    </select>
+
+
+    <select id="getMeetingId" resultType="_int">
+        select
+            meeting_id
+        from
+            tbl_meeting_participation
+        where
+            participation_id = #{participationId}
+    </select>
+
+    <select id="findSimpleAll" resultMap="SimpleAllResultMap">
+        select
+              a.alarm_id
+            , a.member_id as memberWhoJoin
+            , a.meeting_id
+            , b.title as meetingName
+            , a.alarm_status
+        from tbl_alarm as a
+        join
+            (
+                select
+                    meeting_id
+                from
+                    tbl_meeting_participation
+                where
+                    member_id = #{hostMemberId}
+                    and role = 'Host'
+            )  as c
+            on c.meeting_id = a.meeting_id
+        join tbl_meeting as b
+            on b.meeting_id = a.meeting_id
+    </select>
+
 
 </mapper>

@@ -30,6 +30,7 @@
     <link th:href="@{/css/template.css}" rel="stylesheet">
     <link th:href="@{/css/alarm.css}" rel="stylesheet">
 
+    <script src="/js/alarm.js"></script>
 
 
 </head>
@@ -109,45 +110,58 @@
             </div>
         </div>
     </div>
+
     <div class="container">
-        <script src="/js/alarm.js"></script>
-        <div class="alarm highlight">
-            <img src="/img/test_image.png">
-            <div class="text">
-                <p th:text="${meetingname}">후라토식당 아브뉴프랑 판교점</p>
-                <small class="important" th:text="${meetingMessage}">모임이 곧 시작되요!</small>
+        <tr th:each="alarm : ${alarmList}">
+<!--            <script>getAlarmDeatil([[${alarm.getAlarmId()}]])</script>-->
+            <div type="button" class="alarm highlight " data-bs-toggle="modal"
+                 data-bs-target="#alarmDetailModal" th:onclick="getAlarmDeatil([[${alarm.getAlarmId()}]])">
+<!--                <div style="display:none;" th:text="${alarm.getAlarmId()}" />-->
+                <img src="/img/test_image.png">
+                <div class="text">
+                    <td th:text="${alarm.getMeetingName()}">참가 신청 한 모임 이름</td><td>의 참가 신청이 들어왔어요!</td>
+<!--                        <small class="important" th:text="${alarm.getAlarmDetail()}">모임 신청이 도착했어요!</small>-->
+                </div>
+            </div>
+        </tr>
+
+        <!-- Modal Start -->
+        <div class="modal fade" id="alarmDetailModal" tabindex="-1" aria-labelledby="alarmModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">참가 신청</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div id="alarmModelBody" class="modal-body">
+                        <div class="d-flex align-items-start">
+                            <img src="/img/test_image.png" class="rounded-circle me-3" style="width: 60px; height: 60px;">
+                            <div>
+                                <h5 class="mt-0" id="alarm-userName">신청한 사람</h5>
+                                <p class="text-muted" id="alarm-meetingName">모임 이름 에 신청하셨어요</p>
+                                <p id="alarm-detail-introduce"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">거절</button>
+                        <button type="button" class="btn btn-primary">승인</button>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="alarm highlight">
-            <img src="/img/test_image.png">
-            <div class="text">
-                <p th:text="${joinname}">기본 식당</p>
-                <small th:text="${joinMessage}">기본 문구</small>
-            </div>
-        </div>
-        <div class="alarm highlight">
-            <img src="/img/profile.png">
-            <div class="text">
-                <p th:text="${followname}">아이디</p>
-                <small th:text="${followMessage}">님이 나를 팔로우 했어요!</small>
-            </div>
-        </div>
-        <div class="alarm highlight">
-            <img src="/img/test_image.png">
-            <div class="text">
-                <p th:text="${joinname}">기본 식당</p>
-                <small th:text="${joinMessage}">기본 문구</small>
-            </div>
-        </div>
-        <div class="alarm highlight">
-            <img src="/img/test_image.png">
-            <div class="text">
-                <p th:text="${joinname}">기본 식당</p>
-                <small th:text="${joinMessage}">기본 문구</small>
-            </div>
-        </div>
-    </div>
+        <!-- Modal END -->
+
+<!--        필요한것-->
+<!--        1. 미팅 이름-->
+<!--        2. 사람 이름-->
+<!--        3. 사람 프로필 링크-->
+<!--        4. 미팅 링크-->
+<!--        5. 이미지 링크-->
+
+
     <!-- Alarm List End -->
+
 
 
 
