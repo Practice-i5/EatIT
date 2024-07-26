@@ -2,11 +2,19 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="footerFragment">
 <footer class="footer">
+
     <div  class="footer-link-block">
-        <a>고객서비스</a>
-        <a>소셜미디어</a>
-        <a>팀원소개</a>
-        <a>github</a>
+        <h3>
+            EatIt
+        </h3>
+        <div>
+            <h3>팀원소개</h3>
+            <img src="images/git_image.png" th:src="@{/img/my-page/git_image.png}" style="width: 100%; min-width: 300px;max-width: 600px;">
+        </div>
+        <div>
+            <h3>github</h3>
+            <a>https://github.com/Practice-i5/EatIT-FE</a>
+        </div>
     </div>
 <!--    <div style="width: 100%; align-items: center;">-->
 <!--        <ul style="margin:auto; display: flex; flex-direction: row; width: 50%; max-width: 450px;">-->
@@ -17,7 +25,6 @@
 <!--            <li>홍관섭</li>-->
 <!--        </ul>-->
 <!--    </div>-->
-    <img src="images/git_image.png" th:src="@{/img/my-page/git_image.png}" style="width: 60%; min-width: 260px;max-width: 550px;">
 </footer>
 </th:block>
 </html>

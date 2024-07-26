@@ -31,6 +31,19 @@ public class MeetingService {
         meetingMapper.registInterests(interestsRelDTO);
     }
 
+    // 모임 참가
+    @Transactional
+    public void participateGuest(int meetingId, int member_id){
+        meetingMapper.participateGuest(meetingId, member_id);
+    }
+
+    @Transactional
+    public void participateHost(int meetingId, int member_id) {
+        meetingMapper.participateHost(meetingId, member_id);
+    }
+
+    public String findMeetingPhotoById(int meetingId) { return meetingMapper.findMeetingPhotoById(meetingId); }
+
     public List<MeetingDTO> findAllMeetings() { return meetingMapper.findAllMeetings(); }
 
     public List<MeetingDTO> searchMeetings(SearchCriteria searchCriteria) { return meetingMapper.findMeetings(searchCriteria); }
@@ -52,6 +65,15 @@ public class MeetingService {
 
     // 닫혀있는 참여한 목록 불러오기
     public List<PreviewMeetingDTO> findPreviewByMemberIdClosed(int memberId) {return meetingMapper.findPreviewByMemberIdClosed(memberId); };
+
+    public int findHostIdById(int meetingId) { return meetingMapper.findHostIdById(meetingId); }
+
+    public List<String> findAllInterests() { return meetingMapper.findAllInterests();}
+
+    public List<String> findAllType() { return meetingMapper.findAllType(); }
+
+    public PreviewMeetingDTO findPreviewById(int meetingId) { return meetingMapper.findPreviewById(meetingId);}
+
 
 
 

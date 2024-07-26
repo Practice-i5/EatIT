@@ -24,7 +24,7 @@ public class MeetingDTO {
     private String status;              // 모임 상태
     private Timestamp endDate;          // 종료 일시
     private int hostMemberId;           // 호스트 멤버 id
-    private int lastId;                 // 이건 이전 auto_i
+    private int lastId;                 // 자동 생성된 meeting_id
 
     public MeetingDTO() {}
 

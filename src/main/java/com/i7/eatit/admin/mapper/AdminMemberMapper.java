@@ -8,4 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface AdminMemberMapper {
 
     List<AdminMemberDto> findAllMember(String sort, String searchEmail);
+
+    AdminMemberDto findMemberById(int memberId);
 }

@@ -15,4 +15,25 @@
                MEMBER_ID=#{memberId}
     </update>
 
+    <update id="updatePassword" parameterType="hashmap">
+        UPDATE
+               TBL_MEMBER
+           SET
+               PASSWORD=#{newPassword}
+         WHERE
+               MEMBER_ID=#{memberId}
+    </update>
+
+    <update id="softDeleteMember" parameterType="_int">
+        UPDATE
+               TBL_MEMBER
+           SET
+               WITHDRAWAL_STATUS='Y'
+         WHERE
+               MEMBER_ID=#{memberId}
+    </update>
+
+    <update id="insertTechExperience">
+
+    </update>
 </mapper>

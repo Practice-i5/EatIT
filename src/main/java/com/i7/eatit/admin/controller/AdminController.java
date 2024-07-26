@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -83,7 +84,28 @@ public class AdminController {
         return "admin/members";
     }
 
-    // TODO: 신고 조회 위한 메서드
+    // TODO: 회원 단일 조회 [미완성 MemberDto 에 의존하도록 변경해야 함!!]
+    @GetMapping("/members/{memberId}")
+    public String getMember(@PathVariable int memberId, Model model, HttpServletRequest request) {
+        if (!adminService.isAdminLoggedIn(request)) {
+            return "redirect:/admin/login";
+        }
+        AdminMemberDto adminMemberDto = adminService.findMemberById(memberId);
+        model.addAttribute("adminMemberDto", adminMemberDto);
+        return "admin/member";
+    }
+
+    // TODO: 회원 관리 위한 메서드 (정지 혹은 복구) [미완성~!~!~!~!]
+    @GetMapping("/members/{memberId}/management")
+    public String clientManagement(@PathVariable int memberId, HttpServletRequest request) {
+        if (!adminService.isAdminLoggedIn(request)) {
+            return "redirect:/admin/login";
+        }
+
+        return "admin/management";
+    }
+
+    // TODO: 신고 조회 위한 메서드 [미완성~!~!~!]
     @GetMapping("/complaints")
     public String findReports(HttpServletRequest request) {
         if (!adminService.isAdminLoggedIn(request)) {
@@ -91,14 +113,5 @@ public class AdminController {
         }
 
         return "admin/complaints";
-    }
-
-    // TODO: 회원 관리 위한 메서드 (정지 혹은 복구)
-    @GetMapping("/managements")
-    public String clientManagement(HttpServletRequest request) {
-        if (!adminService.isAdminLoggedIn(request)) {
-            return "redirect:/admin/login";
-        }
-        return "admin/managements";
     }
 }

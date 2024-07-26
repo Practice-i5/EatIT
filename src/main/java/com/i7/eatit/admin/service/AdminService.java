@@ -72,8 +72,11 @@ public class AdminService {
                 }
             }
         }
-
         // 4. 이 외의 모든 경우에는 로그인을 허용하지 않는다.
         return false;
+    }
+
+    public AdminMemberDto findMemberById(int memberId) {
+        return adminMemberMapper.findMemberById(memberId);
     }
 }
