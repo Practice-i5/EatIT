@@ -26,7 +26,7 @@ public class LoginController {
 
     /*
         단순 이동 메서드
-     */
+    */
 
     // 메인로그인 페이지로 이동 (브랜드 이미지 클릭)
     @GetMapping("/loginMain")
@@ -47,7 +47,7 @@ public class LoginController {
 
     /*
         정보 전달 메서드
-     */
+    */
 
     // 로그인 - 이메일, 비밀번호
     @PostMapping("/successLogin")
@@ -61,7 +61,7 @@ public class LoginController {
         if (loginUser != null) {    // 성공
             model.addAttribute("loginUser", loginUser);
             session.setAttribute("loginUser", loginUser); // 세션에 사용자 정보 저장
-            return "redirect:/login/successLogin";
+            return "redirect:/";
         } else {                    // 실패
             return "redirect:/login/loginMain";
         }
@@ -90,7 +90,9 @@ public class LoginController {
 
         sessionStatus.setComplete(); // 세션 종료
 
-        return "redirect:/login/loginMain";
+        System.out.println("세션이 종료되었습니다.");
+
+        return "redirect:/";
     }
 
 
