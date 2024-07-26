@@ -153,34 +153,56 @@
     <!-- Navbar start -->
     <div class="container-fluid fixed-top">
         <div class="container px-0">
-            <div class="container px-0">
-                <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                    <a th:href="@{main-page/home.html}" class="navbar-brand"><img class=logo src="/img/logo.png" alt="logo"/></a>
-                    <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarCollapse">
-                        <span class="fa fa-bars text-primary"></span>
-                    </button>
-                    <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
-                        <div class="navbar-nav mx-auto">
-                            <a th:href="@{main-page/home.html}" class="nav-item nav-link">홈</a>
-                            <a th:href="@{enroll-meeting/index.html}" class="nav-item nav-link">모임 등록하기</a>
-                            <a th:href="@{search/list.html}" class="nav-item nav-link header-menu-active">모임 찾기</a>
-                            <a id="open" th:href="@{meetingList-page/like-page.html}" class="nav-item nav-link">모임목록</a>
-                        </div>
-                        <div class="d-flex m-3 me-0">
-                            <a href="#" class="btn-notification my-auto me-4">
-                                <i class="fas fa-bell fa-2x"></i>
-                            </a>
-                            <!-- JavaScript 파일 연결 -->
-                            <button class="btn btn-danger rounded-pill me-2"
-                                onclick="location.href='../newPagetemplate/newlogin.html'" id="loginButton">로그인</button>
-                            <button class="btn btn-outline-danger rounded-pill"
-                                onclick="location.href='../newPagetemplate/newjoin.html'"
-                                id="signupButton">회원가입</button>
-                        </div>
+            <nav class="navbar navbar-light bg-white navbar-expand-xl">
+                <!-- 로고 및 사이트 이름 -->
+                <a th:href="@{/home}" class="navbar-brand">
+                    <img th:src="@{/img/image_145.png}" src="/img/image_145.png" alt="Eat-IT Logo">
+                    <h1 class="text-primary display-6">Eat-IT</h1>
+                </a>
+
+                <!-- 모바일용 네비게이션 토글 버튼 -->
+                <button
+                        class="navbar-toggler py-2 px-3"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarCollapse"
+                >
+                    <span class="fa fa-bars text-primary"></span>
+                </button>
+                <!-- 네비게이션 메뉴 -->
+                <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
+                    <div class="navbar-nav mx-auto">
+                        <a th:href="@{/home/home}" class="nav-item nav-link active">홈</a>
+                        <a th:href="@{/enroll-meeting/enroll-meeting}" class="nav-item nav-link">모임등록</a>
+                        <a th:href="@{/search/list}" class="nav-item nav-link">모임찾기</a>
+                        <!-- 모임목록은 로그인을 해야 들어갈 수 있기에 404 에러가 뜸-->
+                        <a th:href="@{/meetingList/participatingList}" class="nav-item nav-link">모임목록</a>
+
                     </div>
-                </nav>
-            </div>
+                    <!-- 1:1 채팅 및 그룹 채팅 버튼 -->
+                    <a th:href="@{/chat}" class="btn-chat my-auto">
+                        <i class="fas fa-comments"></i>
+                        <span class="btn-text">1:1채팅</span>
+                    </a>
+                    <a th:href="@{/chatGroup/chat-page}" class="btn-chat my-auto">
+                        <i class="fas fa-users"></i>
+                        <span class="btn-text">그룹채팅</span>
+                    </a>
+
+                    <!-- 알림, 로그인, 회원가입 버튼 -->
+
+                    <a href="#" th:href="@{/alarm}" class="btn-notification my-auto me-4">
+                        <i class="fas fa-bell fa-2x"></i>
+                        <span class="notification-dot"></span>
+                    </a>
+                    <a class="btn btn-danger rounded-pill me-2" th:href="@{/login/loginMain}" id="loginButton">
+                        로그인
+                    </a>
+                    <a class="btn btn-outline-danger rounded-pill" th:href="@{/login/join}" id="signupButton">
+                        회원가입
+                    </a>
+                </div>
+            </nav>
         </div>
     </div>
     <!-- Navbar End -->

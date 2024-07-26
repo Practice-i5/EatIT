@@ -32,8 +32,10 @@ public class DetailController {
 
 //    UserInfoService userInfoService;
 
-    public DetailController(MeetingService meetingService) {
+    public DetailController(MeetingService meetingService, AlarmService alarmService, JoinMemberProfileService joinMemberService) {
         this.meetingService = meetingService;
+        this.alarmService = alarmService;
+        this.joinMemberService = joinMemberService;
     }
 
     @GetMapping("detail")
@@ -70,7 +72,7 @@ public class DetailController {
         model.addAttribute("meetingDTO", meetingService.findMeetingById(detailDTO.getMeetingId()));
         model.addAttribute("interests", meetingService.findInterestsById(detailDTO.getMeetingId()));
         model.addAttribute("userInfo", userInfoDTO);
-        model.addAttribute("joinMembers", joinMemberService.getUserProfileInfo(detailDTO.getMeetingId()));
+//        model.addAttribute("joinMembers", joinMemberService.getUserProfileInfo(detailDTO.getMeetingId()));
         model.addAttribute("meetingImage", meetingService.findMeetingPhotoById(detailDTO.getMeetingId()));
 
         //        List<MeetingDTO> meetingList = meetingService.findAllMeeting();
@@ -92,6 +94,7 @@ public class DetailController {
         } else if (detailDTO.isParticipateFree() && meetingService.isExistPart(detailDTO.getMeetingId(), userInfoDTO.getMember_id()) != null) {
             meetingService.participateGuest(detailDTO.getMeetingId(), userInfoDTO.getMember_id());
             meetingService.participateGuest(detailDTO.getMeetingId(), userInfoDTO.getMember_id());
+            meetingService.upCountRecruiterNum(detailDTO.getMeetingId());
         }
         return "detail/detail";
     }

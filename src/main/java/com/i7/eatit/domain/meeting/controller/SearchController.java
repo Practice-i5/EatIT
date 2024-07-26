@@ -37,12 +37,13 @@ public class SearchController {
     @PostMapping("list")
     public String searchListPage(SearchCriteria searchCriteria, Model model) {
 
-        System.out.println("========================프리뷰 모델==========================");
-        System.out.println( meetingService.findPreviewBySearch(searchCriteria));
-        System.out.println("========================개발 분야==========================");
-        System.out.println(meetingService.findAllInterests());
-        System.out.println("========================모임 종류==========================");
-        System.out.println(meetingService.findAllType());
+//        System.out.println("========================프리뷰 모델==========================");
+//        System.out.println( meetingService.findPreviewBySearch(searchCriteria));
+//        System.out.println("========================개발 분야==========================");
+//        System.out.println(meetingService.findAllInterests());
+//        System.out.println("========================모임 종류==========================");
+//        System.out.println(meetingService.findAllType());
+        System.out.println("=================findMeetings===============\n" + meetingService.findPreviewBySearch(searchCriteria) + "\n=================== end ===================");
         model.addAttribute("previewMeetingList", meetingService.findPreviewBySearch(searchCriteria));
         model.addAttribute("interests", meetingService.findAllInterests());
         model.addAttribute("types", meetingService.findAllType());

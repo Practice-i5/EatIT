@@ -67,8 +67,8 @@
                 <!-- 네비게이션 메뉴 -->
                 <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                     <div class="navbar-nav mx-auto">
-                        <a th:href="@{/home}" class="nav-item nav-link active">홈</a>
-                        <a th:href="@{/enroll-meeting}" class="nav-item nav-link">모임등록</a>
+                        <a th:href="@{/home/home}" class="nav-item nav-link active">홈</a>
+                        <a th:href="@{/enroll-meeting/enroll-meeting}" class="nav-item nav-link">모임등록</a>
                         <a th:href="@{/search/list}" class="nav-item nav-link">모임찾기</a>
                         <!-- 모임목록은 로그인을 해야 들어갈 수 있기에 404 에러가 뜸-->
                         <a th:href="@{/meetingList/participatingList}" class="nav-item nav-link">모임목록</a>
@@ -155,7 +155,7 @@
                         <div class="checkbox-group">
                             <ul class="checkbox-group" th:each="type : ${types}">
                                 <li>
-                                    <input type="radio" class="btn-check" name="meetingType" th:value="${type}" th:id="${type}" autocomplete="off">
+                                    <input type="radio" class="btn-check" name="typeCondition" th:value="${type}" th:id="${type}" autocomplete="off">
                                     <label class="btn btn-outline-success" th:for="${type}" th:text="${type}">파이썬</label>
                                 </li>
                             </ul>
