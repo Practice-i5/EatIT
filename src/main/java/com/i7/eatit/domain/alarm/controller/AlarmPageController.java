@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -29,6 +30,16 @@ public class AlarmPageController {
     public String alarmPage(Model model) {
 
 
+        AlarmDTO testDTO = new AlarmDTO();
+        testDTO.setAlarmChecked(false);
+        testDTO.setAlarmDetail("ff");
+        testDTO.setAlarmTime(LocalDateTime.now());
+        testDTO.setAlarmStatus("ddd");
+        testDTO.setMeetingId(3);
+        testDTO.setMemberId(2);
+        testDTO.setParticipationId(5);
+        createNewAlarm(testDTO);
+
         //Todo : 로그인 정보 받아 와야 함
 
         int memberId = 4;
@@ -41,7 +52,7 @@ public class AlarmPageController {
 
         model.addAttribute("isAlarmRinging" , isAlarmRinging);
 
-        return "/alarm/alarm";
+        return "alarm/alarm";
     }
 
     //생성 테스트
