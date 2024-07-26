@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chat Rooms</title>
+    <link th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/groupChat.css}" rel="stylesheet" />
+</head>
+<body>
+<h1>Chat Rooms</h1>
+<form id="createChatRoomForm">
+    <input type="text" id="chatRoomNameInput" placeholder="New Chat Room Name" required>
+    <button type="button" id="createChatRoomButton">Create Chat Room</button>
+</form>
+<ul>
+    <li th:each="chatRoom : ${chatRooms}">
+        <a th:href="@{/chatrooms/{id}(id=${chatRoom.id})}" th:text="${chatRoom.name}">Chat Room Name</a>
+    </li>
+</ul>
+<script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    function createChatRoom(roomName) {
+        fetch("http://localhost:3000/chats/createRoom", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ roomName: roomName })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Chat room created:", data);
+                location.reload(); // Reload the page to see the new chat room
+            })
+            .catch((error) => {
+                console.error("Error creating chat room:", error);
+            });
+    }
+
+    document.getElementById("createChatRoomButton").addEventListener("click", () => {
+        const roomName = document.getElementById("chatRoomNameInput").value;
+        createChatRoom(roomName);
+    });
+    /*]]>*/
+</script>
+</body>
+</html>

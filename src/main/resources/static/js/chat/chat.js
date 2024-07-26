@@ -188,3 +188,28 @@ function updateTimestamps() {
 
 // 30초마다 타임스탬프 업데이트
 setInterval(updateTimestamps, 30000);
+
+//새로운 채팅방 만들기 요청
+function createChatRoom(roomName) {
+  fetch("http://localhost:3000/chats/createRoom", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ roomName: roomName })
+  })
+      .then(response => response.json())
+      .then(data => {
+        console.log("채팅방 생성됨:", data);
+        // 새로운 채팅방이 생성된 후 필요한 동작 수행
+      })
+      .catch((error) => {
+        console.error("채팅방 생성 중 오류 발생:", error);
+      });
+}
+
+// 새로운 채팅방 만들기 버튼 클릭 시
+document.getElementById("createChatRoomButton").addEventListener("click", () => {
+  const roomName = document.getElementById("chatRoomNameInput").value;
+  createChatRoom(roomName);
+});
