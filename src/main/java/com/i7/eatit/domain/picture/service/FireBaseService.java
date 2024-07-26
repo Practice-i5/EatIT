@@ -11,24 +11,22 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.Bucket;
-import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.cloud.StorageClient;
 
 @Service
-public class FireBaseService {
+public class FireBaseService implements FileUploadService {
 
     @Value("${app.firebase-bucket}")
     private String firebaseBucket;
 
-    public String uploadFiles(MultipartFile file, String nameFile)
-            throws IOException, FirebaseAuthException {
+    public String uploadFile(MultipartFile file, String filePath) throws IOException {
         Bucket bucket = StorageClient.getInstance().bucket(firebaseBucket);
         InputStream content = new ByteArrayInputStream(file.getBytes());
-        Blob blob = bucket.create(nameFile, content, file.getContentType());
+        Blob blob = bucket.create(filePath, content, file.getContentType());
         return blob.getMediaLink();
     }
 
-    public String getFileUrl(String filePath) {
+    public String getSourceFromPath(String filePath) {
         try {
             Bucket bucket = StorageClient.getInstance().bucket(firebaseBucket);
             Blob blob = bucket.get(filePath);
@@ -42,7 +40,7 @@ public class FireBaseService {
         return null;
     }
 
-    public void deleteFirebaseBucket(String filePath) {
+    public void deleteFile(String filePath) {
         Bucket bucket = StorageClient.getInstance().bucket(firebaseBucket);
         bucket.get(filePath).delete();
     }
