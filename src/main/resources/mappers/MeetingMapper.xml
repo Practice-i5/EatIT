@@ -14,6 +14,7 @@
         <result property="meetingType" column="meeting_type"/>
         <result property="scheduledDate" column="scheduled_date"/>
         <result property="exitRestrictionTime" column="exit_restriction_time"/>
+        <result property="recruitMemberNumber" column="recruit_member_number"/>
         <result property="recruitmentNumber" column="recruitment_number"/>
         <result property="gender" column="gender"/>
         <result property="eligibleAge" column="eligible_age"/>
@@ -22,6 +23,18 @@
         <result property="status" column="status"/>
         <result property="endDate" column="end_date"/>
         <result property="hostMemberId" column="host_member_id"/>
+    </resultMap>
+
+    <resultMap id="previewMeetingResultMap" type="com.i7.eatit.domain.meeting.model.dto.PreviewMeetingDTO">
+        <id property="meetingId" column="meeting_id"/>
+        <result property="title" column="title"/>
+        <result property="locationName" column="location_name"/>
+        <result property="meetingImageURL" column="meeting_url"/>
+        <result property="status" column="status"/>
+        <result property="hostImageURL" column="member_url"/>
+        <result property="scheduledDate" column="scheduled_date"/>
+        <result property="recruitMemberNumber" column="recruit_member_number"/>
+        <result property="recruitmentNumber" column="recruitment_number"/>
     </resultMap>
 
     <select id="findAllMeetings" resultMap="meetingResultMap">
@@ -36,6 +49,7 @@
                 ,A.MEETING_TYPE
                 ,A.SCHEDULED_DATE
                 ,A.EXIT_RESTRICTION_TIME
+                ,A.RECRUIT_MEMBER_NUMBER
                 ,A.RECRUITMENT_NUMBER
                 ,A.GENDER
                 ,A.ELIGIBLE_AGE
@@ -61,6 +75,7 @@
             ,A.MEETING_TYPE
             ,A.SCHEDULED_DATE
             ,A.EXIT_RESTRICTION_TIME
+            ,A.RECRUIT_MEMBER_NUMBER
             ,A.RECRUITMENT_NUMBER
             ,A.GENDER
             ,A.ELIGIBLE_AGE
@@ -85,6 +100,7 @@
                 , A.MEETING_TYPE
                 , A.SCHEDULED_DATE
                 , A.EXIT_RESTRICTION_TIME
+                , A.RECRUIT_MEMBER_NUMBER
                 , A.RECRUITMENT_NUMBER
                 , A.GENDER
                 , A.ELIGIBLE_AGE
@@ -125,6 +141,7 @@
             , A.MEETING_TYPE
             , A.SCHEDULED_DATE
             , A.EXIT_RESTRICTION_TIME
+            , A.RECRUIT_MEMBER_NUMBER
             , A.RECRUITMENT_NUMBER
             , A.GENDER
             , A.ELIGIBLE_AGE
@@ -201,6 +218,7 @@
             , A.MEETING_TYPE
             , A.SCHEDULED_DATE
             , A.EXIT_RESTRICTION_TIME
+            , A.RECRUIT_MEMBER_NUMBER
             , A.RECRUITMENT_NUMBER
             , A.GENDER
             , A.ELIGIBLE_AGE
@@ -231,6 +249,216 @@
             TBL_MEETING
         WHERE
             MEETING_ID = #{ meetingId }
+    </select>
+
+    <select id="findAllInterests">
+        SELECT
+            INTERESTS
+        FROM
+            TBL_MEETING_INTEREST_CATEGORY
+    </select>
+
+    <select id="findAllType">
+        SELECT
+            MEETING_TYPE
+        FROM
+            TBL_MEETING
+        GROUP BY
+            MEETING_TYPE
+    </select>
+
+    <select id="findPreviewBySearch" parameterType="com.i7.eatit.domain.meeting.model.common.SearchCriteria" resultMap="previewMeetingResultMap">
+        SELECT
+            A.MEETING_ID
+            , A.TITLE
+            , A.LOCATION_NAME
+            , B.PHOTO_PATH AS meeting_url
+            , C.PHOTO_PATH AS member_url
+            , A.STATUS
+            , A.SCHEDULED_DATE
+            , A.RECRUIT_MEMBER_NUMBER
+            , A.RECRUITMENT_NUMBER
+        FROM
+                        TBL_MEETING AS A
+            LEFT JOIN   TBL_MEETING_PHOTO AS B
+            ON          A.MEETING_ID = B.MEETING_ID
+            LEFT JOIN   TBL_MEMBER_PHOTO AS C
+            ON          A.HOST_MEMBER_ID = C.MEMBER_ID
+            LEFT JOIN   TBL_MEETING_INTEREST_RELATION AS D
+            ON          A.MEETING_ID = D.MEETING_ID
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="word != null and word != ''">
+                A.TITLE LIKE CONCAT('%', #{ word }, '%')
+            </if>
+            <if test="interestsConditions != null and interestsConditions.size() != 0">
+                AND D.INTERESTS IN
+                <foreach collection="interestsConditions" item="condition" open="(" close=")" separator=", ">
+                    #{ condition }
+                </foreach>
+            </if>
+            <if test="typeCondition != null and typeCondition != ''">
+                AND A.MEETING_TYPE = #{ typeCondition }
+            </if>
+            AND A.STATUS = 'Open'
+        </trim>
+        GROUP BY
+            A.MEETING_ID
+            , A.TITLE
+            , A.LOCATION_NAME
+            , B.PHOTO_PATH
+            , C.PHOTO_PATH
+            , A.STATUS
+            , A.SCHEDULED_DATE
+            , A.RECRUIT_MEMBER_NUMBER
+            , A.RECRUITMENT_NUMBER
+    </select>
+
+    <select id="findPreviewByMemberIdOpen" parameterType="int" resultMap="previewMeetingResultMap">
+        SELECT
+                A.MEETING_ID
+                , A.TITLE
+                , A.LOCATION_NAME
+                , B.PHOTO_PATH AS meeting_url
+                , C.PHOTO_PATH AS member_url
+                , A.STATUS
+                , A.SCHEDULED_DATE
+                , A.RECRUIT_MEMBER_NUMBER
+                , A.RECRUITMENT_NUMBER
+        FROM
+                TBL_MEETING AS A
+                LEFT JOIN   TBL_MEETING_PHOTO AS B
+                ON          A.MEETING_ID = B.MEETING_ID
+                LEFT JOIN   TBL_MEMBER_PHOTO AS C
+                ON          A.HOST_MEMBER_ID = C.MEMBER_ID
+                LEFT JOIN   TBL_MEETING_PARTICIPATION AS D
+                ON          A.MEETING_ID = D.MEETING_ID
+        WHERE   D.MEMBER_ID = #{ memberId }
+            AND A.STATUS = 'Open'
+        GROUP BY
+            A.MEETING_ID
+            , A.TITLE
+            , A.LOCATION_NAME
+            , B.PHOTO_PATH
+            , C.PHOTO_PATH
+            , A.STATUS
+            , A.SCHEDULED_DATE
+            , A.RECRUIT_MEMBER_NUMBER
+            , A.RECRUITMENT_NUMBER
+    </select>
+
+    <select id="findPreviewByMemberIdClosed" parameterType="int" resultMap="previewMeetingResultMap">
+        SELECT
+        A.MEETING_ID
+        , A.TITLE
+        , A.LOCATION_NAME
+        , B.PHOTO_PATH AS meeting_url
+        , C.PHOTO_PATH AS member_url
+        , A.STATUS
+        , A.SCHEDULED_DATE
+        , A.RECRUIT_MEMBER_NUMBER
+        , A.RECRUITMENT_NUMBER
+        FROM
+        TBL_MEETING AS A
+        LEFT JOIN   TBL_MEETING_PHOTO AS B
+        ON          A.MEETING_ID = B.MEETING_ID
+        LEFT JOIN   TBL_MEMBER_PHOTO AS C
+        ON          A.HOST_MEMBER_ID = C.MEMBER_ID
+        LEFT JOIN   TBL_MEETING_PARTICIPATION AS D
+        ON          A.MEETING_ID = D.MEETING_ID
+        WHERE   D.MEMBER_ID = #{ memberId }
+        AND A.STATUS = 'closed'
+        GROUP BY
+            A.MEETING_ID
+            , A.TITLE
+            , A.LOCATION_NAME
+            , B.PHOTO_PATH
+            , C.PHOTO_PATH
+            , A.STATUS
+            , A.SCHEDULED_DATE
+            , A.RECRUIT_MEMBER_NUMBER
+            , A.RECRUITMENT_NUMBER
+    </select>
+
+    <select id="findHostIdById" parameterType="int" resultType="int">
+        SELECT
+            HOST_MEMBER_ID
+        FROM
+            TBL_MEETING
+        WHERE
+            MEETING_ID = #{ meetingId }
+    </select>
+
+    <select id="findMeetingPhotoById" parameterType="int">
+        SELECT
+            PHOTO_PATH
+        FROM
+            TBL_MEETING_PHOTO
+        WHERE
+            MEETING_ID = #{ meetingId }
+    </select>
+
+    <insert id="participateGuest" parameterType="int">
+        INSERT INTO
+        TBL_MEETING_PARTICIPATION
+        (
+        ROLE
+        MEETING_ID,
+        MEMBER_ID,
+        )
+        VALUES
+        (
+        'Guest'
+        , #{ meetingId }
+        , #{ memberId }
+        )
+    </insert>
+
+    <insert id="participateHost" parameterType="int">
+        INSERT INTO
+        TBL_MEETING_PARTICIPATION
+        (
+            ROLE
+            MEETING_ID,
+            MEMBER_ID,
+        )
+        VALUES
+        (
+            'Host'
+            , #{ meetingId }
+            , #{ memberId }
+        )
+    </insert>
+
+    <select id="findPreviewById" parameterType="int" resultMap="previewMeetingResultMap">
+        SELECT
+            A.MEETING_ID
+            , A.TITLE
+            , A.LOCATION_NAME
+            , B.PHOTO_PATH AS meeting_url
+            , C.PHOTO_PATH AS member_url
+            , A.STATUS
+            , A.SCHEDULED_DATE
+            , A.RECRUIT_MEMBER_NUMBER
+            , A.RECRUITMENT_NUMBER
+        FROM
+                        TBL_MEETING AS A
+            LEFT JOIN   TBL_MEETING_PHOTO AS B
+            ON          A.MEETING_ID = B.MEETING_ID
+            LEFT JOIN   TBL_MEMBER_PHOTO AS C
+            ON          A.HOST_MEMBER_ID = C.MEMBER_ID
+            LEFT JOIN   TBL_MEETING_PARTICIPATION AS D
+            ON          A.MEETING_ID = D.MEETING_ID
+        WHERE           A.MEETING_ID = #{ meetingId }
+        GROUP BY
+                        A.MEETING_ID
+                        , A.TITLE
+                        , A.LOCATION_NAME
+                        , B.PHOTO_PATH
+                        , C.PHOTO_PATH
+                        , A.STATUS
+                        , A.SCHEDULED_DATE
+                        , A.RECRUIT_MEMBER_NUMBER
+                        , A.RECRUITMENT_NUMBER
     </select>
 
     <!-- test mapper start -->

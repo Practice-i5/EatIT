@@ -20,6 +20,9 @@
         <result property="createdDate" column="CREATED_DATE"/>
         <result property="withdrawalStatus" column="WITHDRAWAL_STATUS"/>
         <result property="reportedCount" column="REPORTED_COUNT"/>
+        <result property="age" column="age"/>
+        <result property="gender" column="gender"/>
+        <result property="isStoppedByAdmin" column="is_stopped_by_admin"/>
 
     </resultMap>
 
@@ -60,6 +63,7 @@
                 , REPORTED_COUNT
                 , GENDER
                 , AGE
+                , IS_STOPPED_BY_ADMIN
         from
                 TBL_MEMBER
         where
