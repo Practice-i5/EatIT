@@ -112,24 +112,29 @@ getSessionUser((id) => {
       socket.emit("typing", {
         user: sessionStorage.getItem("userId"),
         message: "is typing...",
+        roomId: roomId
       });
     }
   });
 
+
   socket.on("notifyTyping", (data) => {
-    typing.innerText = data.user + " " + data.message;
-    console.log(data.user + data.message);
+    if (data.roomId === roomId) {
+      typing.innerText = data.user + " " + data.message;
+    }
   });
 
   messageInput.addEventListener("input", () => {
     clearTimeout(typingTimeout);
     typingTimeout = setTimeout(() => {
-      socket.emit("stopTyping", "");
+      socket.emit("stopTyping", roomId);
     }, 2000);
   });
 
-  socket.on("notifyStopTyping", () => {
-    typing.innerText = "";
+  socket.on("notifyStopTyping", (data) => {
+    if (data.roomId === roomId) {
+      typing.innerText = "";
+    }
   });
 });
 
