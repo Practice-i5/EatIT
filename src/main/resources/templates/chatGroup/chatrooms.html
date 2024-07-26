@@ -20,6 +20,30 @@
 </div>
 <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
 <script th:inline="javascript">
+    const urlParams = new URLSearchParams(window.location.search);
+    const roomId = urlParams.get('roomId');
+
+    function fetchMessages() {
+        if (roomId) {
+            fetch(`http://localhost:3000/chats/rooms/${roomId}/messages`, {
+                headers: {
+                    "username": encodeURIComponent(sessionStorage.getItem("userId") || "익명")
+                }
+            })
+                .then(response => response.json())
+                .then(messages => {
+                    const messagesList = document.getElementById("messages");
+                    messagesList.innerHTML = '';
+                    messages.forEach(message => {
+                        const li = document.createElement("li");
+                        li.textContent = message.message; // 메시지 내용 추가
+                        messagesList.appendChild(li);
+                    });
+                })
+                .catch(error => console.error("Error fetching messages:", error));
+        }
+    }
+
     function fetchChatRooms() {
         fetch("http://localhost:3000/chats/rooms")
             .then(response => response.json())
@@ -42,13 +66,18 @@
     }
 
     function createChatRoom(roomName) {
+        const userId = sessionStorage.getItem("userId");
         fetch("http://localhost:3000/chats/createRoom", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${sessionStorage.getItem("token")}` // 토큰을 헤더에 포함
+                "Authorization": `Bearer ${sessionStorage.getItem("token")}`
             },
-            body: JSON.stringify({ roomName: roomName })
+            body: JSON.stringify({
+                roomName: roomName,
+                createdBy: userId,
+                members: [userId] // 방 생성자는 자동으로 멤버에 추가됨
+            })
         })
             .then(response => {
                 if (response.status === 401) {
@@ -66,13 +95,17 @@
             });
     }
 
+
     document.getElementById("createChatRoomButton").addEventListener("click", () => {
         const roomName = document.getElementById("chatRoomNameInput").value;
         createChatRoom(roomName);
     });
 
     // 페이지 로드 시 채팅방 목록 가져오기
-    document.addEventListener("DOMContentLoaded", fetchChatRooms);
+    document.addEventListener("DOMContentLoaded", () => {
+        fetchChatRooms();
+        fetchMessages();
+    });
 </script>
 </body>
 </html>

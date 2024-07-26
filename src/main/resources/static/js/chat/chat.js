@@ -3,11 +3,11 @@ var messages = document.getElementById("messages");
 
 // 사용자 ID를 세션에서 가져오는 함수
 function getSessionUser(callback) {
-  return fetch("http://localhost:8888/login/getSessionUser", { credentials: 'include' }) // 세션 정보를 포함하여 요청
+  return fetch("http://localhost:8888/login/getSessionUser", { credentials: 'include' })
       .then((response) => response.json())
       .then((data) => {
         if (data && data.nickname) {
-          sessionStorage.setItem("userId", data.nickname); // 세션 스토리지에 사용자 ID 저장
+          sessionStorage.setItem("userId", data.nickname);
           callback(data.nickname);
         } else {
           callback('익명');
@@ -21,7 +21,10 @@ function getSessionUser(callback) {
 
 // 클라이언트 초기화 시 사용자 정보를 가져옴
 let userId = null;
-let roomId = new URLSearchParams(window.location.search).get('roomId'); // roomId 가져오기
+const urlParams = new URLSearchParams(window.location.search);
+const roomId = urlParams.get('roomId'); // roomId 가져오기
+
+socket.emit("joinRoom", roomId); // 소켓 연결 후 방에 가입
 
 getSessionUser((id) => {
   userId = id;
@@ -53,9 +56,9 @@ getSessionUser((id) => {
 
     socket.emit("chat message", {
       message: $("#message").val(),
-      sender: userId || '익명', // userId가 없을 경우 '익명'으로 설정
+      sender: userId || '익명',
       createdAt: span.dataset.time,
-      roomId: roomId // roomId 추가
+      roomId: roomId
     });
 
     messages.appendChild(div);
@@ -69,32 +72,33 @@ getSessionUser((id) => {
   });
 
   socket.on("received", (data) => {
-    let div = document.createElement("div");
-    div.className = data.sender === userId ? "message-container right" : "message-container left"; // 메시지를 오른쪽 또는 왼쪽에 정렬
+    if (data.roomId === roomId) { // 받은 메시지가 현재 방의 메시지인지 확인
+      let div = document.createElement("div");
+      div.className = data.sender === userId ? "message-container right" : "message-container left";
 
-    let li = document.createElement("li");
-    li.className = data.sender === userId ? "message right appeared" : "message left appeared";
+      let li = document.createElement("li");
+      li.className = data.sender === userId ? "message right appeared" : "message left appeared";
 
-    let messageDiv = document.createElement("div");
-    messageDiv.className = "text_wrapper";
-    let messageText = document.createElement("div");
-    messageText.className = "text";
-    messageText.textContent = data.message;
+      let messageDiv = document.createElement("div");
+      messageDiv.className = "text_wrapper";
+      let messageText = document.createElement("div");
+      messageText.className = "text";
+      messageText.textContent = data.message;
 
-    let span = document.createElement("span");
-    span.className = "timestamp";
-    span.dataset.time = data.createdAt;
-    span.textContent = "by " + data.sender + ": " + formatTimeAgo(span.dataset.time);
+      let span = document.createElement("span");
+      span.className = "timestamp";
+      span.dataset.time = data.createdAt;
+      span.textContent = "by " + data.sender + ": " + formatTimeAgo(span.dataset.time);
 
-    messageDiv.appendChild(messageText);
-    messageDiv.appendChild(span);
-    li.appendChild(messageDiv);
-    div.appendChild(li);
+      messageDiv.appendChild(messageText);
+      messageDiv.appendChild(span);
+      li.appendChild(messageDiv);
+      div.appendChild(li);
 
-    messages.appendChild(div);
+      messages.appendChild(div);
 
-    // 스크롤을 가장 아래로 이동
-    div.scrollIntoView({ behavior: "smooth" });
+      div.scrollIntoView({ behavior: "smooth" });
+    }
   });
 
   // 타이핑 이벤트 설정
@@ -102,7 +106,6 @@ getSessionUser((id) => {
   let typing = document.getElementById("typing");
   let typingTimeout;
 
-  // isTyping 이벤트
   messageInput.addEventListener("input", () => {
     clearTimeout(typingTimeout);
     if (messageInput.value) {
@@ -118,12 +121,11 @@ getSessionUser((id) => {
     console.log(data.user + data.message);
   });
 
-  // 타이핑 멈춤 이벤트
   messageInput.addEventListener("input", () => {
     clearTimeout(typingTimeout);
     typingTimeout = setTimeout(() => {
       socket.emit("stopTyping", "");
-    }, 2000); // 2초 동안 입력이 없으면 stopTyping 이벤트 발생
+    }, 2000);
   });
 
   socket.on("notifyStopTyping", () => {
@@ -187,7 +189,6 @@ function formatTimeAgo(dateString) {
 
 // 주기적으로 메시지 시간을 업데이트하는 함수
 function updateTimestamps() {
-  console.log("Updating timestamps..."); // 콘솔 로그 추가
   const timestamps = document.getElementsByClassName('timestamp');
   Array.from(timestamps).forEach(span => {
     const time = span.dataset.time;
@@ -210,7 +211,6 @@ function createChatRoom(roomName) {
       .then(response => response.json())
       .then(data => {
         console.log("채팅방 생성됨:", data);
-        // 새로운 채팅방이 생성된 후 필요한 동작 수행
       })
       .catch((error) => {
         console.error("채팅방 생성 중 오류 발생:", error);
