@@ -40,7 +40,7 @@
                 <div class="profile-header">
                     <h3 class="modal-name">경력 사항 추가</h3>
                 </div>
-                <form class="profile-contents">
+                <form class="profile-contents" action="/my-page/tech-experience-modify">
                     <div>
                         <div>
                             <h5>회사명</h5>
@@ -48,7 +48,7 @@
                         </div>
                         <div>
                             <h5>재직 기간</h5>
-                            <input id="employ-start" type="month"/> ~ <input id="employ-end" type="month"/>
+                            <input id="employ-start" type="date"/> ~ <input id="employ-end" type="date"/>
                             <input id="is-employ" type="checkbox"/><label for="is-employ">재직중</label>
                         </div>
                         <div>
@@ -62,6 +62,8 @@
                 </form>
             </div>
         </div>
+
+
 
         <form class="form-content" action="/my-page/tech-profile-modify" method="post">
             <h2>기술 프로필 설정</h2>
@@ -135,6 +137,6 @@
             </div>
             <button class="btn-rw btn-submit" type="submit">제출</button>
         </form>
-        <script src="js/tech-profile-modal.js" th:src="@{js/my-page/tech-profile-modal.js}"></script>
+        <script src="js/tech-profile-modal.js" th:src="@{/js/my-page/tech-profile-modal.js}"></script>
     </div>
 </html>

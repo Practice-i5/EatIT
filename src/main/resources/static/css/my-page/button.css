@@ -44,6 +44,7 @@
 }
 
 .btn-choice-small {
+    display: inline-block;
     border:2px solid;
     border-radius: 20px;
     margin: 3px;
@@ -54,6 +55,16 @@
     text-align: center;
 
     /* border-style: none; */
+}
+
+button.btn-choice-small {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    /*margin: 0;*/
+    overflow: visible;
+    text-transform: none;
+    -webkit-appearance: button;
 }
 
 .btn-choice-mid {
@@ -80,4 +91,5 @@
     margin:auto;
     outline: solid;
 }
+
 

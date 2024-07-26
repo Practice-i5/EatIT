@@ -132,7 +132,7 @@
             <div class="profile-contents">
                 <div class="profile-header">
                     <div class="profile-pic">
-                        <img src="/img/flower_doguri.png" alt="Profile Picture">
+                        <img th:src="${meetingImage.hostImageURL}" alt="Profile Picture">
                     </div>
                     <div class="profile-info">
                         <h5 class="profile-name" th:text="${leaderId}">리더 닉네임</h5>
@@ -141,10 +141,10 @@
                 </div>
                 <div>
                     <div>
-                        <h5>경력</h5>
-                        <div th:each="career : ${careers}">
-                            <p th:text="${career}"></p>
-                        </div>
+<!--                        <h5>경력</h5>-->
+<!--                        <div th:each="career : ${careers}">-->
+<!--                            <p th:text="${career}"></p>-->
+<!--                        </div>-->
                     </div>
                     <div>
                         <h5>관심분야</h5>
@@ -152,10 +152,10 @@
                     </div>
                     <hr />
                     <div>
-                        <h5>평가</h5>
-                        <div th:each="eval : ${evaluates}">
-                            <p th:text="${eval}">평가</p>
-                        </div>
+<!--                        <h5>평가</h5>-->
+<!--                        <div th:each="eval : ${evaluates}">-->
+<!--                            <p th:text="${eval}">평가</p>-->
+<!--                        </div>-->
 
                     </div>
                 </div>
@@ -240,7 +240,7 @@
                         <div class="col-lg-6">
                             <div class="border rounded">
                                 <a href="#">
-                                    <img src="/img/test_image.png" class="img-fluid rounded" alt="Image">
+                                    <img th:src="${meetingImage}" class="img-fluid rounded" alt="meetingImage">
                                 </a>
                             </div>
                         </div>
@@ -462,26 +462,32 @@
                                 <hr />
                                 <div>
                                     <div class="padding-bottom-20px padding-left-20px">
-                                        <a id="open-img" value="button"><img src="/img/sakura_doguri.png"
+                                        <a id="open-img" value="button"><img src="${"
                                                 class="profile-image" /></a>
                                         <a id="open-search" value="button" th:text="${meetingDTO.hostMemberId}">리더 닉네임</a>
                                     </div>
                                     <div class="leader-data-details">
                                         <div class="padding-bottom-20px padding-left-20px">
-                                            <h5>경력</h5>
-                                            <div th:each="career : ${careers}">
-                                                <p th:text="${career}"></p>
-                                            </div>
+<!--                                            <h5>경력</h5>-->
+<!--                                            <div th:each="career : ${careers}">-->
+<!--                                                <p th:text="${career}"></p>-->
+<!--                                            </div>-->
                                         </div>
                                         <div class="padding-left-20px">
                                             <h5>분야</h5>
                                             <div>서버개발</div>
                                         </div>
                                         <div class="leader-rate">
-                                            <p>81</p>
+<!--                                            <p>81</p>-->
                                         </div>
                                         <div class="align-center padding-bottom-20px">
-                                            <button class="active-red normal-btn" type="submit" th:text="${meetingDTO.participationMethod}">바로신청</button>
+                                            <form th:action="@{/detail/detail}" method="post">
+                                                <label>
+                                                    <input name="meetingId" th:value="${meetingDTO.meetingId}" type="hidden">
+                                                    <input name="memberId" th:value="${userInfo.member_id}" type="hidden">
+                                                </label>
+                                                <button class="active-red normal-btn" type="submit" th:text="${meetingDTO.participationMethod}">바로신청</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

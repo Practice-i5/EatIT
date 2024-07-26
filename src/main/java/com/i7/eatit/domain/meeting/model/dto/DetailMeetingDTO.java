@@ -3,7 +3,7 @@ package com.i7.eatit.domain.meeting.model.dto;
 import java.sql.Time;
 import java.sql.Timestamp;
 
-public class MeetingDTO {
+public class DetailMeetingDTO {
 
     private int meetingId;          // 모임 id
     private String title;           // 모임 제목
@@ -25,10 +25,11 @@ public class MeetingDTO {
     private Timestamp endDate;          // 종료 일시
     private int hostMemberId;           // 호스트 멤버 id
     private int lastId;                 // 자동 생성된 meeting_id
+    private String meetingImageURL;
 
-    public MeetingDTO() {}
+    public DetailMeetingDTO() {}
 
-    public MeetingDTO(int meetingId, String title, String locationName, double locationLatitude, double locationLongitude, String introduction, String paymentMethod, String meetingType, Timestamp scheduledDate, Time exitRestrictionTime, int recruitMemberNumber, int recruitmentNumber, String gender, String eligibleAge, Timestamp createdDate, String participationMethod, String status, Timestamp endDate, int hostMemberId, int lastId) {
+    public DetailMeetingDTO(int meetingId, String title, String locationName, double locationLatitude, double locationLongitude, String introduction, String paymentMethod, String meetingType, Timestamp scheduledDate, Time exitRestrictionTime, int recruitMemberNumber, int recruitmentNumber, String gender, String eligibleAge, Timestamp createdDate, String participationMethod, String status, Timestamp endDate, int hostMemberId, int lastId, String meetingImageURL) {
         this.meetingId = meetingId;
         this.title = title;
         this.locationName = locationName;
@@ -49,6 +50,7 @@ public class MeetingDTO {
         this.endDate = endDate;
         this.hostMemberId = hostMemberId;
         this.lastId = lastId;
+        this.meetingImageURL = meetingImageURL;
     }
 
     public int getMeetingId() {
@@ -211,9 +213,17 @@ public class MeetingDTO {
         this.lastId = lastId;
     }
 
+    public String getMeetingImageURL() {
+        return meetingImageURL;
+    }
+
+    public void setMeetingImageURL(String meetingImageURL) {
+        this.meetingImageURL = meetingImageURL;
+    }
+
     @Override
     public String toString() {
-        return "MeetingDTO{" +
+        return "DetailMeetingDTO{" +
                 "meetingId=" + meetingId +
                 ", title='" + title + '\'' +
                 ", locationName='" + locationName + '\'' +
@@ -234,6 +244,7 @@ public class MeetingDTO {
                 ", endDate=" + endDate +
                 ", hostMemberId=" + hostMemberId +
                 ", lastId=" + lastId +
+                ", meetingImageURL='" + meetingImageURL + '\'' +
                 '}';
     }
 }

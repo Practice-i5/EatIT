@@ -7,7 +7,7 @@
     <meta content="" name="keywords" />
     <meta content="" name="description" />
 
-    <!-- Google Web Fonts -->
+    <!-- 구글 웹 폰트 연결 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,7 +15,7 @@
             rel="stylesheet"
     />
 
-    <!-- Icon Font Stylesheet -->
+    <!-- 아이콘 폰트 스타일시트 연결 -->
     <link
             rel="stylesheet"
             href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
@@ -25,31 +25,29 @@
             rel="stylesheet"
     />
 
-    <!-- Libraries Stylesheet -->
+    <!-- 외부 라이브러리 스타일시트 연결 -->
     <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
 
-    <!-- Customized Bootstrap Stylesheet -->
+    <!-- 커스터마이즈된 부트스트랩 스타일시트 -->
     <link href="/css/home.min.css" rel="stylesheet" />
 
-    <!-- Template Stylesheet -->
+    <!-- 템플릿 스타일시트 -->
     <link href="/css/home.css" rel="stylesheet" />
 </head>
 <body>
-<!-- 채팅 버튼 시작 -->
-<button class="chat-button" onclick="location.href='chat.html'">
-    <i class="fas fa-comments fa-2x"></i>
-</button>
-<!-- 채팅 버튼 끝 -->
 
 <!-- 헤더 시작 -->
 <div class="container-fluid fixed-top">
     <div class="container px-0">
         <nav class="navbar navbar-light bg-white navbar-expand-xl">
+            <!-- 로고 및 사이트 이름 -->
             <a th:href="@{/home}" class="navbar-brand">
                 <img src="/img/logo.png" alt="Eat-IT Logo" />
                 <h1 class="text-primary display-6">Eat-IT</h1>
             </a>
+
+            <!-- 모바일용 네비게이션 토글 버튼 -->
             <button
                     class="navbar-toggler py-2 px-3"
                     type="button"
@@ -58,34 +56,40 @@
             >
                 <span class="fa fa-bars text-primary"></span>
             </button>
+            <!-- 네비게이션 메뉴 -->
             <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                 <div class="navbar-nav mx-auto">
                     <a th:href="@{/home}" class="nav-item nav-link active">홈</a>
-                    <a th:href="@{/enroll-meeting}" class="nav-item nav-link"
-                    >모임등록</a
-                    >
-                    <a th:href="@{/search}" class="nav-item nav-link">모임찾기</a>
-                    <a th:href="@{/participatingList}" class="nav-item nav-link"
-                    >모임목록</a
-                    >
+                    <a th:href="@{/enroll-meeting}" class="nav-item nav-link">모임등록</a>
+                    <a th:href="@{/search/list}" class="nav-item nav-link">모임찾기</a>
+                    <!-- 모임목록은 로그인을 해야 들어갈 수 있기에 404 에러가 뜸-->
+                    <a th:href="@{/meetingList/participatingList}" class="nav-item nav-link">모임목록</a>
+
                 </div>
-                <!-- 알림, 로그인, 회원가입 버튼 추가 -->
-                <a href="#" class="btn-notification my-auto me-4">
-                    <i class="fas fa-bell fa-2x"></i>
-                    <span
-                            class="position-absolute bg-danger rounded-circle"
-                            style="top: 0; right: 0; width: 10px; height: 10px"
-                    ></span>
+                <!-- 1:1 채팅 및 그룹 채팅 버튼 -->
+                <a th:href="@{/chat}" class="btn-chat my-auto">
+                    <i class="fas fa-comments"></i>
+                    <span class="btn-text">1:1채팅</span>
                 </a>
-                <button class="btn btn-danger rounded-pill me-2" id="loginButton">
+                <a th:href="@{/groupchat}" class="btn-chat my-auto">
+                    <i class="fas fa-users"></i>
+                    <span class="btn-text">그룹채팅</span>
+                </a>
+
+                <!-- 알림, 로그인, 회원가입 버튼 -->
+
+                <a href="#" th:href="@{/alarm}" class="btn-notification my-auto me-4">
+                    <i class="fas fa-bell fa-2x"></i>
+                    <span class="notification-dot"></span>
+                </a>
+                <a class="btn btn-danger rounded-pill me-2" th:href="@{/login/loginMain}" id="loginButton">
                     로그인
-                </button>
-                <button
-                        class="btn btn-outline-danger rounded-pill"
-                        id="signupButton"
-                >
+                </a>
+                <a class="btn btn-outline-danger rounded-pill" th:href="@{/login/join}" id="signupButton">
                     회원가입
-                </button>
+                </a>
+
+
             </div>
         </nav>
     </div>
@@ -100,29 +104,25 @@
                 <h4 class="mb-3 text-secondary">소소한 it 소모임</h4>
                 <h5 class="mb-5 display-7 text-primary">관심 개발 분야 🔍</h5>
                 <div class="position-relative mx-auto">
-                    <input
-                            class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill"
-                            type="number"
-                            placeholder="Search"
-                    />
                     <form id="searchForm" method="get" th:action="@{/search}">
                         <button
                                 type="submit"
-                                class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100"
+                                class="btn btn-primary border-2 border-secondary py-3 px-4 rounded-pill text-white h-200"
                                 style="top: 0; right: 25%"
-                        >
-                            검색
+                        >검색
                         </button>
                     </form>
                 </div>
             </div>
             <div class="col-md-12 col-lg-5">
+                <!-- 이미지 슬라이더 -->
                 <div
                         id="carouselId"
                         class="carousel slide position-relative"
                         data-bs-ride="carousel"
                 >
                     <div class="carousel-inner" role="listbox">
+                        <!-- 첫 번째 슬라이드 -->
                         <div class="carousel-item active rounded">
                             <img
                                     src="https://cdn.pixabay.com/photo/2017/01/26/02/06/platter-2009590_640.jpg"
@@ -130,6 +130,7 @@
                                     alt="First slide"
                             />
                         </div>
+                        <!-- 두 번째 슬라이드 -->
                         <div class="carousel-item rounded">
                             <img
                                     src="/img/main1.png"
@@ -138,16 +139,17 @@
                             />
                         </div>
                     </div>
+                    <!-- 슬라이더 컨트롤 버튼 -->
                     <button
                             class="carousel-control-prev"
                             type="button"
                             data-bs-target="#carouselId"
                             data-bs-slide="prev"
                     >
-                <span
-                        class="carousel-control-prev-icon"
-                        aria-hidden="true"
-                ></span>
+                        <span
+                                class="carousel-control-prev-icon"
+                                aria-hidden="true"
+                        ></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
                     <button
@@ -156,10 +158,10 @@
                             data-bs-target="#carouselId"
                             data-bs-slide="next"
                     >
-                <span
-                        class="carousel-control-next-icon"
-                        aria-hidden="true"
-                ></span>
+                        <span
+                                class="carousel-control-next-icon"
+                                aria-hidden="true"
+                        ></span>
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
@@ -178,6 +180,7 @@
                     <h2>관심 개발 분야</h2>
                 </div>
                 <div class="col-lg-8 text-end">
+                    <!-- 개발 분야 탭 목록 -->
                     <ul class="nav nav-pills d-inline-flex text-center mb-5">
                         <li class="nav-item">
                             <a
@@ -185,9 +188,7 @@
                                     data-bs-toggle="pill"
                                     href="#tab-1"
                             >
-                    <span class="text-dark" style="width: 130px"
-                    >프론트엔드</span
-                    >
+                                <span class="text-dark" style="width: 130px">프론트엔드</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -214,9 +215,7 @@
                                     data-bs-toggle="pill"
                                     href="#tab-4"
                             >
-                    <span class="text-dark" style="width: 130px"
-                    >게임 클라이언트</span
-                    >
+                                <span class="text-dark" style="width: 130px">게임 클라이언트</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -252,9 +251,7 @@
                                     data-bs-toggle="pill"
                                     href="#tab-8"
                             >
-                    <span class="text-dark" style="width: 130px"
-                    >데이터엔지니어링</span
-                    >
+                                <span class="text-dark" style="width: 130px">데이터엔지니어링</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -263,9 +260,7 @@
                                     data-bs-toggle="pill"
                                     href="#tab-9"
                             >
-                    <span class="text-dark" style="width: 130px"
-                    >게임 서버</span
-                    >
+                                <span class="text-dark" style="width: 130px">게임 서버</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -299,10 +294,12 @@
                 </div>
             </div>
             <div class="tab-content">
+                <!-- 첫 번째 탭 내용 -->
                 <div id="tab-1" class="tab-pane fade show p-0 active">
                     <div class="row g-4">
                         <div class="col-lg-12">
                             <div class="row g-4">
+                                <!-- 첫 번째 개발 모임 -->
                                 <div class="col-md-6 col-lg-4 col-xl-3">
                                     <div class="rounded position-relative fruite-item">
                                         <div class="fruite-img">
@@ -351,6 +348,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!-- 두 번째 개발 모임 -->
                                 <div class="col-md-6 col-lg-4 col-xl-3">
                                     <div class="rounded position-relative fruite-item">
                                         <div class="fruite-img">
@@ -399,6 +397,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!-- 세 번째 개발 모임 -->
                                 <div class="col-md-6 col-lg-4 col-xl-3">
                                     <div class="rounded position-relative fruite-item">
                                         <div class="fruite-img">
@@ -447,6 +446,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!-- 네 번째 개발 모임 -->
                                 <div class="col-md-6 col-lg-4 col-xl-3">
                                     <div class="rounded position-relative fruite-item">
                                         <div class="fruite-img">
@@ -495,6 +495,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!-- 다섯 번째 개발 모임 -->
                                 <div class="col-md-6 col-lg-4 col-xl-3">
                                     <div class="rounded position-relative fruite-item">
                                         <div class="fruite-img">
@@ -543,6 +544,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!-- 여섯 번째 개발 모임 -->
                                 <div class="col-md-6 col-lg-4 col-xl-3">
                                     <div class="rounded position-relative fruite-item">
                                         <div class="fruite-img">
@@ -676,11 +678,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-            <span class="text-light"
-            ><a href="#"
-            ><i class="fas fa-copyright text-light me-2"></i>Eat IT</a
-            >, All right reserved.</span
-            >
+                <span class="text-light"
+                ><a href="#"
+                ><i class="fas fa-copyright text-light me-2"></i>Eat IT</a
+                >, All right reserved.</span
+                >
             </div>
             <div class="col-md-6 my-auto text-center text-md-end text-white">
                 Designed By
