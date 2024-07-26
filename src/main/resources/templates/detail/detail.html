@@ -30,11 +30,12 @@
     <link th:href="@{/css/template.css}" rel="stylesheet">
     <link th:href="@{/css/detail.css}" rel="stylesheet">
     <link th:thrf="@{/css/recruit.css}" rel="stylesheet">
+    <link th:href="@{/css/home.css}" rel="stylesheet">
 
     <style>
         #recruit-modal {
-            /*position: fixed;*/
-            position: absolute;
+            position: fixed;
+            /*position: absolute;*/
             display: none ;
             top: 0;
             left: 0;
@@ -172,7 +173,7 @@
                 <!-- 네비게이션 메뉴 -->
                 <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                     <div class="navbar-nav mx-auto">
-                        <a th:href="@{/home/home}" class="nav-item nav-link active">홈</a>
+                        <a th:href="@{/home}" class="nav-item nav-link active">홈</a>
                         <a th:href="@{/enroll-meeting/enroll-meeting}" class="nav-item nav-link">모임등록</a>
                         <a th:href="@{/search/list}" class="nav-item nav-link">모임찾기</a>
                         <!-- 모임목록은 로그인을 해야 들어갈 수 있기에 404 에러가 뜸-->
@@ -212,7 +213,7 @@
     <div id="recruit-modal">
         <div id="recruit-template">
             <button id="recruit-close">&times;</button>
-            <form th:action="@{detail/detail.html}" method="POST">
+            <form th:action="@{/detail/detail.html}" method="POST">
                 <div class="recruit-header">
                     <h3 class="modal-name">모임 신청하기</h3>
                 </div>
@@ -224,32 +225,22 @@
                     </div>
                     <div>
                         <div class="form-group">
-                            <label for="group-detail">모임을 소개해주세요</label>
-                            <input type="text" id="group-detail" name="introduction" style="width:100px; height: 100px;" maxlength="100" placeholder="모집인원, 메인 메뉴 등 모임에 대한 설정포함"/>
-                        </div>
-                        <div>
-                            <h5>관심분야</h5>
-                            <p>백엔드</p>
-                        </div>
-                        <hr/>
-                        <div>
-                            <!--                        <h5>평가</h5>-->
-                            <!--                        <div th:each="eval : ${evaluates}">-->
-                            <!--                            <p th:text="${eval}">평가</p>-->
-                            <!--                        </div>-->
-
+                            <label for="group-detail">간단하게 소개해주세요</label>
+                            <input type="text" id="group-detail" name="introduction" style="width:80%; height: 50%; overflow: auto;" maxlength="100" placeholder="100글자 이내로 작성해주세요."/>
                         </div>
                     </div>
                 </div>
+                <div class="align-center">
+                    <button type="submit" class="follow-btn">모임신청</button>
+                </div>
             </form>
-            <button type="submit" class="follow-btn">모임신청</button>
         </div>
     </div>
     <!-- <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
     <div id="profile-modal">
         <div id="profile">
             <button id="profile-close">&times;</button>
-            <form th:action="@{detail/detail.html}" method="POST">
+            <form th:action="@{/detail/detail.html}" method="POST">
                 <div class="profile-header">
                     <h3 class="modal-name">프로필 상세 보기</h3>
                 </div>
@@ -286,9 +277,11 @@
                 </div>
     <!--            <div style="text-align: center"><a th:text="${temp}">매너온도</a></div>-->
 <!--                <div id="action-buttons">-->
-    <!--                <button class="follow-btn">팔로우</button>-->
+                <div id="action-buttons">
+                    <button class="follow-btn">팔로우</button>
                     <input name="isDecHuman" th:value="true" type="hidden">
                     <button type="submit" class="report-button report-btn">신고하기</button>
+                </div>
 <!--                    <span><input type="button" onclick='toggleReportBtns()'/></span>-->
 <!--                </div>-->
             </form>
@@ -319,8 +312,8 @@
                     <div class="row g-4">
                         <div class="col-lg-6">
                             <div class="border rounded">
-                                <a href="#">
-                                    <img th:src="${meetingImage}" class="img-fluid rounded" alt="meetingImage">
+                                <a>
+                                    <img th:src="${meetingImage.meetingImageURL}" class="img-fluid rounded" alt="meetingImage">
                                 </a>
                             </div>
                         </div>
@@ -343,6 +336,7 @@
                                     </div>
                                 </div>
                             </span>
+                        </div>
                         <div>
                             <h4 class="mb-5 fw-bold">소개글</h4>
                             <p th:text="${meetingDTO.introduction}"></p>
@@ -387,27 +381,26 @@
                                         <div class="leader-rate">
 <!--                                            <p>81</p>-->
                                         </div>
-                                        <div class="align-center padding-bottom-20px">
+                                        <div class="padding-bottom-20px">
                                             <!-- HTML 폼 -->
-                                            <form th:action="@{/detail/detail}" method="post" id="recruit-now">
-                                                <label>
-                                                    <input name="meetingId" th:value="${meetingDTO.meetingId}" type="hidden">
-                                                    <input name="isParticipateFree" th:value="true" type="hidden">
-                                                </label>
-                                                <button class="active-red normal-btn" type="submit" th:text="${meetingDTO.participationMethod}">바로등록</button>
-                                            </form>
-
-                                            <!-- 버튼을 감싸는 div -->
-                                            <form th:action="@{/detail/detail}" method="post">
-                                                <div id="not-now">
+                                            <div class="align-center">
+                                                <form th:action="@{/detail/detail}" method="post" id="recruit-now">
                                                     <label>
                                                         <input name="meetingId" th:value="${meetingDTO.meetingId}" type="hidden">
-                                                        <input name="isParticipateAcc" th:value="true" type="hidden">
+                                                        <input name="isParticipateFree" th:value="true" type="hidden">
                                                     </label>
-                                                    <button type="submit" class="active-red normal-btn" id="open-rct" th:text="${meetingDTO.participationMethod}">모임신청</button>
-                                                </div>
-                                            </form>
-
+                                                    <button class="active-red normal-btn" style="justify-content: center;" type="submit" th:text="${meetingDTO.participationMethod}">바로등록</button>
+                                                </form>
+                                            </div>
+                                            <!-- 버튼을 감싸는 div -->
+                                            <div id="not-now" class="align-center">
+                                                <label>
+                                                    <input name="meetingId" th:value="${meetingDTO.meetingId}" type="hidden">
+                                                    <input name="isParticipateAcc" th:value="true" type="hidden">
+                                                </label>
+                                                <button type="submit" style="justify-content: center;" class="active-red normal-btn" id="open-rct" th:text="${meetingDTO.participationMethod}">모임신청</button>
+                                            </div>
+                                        </div>
                                             <!-- JavaScript 부분 -->
                                             <script th:inline="javascript">
                                                 // HTML 요소 선택
@@ -433,10 +426,9 @@
                 </div>
             </div>
             <h4 class="fw-bold mb-0">참여자</h4>
-            <div class="participants-container">
-                <div class="owl-carousel vegetable-carousel justify-content-center">
-                    <div class="border border-primary rounded position-relative participants-container-item">
-                        <div class="contents-container">
+                <div class="owl-carousel vegetable-carousel justify-content-center participants-container">
+                    <div class=" position-relative participants-container-item">
+                        <div class="contents-container border border-primary rounded">
                             <img src="/img/honeybee_doguri.png" class="contents-container-item" alt="dev1">
                             <div class="contents-container-item">
                                 <p class="fw-bold align-center">꿀벌 도**</p>
@@ -444,8 +436,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="border border-primary rounded position-relative participants-container-item">
-                        <div class="contents-container">
+                    <div class="position-relative participants-container-item">
+                        <div class="contents-container border border-primary rounded">
                             <img src="/img/sakura_doguri.png" alt="dev2" class="contents-container-item">
                             <div class="contents-container-item">
                                 <p class="fw-bold align-center">벛꽃 도**</p>
@@ -453,8 +445,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="border border-primary rounded position-relative participants-container-item">
-                        <div class="contents-container">
+                    <div class="position-relative participants-container-item">
+                        <div class="contents-container border border-primary rounded">
                             <img src="/img/flower_doguri.png" alt="dev3" class="contents-container-item">
                             <div class="contents-container-item">
                                 <p class="fw-bold align-center">넥카라 도**</p>
@@ -463,7 +455,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
     <!-- Single Product End -->

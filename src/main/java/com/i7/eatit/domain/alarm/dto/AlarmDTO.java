@@ -90,4 +90,18 @@ public class AlarmDTO {
     public void setMeetingId(int meetingId) {
         this.meetingId = meetingId;
     }
+
+    @Override
+    public String toString() {
+        return "AlarmDTO{" +
+                "alarmId=" + alarmId +
+                ", alarmDetail='" + alarmDetail + '\'' +
+                ", alarmTime=" + alarmTime +
+                ", memberId=" + memberId +
+                ", participationId=" + participationId +
+                ", alarmStatus='" + alarmStatus + '\'' +
+                ", alarmChecked=" + alarmChecked +
+                ", meetingId=" + meetingId +
+                '}';
+    }
 }

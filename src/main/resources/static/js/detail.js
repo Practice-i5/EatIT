@@ -28,19 +28,19 @@ rctCloseBtn.addEventListener("click", () => {
 });
 
 
-function toggleReportBtns() {
-
-    const btns = document.getElementsByClassName("report-button");
-
-    if (btns[0].style.display !== "none") {
-        btns[0].style.display = "none"
-    } else {
-        btns[0].style.display = "flex"
-    }
-
-    if (btns[1].style.display !== "none") {
-        btns[1].style.display = "none"
-    } else {
-        btns[1].style.display = "flex"
-    }
-}
+// function toggleReportBtns() {
+//
+//     const btns = document.getElementsByClassName("report-button");
+//
+//     if (btns[0].style.display !== "none") {
+//         btns[0].style.display = "none"
+//     } else {
+//         btns[0].style.display = "flex"
+//     }
+//
+//     if (btns[1].style.display !== "none") {
+//         btns[1].style.display = "none"
+//     } else {
+//         btns[1].style.display = "flex"
+//     }
+// }

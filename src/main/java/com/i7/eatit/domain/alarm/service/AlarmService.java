@@ -4,6 +4,7 @@ import com.i7.eatit.domain.alarm.dao.AlarmMapper;
 import com.i7.eatit.domain.alarm.dto.AlarmDTO;
 import com.i7.eatit.domain.alarm.dto.AlarmDetailDTO;
 import com.i7.eatit.domain.alarm.dto.AlarmSimpleDTO;
+import com.i7.eatit.domain.alarm.dto.AlarmUpdateDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,13 +19,13 @@ public class AlarmService {
         this.alarmMapper = alarmMapper;
     }
 
-    public List<AlarmDTO> findAllAlarm(int hostMemberId) {
-       return alarmMapper.findAllAlarm(hostMemberId);
+    public List<AlarmDTO> findAllAlarm(int memberId) {
+       return alarmMapper.findAllAlarm(memberId);
     }
 
-    public boolean checkNewAlarm(int hostMemberId){
+    public boolean checkNewAlarm(int memberId){
 
-        List<AlarmDTO> alarmList = this.findAllAlarm(hostMemberId);
+        List<AlarmDTO> alarmList = this.findAllAlarm(memberId);
 
         int alarmCount = 0;
         for (AlarmDTO alarmDTO : alarmList) {
@@ -37,6 +38,15 @@ public class AlarmService {
         // 하나라도 있으면 true
         return alarmCount > 0;
 //        return false;
+    }
+
+
+    public AlarmDTO findOneAlarm(int alarmId) {
+        return alarmMapper.findOneAlarm(alarmId);
+    }
+
+    public AlarmDTO findOneAlarm(int memberId, int meetingId) {
+        return alarmMapper.findOneAlarmDuo(memberId, meetingId);
     }
 
     private int getMeetingId(int ParticipationId){
@@ -60,5 +70,17 @@ public class AlarmService {
 
     public List<AlarmSimpleDTO> findSimpleAll(int hostMemberId) {
         return alarmMapper.findSimpleAll(hostMemberId);
+    }
+
+    public void acceptRecruit(int alarmId) {
+        alarmMapper.acceptRecruit(alarmId);
+    }
+
+    public void addParticipant(AlarmUpdateDTO alarmUpdateDTO) {
+        alarmMapper.addParticipant(alarmUpdateDTO);
+    }
+
+    public void refuseRecruit(int alarmId) {
+        alarmMapper.refuseRecruit(alarmId);
     }
 }

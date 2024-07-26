@@ -43,6 +43,8 @@ public class DetailController {
 
         String leaderId = "임시 닉네임";
 
+        System.out.println("==================here================\n" + meetingId + "\n=================end==================");
+        System.out.println("==================here================\n" + meetingService.findPreviewById(meetingId) + "\n=================end==================");
         int temp = 81;
 
         List<String> careers = new ArrayList<>();
@@ -73,7 +75,7 @@ public class DetailController {
         model.addAttribute("interests", meetingService.findInterestsById(detailDTO.getMeetingId()));
         model.addAttribute("userInfo", userInfoDTO);
 //        model.addAttribute("joinMembers", joinMemberService.getUserProfileInfo(detailDTO.getMeetingId()));
-        model.addAttribute("meetingImage", meetingService.findMeetingPhotoById(detailDTO.getMeetingId()));
+        model.addAttribute("meetingImage", meetingService.findPreviewById(detailDTO.getMeetingId()));
 
         //        List<MeetingDTO> meetingList = meetingService.findAllMeeting();
         if (detailDTO.isDecHuman()) {

@@ -229,7 +229,6 @@
                             <div class="row g-4">
                                 <div class="col-lg-12">
                                     <div class="row g-4">
-
                                         <!-- 타임리프를 사용하여 저장된 데이터만큼 반복 -->
                                         <div th:each="meeting : ${previewMeetingList}" class="col-md-6 col-lg-4 col-xl-3">
                                             <a th:href="@{|/detail/detail?meetingId=${meeting.meetingId}|}"
