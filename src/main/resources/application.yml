@@ -1,0 +1,21 @@
+server:
+  port: 8888
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/eatitdb
+    username: ohgiraffers
+    password: ohgiraffers
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+mybatis:
+  mapper-locations: mappers/**/*.xml
+
+app:
+  firebase-configuration-file: ./serviceAccount.json
+  firebase-bucket: eatit-70ba1.appspot.com
