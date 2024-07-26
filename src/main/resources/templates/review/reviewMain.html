@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <!-- 문서의 문자 인코딩 설정 -->
     <meta charset="UTF-8">
+    <!-- 뷰포트 설정: 모바일 장치에 최적화 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 문서의 제목 설정 -->
     <title>평가 폼</title>
+    <!-- Tailwind CSS를 CDN을 통해 가져오기 -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts를 통해 Noto Sans KR 폰트 가져오기 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <!-- 로컬 CSS 파일 연결 (Thymeleaf 사용 시 경로 매핑) -->
     <link rel="stylesheet" href="/static/css/review.css" th:href="@{/css/review.css}">
-
-    <style>
-        /* 추가적인 CSS는 여기에 작성할 수 있습니다. */
-    </style>
 </head>
+
 <body class="bg-gray-100 p-4">
 <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
 
@@ -24,36 +27,48 @@
     <!-- 모임장 평가 항목 -->
     <div class="mb-6">
         <!-- 모임장(호스트) 이름 받아오기 -->
-        <h3 class="text-lg font-semibold mb-2" th:text="${meeting.host.name} + '님은 어땠나요?'">모임장은 어땠나요?</h3>
+        <h3 class="text-lg font-semibold mb-2" th:text="${meeting.host} + '님은 어땠나요?'">모임장은 어땠나요?</h3>
+        <!-- 평가 버튼 -->
         <div class="flex space-x-2 mb-4">
             <button class="bg-blue-500 text-white px-4 py-2 rounded openModalBtn">평가하기</button>
+            <!-- 평가 외 신고 및 차단 기능 (현재 주석 처리됨) -->
+            <!--
             <button class="bg-red-500 text-white px-4 py-2 rounded">신고하기</button>
             <button class="bg-black text-white px-4 py-2 rounded">차단하기</button>
+            -->
         </div>
         <div class="manager-feedback text-gray-700">
+            <!-- 선택한 피드백 항목 표시 (초기에는 숨김 처리) -->
             <div class="selected-feedback hidden mb-2">
                 <strong>선택한 항목:</strong>
                 <ul class="selected-items"></ul>
             </div>
+            <!-- 모달에서 제공된 피드백 항목 표시 -->
             <div class="modal-feedback"></div>
         </div>
     </div>
 
-    <!-- 모임원 평가 항목 반복 -->
-    <div th:each="guest, iterStat : ${meeting.guests}">
+    <!-- 모임원 평가 항목 반복 (Thymeleaf를 통해 동적으로 생성) -->
+    <div th:each="guest, iterStat : ${meeting.guest}">
         <div class="mb-6">
             <!-- 모임원(게스트) 이름 받아오기 -->
             <h3 class="text-lg font-semibold mb-2" th:text="${guest.name} + '님은 어땠나요?'">모임원은 어땠나요?</h3>
+            <!-- 평가 버튼 -->
             <div class="flex space-x-2 mb-4">
                 <button class="bg-blue-500 text-white px-4 py-2 rounded openModalBtn">평가하기</button>
+                <!-- 평가 외 신고 및 차단 기능 (현재 주석 처리됨) -->
+                <!--
                 <button class="bg-red-500 text-white px-4 py-2 rounded">신고하기</button>
                 <button class="bg-black text-white px-4 py-2 rounded">차단하기</button>
+                -->
             </div>
             <div class="manager-feedback text-gray-700">
+                <!-- 선택한 피드백 항목 표시 (초기에는 숨김 처리) -->
                 <div class="selected-feedback hidden mb-2">
                     <strong>선택한 항목:</strong>
                     <ul class="selected-items"></ul>
                 </div>
+                <!-- 모달에서 제공된 피드백 항목 표시 -->
                 <div class="modal-feedback"></div>
             </div>
         </div>
@@ -61,40 +76,49 @@
 
     <!-- 저장 버튼 -->
     <div class="text-center">
-        <button class="bg-red-500 text-white px-6 py-2 rounded" onclick="location.href='/'">확인</button> <!-- 메인/상세 페이지로 돌아가기 -->
+        <button class="bg-red-500 text-white px-6 py-2 rounded" onclick="location.href='/'">확인</button>
+        <!-- 메인/상세 페이지로 돌아가기 -->
     </div>
 </div>
 
-<!-- 모달 시작 -->
+<!-- 모달 시작 (Thymeleaf를 통해 동적으로 생성) -->
 <div th:each="guest, iterStat : ${meeting.guests}">
     <div th:attr="id='myModal' + ${iterStat.index}" class="modal">
         <div class="modal-content">
+
             <div>
                 <div class="container">
+                    <!-- 프로필 사진과 이름 표시 -->
                     <div class="text-center mb-6">
-                        <img src="/static/img/profile.png" th:src="@{/img/profile.png}" alt="프로필 사진" class="profile-picture">
+                        <img src="/static/img/profile.png" th:src="@{/img/profile.png}" alt="프로필 사진"
+                             class="profile-picture">
                         <p class="profile-name" th:text="${guest.name}">이름</p>
                     </div>
+                    <!-- 피드백 제출 폼 -->
                     <form action="/review/regist" method="post">
                         <div class="checkbox-grid">
+                            <!-- 체크박스 항목 (반복적으로 추가 가능) -->
                             <label class="checkbox-label">
                                 <input type="checkbox" class="form-checkbox" value="친절해요">
                                 <span class="ml-2">친절해요</span>
                             </label>
                             <!-- 나머지 체크박스 항목들도 동일하게 반복해서 추가 -->
                         </div>
+                        <!-- 제출 버튼 -->
                         <div class="text-center">
-                            <button class="bg-blue-500 text-white px-6 py-2 rounded submit-btn" type="submit">제출</button>
+                            <button class="bg-blue-500 text-white px-6 py-2 rounded submit-btn" type="submit">제출
+                            </button>
                         </div>
                     </form>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
 <!-- 모달 끝 -->
 
-<!-- JS 파일 연결 -->
+<!-- JS 파일 연결 (Thymeleaf 사용 시 경로 매핑) -->
 <script src="/static/js/review.js" th:src="@{/js/review.js}"></script>
 
 </body>
