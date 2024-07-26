@@ -113,9 +113,10 @@
 
     <div class="container">
         <tr th:each="alarm : ${alarmList}">
-            <script>getAlarmDeatil([[${alarm.getAlarmId()}]])</script>
-            <div type="button" class="alarm highlight " data-bs-toggle="modal" data-bs-target="#alarmDetailModal">
-                <div style="display:none;" th:text="${alarm.getAlarmId()}" />
+<!--            <script>getAlarmDeatil([[${alarm.getAlarmId()}]])</script>-->
+            <div type="button" class="alarm highlight " data-bs-toggle="modal"
+                 data-bs-target="#alarmDetailModal" th:onclick="getAlarmDeatil([[${alarm.getAlarmId()}]])">
+<!--                <div style="display:none;" th:text="${alarm.getAlarmId()}" />-->
                     <img src="/img/test_image.png">
                     <div class="text">
                         <td th:text="${alarm.getMeetingId()}">참가 신청 한 모임 이름</td><td>의 참가 신청이 들어왔어요!</td>
@@ -129,11 +130,18 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="alarmModalLabel">신청</h5>
+                        <h5 class="modal-title">참가 신청</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div id="alarmModelBody" class="modal-body">
-                        ...
+                        <div class="d-flex align-items-start">
+                            <img src="/img/test_image.png" class="rounded-circle me-3" style="width: 60px; height: 60px;">
+                            <div>
+                                <h5 class="mt-0" id="alarm-userName">신청한 사람</h5>
+                                <p class="text-muted" id="alarm-meetingName">모임 이름 에 신청하셨어요</p>
+                                <p id="alarm-detail-introduce"></p>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">거절</button>

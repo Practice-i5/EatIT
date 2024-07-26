@@ -65,7 +65,7 @@ public class AlarmPageController {
     @GetMapping(value="meetingImg", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public int getMeetingImage(@RequestParam int meetingId) {
-//        return photoService.findPhotoByMeetingId(meetingId);
+//        return photoService.getPhotoUrlByPath()
         return 1;       //test
     }
 

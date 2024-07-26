@@ -44,7 +44,7 @@ public class AlarmService {
 
     public AlarmDetailDTO findAlarmDetail(int alarmId) {
         AlarmDetailDTO dto = alarmMapper.findAlarmDetail(alarmId);
-        System.out.println(dto.toString());
+//        System.out.println(dto.toString());
         return alarmMapper.findAlarmDetail(alarmId);
     }
 
