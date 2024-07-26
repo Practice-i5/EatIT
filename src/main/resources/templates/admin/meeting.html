@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Meeting Details</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+        rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
@@ -42,21 +43,24 @@
   </style>
 </head>
 <body class="font-body bg-background text-foreground">
-<div class="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden" data-v0-t="card">
+<div class="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden"
+     data-v0-t="card">
   <div class="space-y-1.5 p-6 flex flex-row items-start bg-muted/50">
     <div class="grid gap-0.5">
       <h3 class="whitespace-nowrap font-semibold tracking-tight group flex items-center gap-2 text-lg">
-        Meeting #<span th:text="${meetingId}">M2345</span>
-        <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-6 w-6 opacity-0 transition-opacity group-hover:opacity-100">
+        Meeting #<span th:text="${adminMeetingDto.meetingId}"></span>
+        <button
+            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-6 w-6 opacity-0 transition-opacity group-hover:opacity-100">
           <span class="sr-only">Copy Meeting ID</span>
         </button>
       </h3>
-      <p class="text-sm text-muted-foreground" th:text="${meetingTitle}">Weekly Team Sync</p>
+      <p class="text-sm text-muted-foreground" th:text="${adminMeetingDto.title}"></p>
     </div>
     <div class="ml-auto flex items-center gap-1">
-      <button class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground rounded-md px-3 h-8 gap-1">
-        <span class="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">Add to Calendar</span>
-      </button>
+      <!--      <button-->
+      <!--          class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground rounded-md px-3 h-8 gap-1">-->
+      <!--        <span class="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">Add to Calendar</span>-->
+      <!--      </button>-->
     </div>
   </div>
   <div class="p-6 text-sm">
@@ -66,18 +70,99 @@
           <div class="font-semibold">Meeting Details</div>
           <ul class="grid gap-3">
             <li class="flex items-center justify-between">
-              <span class="text-muted-foreground">Location</span>
-              <span th:text="${meetingLocation}">Zoom</span>
+              <span class="text-muted-foreground">장소 및 위치</span>
+              <span th:text="${adminMeetingDto.locationName}"></span>
             </li>
             <li class="flex items-center justify-between">
-              <span class="text-muted-foreground">Coordinates</span>
-              <span th:text="${meetingCoordinates}">40.730610, -73.935242</span>
+              <span class="text-muted-foreground">위도 및 경도</span>
+              <span
+                  th:text="${adminMeetingDto.locationLatitude + ', ' + adminMeetingDto.locationLongitude}"></span>
             </li>
             <li class="flex items-center justify-between">
-              <span class="text-muted-foreground">Description</span>
-              <span th:text="${meetingDescription}">Weekly sync to discuss project updates and next steps.</span>
+              <span class="text-muted-foreground">모임 설명</span>
+              <span th:text="${adminMeetingDto.introduction}"></span>
             </li>
             <li class="flex items-center justify-between">
-              <span class="text-muted-foreground">Payment</span>
-              <span th:text="${meetingPayment}">Free</span>
-
+              <span class="text-muted-foreground">지불 방식</span>
+              <span th:text="${adminMeetingDto.paymentMethod}"></span>
+            </li>
+            <li class="flex items-center justify-between">
+              <span class="text-muted-foreground">모임 종류</span>
+              <span th:text="${adminMeetingDto.meetingType}"></span>
+            </li>
+          </ul>
+        </div>
+        <div class="grid gap-3">
+          <div class="font-semibold">Timing</div>
+          <ul class="grid gap-3">
+            <li class="flex items-center justify-between">
+              <span class="text-muted-foreground">모임 일시</span>
+              <span
+                  th:text="${#dates.format(adminMeetingDto.scheduledDate, 'hh:mm a')}"></span>
+            </li>
+            <li class="flex items-center justify-between">
+              <span class="text-muted-foreground">종료 일시</span>
+              <span th:text="${#dates.format(adminMeetingDto.endDate, 'hh:mm a')}">3:00 PM</span>
+            </li>
+            <li class="flex items-center justify-between">
+              <span class="text-muted-foreground">참석자</span>
+              <span
+                  th:text="${adminMeetingDto.recruitMemberNumber + '/' + adminMeetingDto.recruitmentNumber}"></span>
+            </li>
+            <li class="flex items-center justify-between">
+              <span class="text-muted-foreground">최대 수용 인원</span>
+              <span th:text="${adminMeetingDto.recruitmentNumber}"></span>
+            </li>
+            <li class="flex items-center justify-between">
+              <span class="text-muted-foreground">모임 참여 가능한 성별</span>
+              <span th:text="${adminMeetingDto.gender}"></span>
+            </li>
+            <li class="flex items-center justify-between">
+              <span class="text-muted-foreground">모임 참여 가능 연령대</span>
+              <span th:text="${adminMeetingDto.eligibleAge}"></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div data-orientation="horizontal" role="none"
+           class="shrink-0 bg-border h-[1px] w-full my-2"></div>
+      <div class="grid gap-3">
+        <div class="font-semibold">Meeting Info</div>
+        <ul class="grid gap-3">
+          <li class="flex items-center justify-between">
+            <span class="text-muted-foreground">모임 생성 일자</span>
+            <span th:text="${#dates.format(adminMeetingDto.createdDate, 'MMMM d, yyyy')}"></span>
+          </li>
+          <li class="flex items-center justify-between">
+            <span class="text-muted-foreground">모임 참여 방식</span>
+            <span th:text="${adminMeetingDto.participationMethod}"></span>
+          </li>
+          <li class="flex items-center justify-between">
+            <span class="text-muted-foreground">모임 상태</span>
+            <span class="text-green-500" th:text="${adminMeetingDto.status}"></span>
+          </li>
+          <li class="flex items-center justify-between">
+            <span class="text-muted-foreground">모임 개최자 멤버 아이디</span>
+            <span th:text="${adminMeetingDto.hostMemberId}"></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="p-6 flex flex-row items-center border-t bg-muted/50 px-6 py-3">
+    <!--    <div class="text-xs text-muted-foreground">-->
+    <!--      Updated <time th:datetime="${#dates.format(adminMeetingDto.updatedOn, 'yyyy-MM-dd')}" th:text="${#dates.format(adminMeetingDto.updatedOn, 'MMMM d, yyyy')}">June 1, 2023</time>-->
+    <!--    </div>-->
+    <nav aria-label="pagination" class="mx-auto flex justify-center ml-auto mr-0 w-auto"
+         role="navigation">
+      <ul class="flex flex-row items-center gap-1">
+        <li>
+          <button
+              class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-6 w-6"></button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+</body>
+</html>

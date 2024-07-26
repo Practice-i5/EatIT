@@ -33,6 +33,6 @@
   <select id="findMeetingById" resultMap="meetingResultMap">
     SELECT *
     FROM tbl_meeting T
-    WHERE MEETING_ID = #{ meetingId }
+    WHERE T.meeting_id = #{ meetingId }
   </select>
 </mapper>
