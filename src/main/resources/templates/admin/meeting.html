@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Meeting Details</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+      --font-heading: 'Inter', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --border: 210, 16%, 93%;
+      --input: 210, 16%, 96%;
+      --ring: 210, 16%, 86%;
+      --background: 0, 0%, 100%;
+      --foreground: 210, 22%, 49%;
+      --primary: 210, 22%, 49%;
+      --primary-foreground: 210, 16%, 96%;
+      --secondary: 210, 22%, 60%;
+      --secondary-foreground: 210, 16%, 96%;
+      --destructive: 360, 82%, 64%;
+      --destructive-foreground: 210, 16%, 96%;
+      --muted: 210, 16%, 96%;
+      --muted-foreground: 210, 22%, 49%;
+      --accent: 210, 16%, 86%;
+      --accent-foreground: 210, 22%, 49%;
+      --popover: 210, 16%, 96%;
+      --popover-foreground: 210, 22%, 49%;
+      --card: 0, 0%, 100%;
+      --card-foreground: 210, 22%, 49%;
+      --radius: 8px;
+    }
+
+    .font-heading {
+      font-family: var(--font-heading);
+    }
+
+    .font-body {
+      font-family: var(--font-body);
+    }
+  </style>
+</head>
+<body class="font-body bg-background text-foreground">
+<div class="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden" data-v0-t="card">
+  <div class="space-y-1.5 p-6 flex flex-row items-start bg-muted/50">
+    <div class="grid gap-0.5">
+      <h3 class="whitespace-nowrap font-semibold tracking-tight group flex items-center gap-2 text-lg">
+        Meeting #<span th:text="${meetingId}">M2345</span>
+        <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-6 w-6 opacity-0 transition-opacity group-hover:opacity-100">
+          <span class="sr-only">Copy Meeting ID</span>
+        </button>
+      </h3>
+      <p class="text-sm text-muted-foreground" th:text="${meetingTitle}">Weekly Team Sync</p>
+    </div>
+    <div class="ml-auto flex items-center gap-1">
+      <button class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground rounded-md px-3 h-8 gap-1">
+        <span class="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">Add to Calendar</span>
+      </button>
+    </div>
+  </div>
+  <div class="p-6 text-sm">
+    <div class="grid gap-6">
+      <div class="grid grid-cols-2 gap-4">
+        <div class="grid gap-3">
+          <div class="font-semibold">Meeting Details</div>
+          <ul class="grid gap-3">
+            <li class="flex items-center justify-between">
+              <span class="text-muted-foreground">Location</span>
+              <span th:text="${meetingLocation}">Zoom</span>
+            </li>
+            <li class="flex items-center justify-between">
+              <span class="text-muted-foreground">Coordinates</span>
+              <span th:text="${meetingCoordinates}">40.730610, -73.935242</span>
+            </li>
+            <li class="flex items-center justify-between">
+              <span class="text-muted-foreground">Description</span>
+              <span th:text="${meetingDescription}">Weekly sync to discuss project updates and next steps.</span>
+            </li>
+            <li class="flex items-center justify-between">
+              <span class="text-muted-foreground">Payment</span>
+              <span th:text="${meetingPayment}">Free</span>
+

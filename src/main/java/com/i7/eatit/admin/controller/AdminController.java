@@ -1,6 +1,7 @@
 package com.i7.eatit.admin.controller;
 
 import com.i7.eatit.admin.dto.AdminLoginDto;
+import com.i7.eatit.admin.dto.AdminMeetingDto;
 import com.i7.eatit.admin.dto.AdminMemberDto;
 import com.i7.eatit.admin.service.AdminService;
 import jakarta.servlet.http.Cookie;
@@ -22,8 +23,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/admin")
 public class AdminController {
 
-    private final AdminService adminService;
     private static final String REDIRECT_TO_LOGIN = "redirect:/admin/login";
+
+    private final AdminService adminService;
 
     @Autowired
     public AdminController(AdminService adminService) {
@@ -72,7 +74,7 @@ public class AdminController {
     }
 
     @GetMapping("/members")
-    public String getMembers(Model model,
+    public String findAllMember(Model model,
         @RequestParam(name = "sort", required = false) String sort,
         @RequestParam(name = "searchEmail", required = false) String searchEmail,
         HttpServletRequest request) {
@@ -88,7 +90,7 @@ public class AdminController {
 
     // 회원 단일 조회 위한 Controller
     @GetMapping("/members/{memberId}")
-    public String getMember(@PathVariable(name = "memberId") int memberId, Model model,
+    public String findMember(@PathVariable(name = "memberId") int memberId, Model model,
         HttpServletRequest request) {
         if (!adminService.isAdminLoggedIn(request)) {
             return REDIRECT_TO_LOGIN;
@@ -110,13 +112,28 @@ public class AdminController {
         return "redirect:/admin/members";
     }
 
-    // 신고 당한 모임을 모아서 보는 기능 추가하기
-    @GetMapping("/complaints")
-    public String findReports(HttpServletRequest request) {
+    // 전체 모임 조회
+    @GetMapping("/meetings")
+    public String findMeetings(HttpServletRequest request, Model model) {
         if (!adminService.isAdminLoggedIn(request)) {
             return REDIRECT_TO_LOGIN;
         }
 
-        return "admin/complaints";
+        List<AdminMeetingDto> adminMeetingDtoList = adminService.findAllMeeting();
+        model.addAttribute("adminMeetingDtoList", adminMeetingDtoList);
+        return "admin/meetings";
+    }
+
+    // 모임 단일 조회
+    @GetMapping("/meetings/{meetingId}")
+    public String findMeetingById(HttpServletRequest request, Model model,
+        @PathVariable(name = "meetingId") int meetingId) {
+        if (!adminService.isAdminLoggedIn(request)) {
+            return REDIRECT_TO_LOGIN;
+        }
+
+        AdminMeetingDto adminMeetingDto = adminService.findMeetingById(meetingId);
+        model.addAttribute("adminMeetingDto", adminMeetingDto);
+        return "admin/meeting";
     }
 }
