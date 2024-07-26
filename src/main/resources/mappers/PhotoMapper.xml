@@ -49,7 +49,7 @@
     </select>
 
     <insert id="uploadMemberPhoto" parameterType="com.i7.eatit.domain.picture.dto.MemberPhotoDTO"
-    useGeneratedKeys="true" keyProperty="photoId">
+    useGeneratedKeys="true" keyProperty="memberPhotoId">
     INSERT INTO TBL_MEMBER_PHOTO(
         PHOTO_PATH
         ,  PHOTO_NAME
@@ -66,13 +66,25 @@
     </insert>
 
     <insert id="uploadMeetingPhoto" parameterType="com.i7.eatit.domain.picture.dto.MeetingPhotoDTO">
-        INSERT INTO TBL_MEMBER_PHOTO(
-        PHOTO_ID
-        ,  PHOTO_URL
+        INSERT INTO TBL_MEETING_PHOTO(
+        PHOTO_PATH
+        ,  PHOTO_NAME
         ,  MEETING_ID
         ) VALUES
-        (#{meetingPhotoId},
-        #{photoURL},
+        (#{photoPath},
+        #{photoName},
         #{meetingId})
     </insert>
+
+    <delete id="deleteMeetingPhoto" parameterType="_int">
+        DELETE FROM TBL_MEETING_PHOTO
+        WHERE MEETING_ID = #{meetingId}
+
+    </delete>
+
+    <delete id="deleteMeetingPhoto" parameterType="_map">
+        DELETE FROM TBL_MEETING_PHOTO
+        WHERE MEETING_ID = #{meetingId}
+        AND PHOTO_ID = #{photoId}
+    </delete>
 </mapper>

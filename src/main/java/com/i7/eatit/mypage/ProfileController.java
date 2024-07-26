@@ -1,6 +1,7 @@
 package com.i7.eatit.mypage;
 
 import com.i7.eatit.domain.picture.dto.MemberPhotoDTO;
+import com.i7.eatit.domain.picture.service.FireBaseService;
 import com.i7.eatit.domain.picture.service.PhotoService;
 import com.i7.eatit.domain.user.dto.ProfileModifyDTO;
 import com.i7.eatit.domain.user.dto.UserInfoDTO;
@@ -34,8 +35,8 @@ public class ProfileController {
         MemberPhotoDTO photoInfo = photoService.findPhotoByMemberId(loginUser.getMember_id());
 
         if(photoInfo!=null){
-            //String photoUrl = photoInfo.getPhotoPath()+photoInfo.getPhotoName();
-            model.addAttribute("profileImage", photoInfo.getPhotoPath());
+            System.out.println(photoService.getPhotoUrlByPath(photoInfo.getPhotoPath()));
+            model.addAttribute("profileImage", photoService.getPhotoUrlByPath(photoInfo.getPhotoPath()));
         }
     }
 
@@ -50,15 +51,20 @@ public class ProfileController {
             , RedirectAttributes rttr) {
 
         if(Objects.equals(newProfile.getGender(), "")){
-            rttr.addFlashAttribute("error_gender", "해당 값은 빈 값일 수 없습니다.");
+            rttr.addFlashAttribute("error_gender", "성별을 선택해주세요.");
         } else{
             System.out.println(loginUser);
+
             newProfile.setMemberId(loginUser.getMember_id());
             System.out.println(newProfile);
             profileModifyService.modifyProfile(newProfile);
+
             loginUser.setGender(newProfile.getGender());
             loginUser.setAge(newProfile.getAge());
             loginUser.setNickname(newProfile.getNickname());
+
+
+            rttr.addFlashAttribute("profileChangeMessage", "프로필을 변경했습니다.");
         }
 
 //        for (var it: request.getParameterMap().keySet()) {
@@ -69,6 +75,25 @@ public class ProfileController {
 //        }
 
         //System.out.println(request.getParameter("nickName"));
+        return "redirect:/my-page/profile";
+    }
+
+    @PostMapping("profile-modify-image")
+    public String modifyProfileImage(@SessionAttribute("loginUser") UserInfoDTO loginUser,
+            MultipartFile imgFile, RedirectAttributes rttr) throws IOException{
+
+        if (imgFile==null) {
+            rttr.addFlashAttribute("error_image", "이미지를 등록해주세요.");
+        } else{
+            String uploadedUrl = photoService.uploadMemberPhoto(imgFile, loginUser.getMember_id());
+
+            if(uploadedUrl!=null){
+                rttr.addFlashAttribute("profileChangeMessage", "사진을 변경했습니다.");
+            } else{
+                rttr.addFlashAttribute("error_image", "사진 변경에 실패했습니다.");
+            }
+        }
+
         return "redirect:/my-page/profile";
     }
 
@@ -86,10 +111,11 @@ public class ProfileController {
 
         String uploadedUrl = photoService.uploadMemberPhoto(singleFile, 7);
         if (uploadedUrl != null){
-            gdriveUrl = "https://drive.google.com/thumbnail?id=" + uploadedUrl + "&sz=w300";
-            rttr.addFlashAttribute("profileImage", gdriveUrl);
+            //gdriveUrl = "https://drive.google.com/thumbnail?id=" + uploadedUrl + "&sz=w300";
+            rttr.addFlashAttribute("profileImage", uploadedUrl);
             System.out.println("결과 url");
-            System.out.println(gdriveUrl);
+            //fireBaseService.deleteFirebaseBucket("memberImage/27403cca033349429e657b83eaef2727.png");
+            //System.out.println(gdriveUrl);
         }
 
         //rttr.addFlashAttribute("profileImage", uploadedUrl);
