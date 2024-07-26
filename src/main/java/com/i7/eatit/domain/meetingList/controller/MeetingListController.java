@@ -37,6 +37,8 @@ public class MeetingListController {
 
         model.addAttribute("meetingList", meetingList);
 
+        System.out.println(meetingList);
+
         return "meetingList/participatingList";
     }
 
@@ -58,8 +60,7 @@ public class MeetingListController {
     }
 
 
-
-
+/*
 
     // 팔로잉한 모임 목록
     @GetMapping("/meetingList/followList")
@@ -86,5 +87,6 @@ public class MeetingListController {
         model.addAttribute("meetingList", meetingList);
         return "meetingList/likeList2";  // HTML 파일의 이름(확장자 제외)
     }
+*/
 
 }

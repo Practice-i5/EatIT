@@ -366,7 +366,7 @@
         LEFT JOIN   TBL_MEETING_PARTICIPATION AS D
         ON          A.MEETING_ID = D.MEETING_ID
         WHERE   D.MEMBER_ID = #{ memberId }
-        AND A.STATUS = 'Closed'
+        AND A.STATUS = 'closed'
         GROUP BY
             A.MEETING_ID
             , A.TITLE

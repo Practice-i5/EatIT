@@ -90,6 +90,13 @@ public class TechProfileController {
         return "redirect:/my-page/tech-profile";
     }
 
+    @PostMapping("tech-experience-modify")
+    public String techExperienceModify() {
+
+
+        return "redirect:/my-page/tech-profile";
+    }
+
     @GetMapping("tech-profile/test")
     public String getTechStack(Model model) {
         List<TechStackTypeDTO> techStackList = techStackTypeService.findAllTechStack();
