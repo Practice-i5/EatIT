@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+          integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+          crossorigin="anonymous"
+  />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/oneToOneChat.css}" />
+  <title>Eat-It 1:1채팅</title>
+</head>
+<body>
+<div class="chat-container">
+  <header class="chat-header">
+    <h1><i class="fas fa-smile"></i>Eat-It 1:1채팅</h1>
+    <a th:href="@{/logout}" class="btn">방 나가기</a>
+  </header>
+  <main class="chat-main">
+    <div class="chat-sidebar">
+      <h3><i class="fas fa-comments"></i> 방 이름:</h3>
+      <h2 id="room-name" th:text="${roomName}">방 이름</h2>
+      <h3><i class="fas fa-users"></i> 사용자</h3>
+      <ul id="users">
+        <li th:each="user : ${users}" th:text="${user.username}">사용자</li>
+      </ul>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <!-- 메시지가 동적으로 추가될 영역 -->
+    </div>
+  </main>
+  <div class="chat-form-container">
+    <form id="chat-form" th:action="@{/sendMessage}" method="post">
+      <input
+              id="msg"
+              type="text"
+              placeholder="메시지 입력"
+              required
+              autocomplete="off"
+      />
+      <button class="btn" type="submit"><i class="fas fa-paper-plane"></i> 전송</button>
+    </form>
+  </div>
+</div>
+
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js"
+        integrity="sha256-TDxXjkAUay70ae/QJBEpGKkpVslXaHHayklIVglFRT4="
+        crossorigin="anonymous"
+></script>
+<script src="/socket.io/socket.io.js"></script>
+<script th:src="@{/js/oneToOneChat.js}"></script>
+</body>
+</html>
