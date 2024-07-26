@@ -29,6 +29,9 @@ public class EnrollMeetingController {
 
     @GetMapping("enroll-meeting")
     public String enrollMeeting(Model model) {
+
+        model.addAttribute("types", meetingService.findAllType());
+        model.addAttribute("interests", meetingService.findAllInterests());
         return "enroll-meeting/enroll-meeting";
     }
 

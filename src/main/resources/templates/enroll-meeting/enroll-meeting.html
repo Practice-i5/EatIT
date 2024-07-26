@@ -78,54 +78,66 @@
 <!--                </div>-->
 <!--            </div>-->
             <div class="form-group">
-                <label>대화주제</label>
-                <div class="time-group">
-                    <input type="radio" class="btn-check" name="meetingType" value="Study" id="Study" autocomplete="off">
-                    <label class="btn btn-outline-success" for="Study">스터디</label>
+                <label>모임종류</label>
+                <ul class="time-group" th:each="type : ${types}">
+                    <li>
+                        <input type="radio" class="btn-check" name="meetingType" th:value="${type}" th:id="${type}" autocomplete="off">
+                        <label class="btn btn-outline-success" th:for="${Study}" th:text="${type}">종류</label>
+                    </li>
+                </ul>
+<!--                <div class="time-group">-->
+<!--                    <input type="radio" class="btn-check" name="meetingType" value="Study" id="Study" autocomplete="off">-->
+<!--                    <label class="btn btn-outline-success" for="Study">스터디</label>-->
 
-                    <input type="radio" class="btn-check" name="meetingType" value="모각코" id="coding" autocomplete="off">
-                    <label class="btn btn-outline-success" for="coding">모각코</label>
+<!--                    <input type="radio" class="btn-check" name="meetingType" value="모각코" id="coding" autocomplete="off">-->
+<!--                    <label class="btn btn-outline-success" for="coding">모각코</label>-->
 
-                    <input type="radio" class="btn-check" name="meetingType"  value="포트폴리오리뷰" id="portfolio" autocomplete="off">
-                    <label class="btn btn-outline-success" for="portfolio">포트폴리오리뷰</label>
+<!--                    <input type="radio" class="btn-check" name="meetingType"  value="포트폴리오리뷰" id="portfolio" autocomplete="off">-->
+<!--                    <label class="btn btn-outline-success" for="portfolio">포트폴리오리뷰</label>-->
 
-                    <input type="radio" class="btn-check" name="meetingType" value="이직준비" id="turnover" autocomplete="off">
-                    <label class="btn btn-outline-success" for="turnover">이직준비</label>
-                </div>
+<!--                    <input type="radio" class="btn-check" name="meetingType" value="이직준비" id="turnover" autocomplete="off">-->
+<!--                    <label class="btn btn-outline-success" for="turnover">이직준비</label>-->
+<!--                </div>-->
             </div>
             <div class="form-group">
                 <label>관심분야</label>
-                <div class="checkbox-group">
-                    <input type="checkbox" class="btn-check" name="interestsConditions" value="Python" id="python" autocomplete="off">
-                    <label class="btn btn-outline-success" for="python">파이썬</label>
+                <ul class="checkbox-group" th:each="interest : ${interests}">
+                    <li>
+                        <input type="checkbox" class="btn-check" name="interestsConditions" th:value="${interest}" th:id="${interest}" autocomplete="off">
+                        <label class="btn btn-outline-success" th:for="${interest}" th:text="${interest}">파이썬</label>
+                    </li>
+                </ul>
+<!--                <div class="checkbox-group">-->
+<!--                    <input type="checkbox" class="btn-check" name="interestsConditions" value="Python" id="python" autocomplete="off">-->
+<!--                    <label class="btn btn-outline-success" for="python">파이썬</label>-->
 
-                    <input type="checkbox" class="btn-check" name="interestsConditions" value="Swift" id="Swift" autocomplete="off">
-                    <label class="btn btn-outline-success" for="Swift">Swift</label>
+<!--                    <input type="checkbox" class="btn-check" name="interestsConditions" value="Swift" id="Swift" autocomplete="off">-->
+<!--                    <label class="btn btn-outline-success" for="Swift">Swift</label>-->
 
-                    <input type="checkbox" class="btn-check" name="interestsConditions" value="VisionOS" id="VisionOS" autocomplete="off">
-                    <label class="btn btn-outline-success" for="VisionOS">VisionOS</label>
+<!--                    <input type="checkbox" class="btn-check" name="interestsConditions" value="VisionOS" id="VisionOS" autocomplete="off">-->
+<!--                    <label class="btn btn-outline-success" for="VisionOS">VisionOS</label>-->
 
-                    <input type="checkbox" class="btn-check" name="interestsConditions"  value="C++" id="C++" autocomplete="off">
-                    <label class="btn btn-outline-success" for="C++">C++</label>
+<!--                    <input type="checkbox" class="btn-check" name="interestsConditions"  value="C++" id="C++" autocomplete="off">-->
+<!--                    <label class="btn btn-outline-success" for="C++">C++</label>-->
 
-                    <input type="checkbox" class="btn-check" name="interestsConditions" value="Backend" id="Backend" autocomplete="off">
-                    <label class="btn btn-outline-success" for="Backend">Backend</label>
+<!--                    <input type="checkbox" class="btn-check" name="interestsConditions" value="Backend" id="Backend" autocomplete="off">-->
+<!--                    <label class="btn btn-outline-success" for="Backend">Backend</label>-->
 
-                    <input type="checkbox" class="btn-check" name="interestsConditions" value="Unity" id="Unity" autocomplete="off">
-                    <label class="btn btn-outline-success" for="Unity">Unity</label>
+<!--                    <input type="checkbox" class="btn-check" name="interestsConditions" value="Unity" id="Unity" autocomplete="off">-->
+<!--                    <label class="btn btn-outline-success" for="Unity">Unity</label>-->
 
-                    <input type="checkbox" class="btn-check" name="interestsConditions" value="UE5" id="UE5" autocomplete="off">
-                    <label class="btn btn-outline-success" for="UE5">UE5</label>
+<!--                    <input type="checkbox" class="btn-check" name="interestsConditions" value="UE5" id="UE5" autocomplete="off">-->
+<!--                    <label class="btn btn-outline-success" for="UE5">UE5</label>-->
 
-                    <input type="checkbox" class="btn-check" name="interestsConditions" value="AI" id="AI" autocomplete="off">
-                    <label class="btn btn-outline-success" for="AI">AI</label>
+<!--                    <input type="checkbox" class="btn-check" name="interestsConditions" value="AI" id="AI" autocomplete="off">-->
+<!--                    <label class="btn btn-outline-success" for="AI">AI</label>-->
 
-                    <input type="checkbox" class="btn-check" name="interestsConditions" value="TA" id="TA" autocomplete="off">
-                    <label class="btn btn-outline-success" for="TA">TA</label>
+<!--                    <input type="checkbox" class="btn-check" name="interestsConditions" value="TA" id="TA" autocomplete="off">-->
+<!--                    <label class="btn btn-outline-success" for="TA">TA</label>-->
 
-                    <input type="checkbox" class="btn-check" name="interestsConditions" value="Object-C" id="Object-C" autocomplete="off">
-                    <label class="btn btn-outline-success" for="Object-C">Object-C</label>
-                </div>
+<!--                    <input type="checkbox" class="btn-check" name="interestsConditions" value="Object-C" id="Object-C" autocomplete="off">-->
+<!--                    <label class="btn btn-outline-success" for="Object-C">Object-C</label>-->
+<!--                </div>-->
             </div>
             <div class="form-group upload-group">
                 <div class="upload-container">
