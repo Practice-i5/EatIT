@@ -24,7 +24,7 @@ public class ChatRoomController {
         if (loginUser == null) {
             return "redirect:/login/loginMain"; // 로그인 페이지로 리다이렉트
         }
-        List<ChatRoomDTO> chatRooms = chatService.getAllChatRooms();
+        List<ChatRoomDTO> chatRooms = chatService.getUserChatRooms(loginUser.getEmail()); // 로그인한 사용자의 채팅방만 가져옴
         model.addAttribute("chatRooms", chatRooms);
         return "chatrooms";
     }
@@ -42,9 +42,12 @@ public class ChatRoomController {
     }
 
     @GetMapping("/userChatrooms")
-    public String getUserChatRooms(@SessionAttribute("loginUser") UserInfoDTO loginUser, Model model) {
+    public String getUserChatRooms(@SessionAttribute(value = "loginUser", required = false) UserInfoDTO loginUser, Model model) {
+        if (loginUser == null) {
+            return "redirect:/login/loginMain"; // 로그인 페이지로 리다이렉트
+        }
         List<ChatRoomDTO> chatRooms = chatService.getUserChatRooms(loginUser.getEmail());
         model.addAttribute("chatRooms", chatRooms);
-        return "chatGroup/chatrooms";
+        return "chatGroup/userChatrooms";
     }
 }
