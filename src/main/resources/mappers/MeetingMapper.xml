@@ -480,7 +480,7 @@
 
     </select>
 
-    <update id="upCountRecruiterNum" parameterType="meetingId">
+    <update id="upCountRecruiterNum" parameterType="int">
         UPDATE  TBL_MEETING
         SET     RECRUIT_MEMBER_NUMBER = RECRUIT_MEMBER_NUMBER + 1
         WHERE   MEETING_ID = #{ meetingId }
