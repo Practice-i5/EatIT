@@ -6,9 +6,9 @@ function getSessionUser(callback) {
   return fetch("http://localhost:8888/login/getSessionUser", { credentials: 'include' }) // 세션 정보를 포함하여 요청
       .then((response) => response.json())
       .then((data) => {
-        if (data && data.member_id) {
-          sessionStorage.setItem("userId", data.member_id); // 세션 스토리지에 사용자 ID 저장
-          callback(data.member_id);
+        if (data && data.nickname) {
+          sessionStorage.setItem("userId", data.nickname); // 세션 스토리지에 사용자 ID 저장
+          callback(data.nickname);
         } else {
           callback('익명');
         }
