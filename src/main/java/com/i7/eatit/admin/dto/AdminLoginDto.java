@@ -20,12 +20,4 @@ public class AdminLoginDto {
     public void setAdminPassword(String adminPassword) {
         this.adminPassword = adminPassword;
     }
-
-    @Override
-    public String toString() {
-        return "AdminLoginDto{" +
-            "adminEmail='" + adminEmail + '\'' +
-            ", adminPassword='" + adminPassword + '\'' +
-            '}';
-    }
 }

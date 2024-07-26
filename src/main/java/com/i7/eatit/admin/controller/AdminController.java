@@ -85,7 +85,7 @@ public class AdminController {
         return "admin/members";
     }
 
-    // TODO: 회원 단일 조회 [미완성 MemberDto 에 의존하도록 변경해야 함!!]
+    // 회원 단일 조회 위한 Controller
     @GetMapping("/members/{memberId}")
     public String getMember(@PathVariable int memberId, Model model, HttpServletRequest request) {
         if (!adminService.isAdminLoggedIn(request)) {

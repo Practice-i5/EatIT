@@ -17,7 +17,7 @@ public class AdminMemberDto {
     private String gender;
     private int age;
     private int isStoppedByAdmin;
-    
+
     public int getMemberId() {
         return memberId;
     }

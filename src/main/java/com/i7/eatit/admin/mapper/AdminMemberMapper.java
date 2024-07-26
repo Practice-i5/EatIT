@@ -8,7 +8,8 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface AdminMemberMapper {
 
-    List<AdminMemberDto> findAllMember(@Param("sort") String sort, @Param("searchEmail") String searchEmail);
+    List<AdminMemberDto> findAllMember(@Param("sort") String sort,
+        @Param("searchEmail") String searchEmail);
 
     AdminMemberDto findMemberById(int memberId);
 }
