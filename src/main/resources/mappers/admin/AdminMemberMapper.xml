@@ -58,6 +58,10 @@
     WHERE A.member_id = #{ memberId }
   </update>
 
+  <update id="updateMemberStatus">
+
+  </update>
+
 
 
 </mapper>

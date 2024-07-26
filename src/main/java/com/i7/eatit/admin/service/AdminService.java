@@ -97,4 +97,20 @@ public class AdminService {
     public AdminMeetingDto findMeetingById(int meetingId) {
         return adminMeetingMapper.findMeetingById(meetingId);
     }
+
+    public void changeMeetingStatus(int meetingId) {
+        adminMeetingMapper.changeMeetingStatus(meetingId);
+    }
+
+    public void increaseMeetingReport(int meetingId) {
+        adminMeetingMapper.increaseMeetingReport(meetingId);
+    }
+
+    public void increaseMemberReport(int memberId) {
+        adminMemberMapper.increaseMemberReport(memberId);
+    }
+
+    public void changeMemberStatus(int memberId) {
+        adminMemberMapper.changeMemberStatus(memberId);
+    }
 }

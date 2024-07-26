@@ -14,4 +14,6 @@ public interface AdminMemberMapper {
     AdminMemberDto findMemberById(int memberId);
 
     void updateMemberStatus(int memberId);
+
+    void increaseMemberReport(int memberId);
 }

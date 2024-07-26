@@ -35,4 +35,20 @@
     FROM tbl_meeting T
     WHERE T.meeting_id = #{ meetingId }
   </select>
+
+  <update id="changeMeetingStatus">
+    UPDATE tbl_meeting M
+    SET M.is_stopped_by_admin = CASE
+    WHEN M.is_stopped_by_admin = 0 THEN 1
+    WHEN M.is_stopped_by_admin = 1 THEN 0
+    ELSE M.is_stopped_by_admin
+    END
+    WHERE M.meeting_id = #{ meetingId }
+  </update>
+
+  <update id="increaseMeetingReport">
+    UPDATE tbl_meeting M
+    SET M.reported_count = M.reported_count + 1
+    WHERE M.meeting_id = #{ meetingId }
+  </update>
 </mapper>

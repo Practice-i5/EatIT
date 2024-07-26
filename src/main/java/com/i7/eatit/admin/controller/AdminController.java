@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner.Mode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/admin")
@@ -135,5 +137,25 @@ public class AdminController {
         AdminMeetingDto adminMeetingDto = adminService.findMeetingById(meetingId);
         model.addAttribute("adminMeetingDto", adminMeetingDto);
         return "admin/meeting";
+    }
+
+    @GetMapping("/meetings/{meetingId}/management")
+    public String changeMeetingStatus(@PathVariable int meetingId, Model model) {
+        adminService.changeMeetingStatus(meetingId);
+        return "redirect:/admin/meetings/" + meetingId;
+    }
+
+    @GetMapping("api/admin/meetings/{meetingId}/increaseReport")
+    public String increaseMeetingReport(@PathVariable int meetingId) {
+        adminService.increaseMeetingReport(meetingId);
+        adminService.changeMeetingStatus(meetingId);
+        return "redirect:/index.html";
+    }
+
+    @GetMapping("api/admin/members/{memberId}/increaseReport")
+    public String increaseMemberReport(@PathVariable int memberId) {
+        adminService.increaseMemberReport(memberId);
+        adminService.changeMemberStatus(memberId);
+        return "redirect:/index.html";
     }
 }

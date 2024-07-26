@@ -10,4 +10,8 @@ public interface AdminMeetingMapper {
     List<AdminMeetingDto> findAllMeeting();
 
     AdminMeetingDto findMeetingById(int meetingId);
+
+    void changeMeetingStatus(int meetingId);
+
+    void increaseMeetingReport(int meetingId);
 }
