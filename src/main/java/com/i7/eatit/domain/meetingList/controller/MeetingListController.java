@@ -26,7 +26,7 @@ public class MeetingListController {
 
 
     // 진행중인 모임 목록
-    @GetMapping("/meetingList/participatingList")
+    @GetMapping("/participatingList")
     public String ParticipatingMeeting(@SessionAttribute("loginUser") UserInfoDTO userInfoDTO, Model model) {
 
 
@@ -44,7 +44,7 @@ public class MeetingListController {
 
 
     // 종료한 모임 목록
-    @GetMapping("/meetingList/endList")
+    @GetMapping("/endList")
     public String EndMeeting(@SessionAttribute("loginUser") UserInfoDTO userInfoDTO, Model model) {
 
         int memberId =  userInfoDTO.getMember_id();
@@ -58,7 +58,6 @@ public class MeetingListController {
 
         return "meetingList/endList";  // HTML 파일의 이름(확장자 제외)
     }
-
 
 /*
 
