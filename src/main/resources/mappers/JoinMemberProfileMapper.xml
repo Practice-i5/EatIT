@@ -39,36 +39,41 @@
 
     <select id="findJoinUser" resultMap="JoinMemberProfileMap">
         SELECT
-                    B.MEMBER_ID
-                    , A.STACK_NAME
-                    , C.NICKNAME
-                    , D.PHOTO_PATH
-                    , A.STACK_NAME JAVASCRIPT
-                    , A.STACK_NAME PYTHON
-                    , A.STACK_NAME JAVA
-                    , A.STACK_NAME CSHARP
-                    , A.STACK_NAME RUBY
-                    , A.STACK_NAME PHP
-                    , A.STACK_NAME SWIFT
-                    , A.STACK_NAME KOTLIN
-                    , A.STACK_NAME GO
-                    , A.STACK_NAME RUST
+                    A.meeting_id
+                    , A.member_id
+                    , E.photo_path
+                    , D.stack_name
+                    , D.STACK_NAME JAVASCRIPT
+                    , D.STACK_NAME PYTHON
+                    , D.STACK_NAME JAVA
+                    , D.STACK_NAME CSHARP
+                    , D.STACK_NAME RUBY
+                    , D.STACK_NAME PHP
+                    , D.STACK_NAME SWIFT
+                    , D.STACK_NAME KOTLIN
+                    , D.STACK_NAME GO
+                    , D.STACK_NAME RUST
+
         FROM
-                    TBL_TECH_STACK_TYPE A
+                    tbl_meeting_participation A
         LEFT JOIN
-                    TBL_MEMBER_TECH_STACK B
+                    tbl_notification B
         ON
-                    A.STACK_CODE = B.STACK_CODE
+                    A.participation_id = B.participation_id
         LEFT JOIN
-                    TBL_MEMBER C
+                    tbl_member_tech_stack C
         ON
-                    C.MEMBER_ID = B.MEMBER_ID
+                    C.MEMBER_ID = A.member_id
         LEFT JOIN
-                    TBL_MEMBER_PHOTO D
+                    tbl_tech_stack_type D
         ON
-                    D.MEMBER_ID = B.MEMBER_ID
+                    C.stack_code = D.stack_code
+        LEFT JOIN
+                    tbl_member_photo E
+        ON
+                    A.MEMBER_ID = E.member_id
         WHERE
-                    MEETING_ID = #{ meetingId }
+                    A.meeting_id = #{ meetingId }
     </select>
 
 </mapper>
