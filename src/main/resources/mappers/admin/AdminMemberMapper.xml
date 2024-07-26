@@ -20,17 +20,19 @@
     <result property="createdDate" column="created_date"/>
     <result property="withdrawalStatus" column="withdrawal_status"/>
     <result property="reportedCount" column="reported_count"/>
+    <result property="gender" column="gender"/>
+    <result property="age" column="age"/>
     <result property="isStoppedByAdmin" column="is_stopped_by_admin"/>
   </resultMap>
 
   <select id="findAllMember" resultMap="AdminMemberResultMap">
     SELECT *
     FROM tbl_member A
-
-    <if test="searchEmail != null">
-      WHERE A.email LIKE CONCAT('%', #{ searchEmail }, '%')
-    </if>
-
+    <where>
+      <if test="searchEmail != null">
+        AND A.email LIKE CONCAT('%', #{searchEmail}, '%')
+      </if>
+    </where>
     <if test="sort != null">
       ORDER BY
       <choose>
@@ -45,5 +47,17 @@
     FROM tbl_member A
     WHERE A.member_id = #{ memberId }
   </select>
+
+  <update id="updateMemberStatus">
+    UPDATE tbl_member A
+    SET A.is_stopped_by_admin = CASE
+    WHEN A.is_stopped_by_admin = 0 THEN 1
+    WHEN A.is_stopped_by_admin = 1 THEN 0
+    ELSE A.is_stopped_by_admin
+    END
+    WHERE A.member_id = #{ memberId }
+  </update>
+
+
 
 </mapper>

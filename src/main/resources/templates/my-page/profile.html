@@ -40,7 +40,7 @@
 
         <div class="form-content" >
             <h2>프로필 수정</h2>
-            <form method="post" action="/my-page/profile-img-modify" enctype="multipart/form-data">
+            <form method="post" action="/my-page/profile-modify-image" enctype="multipart/form-data">
                 <div class="form-item">
                     <label class="profile-label">프로필 사진</label>
                     <div class="form-input" style="width: 70%; display: flex; align-items: center; justify-content: space-between;">
@@ -49,10 +49,12 @@
                         <div>
                             <input id="img-file" style="display: none; width:0px; margin: 0px; padding: 0px;" type="file" accept="image/*" name="imgFile"/>
                             <label for="img-file" class="upload-btn btn-choice-small btn-wb">수정</label>
+                            <button class="btn-choice-small btn-wb">적용</button>
                             <label class="reset-img btn-choice-small btn-wb">초기화</label>
                         </div>
                     </div>
                 </div>
+                <p th:text="${error_image}"></p>
             </form>
 
 

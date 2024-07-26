@@ -263,6 +263,8 @@
             MEETING_TYPE
         FROM
             TBL_MEETING
+        GROUP BY
+            MEETING_TYPE
     </select>
 
     <select id="findPreviewBySearch" parameterType="com.i7.eatit.domain.meeting.model.common.SearchCriteria" resultMap="previewMeetingResultMap">
@@ -364,7 +366,7 @@
         LEFT JOIN   TBL_MEETING_PARTICIPATION AS D
         ON          A.MEETING_ID = D.MEETING_ID
         WHERE   D.MEMBER_ID = #{ memberId }
-        AND A.STATUS = 'closed'
+        AND A.STATUS = 'Closed'
         GROUP BY
             A.MEETING_ID
             , A.TITLE
@@ -384,6 +386,79 @@
             TBL_MEETING
         WHERE
             MEETING_ID = #{ meetingId }
+    </select>
+
+    <select id="findMeetingPhotoById" parameterType="int">
+        SELECT
+            PHOTO_PATH
+        FROM
+            TBL_MEETING_PHOTO
+        WHERE
+            MEETING_ID = #{ meetingId }
+    </select>
+
+    <insert id="participateGuest" parameterType="int">
+        INSERT INTO
+        TBL_MEETING_PARTICIPATION
+        (
+        ROLE
+        MEETING_ID,
+        MEMBER_ID,
+        )
+        VALUES
+        (
+        'Guest'
+        , #{ meetingId }
+        , #{ memberId }
+        )
+    </insert>
+
+    <insert id="participateHost" parameterType="int">
+        INSERT INTO
+        TBL_MEETING_PARTICIPATION
+        (
+            ROLE
+            MEETING_ID,
+            MEMBER_ID,
+        )
+        VALUES
+        (
+            'Host'
+            , #{ meetingId }
+            , #{ memberId }
+        )
+    </insert>
+
+    <select id="findPreviewById" parameterType="int" resultMap="previewMeetingResultMap">
+        SELECT
+            A.MEETING_ID
+            , A.TITLE
+            , A.LOCATION_NAME
+            , B.PHOTO_PATH AS meeting_url
+            , C.PHOTO_PATH AS member_url
+            , A.STATUS
+            , A.SCHEDULED_DATE
+            , A.RECRUIT_MEMBER_NUMBER
+            , A.RECRUITMENT_NUMBER
+        FROM
+                        TBL_MEETING AS A
+            LEFT JOIN   TBL_MEETING_PHOTO AS B
+            ON          A.MEETING_ID = B.MEETING_ID
+            LEFT JOIN   TBL_MEMBER_PHOTO AS C
+            ON          A.HOST_MEMBER_ID = C.MEMBER_ID
+            LEFT JOIN   TBL_MEETING_PARTICIPATION AS D
+            ON          A.MEETING_ID = D.MEETING_ID
+        WHERE           A.MEETING_ID = #{ meetingId }
+        GROUP BY
+                        A.MEETING_ID
+                        , A.TITLE
+                        , A.LOCATION_NAME
+                        , B.PHOTO_PATH
+                        , C.PHOTO_PATH
+                        , A.STATUS
+                        , A.SCHEDULED_DATE
+                        , A.RECRUIT_MEMBER_NUMBER
+                        , A.RECRUITMENT_NUMBER
     </select>
 
     <!-- test mapper start -->

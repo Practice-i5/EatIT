@@ -79,4 +79,8 @@ public class AdminService {
     public AdminMemberDto findMemberById(int memberId) {
         return adminMemberMapper.findMemberById(memberId);
     }
+
+    public void updateMemberStatus(int memberId) {
+        adminMemberMapper.updateMemberStatus(memberId);
+    }
 }

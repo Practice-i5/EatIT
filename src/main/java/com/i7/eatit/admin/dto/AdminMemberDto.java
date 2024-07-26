@@ -6,34 +6,17 @@ public class AdminMemberDto {
 
     private int memberId;               // 회원 아이디
     private String email;               // 회원 이메일
-    private String password;
+    private String password;            // 회원의 비밀번호
     private String name;                // 회원 이름
-    private String nickname;
-    private String loginMethod;
-    private String phoneNumber;
-    private LocalDateTime createdDate;  // 가입 일시
-    private String withdrawalStatus;    // 탈퇴 여부
-    private int reportedCount;          // 누적 신고 횟수
-    private int isStoppedByAdmin;
-
-    public AdminMemberDto(int memberId, String email, String password, String name, String nickname,
-        String loginMethod, String phoneNumber, LocalDateTime createdDate, String withdrawalStatus,
-        int reportedCount, int isStoppedByAdmin) {
-        this.memberId = memberId;
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.nickname = nickname;
-        this.loginMethod = loginMethod;
-        this.phoneNumber = phoneNumber;
-        this.createdDate = createdDate;
-        this.withdrawalStatus = withdrawalStatus;
-        this.reportedCount = reportedCount;
-        this.isStoppedByAdmin = isStoppedByAdmin;
-    }
-
-    public AdminMemberDto() {
-    }
+    private String nickname;            // 회원의 닉네임
+    private String loginMethod;         // 회원의 로그인 수단
+    private String phoneNumber;         // 회원의 전화 번호
+    private LocalDateTime createdDate;  // 회원의 가입 일시
+    private String withdrawalStatus;    // 회원의 탈퇴 여부
+    private int reportedCount;          // 회원의 누적 신고 횟수
+    private String gender;              // 회원의 성별
+    private int age;                    // 회원의 나이
+    private int isStoppedByAdmin;       // 회원의 정지 여부 상태. 관리자가 정지를 먹인 회원이면 1, 그렇지 않으면 0
 
     public int getMemberId() {
         return memberId;
@@ -113,6 +96,22 @@ public class AdminMemberDto {
 
     public void setReportedCount(int reportedCount) {
         this.reportedCount = reportedCount;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public int getIsStoppedByAdmin() {

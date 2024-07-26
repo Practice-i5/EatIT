@@ -107,6 +107,15 @@
                 <label>개발 경력</label>
                 <div style="width: 70%;">
                     <ul style="margin-left:5px; list-style: none; padding-left: 0px; display:flex; flex-flow : column wrap; align-items: baseline;">
+                        <th:block th:if="${techExperienceList}">
+                            <li th:each="techExperience:${techExperienceList}">
+                                <div style="display: flex; flex-direction: column; align-items: baseline;">
+                                    <h3 style="margin:0px;" th:text="${techExperience.companyName}"></h3>
+                                    <p class="form-message-mini warn">techExperience</p>
+                                    <p class="form-message-mini warn">2022.10~2023.11</p>
+                                </div>
+                            </li>
+                        </th:block>
                         <li style="display: flex; justify-content: space-between; width: 100%;">
                             <div style="display: flex; flex-direction: column; align-items: baseline;">
                                 <h3 style="margin:0px;">현대오토에버</h3>

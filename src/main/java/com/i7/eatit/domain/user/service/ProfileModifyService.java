@@ -2,10 +2,14 @@ package com.i7.eatit.domain.user.service;
 
 import com.i7.eatit.domain.user.dao.ProfileModifyMapper;
 import com.i7.eatit.domain.user.dto.ProfileModifyDTO;
+import com.i7.eatit.domain.user.dto.TechExperienceDTO;
+import com.i7.eatit.domain.user.dto.UserInfoDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -34,6 +38,16 @@ public class ProfileModifyService {
     @Transactional
     public void withdraw(int memberId){
         profileModifyMapper.softDeleteMember(memberId);
+    }
+
+    @Transactional
+    public List<TechExperienceDTO> findMemberTechExperience(int memberId){
+        return profileModifyMapper.selectTechExperience(memberId);
+    }
+
+    @Transactional
+    public void modifyTechExperience(TechExperienceDTO techExperience) {
+        profileModifyMapper.insertTechExperience(techExperience);
     }
 
 

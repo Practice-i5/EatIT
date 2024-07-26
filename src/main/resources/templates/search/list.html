@@ -28,6 +28,7 @@
     <!-- Template Stylesheet -->
     <link th:href="@{/css/style.css}" rel="stylesheet">
     <link th:href="@{/css/search.css}" rel="stylesheet">
+    <link th:href="@{/css/meetingList.css}" rel="stylesheet">
     <style>
         
     </style>
@@ -36,10 +37,10 @@
 <body>
 
     <!-- Spinner Start -->
-    <div id="spinner"
-        class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
-        <div class="spinner-grow text-primary" role="status"></div>
-    </div>
+<!--    <div id="spinner"-->
+<!--        class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">-->
+<!--        <div class="spinner-grow text-primary" role="status"></div>-->
+<!--    </div>-->
     <!-- Spinner End -->
 
 
@@ -99,95 +100,78 @@
 
 
     <!-- Hero Start -->
-    <div>
-        <h1>
-            빈공간
-        </h1>
-    </div>
+<!--    <div>-->
+<!--        <h1 th:text=" ">-->
+<!--        </h1>-->
+<!--    </div>-->
     <!-- Hero End -->
 
 
     <!-- Fruits Shop Start-->
     <div class="container-fluid fruite py-5">
-        <div class="container py-5">
-            <form action="search/list" method="post">
+        <div class="container py-5" style="margin-top: 30px">
+            <form th:action="@{/search/list}" method="post">
                 <div class="align-center">
                     <h1>모임 검색</h1>
                     <div class="modal-body d-flex align-items-center">
                         <div class="input-group w-75 mx-auto d-flex">
-                            <input type="search" class="form-control p-3" placeholder="검색어를 입력해주세요."
+                            <input type="search" name="word" class="form-control p-3" placeholder="검색어를 입력해주세요."
                                 aria-describedby="search-icon-1">
-                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                            <button type="submit" id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <h5 class="mb-5 fw-bold padding-left-20px">#모임 종류</h5>
-                    <!-- <div class="contents-container">
-                        <div class="contents-container-item hashtag"><p class="align-center">네트워킹</p></div>
-                        <div class="contents-container-item hashtag"><p class="align-center">커피챗</p></div>
-                        <div class="contents-container-item hashtag"><p class="align-center">멘토링</p></div>
-                        <div class="contents-container-item hashtag"><p class="align-center">스터디</p></div>
-                    </div> -->
-                    <div class="row g-4">
-                        <div class="col-lg-4 text-start">
-                            <h2>모임종류</h2>
-                        </div>
-                        <div class="col-lg-8 text-end">
-                            <ul th:each="type : ${types}" class="nav nav-pills d-inline-flex text-center mb-5">
-                                <li class="nav-item">
-                                    <a class="d-flex m-2 py-2 bg-light rounded-pill active"
-                                        data-bs-toggle="pill"
-                                        href="#tab-1">
-                                        <span class="text-dark" style="width: 130px" th:text="${type}">모임유형</span>
-                                    </a>
+
+                    <div class="form-group">
+                        <label>모임종류</label>
+                        <div class="checkbox-group">
+                            <ul class="checkbox-group" th:each="type : ${types}">
+                                <li>
+                                    <input type="radio" class="btn-check" name="meetingType" th:value="${type}" th:id="${type}" autocomplete="off">
+                                    <label class="btn btn-outline-success" th:for="${type}" th:text="${type}">파이썬</label>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <div class="row g-4">
-                        <div class="col-lg-4 text-start">
-                            <h2>개발분야</h2>
-                        </div>
-                        <div class="col-lg-8 text-end">
-                            <ul th:each="interest : ${interests}" class="nav nav-pills d-inline-flex text-center mb-5">
-                                <li class="nav-item">
-                                    <a class="d-flex m-2 py-2 bg-light rounded-pill active"
-                                       data-bs-toggle="pill"
-                                       href="#tab-1">
-                                        <span class="text-dark" style="width: 130px" th:text="${interest}">관심분야</span>
-                                    </a>
+                    <div class="form-group">
+                        <label>관심분야</label>
+                        <div class="checkbox-group">
+                            <ul class="checkbox-group" th:each="interest : ${interests}">
+                                <li>
+                                    <input type="checkbox" class="btn-check" name="interestsConditions" th:value="${interest}" th:id="${interest}" autocomplete="off">
+                                    <label class="btn btn-outline-success" th:for="${interest}" th:text="${interest}">파이썬</label>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </form>
-            <div>
-                <h5 class="mb-5 fw-bold padding-left-20px">#관심 개발분야</h5>
+<!--            <div>-->
+<!--                <h5 class="mb-5 fw-bold padding-left-20px">#관심 개발분야</h5>-->
                 <!-- <div class="contents-container">
                     <div class="contents-container-item hashtag"><p class="align-center">FE</p></div>
                     <div class="contents-container-item hashtag"><p class="align-center">iOS</p></div>
                     <div class="contents-container-item hashtag"><p class="align-center">Android</p></div>
                 </div> -->
-                <ul class="nav nav-pills d-inline-flex text-center mb-5">
-                    <li class="nav-item">
-                        <a class="d-flex m-2 py-2 bg-light rounded-pill active" data-bs-toggle="pill" th:href="@{#tab-1}">
-                            <span class="text-dark" style="width: 130px;">FE</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="d-flex py-2 m-2 bg-light rounded-pill" data-bs-toggle="pill" th:href="@{#tab-2}">
-                            <span class="text-dark" style="width: 130px;">iOS</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" th:href="@{#tab-3}">
-                            <span class="text-dark" style="width: 130px;">Android</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+<!--                <ul class="nav nav-pills d-inline-flex text-center mb-5">-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="d-flex m-2 py-2 bg-light rounded-pill active" data-bs-toggle="pill" th:href="@{#tab-1}">-->
+<!--                            <span class="text-dark" style="width: 130px;">FE</span>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="d-flex py-2 m-2 bg-light rounded-pill" data-bs-toggle="pill" th:href="@{#tab-2}">-->
+<!--                            <span class="text-dark" style="width: 130px;">iOS</span>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" th:href="@{#tab-3}">-->
+<!--                            <span class="text-dark" style="width: 130px;">Android</span>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </div>-->
             <!-- <h1 class="mb-4">Fresh fruits shop</h1> -->
             <div class="row g-4">
                 <div class="col-lg-12">
@@ -201,65 +185,72 @@
                             </div> -->
                         </div>
                         <div class="col-6"></div>
-                        <div class="col-xl-3">
-                            <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
-                                <label for="fruits">정렬</label>
-                                <select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3">
-                                    <option value="volvo">없음</option>
-                                    <option value="saab">인기</option>
-                                    <option value="opel">빠른 날짜순</option>
-                                    <option value="audi">관심도</option>
-                                </select>
-                            </div>
-                        </div>
+<!--                        <div class="col-xl-3">-->
+<!--                            <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">-->
+<!--                                <label for="fruits">정렬</label>-->
+<!--                                <select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3">-->
+<!--                                    <option value="volvo">없음</option>-->
+<!--                                    <option value="saab">인기</option>-->
+<!--                                    <option value="opel">빠른 날짜순</option>-->
+<!--                                    <option value="audi">관심도</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                        </div>-->
                     </div>
-                    <div class="row g-4">
-                        <div class="col-lg-9">
-                            <div class="row g-4 justify-content-center">
-                                <ul th:each="meeting : ${previewMeetingList}">
-                                    <li>
-                                        <div class="col-md-6 col-lg-6 col-xl-4">
-                                            <div class="rounded position-relative fruite-item"
-                                                 th:onclick="|location.href='@{/detail/detail}'|" th:value="${meeting.meetingId}">
-                                                <div class="fruite-img">
-                                                    <img th:src="${meeting.meetingImageURL}" class="img-fluid w-100 rounded-top" alt="meetingImageURL" />
-                                                </div>
-                                                <div class="active-red px-3 py-1 rounded position-absolute"
-                                                     style="top: 10px; left: 10px;" th:text="${meeting.status}">모집중</div>
-                                                <div class="p-4 border  border-top-0 rounded-bottom">
-                                                    <h4 th:text="${meeting.title}">모임 이름</h4>
-                                                    <p th:datetime="${meeting.scheduledDate}">2024.06.20(목) 오후 10:09</p>
-                                                    <!-- <div class="d-flex justify-content-between flex-lg-wrap"> -->
-                                                    <div class="contents-container">
-                                                        <p class="cont text-dark fs-5 fw-bold mb-0" th:number="${meeting.recruitMemberNumber}">recruitMemberNumber</p>
-                                                        <p class="cont text-dark fs-5 fw-bold mb-0"> / </p>
-                                                        <p class="cont text-dark fs-5 fw-bold mb-0">recruitmentNumber</p>
-                                                        <img th:src="${meeting.meetingImageURL}" class="search-profile-img" alt="hostImageURL"/>
-                                                        <!-- <div class="padding-left-100px"></div> -->
-                                                        <img th:src="@{/img/like.png}" class="conte search-profile-img" alt="LikeImageURL"/>
-                                                        <img th:src="@{/img/share.png}" class="search-profile-img" alt="ShareImageURL"/>
-                                                        <!-- <a th:href="@{#}"
-                                                            class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                            cart</a> -->
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane fade show p-0 active">
+                            <div class="row g-4">
+                                <div class="col-lg-12">
+                                    <div class="row g-4">
+
+                                        <!-- 타임리프를 사용하여 저장된 데이터만큼 반복 -->
+                                        <div th:each="meeting : ${previewMeetingList}" class="col-md-6 col-lg-4 col-xl-3">
+                                            <a th:href="@{|/detail/detail?meetingId=${meeting.meetingId}|}"
+                                               class="meeting-link">
+                                                <div class="rounded position-relative fruite-item">
+
+                                                    <!-- 모임 이미지 -->
+                                                    <div class="fruit-img">
+                                                        <img th:src="${meeting.meetingImageURL}"
+                                                             class="other-image img-fluid w-100 rounded-top" alt=""/>
+                                                    </div>
+
+                                                    <!-- 모임 정보 -->
+                                                    <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                        <h4 th:text="${meeting.title}">모임 제목</h4>
+                                                        <p th:text="${meeting.locationName}">모임 위치</p>
+                                                        <div class="d-flex justify-content-between flex-lg-wrap">
+
+                                                            <!-- 호스트 프로필과 참가 인원 -->
+                                                            <div class="profile-container">
+                                                                <img th:src="${meeting.hostImageURL}" alt="Profile Picture"
+                                                                     class="profile-image">
+                                                                <span class="profile-text"
+                                                                      th:text="${meeting.recruitMemberNumber + '/' + meeting.recruitmentNumber + '명'}">참가 인원</span>
+                                                            </div>
+
+                                                            <!-- 모임 상태 -->
+                                                            <div class="meeting-status text-info fw-bold"
+                                                                 th:text="${meeting.status}">모임 상태
+                                                            </div>
+
+                                                            <!-- 모임 날짜 및 시간 -->
+                                                            <p class="text-dark fs-5 fw-bold mb-0"
+                                                               th:text="${meeting.scheduledDate}">모임 날짜 및 시간</p>
+
+                                                            <!-- 찜하기 기능 -->
+                                                            <!--<a href="#" class="icon" th:onclick="'toggleFavorite(event, \'heartIcon' + ${meeting.id} + '\')'">
+                                                                <i th:id="'heartIcon' + ${meeting.id}" class="fas fa-heart me-2 text-primary"></i> 찜하기
+                                                            </a>
+                                                            -->
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </a>
                                         </div>
-                                    </li>
-                                </ul>
-<!--                                <div class="col-12">-->
-<!--                                    <div class="pagination d-flex justify-content-center mt-5">-->
-<!--                                        <a th:href="@{#}" class="rounded">&laquo;</a>-->
-<!--                                        <a th:href="@{#}" class="active rounded">1</a>-->
-<!--                                        <a th:href="@{#}" class="rounded">2</a>-->
-<!--                                        <a th:href="@{#}" class="rounded">3</a>-->
-<!--                                        <a th:href="@{#}" class="rounded">4</a>-->
-<!--                                        <a th:href="@{#}" class="rounded">5</a>-->
-<!--                                        <a th:href="@{#}" class="rounded">6</a>-->
-<!--                                        <a th:href="@{#}" class="rounded">&raquo;</a>-->
-<!--                                    </div>-->
-<!--                                </div>-->
+                                        <!-- 타임리프 반복문 종료 -->
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
