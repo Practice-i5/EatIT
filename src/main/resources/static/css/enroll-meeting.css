@@ -101,6 +101,18 @@ form {
     font-weight: lighter;
 }
 
+ul.checkbox-group {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.checkbox-group li,
+.time-group li{
+    list-style-type: none;
+}
+
+
 .form-group input, 
 .form-group select, 
 .form-group textarea {

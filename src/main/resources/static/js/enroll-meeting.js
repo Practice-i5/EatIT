@@ -16,7 +16,7 @@ document.getElementById('file-input').addEventListener('change', function(event)
 
     uploadedFiles = uploadedFiles.concat(newFiles);
 
-    fileCountDisplay.textContent = `${uploadedFiles.length}/1`;
+    fileCountDisplay.textContent = `${uploadedFiles.length}/1`;  //모임등록 페이지 사진 등록 갯수
 
     // 기존 이미지를 초기화
     imagePreview.innerHTML = '';
@@ -36,7 +36,7 @@ document.getElementById('file-input').addEventListener('change', function(event)
             removeButton.classList.add('remove-button');
             removeButton.innerHTML = '&times;';
             removeButton.addEventListener('click', function() {
-                uploadedFiles.splice(index, 1);
+                uploadedFiles.splice(index, 1); //모임등록 페이지 사진 등록 갯수 증가
                 updateImagePreview();
             });
             imgContainer.appendChild(removeButton);
