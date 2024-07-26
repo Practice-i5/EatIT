@@ -6,31 +6,60 @@
     <link th:href="@{/css/groupChat.css}" rel="stylesheet" />
 </head>
 <body>
-<h1>Chat Rooms</h1>
-<form id="createChatRoomForm">
-    <input type="text" id="chatRoomNameInput" placeholder="New Chat Room Name" required>
-    <button type="button" id="createChatRoomButton">Create Chat Room</button>
-</form>
-<ul>
-    <li th:each="chatRoom : ${chatRooms}">
-        <a th:href="@{/chatrooms/{id}(id=${chatRoom.id})}" th:text="${chatRoom.name}">Chat Room Name</a>
-    </li>
-</ul>
+<div class="container">
+    <h1>Chat Rooms</h1>
+    <form id="createChatRoomForm">
+        <div class="form-group">
+            <input type="text" id="chatRoomNameInput" class="form-control" placeholder="New Chat Room Name" required>
+        </div>
+        <button type="button" id="createChatRoomButton" class="btn btn-primary">Create Chat Room</button>
+    </form>
+    <ul id="chatRoomList" class="list-group">
+        <!-- 채팅방 목록이 여기에 추가됨 -->
+    </ul>
+</div>
 <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
 <script th:inline="javascript">
-    /*<![CDATA[*/
+    function fetchChatRooms() {
+        fetch("http://localhost:3000/chats/rooms")
+            .then(response => response.json())
+            .then(data => {
+                const chatRoomList = document.getElementById("chatRoomList");
+                chatRoomList.innerHTML = ''; // 기존 목록 초기화
+                data.forEach(chatRoom => {
+                    const li = document.createElement("li");
+                    li.className = "list-group-item";
+                    const a = document.createElement("a");
+                    a.href = `/chatGroup/chat-page?roomId=${chatRoom._id}`; // 링크를 올바르게 설정
+                    a.textContent = chatRoom.name;
+                    li.appendChild(a);
+                    chatRoomList.appendChild(li);
+                });
+            })
+            .catch((error) => {
+                console.error("Error fetching chat rooms:", error);
+            });
+    }
+
     function createChatRoom(roomName) {
         fetch("http://localhost:3000/chats/createRoom", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${sessionStorage.getItem("token")}` // 토큰을 헤더에 포함
             },
             body: JSON.stringify({ roomName: roomName })
         })
-            .then(response => response.json())
+            .then(response => {
+                if (response.status === 401) {
+                    alert("로그인이 필요합니다.");
+                    return;
+                }
+                return response.json();
+            })
             .then(data => {
                 console.log("Chat room created:", data);
-                location.reload(); // Reload the page to see the new chat room
+                fetchChatRooms(); // 채팅방 목록 갱신
             })
             .catch((error) => {
                 console.error("Error creating chat room:", error);
@@ -41,7 +70,9 @@
         const roomName = document.getElementById("chatRoomNameInput").value;
         createChatRoom(roomName);
     });
-    /*]]>*/
+
+    // 페이지 로드 시 채팅방 목록 가져오기
+    document.addEventListener("DOMContentLoaded", fetchChatRooms);
 </script>
 </body>
 </html>

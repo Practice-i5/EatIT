@@ -52,7 +52,8 @@ getSessionUser((id) => {
     socket.emit("chat message", {
       message: $("#message").val(),
       sender: userId || '익명', // userId가 없을 경우 '익명'으로 설정
-      createdAt: span.dataset.time
+      createdAt: span.dataset.time,
+      roomId: roomId // roomId 추가
     });
 
     messages.appendChild(div);
@@ -129,9 +130,10 @@ getSessionUser((id) => {
 });
 
 // formatTimeAgo 함수 정의
-function formatTimeAgo(date) {
+function formatTimeAgo(dateString) {
+  const date = new Date(dateString);
   const now = new Date();
-  const diff = now - new Date(date);
+  const diff = now - date;
   const minutes = Math.floor(diff / 60000);
   if (minutes < 1) return 'just now';
   if (minutes < 60) return `${minutes} minutes ago`;
@@ -143,7 +145,11 @@ function formatTimeAgo(date) {
 
 // 초기 채팅 메시지를 데이터베이스에서 가져오기
 (function () {
-  fetch("http://localhost:3000/chats") // Node.js 서버와 연결하여 초기 채팅 메시지를 가져옴
+  fetch(`http://localhost:3000/chats/rooms/${roomId}/messages`, {
+    headers: {
+      "username": sessionStorage.getItem("userId")
+    }
+  }) // Node.js 서버와 연결하여 초기 채팅 메시지를 가져옴
       .then(data => data.json())
       .then(json => {
         json.forEach(data => {
@@ -161,7 +167,7 @@ function formatTimeAgo(date) {
 
           let span = document.createElement("span");
           span.className = "timestamp";
-          span.dataset.time = data.createdAt;
+          span.dataset.time = new Date(data.createdAt).toISOString(); // 날짜 형식 수정
           span.textContent = "by " + data.sender + ": " + formatTimeAgo(span.dataset.time);
 
           messageDiv.appendChild(messageText);
@@ -179,6 +185,7 @@ function formatTimeAgo(date) {
 
 // 주기적으로 메시지 시간을 업데이트하는 함수
 function updateTimestamps() {
+  console.log("Updating timestamps..."); // 콘솔 로그 추가
   const timestamps = document.getElementsByClassName('timestamp');
   Array.from(timestamps).forEach(span => {
     const time = span.dataset.time;
@@ -189,7 +196,7 @@ function updateTimestamps() {
 // 30초마다 타임스탬프 업데이트
 setInterval(updateTimestamps, 30000);
 
-//새로운 채팅방 만들기 요청
+// 새로운 채팅방 만들기 요청
 function createChatRoom(roomName) {
   fetch("http://localhost:3000/chats/createRoom", {
     method: "POST",

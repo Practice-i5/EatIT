@@ -1,4 +1,4 @@
-package com.i7.eatit.domain.user.dto;
+package com.i7.eatit.domain.groupChat.dto;
 
 public class ChatMessageDTO {
     private String id;

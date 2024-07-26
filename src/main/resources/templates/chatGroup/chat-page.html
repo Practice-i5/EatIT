@@ -20,7 +20,6 @@
   </div>
   <ul id="messages" class="messages">
     <!-- 메시지 목록은 서버에서 채워짐 -->
-    <li th:each="message : ${messages}" th:text="${message.content}"></li>
   </ul>
 
   <div class="bottom_wrapper clearfix">
@@ -38,5 +37,24 @@
 <script th:src="@{https://code.jquery.com/jquery-1.11.1.min.js}"></script>
 <script th:src="@{https://cdn.jsdelivr.net/gh/yourusername/TimeLeap/src/index-cdn.js}"></script>
 <script th:src="@{/js/chat/chat.js}"></script>
+<script th:inline="javascript">
+  const urlParams = new URLSearchParams(window.location.search);
+  const roomId = urlParams.get('roomId');
+
+  if (roomId) {
+    fetch(`http://localhost:3000/chats/rooms/${roomId}/messages`)
+            .then(response => response.json())
+            .then(messages => {
+              const messagesList = document.getElementById("messages");
+              messagesList.innerHTML = '';
+              messages.forEach(message => {
+                const li = document.createElement("li");
+                li.textContent = message.message; // 메시지 내용 추가
+                messagesList.appendChild(li);
+              });
+            })
+            .catch(error => console.error("Error fetching messages:", error));
+  }
+</script>
 </body>
 </html>
