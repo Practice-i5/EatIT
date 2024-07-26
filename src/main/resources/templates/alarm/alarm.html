@@ -117,11 +117,11 @@
             <div type="button" class="alarm highlight " data-bs-toggle="modal"
                  data-bs-target="#alarmDetailModal" th:onclick="getAlarmDeatil([[${alarm.getAlarmId()}]])">
 <!--                <div style="display:none;" th:text="${alarm.getAlarmId()}" />-->
-                    <img src="/img/test_image.png">
-                    <div class="text">
-                        <td th:text="${alarm.getMeetingId()}">참가 신청 한 모임 이름</td><td>의 참가 신청이 들어왔어요!</td>
-    <!--                        <small class="important" th:text="${alarm.getAlarmDetail()}">모임 신청이 도착했어요!</small>-->
-                    </div>
+                <img src="/img/test_image.png">
+                <div class="text">
+                    <td th:text="${alarm.getMeetingName()}">참가 신청 한 모임 이름</td><td>의 참가 신청이 들어왔어요!</td>
+<!--                        <small class="important" th:text="${alarm.getAlarmDetail()}">모임 신청이 도착했어요!</small>-->
+                </div>
             </div>
         </tr>
 

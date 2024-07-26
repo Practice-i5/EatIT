@@ -3,6 +3,7 @@ package com.i7.eatit.domain.alarm.service;
 import com.i7.eatit.domain.alarm.dao.AlarmMapper;
 import com.i7.eatit.domain.alarm.dto.AlarmDTO;
 import com.i7.eatit.domain.alarm.dto.AlarmDetailDTO;
+import com.i7.eatit.domain.alarm.dto.AlarmSimpleDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,13 +18,13 @@ public class AlarmService {
         this.alarmMapper = alarmMapper;
     }
 
-    public List<AlarmDTO> findAllAlarm(int member_id) {
-       return alarmMapper.findAllAlarm(member_id);
+    public List<AlarmDTO> findAllAlarm(int hostMemberId) {
+       return alarmMapper.findAllAlarm(hostMemberId);
     }
 
-    public boolean checkNewAlarm(int memberId){
+    public boolean checkNewAlarm(int hostMemberId){
 
-        List<AlarmDTO> alarmList = this.findAllAlarm(memberId);
+        List<AlarmDTO> alarmList = this.findAllAlarm(hostMemberId);
 
         int alarmCount = 0;
         for (AlarmDTO alarmDTO : alarmList) {
@@ -49,6 +50,7 @@ public class AlarmService {
     }
 
 
+
     public AlarmDetailDTO findAlarmDetail(int alarmId) {
         AlarmDetailDTO dto = alarmMapper.findAlarmDetail(alarmId);
 //        System.out.println(dto.toString());
@@ -56,4 +58,7 @@ public class AlarmService {
     }
 
 
+    public List<AlarmSimpleDTO> findSimpleAll(int hostMemberId) {
+        return alarmMapper.findSimpleAll(hostMemberId);
+    }
 }

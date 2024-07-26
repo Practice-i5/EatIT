@@ -5,20 +5,20 @@ import java.time.LocalDateTime;
 public class AlarmSimpleDTO {
 
     private int alarmId;
-    private int hostId;             //participation.memberId
+    private int memberId;             //alarm.memberId
     private int meetingId;
-    private int receivingMemberId;     //alarm.memberId
-    private LocalDateTime time;
+    private String meetingName;     //meeting.title
+    private LocalDateTime alarmTime;
 
     public AlarmSimpleDTO() {
     }
 
-    public AlarmSimpleDTO(int alarmId, int hostId, int meetingId, int receivingMemberId, LocalDateTime time) {
+    public AlarmSimpleDTO(int alarmId, int memberId, int meetingId, String meetingName, LocalDateTime alarmTime) {
         this.alarmId = alarmId;
-        this.hostId = hostId;
+        this.memberId = memberId;
         this.meetingId = meetingId;
-        this.receivingMemberId = receivingMemberId;
-        this.time = time;
+        this.meetingName = meetingName;
+        this.alarmTime = alarmTime;
     }
 
     public int getAlarmId() {
@@ -29,12 +29,12 @@ public class AlarmSimpleDTO {
         this.alarmId = alarmId;
     }
 
-    public int getHostId() {
-        return hostId;
+    public int getMemberId() {
+        return memberId;
     }
 
-    public void setHostId(int hostId) {
-        this.hostId = hostId;
+    public void setMemberId(int memberId) {
+        this.memberId = memberId;
     }
 
     public int getMeetingId() {
@@ -45,19 +45,19 @@ public class AlarmSimpleDTO {
         this.meetingId = meetingId;
     }
 
-    public int getReceivingMemberId() {
-        return receivingMemberId;
+    public String getMeetingName() {
+        return meetingName;
     }
 
-    public void setReceivingMemberId(int receivingMemberId) {
-        this.receivingMemberId = receivingMemberId;
+    public void setMeetingName(String meetingName) {
+        this.meetingName = meetingName;
     }
 
-    public LocalDateTime getTime() {
-        return time;
+    public LocalDateTime getAlarmTime() {
+        return alarmTime;
     }
 
-    public void setTime(LocalDateTime time) {
-        this.time = time;
+    public void setAlarmTime(LocalDateTime alarmTime) {
+        this.alarmTime = alarmTime;
     }
 }

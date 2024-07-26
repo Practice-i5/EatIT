@@ -3,6 +3,7 @@ package com.i7.eatit.domain.alarm.controller;
 
 import com.i7.eatit.domain.alarm.dto.AlarmDTO;
 import com.i7.eatit.domain.alarm.dto.AlarmDetailDTO;
+import com.i7.eatit.domain.alarm.dto.AlarmSimpleDTO;
 import com.i7.eatit.domain.alarm.service.AlarmService;
 import com.i7.eatit.domain.picture.dto.MemberPhotoDTO;
 import com.i7.eatit.domain.picture.service.PhotoService;
@@ -21,6 +22,7 @@ public class AlarmPageController {
     private final PhotoService photoService;
 
 
+
     public AlarmPageController(AlarmService alarmService, PhotoService photoService) {
         this.alarmService = alarmService;
         this.photoService = photoService;
@@ -29,26 +31,15 @@ public class AlarmPageController {
     @GetMapping("alarm")
     public String alarmPage(Model model) {
 
-
-        AlarmDTO testDTO = new AlarmDTO();
-        testDTO.setAlarmChecked(false);
-        testDTO.setAlarmDetail("ff");
-        testDTO.setAlarmTime(LocalDateTime.now());
-        testDTO.setAlarmStatus("ddd");
-        testDTO.setMeetingId(3);
-        testDTO.setMemberId(2);
-        testDTO.setParticipationId(5);
-        createNewAlarm(testDTO);
-
         //Todo : 로그인 정보 받아 와야 함
 
-        int memberId = 4;
-        List<AlarmDTO> alarmList = alarmService.findAllAlarm(memberId);
+        int hostMemberId = 3;
+        List<AlarmSimpleDTO> alarmList = alarmService.findSimpleAll(hostMemberId);
         model.addAttribute("alarmList", alarmList);
 
 
 
-        boolean isAlarmRinging = alarmService.checkNewAlarm(memberId);
+        boolean isAlarmRinging = alarmService.checkNewAlarm(hostMemberId);
 
         model.addAttribute("isAlarmRinging" , isAlarmRinging);
 
@@ -66,6 +57,7 @@ public class AlarmPageController {
     public AlarmDetailDTO findAlarmDetail(@RequestParam int alarmId) {
         return alarmService.findAlarmDetail(alarmId);
     }
+
 
     @GetMapping(value="userImg", produces = "application/json; charset=UTF-8")
     @ResponseBody
