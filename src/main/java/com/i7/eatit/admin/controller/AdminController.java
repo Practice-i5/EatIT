@@ -71,7 +71,8 @@ public class AdminController {
     }
 
     @GetMapping("/members")
-    public String getMembers(Model model, @RequestParam(required = false) String sort,
+    public String getMembers(Model model,
+        @RequestParam(name = "sort", required = false) String sort,
         @RequestParam(name = "searchEmail", required = false) String searchEmail,
         HttpServletRequest request) {
 
@@ -84,9 +85,10 @@ public class AdminController {
         return "admin/members";
     }
 
-    // TODO: 회원 단일 조회 [미완성 MemberDto 에 의존하도록 변경해야 함!!]
+    // 회원 단일 조회 위한 Controller
     @GetMapping("/members/{memberId}")
-    public String getMember(@PathVariable int memberId, Model model, HttpServletRequest request) {
+    public String getMember(@PathVariable(name = "memberId") int memberId, Model model,
+        HttpServletRequest request) {
         if (!adminService.isAdminLoggedIn(request)) {
             return "redirect:/admin/login";
         }
@@ -95,14 +97,16 @@ public class AdminController {
         return "admin/member";
     }
 
-    // TODO: 회원 관리 위한 메서드 (정지 혹은 복구) [미완성~!~!~!~!]
+    // 회원을 정지시키기 위한 페이지
     @GetMapping("/members/{memberId}/management")
-    public String clientManagement(@PathVariable int memberId, HttpServletRequest request) {
+    public String clientManagement(@PathVariable(name = "memberId") int memberId,
+        HttpServletRequest request
+    ) {
         if (!adminService.isAdminLoggedIn(request)) {
             return "redirect:/admin/login";
         }
-
-        return "admin/management";
+        adminService.updateMemberStatus(memberId);
+        return "redirect:/admin/members";
     }
 
     // TODO: 신고 조회 위한 메서드 [미완성~!~!~!]

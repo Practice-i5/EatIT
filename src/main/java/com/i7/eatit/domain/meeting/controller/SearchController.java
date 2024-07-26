@@ -27,12 +27,25 @@ public class SearchController {
     public void search_test() {}
 
     @GetMapping("list")
-    public void searchListPage() {}
+    public String searchListPage(Model model) {
+
+        model.addAttribute("interests", meetingService.findAllInterests());
+        model.addAttribute("types", meetingService.findAllType());
+        return "search/list";
+    }
 
     @PostMapping("list")
     public String searchListPage(SearchCriteria searchCriteria, Model model) {
 
-        model.addAttribute("meetingList", meetingService.findPreviewBySearch(searchCriteria));
+        System.out.println("========================프리뷰 모델==========================");
+        System.out.println( meetingService.findPreviewBySearch(searchCriteria));
+        System.out.println("========================개발 분야==========================");
+        System.out.println(meetingService.findAllInterests());
+        System.out.println("========================모임 종류==========================");
+        System.out.println(meetingService.findAllType());
+        model.addAttribute("previewMeetingList", meetingService.findPreviewBySearch(searchCriteria));
+        model.addAttribute("interests", meetingService.findAllInterests());
+        model.addAttribute("types", meetingService.findAllType());
         return "search/list";
     }
 

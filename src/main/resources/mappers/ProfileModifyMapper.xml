@@ -4,6 +4,16 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.i7.eatit.domain.user.dao.ProfileModifyMapper">
+
+    <resultMap id="techExperienceMap" type="com.i7.eatit.domain.user.dto.TechExperienceDTO">
+        <id property="experienceId" column="EXPERIENCE_ID"/>
+        <result property="memberId" column="MEMBER_ID"/>
+        <result property="companyName" column="COMPANY_NAME"/>
+        <result property="description" column="DESCRIPTION"/>
+        <result property="startDate" column="START_DATE"/>
+        <result property="endDate" column="END_DATE"/>
+    </resultMap>
+
     <update id="updateProfile" parameterType="com.i7.eatit.domain.user.dto.ProfileModifyDTO">
         UPDATE
                TBL_MEMBER
@@ -14,5 +24,59 @@
          WHERE
                MEMBER_ID=#{memberId}
     </update>
+
+    <update id="updatePassword" parameterType="hashmap">
+        UPDATE
+               TBL_MEMBER
+           SET
+               PASSWORD=#{newPassword}
+         WHERE
+               MEMBER_ID=#{memberId}
+    </update>
+
+    <update id="softDeleteMember" parameterType="_int">
+        UPDATE
+               TBL_MEMBER
+           SET
+               WITHDRAWAL_STATUS='Y'
+         WHERE
+               MEMBER_ID=#{memberId}
+    </update>
+
+    <select id="selectTechExperience" resultMap="techExperienceMap">
+        SELECT
+               EXPERIENCE_ID
+            ,  MEMBER_ID
+            ,  COMPANY_NAME
+            ,  DESCRIPTION
+            ,  START_DATE
+            ,  END_DATE
+          FROM
+               TBL_MEMBER_EXPERIENCE
+         WHERE
+               MEMBER_ID=#{memberId}
+        ORDER BY
+               START_DATE
+
+    </select>
+
+    <insert id="insertTechExperience" parameterType="com.i7.eatit.domain.user.dto.TechExperienceDTO"
+            useGeneratedKeys="true" keyProperty="experienceId">
+        INSERT INTO
+               TBL_MEMBER_EXPERIENCE(
+               MEMBER_ID
+            ,  COMPANY_NAME
+            ,  DESCRIPTION
+            ,  START_DATE
+            ,  END_DATE
+        )
+        VALUES (
+               #{memberId}
+            ,  #{companyName}
+            ,  #{description}
+            ,  #{startDate}
+            ,  #{endDate}
+        )
+    </insert>
 
 </mapper>

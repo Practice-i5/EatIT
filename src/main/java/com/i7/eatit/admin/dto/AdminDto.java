@@ -9,16 +9,6 @@ public class AdminDto {
     String password;
     LocalDateTime createdDate;
 
-    public AdminDto(int adminId, String email, String password, LocalDateTime createdDate) {
-        this.adminId = adminId;
-        this.email = email;
-        this.password = password;
-        this.createdDate = createdDate;
-    }
-
-    public AdminDto() {
-    }
-
     public int getAdminId() {
         return adminId;
     }

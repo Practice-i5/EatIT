@@ -1,6 +1,7 @@
 package com.i7.eatit.mypage;
 
 import com.i7.eatit.domain.user.dto.UserInfoDTO;
+import com.i7.eatit.domain.user.service.ProfileModifyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,12 @@ import java.util.Objects;
 @RequestMapping("/my-page/*")
 public class AccountInfoController {
 
+    private ProfileModifyService profileModifyService;
+
+    public AccountInfoController(ProfileModifyService profileModifyService) {
+        this.profileModifyService = profileModifyService;
+    }
+
     @GetMapping("account-info")
     public void accountInfo(@SessionAttribute(name = "loginUser", required = false) UserInfoDTO loginUser, Model model){
 
@@ -28,12 +35,19 @@ public class AccountInfoController {
     public String accountInfoModify(@SessionAttribute(name = "loginUser", required = false) UserInfoDTO loginUser, WebRequest request,
                                     RedirectAttributes rttr){
 
-        for (var it: request.getParameterMap().keySet()) {
-            System.out.println(it +":" + request.getParameter(it));
-        }
-
-        if (!Objects.equals(request.getParameter("passwordAfter"), request.getParameter("passwordAfterAgain"))){
+//        for (var it: request.getParameterMap().keySet()) {
+//            System.out.println(it +":" + request.getParameter(it));
+//        }
+        if (!loginUser.getPassword().equals(request.getParameter("passwordBefore"))){
+            rttr.addFlashAttribute("error_passwordBefore", " 올바른 비밀번호를 입력하세요");
+        } else if (!Objects.equals(request.getParameter("passwordAfter"), request.getParameter("passwordAfterAgain"))){
             rttr.addFlashAttribute("error_passwordAgain", "비밀번호를 동일하게 입력해주세요.");
+        } else{
+            //유효한 비밀번호 입력함
+            profileModifyService.modifyPassword(loginUser.getMember_id()
+                    ,request.getParameter("passwordAfter"));
+            loginUser.setPassword(request.getParameter("passwordAfter"));
+            rttr.addFlashAttribute("passwordChangeMessage", "비밀번호를 변경했습니다.");
         }
 
         return "redirect:/my-page/account-info";

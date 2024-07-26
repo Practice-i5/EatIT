@@ -5,7 +5,9 @@ import com.i7.eatit.domain.tag.dto.MemberTechStackDetailDTO;
 import com.i7.eatit.domain.tag.dto.TechStackTypeDTO;
 import com.i7.eatit.domain.tag.service.MemberTechStackService;
 import com.i7.eatit.domain.tag.service.TechStackTypeService;
+import com.i7.eatit.domain.user.dto.TechExperienceDTO;
 import com.i7.eatit.domain.user.dto.UserInfoDTO;
+import com.i7.eatit.domain.user.service.ProfileModifyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,11 +25,14 @@ import java.util.List;
 public class TechProfileController {
 
     private final MemberTechStackService memberTechStackService;
-    TechStackTypeService techStackTypeService;
+    private TechStackTypeService techStackTypeService;
+    private ProfileModifyService profileModifyService;
 
-    public TechProfileController(TechStackTypeService techStackTypeService, MemberTechStackService memberTechStackService) {
-        this.techStackTypeService = techStackTypeService;
+
+    public TechProfileController(MemberTechStackService memberTechStackService, TechStackTypeService techStackTypeService, ProfileModifyService profileModifyService) {
         this.memberTechStackService = memberTechStackService;
+        this.techStackTypeService = techStackTypeService;
+        this.profileModifyService = profileModifyService;
     }
 
     @GetMapping("tech-profile")
@@ -56,6 +61,9 @@ public class TechProfileController {
             System.out.println(stackNumberList);
             model.addAttribute("memberStackCode", stackNumberList);
 
+            List<TechExperienceDTO> techExperienceList = profileModifyService.findMemberTechExperience(loginUser.getMember_id());
+            model.addAttribute("techExperienceList", techExperienceList);
+
         }
     }
 
@@ -79,6 +87,7 @@ public class TechProfileController {
         }
 
         if(!stackCodeList.isEmpty()){
+
             memberTechStackService.updateMemberTechStack(stackCodeList);
             System.out.println("성공?");
             rttr.addFlashAttribute("techModifyMessage", "성공인듯");
@@ -86,6 +95,15 @@ public class TechProfileController {
             System.out.println("실패?");
             rttr.addFlashAttribute("techModifyMessage", "수정 실패");
         }
+
+        return "redirect:/my-page/tech-profile";
+    }
+
+    @PostMapping("tech-experience-modify")
+    public String techExperienceModify(TechExperienceDTO techExperience, @SessionAttribute("loginUser")UserInfoDTO loginUser) {
+
+        techExperience.setMemberId(loginUser.getMember_id());
+        profileModifyService.modifyTechExperience(techExperience);
 
         return "redirect:/my-page/tech-profile";
     }

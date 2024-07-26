@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface PhotoMapper {
@@ -14,7 +15,12 @@ public interface PhotoMapper {
 
     void uploadMemberPhoto(MemberPhotoDTO memberPhoto);
 
-    List<MeetingPhotoDTO> findPhotoByMeetingId(int meetingId);
+    MeetingPhotoDTO findPhotoByMeetingId(int meetingId);
 
+    void uploadMeetingPhoto(MeetingPhotoDTO meetingPhoto);
+
+    void deleteMemberPhoto(int memberId);
+
+    void deleteMeetingPhoto(int meetingId);
 
 }
