@@ -2,9 +2,11 @@ package com.i7.eatit.admin.service;
 
 import com.i7.eatit.admin.dto.AdminDto;
 import com.i7.eatit.admin.dto.AdminLoginDto;
+import com.i7.eatit.admin.dto.AdminMeetingDto;
 import com.i7.eatit.admin.dto.AdminMemberDto;
 import com.i7.eatit.admin.exception.AdminNotFoundException;
 import com.i7.eatit.admin.mapper.AdminMapper;
+import com.i7.eatit.admin.mapper.AdminMeetingMapper;
 import com.i7.eatit.admin.mapper.AdminMemberMapper;
 import com.i7.eatit.admin.util.SHA256Util;
 import jakarta.servlet.http.Cookie;
@@ -19,12 +21,16 @@ import org.springframework.stereotype.Service;
 public class AdminService {
 
     private static final Logger log = LoggerFactory.getLogger(AdminService.class);
-    AdminMemberMapper adminMemberMapper;
-    AdminMapper adminMapper;
 
-    public AdminService(AdminMemberMapper adminMemberMapper, AdminMapper adminMapper) {
+    AdminMapper adminMapper;
+    AdminMemberMapper adminMemberMapper;
+    AdminMeetingMapper adminMeetingMapper;
+
+    public AdminService(AdminMemberMapper adminMemberMapper, AdminMapper adminMapper,
+        AdminMeetingMapper adminMeetingMapper) {
         this.adminMemberMapper = adminMemberMapper;
         this.adminMapper = adminMapper;
+        this.adminMeetingMapper = adminMeetingMapper;
     }
 
     public List<AdminMemberDto> findAllMember(String sort, String searchEmail) {
@@ -82,5 +88,13 @@ public class AdminService {
 
     public void updateMemberStatus(int memberId) {
         adminMemberMapper.updateMemberStatus(memberId);
+    }
+
+    public List<AdminMeetingDto> findAllMeeting() {
+        return adminMeetingMapper.findAllMeeting();
+    }
+
+    public AdminMeetingDto findMeetingById(int meetingId) {
+        return adminMeetingMapper.findMeetingById(meetingId);
     }
 }

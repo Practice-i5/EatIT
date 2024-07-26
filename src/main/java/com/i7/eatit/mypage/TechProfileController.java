@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/my-page/*")
@@ -41,6 +42,9 @@ public class TechProfileController {
             List<MemberTechStackDetailDTO> stackList = memberTechStackService.findMemberTechStack(loginUser.getMember_id());
             System.out.println(stackList);
             model.addAttribute("memberStack",stackList);
+            List<TechExperienceDTO> techExperienceList = profileModifyService.findMemberTechExperience(loginUser.getMember_id());
+            model.addAttribute("techExperienceList", techExperienceList);
+
         }
     }
 
@@ -56,9 +60,6 @@ public class TechProfileController {
                 stackNumberList.add(stack.getStackCode());
             }
 
-            //System.out.println(stackList);
-            System.out.println("멤버 스택목록");
-            System.out.println(stackNumberList);
             model.addAttribute("memberStackCode", stackNumberList);
 
             List<TechExperienceDTO> techExperienceList = profileModifyService.findMemberTechExperience(loginUser.getMember_id());
@@ -74,7 +75,6 @@ public class TechProfileController {
 
         for (var it: request.getParameterMap().keySet()) {
             System.out.println(it +":" + request.getParameter(it));
-
 
             if (it.startsWith("stack-") ){
                 String substr =  it.substring(6);
@@ -99,13 +99,47 @@ public class TechProfileController {
         return "redirect:/my-page/tech-profile";
     }
 
+    @PostMapping("tech-experience-add")
+    public String addTechExperience(TechExperienceDTO techExperience, @SessionAttribute("loginUser")UserInfoDTO loginUser){
+        System.out.println(techExperience);
+        if("on".equals(techExperience.getIsCurrent())) {
+            techExperience.setIsCurrent("Y");
+        } else{
+            techExperience.setIsCurrent("N");
+        }
+
+        techExperience.setMemberId(loginUser.getMember_id());
+        profileModifyService.addTechExperience(techExperience);
+
+        return "redirect:/my-page/tech-profile-modify";
+    }
+
     @PostMapping("tech-experience-modify")
     public String techExperienceModify(TechExperienceDTO techExperience, @SessionAttribute("loginUser")UserInfoDTO loginUser) {
+        System.out.println(techExperience);
+        if("on".equals(techExperience.getIsCurrent())) {
+            techExperience.setIsCurrent("Y");
+        } else{
+            techExperience.setIsCurrent("N");
+        }
 
         techExperience.setMemberId(loginUser.getMember_id());
         profileModifyService.modifyTechExperience(techExperience);
 
-        return "redirect:/my-page/tech-profile";
+        return "redirect:/my-page/tech-profile-modify";
+    }
+
+    @PostMapping("tech-experience-delete")
+    public String deleteTechExperience(@SessionAttribute("loginUser") UserInfoDTO loginUser, WebRequest request){
+        //System.out.println(request.getParameter("deleteId"));
+        if(request.getParameter("deleteId")==null){
+            System.out.println("오류");
+        } else{
+            profileModifyService.deleteTechExperience(loginUser.getMember_id(), Integer.parseInt(Objects.requireNonNull(request.getParameter("deleteId"))));
+
+        }
+
+        return "redirect:/my-page/tech-profile-modify";
     }
 
     @GetMapping("tech-profile/test")
