@@ -8,6 +8,4 @@
     <resultMap id="MemberListMap" type="com.i7.eatit.domain.review.dto.ReviewDTO">
 
     </resultMap>
-
-    <
 </mapper>
