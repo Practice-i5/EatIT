@@ -17,7 +17,6 @@ public class JoinController {
         this.joinService = loginService;
     }
 
-
     // 회원가입 - 이메일, 비밀번호, 이름, 전화번호,닉네임, 기술스택
     @PostMapping("/regist")
     public String join(UserInfoDTO userInfoDTO) {
