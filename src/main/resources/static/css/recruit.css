@@ -1,0 +1,124 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#recruit-modal {
+    /*position: fixed;*/
+    position: absolute;
+    display: none ;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+#recruit-modal.active {
+    display: flex;
+}
+
+#recruit-template {
+    width: 90%;
+    max-width: 500px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+#recruit-close {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+#recruit-close:hover,
+#recruit-close:focus {
+    color: red;
+}
+
+.recruit-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.recruit-pic img {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+}
+
+.recruit-name {
+    margin: 0;
+    text-align: center;
+}
+
+.recruit-contents {
+    background-color: #dff0d8;
+    padding: 20px;
+    border-radius: 10px;
+    /* margin-bottom: 10px; */
+}
+
+.recruit-contents h5 {
+    margin: 10px 0;
+}
+
+.recruit-contents p {
+    margin: 5px 0;
+}
+
+#action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.report-button {
+    display: none;
+}
+
+.block-btn,
+.report-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.follow-btn{
+    background-color: rgb(134, 252, 252);
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.block-btn {
+    background-color: #ccc;
+    color: #000;
+}
+
+.report-btn {
+    background-color: #f44336;
+    color: #fff;
+}

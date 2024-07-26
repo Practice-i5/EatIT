@@ -56,6 +56,12 @@ public interface MeetingMapper {
     PreviewMeetingDTO findPreviewById(int meetingId);
 
     String findMeetingPhotoById(@Param("meetingId") int meetingId);
+
+    String isExistAlarm(@Param("meetingId") int meetingId, @Param("memberId") int memberId);
+
+    String isExistPart(@Param("meetingId") int meetingId, @Param("memberId") int memberId);
+
+    void upCountRecruiterNum(int meetingId);
 //    DetailMeetingDTO findDetailMeetingContents(int meetingId);
 //    List<> findParticipationts(int meetingId);
 }

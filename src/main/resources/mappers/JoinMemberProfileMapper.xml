@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com/i7/eatit/domain/user/dao/JoinMemberProfileMapper">
+<mapper namespace="com.i7.eatit.domain.user.dao.JoinMemberProfileMapper">
 
     <!--JoinMemberProfileDTO Mapping-->
     <resultMap id="JoinMemberProfileMap" type="com.i7.eatit.domain.user.dto.JoinMemberProfileDTO">
@@ -37,7 +37,7 @@
 
     </resultMap>
 
-    <select id="findJoinUser" resultMap="JoinMemberProfileMap">
+    <select id="findJoinUser" parameterType="int" resultMap="JoinMemberProfileMap">
         SELECT
                     A.meeting_id
                     , A.member_id
