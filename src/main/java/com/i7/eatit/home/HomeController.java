@@ -49,11 +49,13 @@ public class HomeController {
     }
 
     @GetMapping("/chat")
-    public String chat() { return "chat/chat"; // 1:1채팅 페이지
+    public String chat() {
+        return "chat/chat-index"; // 1:1채팅 페이지
     }
 
     @GetMapping("/chatGroup")
-    public String chatGroup() { return "chatGroup/chat-page"; // 그룹 채팅 페이지
+    public String chatGroup() {
+        return "chatGroup/chat-page"; // 그룹 채팅 페이지
     }
 
 
