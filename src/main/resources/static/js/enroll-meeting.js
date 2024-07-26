@@ -8,8 +8,8 @@ document.getElementById('file-input').addEventListener('change', function(event)
     const imagePreview = document.getElementById('image-preview');
     const submitButton = document.getElementById('submit-button');
 
-    if (totalFiles > 5) {
-        alert('최대 5개의 이미지만 업로드할 수 있습니다.');
+    if (totalFiles > 1) {
+        alert('1개의 이미지만 업로드할 수 있습니다.');
         event.target.value = ''; // 입력 초기화
         return;
     }
