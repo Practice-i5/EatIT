@@ -15,11 +15,11 @@ import java.util.*;
 public class PhotoService {
 
     private PhotoMapper photoMapper;
-    private FireBaseService fireBaseService;
+    private FileUploadService fileUploadService;
 
-    public PhotoService(PhotoMapper photoMapper, FireBaseService fireBaseService) {
+    public PhotoService(PhotoMapper photoMapper, FileUploadService fileUploadService) {
         this.photoMapper = photoMapper;
-        this.fireBaseService = fireBaseService;
+        this.fileUploadService = fileUploadService;
     }
 
     public MemberPhotoDTO findPhotoByMemberId(int userId){
@@ -29,7 +29,7 @@ public class PhotoService {
     }
 
     public String getPhotoUrlByPath(String path){
-        return fireBaseService.getSourceFromPath(path);
+        return fileUploadService.getSourceFromPath(path);
     }
 
     public MeetingPhotoDTO findPhotoByMeetingId(int meetingId){
@@ -50,7 +50,7 @@ public class PhotoService {
         try {
             //singleImageFile.transferTo(new File(filePath + "/" + savedName));
             //String uploadFileId = DriveExample.uploadFile(singleImageFile);
-            fireBaseService.uploadFile(singleImageFile, "memberImage/"+savedName);
+            fileUploadService.uploadFile(singleImageFile, "memberImage/"+savedName);
 
             MemberPhotoDTO memberPhoto = new MemberPhotoDTO();
             memberPhoto.setMemberId(memberId);
@@ -61,7 +61,7 @@ public class PhotoService {
 
             System.out.println("업로드 성공");
 
-            String Url = fireBaseService.getSourceFromPath("memberImage/"+savedName);
+            String Url = fileUploadService.getSourceFromPath("memberImage/"+savedName);
             System.out.println("반환 url : "+ Url);
             return Url;
 
@@ -89,7 +89,7 @@ public class PhotoService {
             photoMapper.uploadMeetingPhoto(meetingPhoto);
             System.out.println("업로드 완료");
 
-            String Url = fireBaseService.getSourceFromPath("meetingImage/"+savedName);
+            String Url = fileUploadService.getSourceFromPath("meetingImage/"+savedName);
             System.out.println("반환 url : "+ Url);
             return Url;
 
