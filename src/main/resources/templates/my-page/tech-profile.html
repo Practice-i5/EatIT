@@ -60,7 +60,6 @@
                         <button id="experience-submit" class="btn-rw btn-choice-mid" type="button">추가</button>
                     </div>
 
-
                 </form>
             </div>
         </div>
@@ -107,20 +106,21 @@
                 <label>개발 경력</label>
                 <div style="width: 70%;">
                     <ul style="margin-left:5px; list-style: none; padding-left: 0px; display:flex; flex-flow : column wrap; align-items: baseline;">
-                        <li style="display: flex; justify-content: space-between; width: 100%;">
-                            <div style="display: flex; flex-direction: column; align-items: baseline;">
-                                <h3 style="margin:0px;">현대오토에버</h3>
-                                <p class="form-message-mini warn"> 백엔드 개발</p>
-                                <p class="form-message-mini warn">2022.10~2023.11</p>
-                            </div>
-                        </li>
-                        <li style="display: flex; justify-content: space-between; width: 100%;">
-                            <div style="display: flex; flex-direction: column; align-items: baseline;">
-                                <h3 style="margin:0px">네이버</h3>
-                                <p class="form-message-mini warn"> 백엔드 개발</p>
-                                <p class="form-message-mini warn">2023.11~재직 중</p>
-                            </div>
-                        </li>
+                        <th:block th:if="${techExperienceList}">
+                            <li style="display: flex; justify-content: space-between; width: 100%;"
+                                    th:each="techExperience:${techExperienceList}">
+                                <div style="display: flex; flex-direction: column; align-items: baseline;">
+                                    <h3 style="margin:0px;" th:text="${techExperience.companyName}"></h3>
+                                    <p class="form-message-mini warn" th:text="${techExperience.description}"></p>
+                                    <th:block th:if="${techExperience.endDate ne null}">
+                                        <p class="form-message-mini warn" th:text="|${techExperience.startDate}~${techExperience.endDate}|"></p>
+                                    </th:block>
+                                    <th:block th:if="${techExperience.endDate eq null}">
+                                        <p class="form-message-mini warn" th:text="|${techExperience.startDate}~재직중|"></p>
+                                    </th:block>
+                                </div>
+                            </li>
+                        </th:block>
                     </ul>
                 </div>
             </div>

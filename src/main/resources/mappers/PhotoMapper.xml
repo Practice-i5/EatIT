@@ -74,17 +74,20 @@
         (#{photoPath},
         #{photoName},
         #{meetingId})
+        <!--        기존에 없으면 insert, 있으면 update -->
+        ON DUPLICATE KEY UPDATE
+        PHOTO_PATH = #{photoPath},
+        PHOTO_NAME = #{photoName},
+        MEMBER_ID = #{memberId}
     </insert>
+
+    <delete id="deleteMemberPhoto" parameterType="_int">
+        DELETE FROM TBL_MEMBER_PHOTO
+        WHERE MEMBER_ID = #{memberId}
+    </delete>
 
     <delete id="deleteMeetingPhoto" parameterType="_int">
         DELETE FROM TBL_MEETING_PHOTO
         WHERE MEETING_ID = #{meetingId}
-
-    </delete>
-
-    <delete id="deleteOneMeetingPhoto" parameterType="hashmap">
-        DELETE FROM TBL_MEETING_PHOTO
-        WHERE MEETING_ID = #{meetingId}
-        AND PHOTO_ID = #{photoId}
     </delete>
 </mapper>
