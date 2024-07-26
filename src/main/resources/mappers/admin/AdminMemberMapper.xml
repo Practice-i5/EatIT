@@ -26,11 +26,11 @@
   <select id="findAllMember" resultMap="AdminMemberResultMap">
     SELECT *
     FROM tbl_member A
-
-    <if test="searchEmail != null">
-      WHERE A.email LIKE CONCAT('%', #{ searchEmail }, '%')
-    </if>
-
+    <where>
+      <if test="searchEmail != null">
+        AND A.email LIKE CONCAT('%', #{searchEmail}, '%')
+      </if>
+    </where>
     <if test="sort != null">
       ORDER BY
       <choose>

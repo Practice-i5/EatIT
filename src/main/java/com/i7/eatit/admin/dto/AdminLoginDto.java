@@ -10,6 +10,9 @@ public class AdminLoginDto {
         this.adminPassword = adminPassword;
     }
 
+    public AdminLoginDto() {
+    }
+
     public String getAdminEmail() {
         return adminEmail;
     }
