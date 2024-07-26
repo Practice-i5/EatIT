@@ -25,6 +25,14 @@
         <result property="alarmStatus" column="alarm_status"/>
     </resultMap>
 
+    <resultMap id="SimpleAllResultMap" type="com.i7.eatit.domain.alarm.dto.AlarmSimpleDTO">
+        <id property="alarmId" column="alarm_id"/>
+        <result property="memberId" column="memberWhoJoin"/>
+        <result property="meetingId" column="meeting_id"/>
+        <result property="meetingName" column="meetingName"/>
+        <result property="alarmTime" column="alarm_date"/>
+    </resultMap>
+
     <select id="findAllAlarm" resultMap="alarmAllResultMap">
         select
               alarm_id
@@ -40,12 +48,11 @@
         order by alarm_date
     </select>
 
-    <insert id="createNewAlarms" parameterType="com.i7.eatit.domain.alarm.dto.AlarmDTO"
+    <insert id="createNewAlarm" parameterType="com.i7.eatit.domain.alarm.dto.AlarmDTO"
             useGeneratedKeys="true" keyProperty="alarmId">
         insert into tbl_alarm
         (
-              alarm_id
-            , alarm_detail
+              alarm_detail
             , alarm_date
             , member_id
             , participation_id
@@ -55,8 +62,7 @@
         )
         values
         (
-              #{ alarmId }
-            , #{ alarmDetail }
+              #{ alarmDetail }
             , #{ alarmTime }
             , #{ memberId }
             , #{ participationId }
@@ -82,6 +88,39 @@
             left join tbl_member as c
                 on c.member_id = AM.meeting_id
         where AM.alarm_id = #{alarmId}
+    </select>
+
+
+    <select id="getMeetingId" resultType="_int">
+        select
+            meeting_id
+        from
+            tbl_meeting_participation
+        where
+            participation_id = #{participationId}
+    </select>
+
+    <select id="findSimpleAll" resultMap="SimpleAllResultMap">
+        select
+              a.alarm_id
+            , a.member_id as memberWhoJoin
+            , a.meeting_id
+            , b.title as meetingName
+            , a.alarm_status
+        from tbl_alarm as a
+        join
+            (
+                select
+                    meeting_id
+                from
+                    tbl_meeting_participation
+                where
+                    member_id = #{hostMemberId}
+                    and role = 'Host'
+            )  as c
+            on c.meeting_id = a.meeting_id
+        join tbl_meeting as b
+            on b.meeting_id = a.meeting_id
     </select>
 
 

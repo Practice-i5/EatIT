@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meeting Management</title>
+  <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+
+<body>
+<div class="container">
+  <div class="sidebar">
+    <ul>
+      <li><a th:href="@{/admin/members}">회원 관리</a></li>
+      <li><a th:href="@{/admin/meetings}">모임 관리</a></li>
+      <li><a th:href="@{/admin/login}">로그아웃</a></li>
+    </ul>
+  </div>
+  <div class="main">
+    <div class="header">
+      <form action="/admin/meetings" method="GET">
+        <input type="text" name="searchEmail" id="search" placeholder="search by Meeting Id"
+               required>
+        <button type="submit" class="add-user">조회</button>
+      </form>
+    </div>
+    <table>
+      <thead>
+      <tr>
+        <th>모임 아이디</th>
+        <th>제목</th>
+        <th>장소</th>
+        <th>위도</th>
+        <th>경도</th>
+        <th>소개</th>
+        <th>지불 방식</th>
+        <th>모임 종류</th>
+        <th>예정 일자</th>
+        <th>관리</th>
+      </tr>
+      </thead>
+      <tbody id="userTableBody">
+      <tr th:each="adminMeetingDto : ${adminMeetingDtoList}">
+        <td th:text="${adminMeetingDto.meetingId}"></td>
+        <td th:text="${adminMeetingDto.title}"></td>
+        <td th:text="${adminMeetingDto.locationName}"></td>
+        <td th:text="${adminMeetingDto.locationLatitude}"></td>
+        <td th:text="${adminMeetingDto.locationLongitude}"></td>
+        <td th:text="${adminMeetingDto.introduction}"></td>
+        <td th:text="${adminMeetingDto.paymentMethod}"></td>
+        <td th:text="${adminMeetingDto.meetingType}"></td>
+        <td th:text="${adminMeetingDto.scheduledDate}"></td>
+
+        <td>
+          <a th:href="@{/admin/meetings/{meetingId}(meetingId=${adminMeetingDto.meetingId})}"
+             class="management-button"
+             style="display: inline-block; padding: 5px 10px; background-color: #007bff; color: white; text-align: center; text-decoration: none; border-radius: 5px;">관리</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

@@ -3,6 +3,7 @@ package com.i7.eatit.domain.alarm.controller;
 
 import com.i7.eatit.domain.alarm.dto.AlarmDTO;
 import com.i7.eatit.domain.alarm.dto.AlarmDetailDTO;
+import com.i7.eatit.domain.alarm.dto.AlarmSimpleDTO;
 import com.i7.eatit.domain.alarm.service.AlarmService;
 import com.i7.eatit.domain.picture.dto.MemberPhotoDTO;
 import com.i7.eatit.domain.picture.service.PhotoService;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -20,6 +22,7 @@ public class AlarmPageController {
     private final PhotoService photoService;
 
 
+
     public AlarmPageController(AlarmService alarmService, PhotoService photoService) {
         this.alarmService = alarmService;
         this.photoService = photoService;
@@ -28,20 +31,19 @@ public class AlarmPageController {
     @GetMapping("alarm")
     public String alarmPage(Model model) {
 
-
         //Todo : 로그인 정보 받아 와야 함
 
-        int memberId = 4;
-        List<AlarmDTO> alarmList = alarmService.findAllAlarm(memberId);
+        int hostMemberId = 3;
+        List<AlarmSimpleDTO> alarmList = alarmService.findSimpleAll(hostMemberId);
         model.addAttribute("alarmList", alarmList);
 
 
 
-        boolean isAlarmRinging = alarmService.checkNewAlarm(memberId);
+        boolean isAlarmRinging = alarmService.checkNewAlarm(hostMemberId);
 
         model.addAttribute("isAlarmRinging" , isAlarmRinging);
 
-        return "/alarm/alarm";
+        return "alarm/alarm";
     }
 
     //생성 테스트
@@ -55,6 +57,7 @@ public class AlarmPageController {
     public AlarmDetailDTO findAlarmDetail(@RequestParam int alarmId) {
         return alarmService.findAlarmDetail(alarmId);
     }
+
 
     @GetMapping(value="userImg", produces = "application/json; charset=UTF-8")
     @ResponseBody

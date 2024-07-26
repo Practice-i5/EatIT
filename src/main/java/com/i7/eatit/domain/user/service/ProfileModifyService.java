@@ -47,8 +47,20 @@ public class ProfileModifyService {
 
     @Transactional
     public void modifyTechExperience(TechExperienceDTO techExperience) {
-        profileModifyMapper.insertTechExperience(techExperience);
+        profileModifyMapper.updateTechExperience(techExperience);
     }
 
 
+    @Transactional
+    public void addTechExperience(TechExperienceDTO techExperience){
+        profileModifyMapper.insertTechExperience(techExperience);
+
+    }
+
+    public void deleteTechExperience(int memberId, int experienceId) {
+        Map<String, Integer> experienceInfo = new HashMap<>();
+        experienceInfo.put("memberId", memberId);
+        experienceInfo.put("experienceId", experienceId);
+        profileModifyMapper.deleteTechExperience(experienceInfo);
+    }
 }

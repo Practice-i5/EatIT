@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.i7.eatit.admin.mapper.AdminMeetingMapper">
+  <resultMap id="meetingResultMap" type="com.i7.eatit.admin.dto.AdminMeetingDto">
+    <id property="meetingId" column="meeting_id"/>
+    <result property="title" column="title"/>
+    <result property="locationName" column="location_name"/>
+    <result property="locationLatitude" column="location_latitude"/>
+    <result property="locationLongitude" column="location_longitude"/>
+    <result property="introduction" column="introduction"/>
+    <result property="paymentMethod" column="payment_method"/>
+    <result property="meetingType" column="meeting_type"/>
+    <result property="scheduledDate" column="scheduled_date"/>
+    <result property="exitRestrictionTime" column="exit_restriction_time"/>
+    <result property="recruitMemberNumber" column="recruit_member_number"/>
+    <result property="recruitmentNumber" column="recruitment_number"/>
+    <result property="gender" column="gender"/>
+    <result property="eligibleAge" column="eligible_age"/>
+    <result property="createdDate" column="created_date"/>
+    <result property="participationMethod" column="participation_method"/>
+    <result property="status" column="status"/>
+    <result property="endDate" column="end_date"/>
+    <result property="hostMemberId" column="host_member_id"/>
+  </resultMap>
+
+  <select id="findAllMeeting" resultMap="meetingResultMap">
+    SELECT *
+    FROM tbl_meeting
+  </select>
+
+  <select id="findMeetingById" resultMap="meetingResultMap">
+    SELECT *
+    FROM tbl_meeting T
+    WHERE T.meeting_id = #{ meetingId }
+  </select>
+</mapper>

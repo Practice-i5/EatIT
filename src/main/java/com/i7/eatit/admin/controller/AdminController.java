@@ -1,6 +1,7 @@
 package com.i7.eatit.admin.controller;
 
 import com.i7.eatit.admin.dto.AdminLoginDto;
+import com.i7.eatit.admin.dto.AdminMeetingDto;
 import com.i7.eatit.admin.dto.AdminMemberDto;
 import com.i7.eatit.admin.service.AdminService;
 import jakarta.servlet.http.Cookie;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+
+    private static final String REDIRECT_TO_LOGIN = "redirect:/admin/login";
 
     private final AdminService adminService;
 
@@ -51,7 +54,7 @@ public class AdminController {
 
         // 1. 유효한 로그인인지 확인한다.
         if (!adminService.isValidAdminLogin(adminLoginDto)) {
-            return "redirect:/admin/login";
+            return REDIRECT_TO_LOGIN;
         }
 
         // 2. Session 에 ("adminSession_" + 세션 아이디, 어드민의 이메일) 형식으로 저장해 둔다.
@@ -71,13 +74,13 @@ public class AdminController {
     }
 
     @GetMapping("/members")
-    public String getMembers(Model model,
+    public String findAllMember(Model model,
         @RequestParam(name = "sort", required = false) String sort,
         @RequestParam(name = "searchEmail", required = false) String searchEmail,
         HttpServletRequest request) {
 
         if (!adminService.isAdminLoggedIn(request)) {
-            return "redirect:/admin/login";
+            return REDIRECT_TO_LOGIN;
         }
 
         List<AdminMemberDto> adminMemberDtoList = adminService.findAllMember(sort, searchEmail);
@@ -87,10 +90,10 @@ public class AdminController {
 
     // 회원 단일 조회 위한 Controller
     @GetMapping("/members/{memberId}")
-    public String getMember(@PathVariable(name = "memberId") int memberId, Model model,
+    public String findMember(@PathVariable(name = "memberId") int memberId, Model model,
         HttpServletRequest request) {
         if (!adminService.isAdminLoggedIn(request)) {
-            return "redirect:/admin/login";
+            return REDIRECT_TO_LOGIN;
         }
         AdminMemberDto adminMemberDto = adminService.findMemberById(memberId);
         model.addAttribute("adminMemberDto", adminMemberDto);
@@ -103,19 +106,34 @@ public class AdminController {
         HttpServletRequest request
     ) {
         if (!adminService.isAdminLoggedIn(request)) {
-            return "redirect:/admin/login";
+            return REDIRECT_TO_LOGIN;
         }
         adminService.updateMemberStatus(memberId);
         return "redirect:/admin/members";
     }
 
-    // TODO: 신고 조회 위한 메서드 [미완성~!~!~!]
-    @GetMapping("/complaints")
-    public String findReports(HttpServletRequest request) {
+    // 전체 모임 조회
+    @GetMapping("/meetings")
+    public String findMeetings(HttpServletRequest request, Model model) {
         if (!adminService.isAdminLoggedIn(request)) {
-            return "redirect:/admin/login";
+            return REDIRECT_TO_LOGIN;
         }
 
-        return "admin/complaints";
+        List<AdminMeetingDto> adminMeetingDtoList = adminService.findAllMeeting();
+        model.addAttribute("adminMeetingDtoList", adminMeetingDtoList);
+        return "admin/meetings";
+    }
+
+    // 모임 단일 조회
+    @GetMapping("/meetings/{meetingId}")
+    public String findMeetingById(HttpServletRequest request, Model model,
+        @PathVariable(name = "meetingId") int meetingId) {
+        if (!adminService.isAdminLoggedIn(request)) {
+            return REDIRECT_TO_LOGIN;
+        }
+
+        AdminMeetingDto adminMeetingDto = adminService.findMeetingById(meetingId);
+        model.addAttribute("adminMeetingDto", adminMeetingDto);
+        return "admin/meeting";
     }
 }
