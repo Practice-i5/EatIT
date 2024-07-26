@@ -348,7 +348,7 @@ button#showAllButton:hover {
 }
 
 .navbar-brand img {
-    max-height: 50px; /* 원하는 크기로 조정 */
+    max-height: 80px; /* 원하는 크기로 조정 */
     margin-right: 10px; /* 이미지와 텍스트 사이의 간격 */
 }
 
