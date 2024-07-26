@@ -109,7 +109,7 @@
 
     <!-- Fruits Shop Start-->
     <div class="container-fluid fruite py-5">
-        <div class="container py-5">
+        <div class="container py-5" style="margin-top: 30px">
             <form th:action="@{/search/list}" method="post">
                 <div class="align-center">
                     <h1>모임 검색</h1>
@@ -122,42 +122,25 @@
                     </div>
                 </div>
                 <div>
-<!--                    <h5 class="mb-5 fw-bold padding-left-20px">#모임 종류</h5>-->
-                    <!-- <div class="contents-container">
-                        <div class="contents-container-item hashtag"><p class="align-center">네트워킹</p></div>
-                        <div class="contents-container-item hashtag"><p class="align-center">커피챗</p></div>
-                        <div class="contents-container-item hashtag"><p class="align-center">멘토링</p></div>
-                        <div class="contents-container-item hashtag"><p class="align-center">스터디</p></div>
-                    </div> -->
-                    <div class="row g-4">
-                        <div class="col-lg-4 text-start">
-                            <h2>모임종류</h2>
-                        </div>
-                        <div class="col-lg-8 text-end checkbox-group">
-                            <ul th:each="type : ${types}" class="nav nav-pills d-inline-flex text-center mb-5 checkbox-group">
-                                <li class="nav-item button">
-                                    <input class="d-flex m-2 py-2 bg-light rounded-pill active"
-                                        data-bs-toggle="pill"
-                                        href="#tab-1" name=""
-                                        th:value="${type}">
-                                        <span class="text-dark" style="width: 130px" th:text="${type}">모임유형</span>
-                                    <label></label>
+
+                    <div class="form-group">
+                        <label>모임종류</label>
+                        <div class="checkbox-group">
+                            <ul class="checkbox-group" th:each="type : ${types}">
+                                <li>
+                                    <input type="radio" class="btn-check" name="meetingType" th:value="${type}" th:id="${type}" autocomplete="off">
+                                    <label class="btn btn-outline-success" th:for="${type}" th:text="${type}">파이썬</label>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <div class="row g-4">
-                        <div class="col-lg-4 text-start">
-                            <h2>개발분야</h2>
-                        </div>
-                        <div class="col-lg-8 text-end">
-                            <ul th:each="interest : ${interests}" class="nav nav-pills d-inline-flex text-center mb-5">
-                                <li class="nav-item">
-                                    <a class="d-flex m-2 py-2 bg-light rounded-pill active"
-                                       data-bs-toggle="pill"
-                                       href="#tab-1">
-                                        <span class="text-dark" style="width: 130px" th:text="${interest}">관심분야</span>
-                                    </a>
+                    <div class="form-group">
+                        <label>관심분야</label>
+                        <div class="checkbox-group">
+                            <ul class="checkbox-group" th:each="interest : ${interests}">
+                                <li>
+                                    <input type="checkbox" class="btn-check" name="interestsConditions" th:value="${interest}" th:id="${interest}" autocomplete="off">
+                                    <label class="btn btn-outline-success" th:for="${interest}" th:text="${interest}">파이썬</label>
                                 </li>
                             </ul>
                         </div>
@@ -202,17 +185,17 @@
                             </div> -->
                         </div>
                         <div class="col-6"></div>
-                        <div class="col-xl-3">
-                            <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
-                                <label for="fruits">정렬</label>
-                                <select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3">
-                                    <option value="volvo">없음</option>
-                                    <option value="saab">인기</option>
-                                    <option value="opel">빠른 날짜순</option>
-                                    <option value="audi">관심도</option>
-                                </select>
-                            </div>
-                        </div>
+<!--                        <div class="col-xl-3">-->
+<!--                            <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">-->
+<!--                                <label for="fruits">정렬</label>-->
+<!--                                <select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3">-->
+<!--                                    <option value="volvo">없음</option>-->
+<!--                                    <option value="saab">인기</option>-->
+<!--                                    <option value="opel">빠른 날짜순</option>-->
+<!--                                    <option value="audi">관심도</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                        </div>-->
                     </div>
                     <div class="tab-content">
                         <div id="tab-1" class="tab-pane fade show p-0 active">
