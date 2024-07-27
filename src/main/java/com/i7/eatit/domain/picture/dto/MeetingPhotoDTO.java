@@ -2,26 +2,26 @@ package com.i7.eatit.domain.picture.dto;
 
 public class MeetingPhotoDTO {
 
-    private int meetingPhotoID;
+    private int meetingPhotoId;
     private int meetingId;
     private String photoPath;
     private String photoName;
 
     public MeetingPhotoDTO() {}
 
-    public MeetingPhotoDTO(int meetingPhotoID, int meetingId, String photoPath, String photoName) {
-        this.meetingPhotoID = meetingPhotoID;
+    public MeetingPhotoDTO(int meetingPhotoId, int meetingId, String photoPath, String photoName) {
+        this.meetingPhotoId = meetingPhotoId;
         this.meetingId = meetingId;
         this.photoPath = photoPath;
         this.photoName = photoName;
     }
 
-    public int getMeetingPhotoID() {
-        return meetingPhotoID;
+    public int getMeetingPhotoId() {
+        return meetingPhotoId;
     }
 
-    public void setMeetingPhotoID(int meetingPhotoID) {
-        this.meetingPhotoID = meetingPhotoID;
+    public void setMeetingPhotoId(int meetingPhotoId) {
+        this.meetingPhotoId = meetingPhotoId;
     }
 
     public int getMeetingId() {
@@ -51,7 +51,7 @@ public class MeetingPhotoDTO {
     @Override
     public String toString() {
         return "MeetingPhotoDTO{" +
-                "meetingPhotoID=" + meetingPhotoID +
+                "meetingPhotoId=" + meetingPhotoId +
                 ", meetingId=" + meetingId +
                 ", photoPath='" + photoPath + '\'' +
                 ", photoName='" + photoName + '\'' +
