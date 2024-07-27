@@ -80,11 +80,11 @@ public class MeetingService {
     public String isExistAlarm(int meetingId, int memberId) { return meetingMapper.isExistAlarm(meetingId, memberId);}
 
     public String isExistPart(int meetingId, int memberId) { return meetingMapper.isExistPart(meetingId, memberId); }
-
+    @Transactional
     public void upCountRecruiterNum(int meetingId) { meetingMapper.upCountRecruiterNum(meetingId);}
-
+    @Transactional
     public void increaseMeetingReport(int meetingId) { meetingMapper.increaseMeetingReport(meetingId);}
-
+    @Transactional
     public void increaseMemberReport(int memberId) { meetingMapper.increaseMemberReport(memberId);}
 
     public List<MemberLoadDTO> loadMembersById(int meetingId) { return meetingMapper.loadMembersById(meetingId);}

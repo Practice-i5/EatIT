@@ -41,6 +41,7 @@ public class DetailController {
         this.alarmService = alarmService;
 //        this.joinMemberService = joinMemberService;
         this.userInfoService = userInfoService;
+        this.userFollowService = userFollowService;
     }
 
 
@@ -80,7 +81,6 @@ public class DetailController {
     @PostMapping("detail")
     public String writeDetail(Model model, @ModelAttribute DetailMeetingDTO detailDTO, @SessionAttribute("loginUser") UserInfoDTO userInfoDTO) {
         Timestamp now = new Timestamp(System.currentTimeMillis());
-
         System.out.println("과연 결과는!!!!!!!!!\n" + detailDTO + "\n**************이게 반환되었습니다 ***************");
         model.addAttribute("meetingDTO", meetingService.findMeetingById(detailDTO.getMeetingId()));
         model.addAttribute("interests", meetingService.findInterestsById(detailDTO.getMeetingId()));
@@ -110,11 +110,12 @@ public class DetailController {
                 alarmDTO.setAlarmChecked(false);
                 alarmDTO.setMeetingId(detailDTO.getMeetingId());
                 alarmService.createNewAlarm(alarmDTO);
+                System.out.println("********************이건 alarmDTO****************\n" + alarmDTO + "****************************************");
             } else {
                 model.addAttribute("decMessage", "정원이 전부 찼습니다.");
             }
         } else if (detailDTO.getParticipateFree() == 1 && meetingService.isExistPart(detailDTO.getMeetingId(), userInfoDTO.getMember_id()) != null) {
-
+            System.out.println("heeeeeerrrrrreeeeeeee\n");
 //            System.out.println("********************enrollMeeting******************\n" + );
             if (meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitMemberNumber() < meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitmentNumber()) {
                 meetingService.participateGuest(detailDTO.getMeetingId(), userInfoDTO.getMember_id());

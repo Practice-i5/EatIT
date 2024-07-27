@@ -234,6 +234,7 @@
                 </div>
                 <div class="align-center">
                     <label>
+                        <input name="meetingId" th:value="${meetingDTO.meetingId}" type="number" class="return-value">
                         <input name="participateAcc" type="number" th:value="1" class="return-value">
                         <input name="meetingId" type="number" th:value="${meetingDTO.meetingId}" class="return-value">
                     </label>
@@ -285,13 +286,14 @@
                 <div id="action-buttons">
                     <form th:action="@{/detail/detail}" method="POST">
                         <label for="follow">
+                            <input name="meetingId" th:value="${meetingDTO.meetingId}" type="number" class="return-value">
                             <input name="decMemberId" th:value="${meetingDTO.hostMemberId}" class="return-value">
                             <button id="follow" class="follow-btn">팔로우</button>
                         </label>
                     </form>
                     <form th:action="@{/detail/detail}" method="POST">
                         <label for="dec">
-                            <input name="meetingId" th:value="1" type="number" class="return-value">
+                            <input name="meetingId" th:value="${meetingDTO.meetingId}" type="number" class="return-value">
                             <input name="reportedMemberId" th:value="${meetingDTO.hostMemberId}" class="return-value">
                             <input name="decHuman" type="number" th:value="1" class="return-value">
                             <button id="dec" type="submit" class="report-button report-btn">신고하기</button>
@@ -375,7 +377,7 @@
                     <div class="row g-4 fruite">
                         <div class="col-lg-12">
                             <div class="leader-data">
-                                <h3 class="align-center padding-top-20px" th:text="${hostInfoDTO.nickname}">리더 정보</h3>
+                                <h3 class="align-center padding-top-20px">리더 정보</h3>
                                 <hr />
                                 <div>
                                     <div class="padding-bottom-20px padding-left-20px">
