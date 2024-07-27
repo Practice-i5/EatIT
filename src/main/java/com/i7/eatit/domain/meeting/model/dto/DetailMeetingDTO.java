@@ -6,22 +6,24 @@ import java.sql.Timestamp;
 public class DetailMeetingDTO {
 
     private int meetingId;
+    private int reportedMemberId;
     private int decMemberId;
-    private boolean isDecHuman;
-    private boolean isDecMeeting;
-    private boolean isParticipateFree;
-    private boolean isParticipateAcc;
+    private int decHuman;
+    private int decMeeting;
+    private int participateFree;
+    private int participateAcc;
     private String introduction;
 
     public DetailMeetingDTO() {}
 
-    public DetailMeetingDTO(int meetingId, int decMemberId, boolean isDecHuman, boolean isDecMeeting, boolean isParticipateFree, boolean isParticipateAcc, String introduction) {
+    public DetailMeetingDTO(int meetingId, int reportedMemberId, int decMemberId, int decHuman, int decMeeting, int participateFree, int participateAcc, String introduction) {
         this.meetingId = meetingId;
+        this.reportedMemberId = reportedMemberId;
         this.decMemberId = decMemberId;
-        this.isDecHuman = isDecHuman;
-        this.isDecMeeting = isDecMeeting;
-        this.isParticipateFree = isParticipateFree;
-        this.isParticipateAcc = isParticipateAcc;
+        this.decHuman = decHuman;
+        this.decMeeting = decMeeting;
+        this.participateFree = participateFree;
+        this.participateAcc = participateAcc;
         this.introduction = introduction;
     }
 
@@ -33,6 +35,14 @@ public class DetailMeetingDTO {
         this.meetingId = meetingId;
     }
 
+    public int getReportedMemberId() {
+        return reportedMemberId;
+    }
+
+    public void setReportedMemberId(int reportedMemberId) {
+        this.reportedMemberId = reportedMemberId;
+    }
+
     public int getDecMemberId() {
         return decMemberId;
     }
@@ -41,36 +51,36 @@ public class DetailMeetingDTO {
         this.decMemberId = decMemberId;
     }
 
-    public boolean isDecHuman() {
-        return isDecHuman;
+    public int getDecHuman() {
+        return decHuman;
     }
 
-    public void setDecHuman(boolean decHuman) {
-        isDecHuman = decHuman;
+    public void setDecHuman(int decHuman) {
+        this.decHuman = decHuman;
     }
 
-    public boolean isDecMeeting() {
-        return isDecMeeting;
+    public int getDecMeeting() {
+        return decMeeting;
     }
 
-    public void setDecMeeting(boolean decMeeting) {
-        isDecMeeting = decMeeting;
+    public void setDecMeeting(int decMeeting) {
+        this.decMeeting = decMeeting;
     }
 
-    public boolean isParticipateFree() {
-        return isParticipateFree;
+    public int getParticipateFree() {
+        return participateFree;
     }
 
-    public void setParticipateFree(boolean participateFree) {
-        isParticipateFree = participateFree;
+    public void setParticipateFree(int participateFree) {
+        this.participateFree = participateFree;
     }
 
-    public boolean isParticipateAcc() {
-        return isParticipateAcc;
+    public int getParticipateAcc() {
+        return participateAcc;
     }
 
-    public void setParticipateAcc(boolean participateAcc) {
-        isParticipateAcc = participateAcc;
+    public void setParticipateAcc(int participateAcc) {
+        this.participateAcc = participateAcc;
     }
 
     public String getIntroduction() {
@@ -85,11 +95,12 @@ public class DetailMeetingDTO {
     public String toString() {
         return "DetailMeetingDTO{" +
                 "meetingId=" + meetingId +
+                ", reportedMemberId=" + reportedMemberId +
                 ", decMemberId=" + decMemberId +
-                ", isDecHuman=" + isDecHuman +
-                ", isDecMeeting=" + isDecMeeting +
-                ", isParticipateFree=" + isParticipateFree +
-                ", isParticipateAcc=" + isParticipateAcc +
+                ", decHuman=" + decHuman +
+                ", decMeeting=" + decMeeting +
+                ", participateFree=" + participateFree +
+                ", participateAcc=" + participateAcc +
                 ", introduction='" + introduction + '\'' +
                 '}';
     }
