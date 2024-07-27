@@ -1,5 +1,8 @@
 package com.i7.eatit.domain.chatting.controller;
 
+import com.i7.eatit.domain.user.dto.UserInfoDTO;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -11,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
@@ -34,15 +38,24 @@ public class ChatController {
     }
 
     @GetMapping("/chat")
-    public String chat(Model model) {
-        // 필요한 데이터를 모델에 추가
-        model.addAttribute("roomName", "방 이름");
+    public String chat(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        UserInfoDTO loginUser = (UserInfoDTO) session.getAttribute("loginUser");
+
+        if (loginUser == null) {
+            // 로그인 페이지로 리다이렉트, redirectUrl 파라미터에 현재 페이지를 설정
+            return "redirect:/login/loginMain?redirectUrl=/chat";
+        }
+
+        model.addAttribute("username", loginUser.getNickname());
+        model.addAttribute("roomName", "Default Room"); // 필요한 경우 실제 방 이름을 설정
         model.addAttribute("users", new ArrayList<>()); // 실제 사용자 리스트 추가
+
         return "chat/chat"; // chat.html 템플릿을 렌더링
     }
 
     // ChatMessage 클래스 정의
-    static class ChatMessage {
+    public static class ChatMessage {
         private String username;
         private String room;
         private String message;
