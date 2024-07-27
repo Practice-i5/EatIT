@@ -112,21 +112,16 @@
     </div>
 
     <div class="container">
-<!--        <span th:text="${alarmList[0].getMeetingId()}">ff</span>-->
-<!--        <img th:id="|target_meeting_img_${alarmList[0].getMeetingId()}|" src="/img/test_image.png">-->
-<!--        <script>getMeetingImage([[${alarmList[0].getMemberId()}]])</script>-->
         <tr th:each="alarm : ${alarmList}">
             <div type="button" class="alarm highlight " data-bs-toggle="modal"
                  data-bs-target="#alarmDetailModal" th:onclick="getAlarmDeatil([[${alarm.getAlarmId()}]])">
-<!--                <div style="display:none;" th:text="${alarm.getAlarmId()}" />-->
                 <img th:class="|target_meeting_img_${alarm.getMeetingId()}|" src="/img/test_image.png">
-<!--                <script>getMeetingImage([[${alarm.getMeetingId()}]])</script>-->
-                <div class="text">
-                    <td th:text="${alarm.getMeetingName()}" class="text">참가 신청 한 모임 이름</td><td>의 참가 신청이 들어왔어요!</td>
+                <div class="text" th:id="|target_text_${alarm.getAlarmId()}|">
+                    <td th:text="${alarm.getMeetingName()}" class="text">참가 신청 한 모임 이름</td><td>의 참가 신청이 들어왔어요!</td><td th:text="${alarm.getAlarmTime()}">date</td>
 <!--                        <small class="important" th:text="${alarm.getAlarmDetail()}">모임 신청이 도착했어요!</small>-->
                 </div>
-                <label th:text="${alarm.getAlarmTime()}">date</label>
             </div>
+            <script>checkRead([[${alarm.isAlarmChecked()}]], [[${alarm.getAlarmId()}]])</script>
         </tr>
         <script>getMeetingImages([[${meetingIdList}]])</script>
 
@@ -157,14 +152,6 @@
         </div>
     </div>
         <!-- Modal END -->
-
-<!--        필요한것-->
-<!--        1. 미팅 이름-->
-<!--        2. 사람 이름-->
-<!--        3. 사람 프로필 링크-->
-<!--        4. 미팅 링크-->
-<!--        5. 이미지 링크-->
-
 
     <!-- Alarm List End -->
 

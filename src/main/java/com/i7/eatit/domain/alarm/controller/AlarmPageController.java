@@ -101,11 +101,11 @@ public class AlarmPageController {
     public List<String> getMeetingImages(@RequestParam List<Integer> meetingIdList) {
         List<String> images = new ArrayList<>();
         for (Integer meetingId : meetingIdList) {
-            System.out.println("meeting id : " + meetingId);
+//            System.out.println("meeting id : " + meetingId);
             MeetingPhotoDTO photoDTO = photoService.findPhotoByMeetingId(meetingId);
-            System.out.println("photoPath : "+ photoDTO.getPhotoPath());
+//            System.out.println("photoPath : "+ photoDTO.getPhotoPath());
             String url = photoService.getPhotoUrlByPath(photoDTO.getPhotoPath());
-            System.out.println("url : " + url);
+//            System.out.println("url : " + url);
             images.add(url);
         }
         return images;

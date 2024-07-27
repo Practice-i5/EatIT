@@ -31,6 +31,7 @@
         <result property="meetingId" column="meeting_id"/>
         <result property="meetingName" column="meetingName"/>
         <result property="alarmTime" column="alarm_date"/>
+        <result property="alarmChecked" column="alarm_checked"/>
     </resultMap>
 
     <select id="findAllAlarm" resultMap="alarmAllResultMap">
@@ -139,6 +140,7 @@
             , a.meeting_id
             , b.title as meetingName
             , a.alarm_status
+            , alarm_checked
         from tbl_alarm as a
         join
             (

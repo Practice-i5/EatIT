@@ -143,7 +143,7 @@
 .alarm .text small {
     color: #888;
 }
-.alarm .important small {
+.alarm .important {
     color: red;
     font-weight: bold;
 }
@@ -154,4 +154,9 @@
 .alarm.highlight:hover {
     border: 2px solid red;
     cursor: pointer;
+}
+
+.alarm-important {
+    color: #81c408 ;
+    /*font-weight: bold;*/
 }
