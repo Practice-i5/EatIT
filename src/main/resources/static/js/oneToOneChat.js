@@ -12,39 +12,62 @@ const { username, room } = Qs.parse(location.search, {
     ignoreQueryPrefix: true,
 });
 
-// 메시지 전송 폼의 제출 이벤트를 처리합니다.
-chatForm.addEventListener('submit', (e) => {
-    e.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
+// Socket.IO 클라이언트 생성
+const socket = io("http://localhost:3001");
 
-    // 입력된 메시지 텍스트를 가져옵니다.
-    let msg = e.target.elements.msg.value;
+// 방에 참여
+socket.emit('joinRoom', { username, room });
 
-    msg = msg.trim(); // 메시지 양끝의 공백을 제거합니다.
-
-    if (!msg) {
-        return false; // 메시지가 비어 있으면 전송을 중단합니다.
-    }
-
-    // 서버로 메시지를 전송합니다 (Spring Boot).
-    fetch('/send-message', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            username: username,
-            room: room,
-            message: msg
-        })
-    }).then(response => {
-        if (response.ok) {
-            console.log('Message sent to Node.js server and saved to MongoDB');
-        } else {
-            console.error('Failed to send message');
-        }
-    });
-
-    // 입력 필드를 초기화합니다.
-    e.target.elements.msg.value = '';
-    e.target.elements.msg.focus(); // 입력 필드에 포커스를 맞춥니다.
+// 서버로부터 방 정보와 사용자 목록을 받습니다.
+socket.on('roomUsers', ({ room, users }) => {
+    outputRoomName(room);
+    outputUsers(users);
 });
+
+// 서버로부터 메시지를 받습니다.
+socket.on('message', (message) => {
+    console.log(message);
+    outputMessage(message);
+
+    // 스크롤을 최신 메시지로 이동
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+});
+
+// 메시지 전송 폼 제출 이벤트 처리
+chatForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // 입력된 메시지 텍스트 가져오기
+    const msg = e.target.elements.msg.value;
+
+    // 서버로 메시지 전송
+    socket.emit('chatMessage', msg);
+
+    // 입력 필드 초기화
+    e.target.elements.msg.value = '';
+    e.target.elements.msg.focus();
+});
+
+// 방 이름을 DOM에 출력
+function outputRoomName(room) {
+    roomName.innerText = room;
+}
+
+// 사용자 목록을 DOM에 출력
+function outputUsers(users) {
+    userList.innerHTML = '';
+    users.forEach(user => {
+        const li = document.createElement('li');
+        li.innerText = user.username;
+        userList.appendChild(li);
+    });
+}
+
+// 메시지를 DOM에 출력
+function outputMessage(message) {
+    const div = document.createElement('div');
+    div.classList.add('message');
+    div.innerHTML = `<p class="meta">${message.username} <span>${message.time}</span></p>
+    <p class="text">${message.text}</p>`;
+    chatMessages.appendChild(div);
+}
