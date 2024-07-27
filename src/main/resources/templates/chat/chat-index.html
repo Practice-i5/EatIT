@@ -1,15 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
-            integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
-            crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/oneToOneChat.css}" />
     <title>Eat-It 1:1 채팅</title>
 </head>
@@ -19,25 +14,40 @@
         <h1><i class="fas fa-smile"></i>Eat-It 1:1 채팅</h1>
     </header>
     <main class="join-main">
-        <form th:action="@{/chat/one-to-one/create}" method="post">
+        <form th:action="@{/onechatroom/create}" method="post">
             <div class="form-control">
-                <label for="username">Username</label>
-                <input
-                        type="text"
-                        name="username"
-                        id="username"
-                        placeholder="Enter username..."
-                        required
-                />
+                <label for="room-name">채팅방 생성</label>
+                <input type="text" name="name" id="room-name" placeholder="채팅방 이름 입력..." required />
             </div>
             <div class="form-control">
-                <label for="room">Room</label>
-                <select name="room" id="room">
-                    <option th:each="room : ${rooms}" th:value="${room}" th:text="${room}">Room</option>
+                <label for="username">사용자 이름</label>
+                <input type="text" name="username" id="username-create" placeholder="사용자 이름 입력..." required />
+            </div>
+            <button type="submit" class="btn">채팅방 생성</button>
+        </form>
+        <form th:action="@{/onechatroom/delete}" method="post">
+            <div class="form-control">
+                <label for="delete-room-id">채팅방 삭제</label>
+                <input type="text" name="id" id="delete-room-id" placeholder="삭제할 채팅방 ID 입력..." required />
+            </div>
+            <button type="submit" class="btn">채팅방 삭제</button>
+        </form>
+        <form th:action="@{/onechatroom/chat-room}" method="get">
+            <div class="form-control">
+                <label for="username">사용자 이름</label>
+                <input type="text" name="username" id="username" placeholder="사용자 이름 입력..." required />
+            </div>
+            <div class="form-control">
+                <label for="room">채팅방</label>
+                <select name="room" id="room" required>
+                    <option th:each="room : ${oneChatRooms}" th:value="${room.name}" th:text="${room.name}">Room</option>
                 </select>
             </div>
-            <button type="submit" class="btn">Join Chat</button>
+            <button type="submit" class="btn">채팅방 입장</button>
         </form>
+        <div class="form-control leave-btn-container">
+            <a class="btn" th:href="@{/home}">채팅방 나가기</a>
+        </div>
     </main>
 </div>
 </body>

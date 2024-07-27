@@ -36,7 +36,10 @@
     <link href="/css/home.css" rel="stylesheet" />
 </head>
 <body>
-
+<script>
+    const successMessage = `[[${successMessage}]]`
+    if(successMessage) alert(successMessage)
+</script>
 <!-- 헤더 시작 -->
 <div class="container-fluid fixed-top">
     <div class="container px-0">
@@ -60,7 +63,7 @@
             <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                 <div class="navbar-nav mx-auto">
                     <a th:href="@{/home}" class="nav-item nav-link active">홈</a>
-                    <a th:href="@{/enroll-meeting}" class="nav-item nav-link">모임등록</a>
+                    <a th:href="@{/enroll-meeting/enroll-meeting}" class="nav-item nav-link">모임등록</a>
                     <a th:href="@{/search/list}" class="nav-item nav-link">모임찾기</a>
                     <!-- 모임목록은 로그인을 해야 들어갈 수 있기에 404 에러가 뜸-->
                     <a th:href="@{/meetingList/participatingList}" class="nav-item nav-link">모임목록</a>
@@ -71,7 +74,7 @@
                     <i class="fas fa-comments"></i>
                     <span class="btn-text">1:1채팅</span>
                 </a>
-                <a th:href="@{/groupchat}" class="btn-chat my-auto">
+                <a th:href="@{/chatGroup/chatrooms}" class="btn-chat my-auto">
                     <i class="fas fa-users"></i>
                     <span class="btn-text">그룹채팅</span>
                 </a>
@@ -104,7 +107,7 @@
                 <h4 class="mb-3 text-secondary">소소한 it 소모임</h4>
                 <h5 class="mb-5 display-7 text-primary">관심 개발 분야 🔍</h5>
                 <div class="position-relative mx-auto">
-                    <form id="searchForm" method="get" th:action="@{/search}">
+                    <form id="searchForm" method="get" th:action="@{/search/list}">
                         <button
                                 type="submit"
                                 class="btn btn-primary border-2 border-secondary py-3 px-4 rounded-pill text-white h-200"
@@ -696,5 +699,78 @@
     </div>
 </div>
 <!-- 푸터 끝 -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // 서버에서 세션 사용자 정보를 가져오는 함수
+        function getSessionUser() {
+            return fetch('/login/getSessionUser', {
+                method: 'GET',
+                credentials: 'include', // 세션 정보를 포함하여 요청
+            })
+                .then(response => response.json())
+                .then(data => data)
+                .catch(error => {
+                    console.error('Error:', error);
+                    return null;
+                });
+        }
+
+        async function updateButtons() {
+            const loginButton = document.getElementById('loginButton');
+            const signupButton = document.getElementById('signupButton');
+
+            const user = await getSessionUser();
+
+            if (user && user.email) { // 로그인한 사용자가 있을 경우
+                loginButton.textContent = '로그아웃';
+                loginButton.setAttribute('href', '/login/logout'); // 로그아웃 URL로 업데이트
+                signupButton.textContent = '마이페이지';
+                signupButton.setAttribute('href', '/my-page'); // 마이페이지 URL로 업데이트
+            } else { // 로그인한 사용자가 없을 경우
+                loginButton.textContent = '로그인';
+                loginButton.setAttribute('href', '/login/loginMain');
+                signupButton.textContent = '회원가입';
+                signupButton.setAttribute('href', '/login/join');
+            }
+        }
+
+        updateButtons();
+
+        // 알림 버튼 이벤트
+        document.querySelector('.btn-notification').addEventListener('click', function () {
+            const notificationDot = this.querySelector('.notification-dot');
+            notificationDot.style.display = notificationDot.style.display === 'none' ? 'block' : 'none';
+            alert('새 알림이 있습니다.');
+        });
+
+        // 로그인 버튼 클릭 시 login.html로 이동
+        document.getElementById('loginButton').addEventListener('click', function (event) {
+            if (this.textContent === '로그아웃') {
+                event.preventDefault();
+                fetch('/login/logout', {
+                    method: 'GET',
+                    credentials: 'include', // 세션 정보를 포함하여 요청
+                })
+                    .then(() => {
+                        localStorage.removeItem('isLoggedIn');
+                        window.location.href = '/';
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        });
+
+        // 회원가입 버튼 클릭 시 join.html로 이동
+        document.getElementById('signupButton').addEventListener('click', function () {
+            if (this.textContent !== '마이페이지') {
+                window.location.href = '/login/join';
+            } else {
+                window.location.href = '/my-page'; // 실제 마이페이지 URL로 업데이트
+            }
+        });
+    });
+
+</script>
+
 </body>
 </html>

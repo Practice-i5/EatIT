@@ -134,8 +134,8 @@ body {
 }
 
 #profile-modal {
-    /*position: fixed;*/
-    position: absolute;
+    position: fixed;
+    /*position: absolute;*/
     display: none;
     top: 0;
     left: 0;
@@ -224,9 +224,9 @@ body {
     gap: 10px;
 }
 
-.report-button {
-    display: none;
-}
+/*.report-button {*/
+/*    display: none;*/
+/*}*/
 
 .block-btn,
 .report-btn {

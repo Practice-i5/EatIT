@@ -11,6 +11,9 @@
         <h2>마이 페이지</h2>
         <ul class="list-no-pad">
             <li class="bar-list">
+                <a class="unactive-page" href="./profile.html" th:href="@{/my-page}">홈</a>
+            </li>
+            <li class="bar-list">
                 <a class="unactive-page" href="./profile.html" th:href="@{profile}">프로필 수정</a>
             </li>
             <li class="bar-list">
@@ -41,19 +44,18 @@
                 <li>
                     <div class="form-item">
                         <div class="block-info">
-                            <img th:src="${followUser.detailProfile.memberPhoto.photoPath}"
+                            <img th:src="${followUser.photoUrl}"
                                  src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"/>
-                            <div class="block-info-text" th:text="${followUser.detailProfile.nickname}">
+                            <div class="block-info-text" th:text="${followUser.nickname}">
                                 닉네임1
                             </div>
                         </div>
 
                         <div class="block-modify">
-                            <button class="btn-choice-small btn-wb">프로필</button>
+<!--                            <button class="btn-choice-small btn-wb">프로필</button>-->
                             <form action="/my-page/follow-user-delete" method="post">
                                 <button class="btn-choice-small btn-wb" th:name="memberId" th:value="${followUser.followeeId}">삭제</button>
                             </form>
-
                         </div>
                     </div>
                 </li>
@@ -114,6 +116,29 @@
             </th:block>
 
         </ul>
+
+        <th:block th:if="${paginationList ne null}">
+            <ul class="list-no-pad" style="display: flex; justify-content: center">
+                <li th:if="${prevPage}" style="width: 40px">
+                    <a style="text-decoration: none; color:blue"
+                            th:href="|/my-page/follow-list?page=${currentPage-5}|" th:text="이전"></a>
+                </li>
+                <li style="width: 40px" th:each="page:${paginationList}">
+                    <th:block th:if="${page eq currentPage}">
+                        <a th:href="|/my-page/follow-list?page=${page}|" style="text-decoration: none; color:red" th:text="${page}">
+                        </a>
+                    </th:block>
+                    <th:block th:unless="${page eq currentPage}">
+                        <a th:href="|/my-page/follow-list?page=${page}|" style="text-decoration: none; color:inherit" th:text="${page}">
+                        </a>
+                    </th:block>
+                </li>
+                <li th:if="${nextPage}" style="width: 40px">
+                    <a style="text-decoration: none; color:blue"
+                            th:href="|/my-page/follow-list?page=${currentPage+5}|" th:text="다음"></a>
+                </li>
+            </ul>
+        </th:block>
 
 <!--        <ul class="list-no-pad" style="display: flex; justify-content: center;">-->
 <!--            <li style="width: 40px;">1</li>-->

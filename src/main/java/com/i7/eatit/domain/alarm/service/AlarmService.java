@@ -52,10 +52,13 @@ public class AlarmService {
     private int getMeetingId(int ParticipationId){
         return alarmMapper.getMeetingId(ParticipationId);
     }
+//    private int getHostParticipationId(int memberId){
+//        return alarmMapper.getHostParticipationId(memberId);
+//    }
 
     @Transactional
     public void createNewAlarm(AlarmDTO newAlarm){
-        newAlarm.setMeetingId(this.getMeetingId(newAlarm.getParticipationId()));
+        newAlarm.setParticipationId(-1);
         alarmMapper.createNewAlarm(newAlarm);
     }
 
@@ -72,14 +75,17 @@ public class AlarmService {
         return alarmMapper.findSimpleAll(hostMemberId);
     }
 
+    @Transactional
     public void acceptRecruit(int alarmId) {
         alarmMapper.acceptRecruit(alarmId);
     }
 
+    @Transactional
     public void addParticipant(AlarmUpdateDTO alarmUpdateDTO) {
         alarmMapper.addParticipant(alarmUpdateDTO);
     }
 
+    @Transactional
     public void refuseRecruit(int alarmId) {
         alarmMapper.refuseRecruit(alarmId);
     }

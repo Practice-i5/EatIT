@@ -38,7 +38,7 @@ public class PhotoService {
     }
 
     @Transactional
-    public String uploadMemberPhoto(MultipartFile singleImageFile, int memberId) throws IOException {
+    public String uploadMemberPhoto(MultipartFile singleImageFile, int memberId) {
 
         System.out.println("singleImageFile = " + singleImageFile);
 
@@ -81,6 +81,8 @@ public class PhotoService {
         String savedName = UUID.randomUUID().toString().replace("-", "") + ext;
         
         try{
+            fileUploadService.uploadFile(meetingPhotoFile, "meetingImage/"+savedName);
+
             MeetingPhotoDTO meetingPhoto = new MeetingPhotoDTO();
             meetingPhoto.setMeetingId(meetingId);
             meetingPhoto.setPhotoPath("meetingImage/"+savedName);
