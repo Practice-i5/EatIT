@@ -18,11 +18,11 @@
 <body class="bg-gray-100 p-4">
 <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
 
-    <!-- 모임 시간 받아오기 -->
-    <h2 class="text-xl font-bold mb-4" th:text="${meetingInfo.scheduledDate}">24년 6월 21일 금요일 16:30</h2>
-
     <!-- 모임 제목 받아오기 -->
-    <p class="text-gray-600 mb-6" th:text="${meetingInfo.title}">즐거운 AI 이야기(스타벅스)</p>
+    <h2 class="text-xl font-bold mb-4" th:text="${meetingInfo.title}">즐거운 AI 이야기(스타벅스)</h2>
+
+    <!-- 모임 시간 받아오기 -->
+    <p class="text-gray-600 mb-6" th:text="${meetingInfo.scheduledDate}">24년 6월 21일 금요일 16:30</p>
 
     <!-- 모임장 평가 항목 -->
     <!--<div class="mb-6">
@@ -76,35 +76,37 @@
 
     <!-- 저장 버튼 -->
     <div class="text-center">
-        <button class="bg-red-500 text-white px-6 py-2 rounded" onclick="location.href='/'">확인</button>
+        <button class="bg-red-500 text-white px-6 py-2 rounded" onclick="location.href='/meetingList/endList'">확인
+        </button>
         <!-- 메인/상세 페이지로 돌아가기 -->
     </div>
 </div>
+<!--
 
-<!-- 모달 시작 (Thymeleaf를 통해 동적으로 생성) -->
+ 모달 시작 (Thymeleaf를 통해 동적으로 생성)
 <div th:each="member : ${memberList}">
-    <!--<div th:attr="id='myModal' + ${iterStat.index}" class="modal">-->
+    <div th:attr="id='myModal' + ${iterStat.index}" class="modal">
         <div class="modal-content">
 
             <div>
                 <div class="container">
-                    <!-- 프로필 사진과 이름 표시 -->
+                     프로필 사진과 이름 표시
                     <div class="text-center mb-6">
                         <img src="/static/img/profile.png" th:src="@{member.photoPath}" alt="프로필 사진"
                              class="profile-picture">
                         <p class="profile-name" th:text="${member.nickname}">이름</p>
                     </div>
-                    <!-- 피드백 제출 폼 -->
+                     피드백 제출 폼
                     <form action="/review/regist" method="post">
                         <div class="checkbox-grid">
-                            <!-- 체크박스 항목 (반복적으로 추가 가능) -->
+                             체크박스 항목 (반복적으로 추가 가능)
                             <label class="checkbox-label">
                                 <input type="checkbox" class="form-checkbox" value="친절해요">
                                 <span class="ml-2">친절해요</span>
                             </label>
-                            <!-- 나머지 체크박스 항목들도 동일하게 반복해서 추가 -->
+                             나머지 체크박스 항목들도 동일하게 반복해서 추가
                         </div>
-                        <!-- 제출 버튼 -->
+                         제출 버튼
                         <div class="text-center">
                             <button class="bg-blue-500 text-white px-6 py-2 rounded submit-btn" type="submit">제출
                             </button>
@@ -114,9 +116,10 @@
             </div>
 
         </div>
-    <!--</div>-->
+    </div>
 </div>
-<!-- 모달 끝 -->
+ 모달 끝
+-->
 
 <!-- JS 파일 연결 (Thymeleaf 사용 시 경로 매핑) -->
 <script src="/static/js/review.js" th:src="@{/js/review.js}"></script>

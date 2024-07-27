@@ -34,22 +34,26 @@
                 <input name="password" type="password" placeholder="Password">
             </div>
 
+
+            <!--이메일, 비밀번호로 조회 후 메인 페이지 연결-->
+            <div class="button">
+                <input type="submit" class="btn" value="로그인"/><!-- onclick="location.href='/review/reviewMain'"-->
+            </div>
+
             <div class="login_etc">
                 <!--이메일, 비밀번호 찾기 페이지 이동 (정보이동 x)-->
                 <div class="forgot_pw">
                     <a href="findEmail.html" th:href="@{/login/findEmail}">이메일 찾기/</a>
                     <a href="findPwd.html" th:href="@{/login/findPwd}">비밀번호 찾기</a>
                 </div>
+
                 <!-- 회원가입 페이지 이동 (정보이동 x)-->
                 <div class="forgot_pw">
                     <a href="join.html" th:href="@{/login/join}">회원가입</a>
                 </div>
             </div>
 
-            <!--이메일, 비밀번호로 조회 후 메인 페이지 연결-->
-            <div class="button">
-                <input type="submit" class="btn" value="로그인"/><!-- onclick="location.href='/review/reviewMain'"-->
-            </div>
+
         </div>
     </div>
 </form>
