@@ -38,17 +38,35 @@ public class ChatController {
     }
 
     @GetMapping("/chat")
-    public String chat(HttpServletRequest request, Model model) {
+    public String chatIndex(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         UserInfoDTO loginUser = (UserInfoDTO) session.getAttribute("loginUser");
 
         if (loginUser == null) {
             // 로그인 페이지로 리다이렉트, redirectUrl 파라미터에 현재 페이지를 설정
-            return "redirect:/login/loginMain?redirectUrl=/chat";
+            return "redirect:/login/loginMain?redirectUrl=/chat-index";
         }
 
         model.addAttribute("username", loginUser.getNickname());
         model.addAttribute("roomName", "Default Room"); // 필요한 경우 실제 방 이름을 설정
+        model.addAttribute("users", new ArrayList<>()); // 실제 사용자 리스트 추가
+
+        return "chat/chat-index"; // chat-index.html 템플릿을 렌더링
+    }
+
+    @GetMapping("/chat-room")
+    public String chat(HttpServletRequest request, Model model,
+                       @RequestParam("username") String username,
+                       @RequestParam("room") String room) {
+        HttpSession session = request.getSession();
+        UserInfoDTO loginUser = (UserInfoDTO) session.getAttribute("loginUser");
+
+        if (loginUser == null) {
+            return "redirect:/login/loginMain";
+        }
+
+        model.addAttribute("username", username);
+        model.addAttribute("roomName", room);
         model.addAttribute("users", new ArrayList<>()); // 실제 사용자 리스트 추가
 
         return "chat/chat"; // chat.html 템플릿을 렌더링

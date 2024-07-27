@@ -8,6 +8,7 @@ spring:
     username: ohgiraffers
     password: ohgiraffers
 
+
   servlet:
     multipart:
       max-file-size: 10MB
