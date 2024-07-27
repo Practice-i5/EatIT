@@ -4,6 +4,7 @@ import com.i7.eatit.domain.meeting.model.common.SearchCriteria;
 import com.i7.eatit.domain.meeting.model.dto.DetailMeetingDTO;
 import com.i7.eatit.domain.meeting.model.dto.MeetingDTO;
 import com.i7.eatit.domain.meeting.model.dto.PreviewMeetingDTO;
+import com.i7.eatit.domain.picture.dto.MeetingPhotoDTO;
 import com.i7.eatit.domain.tag.dto.InsertInterestRelDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -26,6 +27,8 @@ public interface MeetingMapper {
 
     // 모임의 관심분야 등록
     void registInterests(InsertInterestRelDTO interestRel);
+
+    void uploadMeetingPhoto(MeetingPhotoDTO meetingPhoto);
 
     // meeting_id로 관심분야 검색
     List<String> findInterestsById(int meetingId);
