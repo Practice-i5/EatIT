@@ -205,6 +205,18 @@
 
     </insert>
 
+    <insert id="uploadMeetingPhoto" parameterType="com.i7.eatit.domain.picture.dto.MeetingPhotoDTO">
+        INSERT INTO TBL_MEETING_PHOTO (
+        PHOTO_PATH,
+        PHOTO_NAME,
+        MEETING_ID
+        ) VALUES (
+        #{photoPath},
+        #{photoName},
+        #{meetingId}
+        )
+    </insert>
+
 
     <select id="findMeetingById" parameterType="int" resultMap="meetingResultMap">
         SELECT

@@ -11,8 +11,11 @@ spring:
 
   servlet:
     multipart:
+      enabled: true
       max-file-size: 10MB
       max-request-size: 10MB
+file:
+  upload-dir: ./uploads
 
 mybatis:
   mapper-locations: mappers/**/*.xml
@@ -24,3 +27,5 @@ app:
 node:
   server:
     url: http://localhost:3001
+
+
