@@ -5,7 +5,9 @@ import com.i7.eatit.domain.meeting.model.common.SearchCriteria;
 import com.i7.eatit.domain.meeting.model.dao.MeetingMapper;
 import com.i7.eatit.domain.meeting.model.dto.MeetingDTO;
 import com.i7.eatit.domain.meeting.model.dto.PreviewMeetingDTO;
+import com.i7.eatit.domain.picture.dto.MeetingPhotoDTO;
 import com.i7.eatit.domain.tag.dto.InsertInterestRelDTO;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +17,10 @@ import java.util.List;
 public class MeetingService {
 
     MeetingMapper meetingMapper;
+
+    @Value("${file.upload-dir}")
+    private String uploadDir;
+
 
     public MeetingService(MeetingMapper meetingMapper) {
         this.meetingMapper = meetingMapper;
@@ -37,6 +43,13 @@ public class MeetingService {
     public void participateGuest(int meetingId, int memberId){
         meetingMapper.participateGuest(meetingId, memberId);
     }
+
+    //사진등록
+    @Transactional
+    public void uploadMeetingPhoto(MeetingPhotoDTO meetingPhoto) {
+        meetingMapper.uploadMeetingPhoto(meetingPhoto);
+    }
+
 
     @Transactional
     public void participateHost(int meetingId, int member_id) {
