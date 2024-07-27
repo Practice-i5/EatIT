@@ -1,5 +1,6 @@
 package com.i7.eatit.domain.meeting.model.service;
 
+import com.i7.eatit.domain.alarm.dto.AlarmDTO;
 import com.i7.eatit.domain.meeting.model.common.SearchCriteria;
 import com.i7.eatit.domain.meeting.model.dao.MeetingMapper;
 import com.i7.eatit.domain.meeting.model.dto.MeetingDTO;
@@ -33,8 +34,8 @@ public class MeetingService {
 
     // 모임 참가
     @Transactional
-    public void participateGuest(int meetingId, int member_id){
-        meetingMapper.participateGuest(meetingId, member_id);
+    public void participateGuest(int meetingId, int memberId){
+        meetingMapper.participateGuest(meetingId, memberId);
     }
 
     @Transactional
@@ -74,9 +75,14 @@ public class MeetingService {
 
     public PreviewMeetingDTO findPreviewById(int meetingId) { return meetingMapper.findPreviewById(meetingId);}
 
+    public String isExistAlarm(int meetingId, int memberId) { return meetingMapper.isExistAlarm(meetingId, memberId);}
 
+    public String isExistPart(int meetingId, int memberId) { return meetingMapper.isExistPart(meetingId, memberId); }
+
+    public void upCountRecruiterNum(int meetingId) { meetingMapper.upCountRecruiterNum(meetingId);}
+}
 
 
 //    public MeetingDTO searchMeetingById(Long id) {}
 
-}
+

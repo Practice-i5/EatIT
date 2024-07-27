@@ -19,7 +19,7 @@
         <h1><i class="fas fa-smile"></i>Eat-It 1:1 채팅</h1>
     </header>
     <main class="join-main">
-        <form th:action="@{/chat/one-to-one/create}" method="post">
+        <form th:action="@{/chat-room}" method="get">
             <div class="form-control">
                 <label for="username">Username</label>
                 <input
@@ -32,8 +32,8 @@
             </div>
             <div class="form-control">
                 <label for="room">Room</label>
-                <select name="room" id="room">
-                    <option th:each="room : ${rooms}" th:value="${room}" th:text="${room}">Room</option>
+                <select name="room" id="room" required>
+                    <option value="Default Room">Default Room</option>
                 </select>
             </div>
             <button type="submit" class="btn">Join Chat</button>

@@ -4,14 +4,18 @@ package com.i7.eatit.domain.alarm.controller;
 import com.i7.eatit.domain.alarm.dto.AlarmDTO;
 import com.i7.eatit.domain.alarm.dto.AlarmDetailDTO;
 import com.i7.eatit.domain.alarm.dto.AlarmSimpleDTO;
+import com.i7.eatit.domain.alarm.dto.AlarmUpdateDTO;
 import com.i7.eatit.domain.alarm.service.AlarmService;
+import com.i7.eatit.domain.meeting.model.dto.MeetingDTO;
+import com.i7.eatit.domain.meeting.model.service.MeetingService;
+import com.i7.eatit.domain.picture.dto.MeetingPhotoDTO;
 import com.i7.eatit.domain.picture.dto.MemberPhotoDTO;
 import com.i7.eatit.domain.picture.service.PhotoService;
+import com.i7.eatit.domain.user.dto.UserInfoDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -20,27 +24,33 @@ public class AlarmPageController {
 
     private final AlarmService alarmService;
     private final PhotoService photoService;
+    private final MeetingService meetingService;
 
 
 
-    public AlarmPageController(AlarmService alarmService, PhotoService photoService) {
+    public AlarmPageController(AlarmService alarmService, PhotoService photoService, MeetingService meetingService) {
         this.alarmService = alarmService;
         this.photoService = photoService;
+        this.meetingService = meetingService;
     }
 
     @GetMapping("alarm")
-    public String alarmPage(Model model) {
+    public String alarmPage(Model model, @SessionAttribute(value = "loginUser", required = false) UserInfoDTO loginUser) {
 
-        //Todo : 로그인 정보 받아 와야 함
+        int hostMemberId ;
+        hostMemberId =3;    //test
+//        try {
+//            hostMemberId = loginUser.getMember_id();
+//        }catch (NullPointerException e){
+//            return "redirect:/login";
+//        }
 
-        int hostMemberId = 3;
+
         List<AlarmSimpleDTO> alarmList = alarmService.findSimpleAll(hostMemberId);
         model.addAttribute("alarmList", alarmList);
 
-
-
+        //알람 배지
         boolean isAlarmRinging = alarmService.checkNewAlarm(hostMemberId);
-
         model.addAttribute("isAlarmRinging" , isAlarmRinging);
 
         return "alarm/alarm";
@@ -67,9 +77,50 @@ public class AlarmPageController {
 
     @GetMapping(value="meetingImg", produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public int getMeetingImage(@RequestParam int meetingId) {
-//        return photoService.getPhotoUrlByPath()
-        return 1;       //test
+    public String getMeetingImage(@RequestParam int meetingId) {
+        System.out.println("meeting id : " + meetingId);
+        MeetingPhotoDTO photoDTO = photoService.findPhotoByMeetingId(meetingId);
+        System.out.println("photoPath : "+ photoDTO.getPhotoPath());
+        System.out.println("url : " + photoService.getPhotoUrlByPath(photoDTO.getPhotoPath()));
+
+
+        return photoService.getPhotoUrlByPath(photoDTO.getPhotoPath());
+
+//        return photoService.getPhotoUrlByPath();
+//        return 1;       //test
+
+    }
+
+    @GetMapping("accept")
+    public String acceptJoin(@RequestParam int alarmId) {
+        AlarmDTO alarmDTO = alarmService.findOneAlarm(alarmId);
+//        System.out.println(alarmDTO.toString());
+
+        alarmService.acceptRecruit(alarmId);
+
+        AlarmUpdateDTO alarmUpdateDTO  = new AlarmUpdateDTO();
+        alarmUpdateDTO.setAlarmId(alarmId);
+        alarmUpdateDTO.setAlarmStatus("승인");
+        alarmUpdateDTO.setAlarmChecked(true);
+
+        alarmUpdateDTO.setRole("Participant");
+        alarmUpdateDTO.setMeetingId(alarmDTO.getMeetingId());
+        alarmUpdateDTO.setMemberId(alarmDTO.getMemberId());
+
+        MeetingDTO meetingDTO = meetingService.findMeetingById(alarmDTO.getMeetingId());
+        alarmUpdateDTO.setMemberNum(meetingDTO.getRecruitMemberNumber() + 1);
+
+        alarmService.addParticipant(alarmUpdateDTO);
+
+        return "redirect:/alarm/alarm";
+    }
+
+    @GetMapping("refuse")
+    public String refuseJoin(@RequestParam int alarmId) {
+
+        alarmService.refuseRecruit(alarmId);
+
+        return "redirect:/alarm/alarm";
     }
 
 

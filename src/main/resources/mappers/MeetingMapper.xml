@@ -401,13 +401,13 @@
         INSERT INTO
         TBL_MEETING_PARTICIPATION
         (
-        ROLE
+        ROLE,
         MEETING_ID,
-        MEMBER_ID,
+        MEMBER_ID
         )
         VALUES
         (
-        'Guest'
+        'Participant'
         , #{ meetingId }
         , #{ memberId }
         )
@@ -428,6 +428,15 @@
             , #{ memberId }
         )
     </insert>
+
+    <select id="isExistAlarm" parameterType="int" resultType="int">
+        SELECT
+            ALARM_STATUS
+        FROM
+            TBL_ALARM
+        WHERE
+            MEETING_ID = #{ meetingId } AND MEMBER_ID = #{ memberId }
+    </select>
 
     <select id="findPreviewById" parameterType="int" resultMap="previewMeetingResultMap">
         SELECT
@@ -460,6 +469,22 @@
                         , A.RECRUIT_MEMBER_NUMBER
                         , A.RECRUITMENT_NUMBER
     </select>
+
+    <select id="isExistPart" parameterType="int">
+        SELECT
+            ROLE
+        FROM
+            TBL_MEETING_PARTICIPATION
+        WHERE
+            MEETING_ID = #{ meetingId } AND MEMBER_ID = #{ memberId }
+
+    </select>
+
+    <update id="upCountRecruiterNum" parameterType="int">
+        UPDATE  TBL_MEETING
+        SET     RECRUIT_MEMBER_NUMBER = RECRUIT_MEMBER_NUMBER + 1
+        WHERE   MEETING_ID = #{ meetingId }
+    </update>
 
     <!-- test mapper start -->
     <select id="testFindMeetings" parameterType="com.i7.eatit.domain.meeting.model.common.SearchCriteria" resultMap="meetingResultMap">
