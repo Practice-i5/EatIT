@@ -92,6 +92,6 @@ public class EnrollMeetingController {
 
 
         rttr.addFlashAttribute("successMessage", "Meeting has been created");
-        return "redirect:/detail/meeting-list";
+        return "redirect:/home";
     }
 }
