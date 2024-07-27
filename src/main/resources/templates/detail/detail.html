@@ -594,7 +594,7 @@
                     loginButton.textContent = '로그아웃';
                     loginButton.setAttribute('href', '/login/logout'); // 로그아웃 URL로 업데이트
                     signupButton.textContent = '마이페이지';
-                    signupButton.setAttribute('href', '/my-page/profile'); // 마이페이지 URL로 업데이트
+                    signupButton.setAttribute('href', '/my-page'); // 마이페이지 URL로 업데이트
                 } else { // 로그인한 사용자가 없을 경우
                     loginButton.textContent = '로그인';
                     loginButton.setAttribute('href', '/login/loginMain');
@@ -633,7 +633,7 @@
                 if (this.textContent !== '마이페이지') {
                     window.location.href = '/login/join';
                 } else {
-                    window.location.href = '/my-page/profile'; // 실제 마이페이지 URL로 업데이트
+                    window.location.href = '/my-page'; // 실제 마이페이지 URL로 업데이트
                 }
             });
         });
