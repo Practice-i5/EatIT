@@ -22,7 +22,7 @@
     <h2 class="text-xl font-bold mb-4" th:text="${meetingInfo.scheduledDate}">24년 6월 21일 금요일 16:30</h2>
 
     <!-- 모임 제목 받아오기 -->
-    <p class="text-gray-600 mb-6" th:text="${meeting.title}">즐거운 AI 이야기(스타벅스)</p>
+    <p class="text-gray-600 mb-6" th:text="${meetingInfo.title}">즐거운 AI 이야기(스타벅스)</p>
 
     <!-- 모임장 평가 항목 -->
     <!--<div class="mb-6">
@@ -90,7 +90,7 @@
                 <div class="container">
                     <!-- 프로필 사진과 이름 표시 -->
                     <div class="text-center mb-6">
-                        <img src="/static/img/profile.png" th:src="@{member.memberPhoto}" alt="프로필 사진"
+                        <img src="/static/img/profile.png" th:src="@{member.photoPath}" alt="프로필 사진"
                              class="profile-picture">
                         <p class="profile-name" th:text="${member.nickname}">이름</p>
                     </div>

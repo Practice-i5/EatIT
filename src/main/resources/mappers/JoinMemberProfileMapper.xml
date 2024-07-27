@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com/i7/eatit/domain/user/dao/JoinMemberProfileMapper">
+<mapper namespace="com.i7.eatit.domain.user.dao.JoinMemberProfileMapper">
 
     <!--JoinMemberProfileDTO Mapping-->
     <resultMap id="JoinMemberProfileMap" type="com.i7.eatit.domain.user.dto.JoinMemberProfileDTO">
@@ -13,8 +13,8 @@
         <result property="nickname" column="NICKNAME"/>
 
         <!--memberPhoto-->
-        <association property="photo" javaType="com.i7.eatit.domain.picture.dto.MemberPhotoDTO">
-             <id property="memberPhotoId" column="PHOTO_ID"/>
+        <association property="memberPhoto" javaType="com.i7.eatit.domain.picture.dto.MemberPhotoDTO">
+            <id property="memberPhotoId" column="PHOTO_ID"/>
 
             <result property="photoPath" column="PHOTO_PATH"/>
             <result property="photoName" column="PHOTO_NAME"/>
@@ -23,16 +23,16 @@
 
         <!--techStack-->
         <collection property="myTechStackList" ofType="com.i7.eatit.domain.user.dto.TechStackDTO">
-            <result property="javaScript" column="JAVASCRIPT"/>
-            <result property="python" column="PYTHON"/>
-            <result property="java" column="JAVA"/>
+            <result property="JavaScript" column="JAVASCRIPT"/>
+            <result property="Python" column="PYTHON"/>
+            <result property="Java" column="JAVA"/>
             <result property="cSharp" column="CSHARP"/>
-            <result property="ruby" column="RUBY"/>
-            <result property="php" column="PHP"/>
-            <result property="swift" column="SWIFT"/>
-            <result property="kotlin" column="KOTLIN"/>
-            <result property="go" column="GO"/>
-            <result property="rust" column="RUST"/>
+            <result property="Ruby" column="RUBY"/>
+            <result property="PHP" column="PHP"/>
+            <result property="Swift" column="SWIFT"/>
+            <result property="Kotlin" column="KOTLIN"/>
+            <result property="Go" column="GO"/>
+            <result property="Rust" column="RUST"/>
         </collection>
 
     </resultMap>
@@ -40,41 +40,46 @@
     <!--참가자 정보-->
     <select id="findJoinUser" resultMap="JoinMemberProfileMap">
         SELECT
-                    A.meeting_id
-                    , A.member_id
-                    , E.photo_path
-                    , D.stack_name
-                    , D.STACK_NAME JAVASCRIPT
-                    , D.STACK_NAME PYTHON
-                    , D.STACK_NAME JAVA
-                    , D.STACK_NAME CSHARP
-                    , D.STACK_NAME RUBY
-                    , D.STACK_NAME PHP
-                    , D.STACK_NAME SWIFT
-                    , D.STACK_NAME KOTLIN
-                    , D.STACK_NAME GO
-                    , D.STACK_NAME RUST
+        A.meeting_id
+        , A.member_id
+        , F.nickname
+        , E.photo_path
+        , D.stack_name
+        , D.STACK_NAME JAVASCRIPT
+        , D.STACK_NAME PYTHON
+        , D.STACK_NAME JAVA
+        , D.STACK_NAME CSHARP
+        , D.STACK_NAME RUBY
+        , D.STACK_NAME PHP
+        , D.STACK_NAME SWIFT
+        , D.STACK_NAME KOTLIN
+        , D.STACK_NAME GO
+        , D.STACK_NAME RUST
 
         FROM
-                    tbl_meeting_participation A
+        tbl_meeting_participation A
         LEFT JOIN
-                    tbl_notification B
+        tbl_notification B
         ON
-                    A.participation_id = B.participation_id
+        A.participation_id = B.participation_id
         LEFT JOIN
-                    tbl_member_tech_stack C
+        tbl_member_tech_stack C
         ON
-                    C.MEMBER_ID = A.member_id
+        C.MEMBER_ID = A.member_id
         LEFT JOIN
-                    tbl_tech_stack_type D
+        tbl_tech_stack_type D
         ON
-                    C.stack_code = D.stack_code
+        C.stack_code = D.stack_code
         LEFT JOIN
-                    tbl_member_photo E
+        tbl_member_photo E
         ON
-                    A.MEMBER_ID = E.member_id
+        A.MEMBER_ID = E.member_id
+        LEFT JOIN
+        tbl_member F
+        ON
+        F.member_id = A.member_id
         WHERE
-                    A.meeting_id = #{ meetingId }
+        A.meeting_id = #{ member_id }
     </select>
 
 </mapper>

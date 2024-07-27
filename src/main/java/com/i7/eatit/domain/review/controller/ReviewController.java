@@ -41,17 +41,22 @@ public class ReviewController {
     @GetMapping("/reviewPage")
     public String getJoinMemberInfo(Model model, @RequestParam("meetingId") int meetingId) {
 
+        // meetingId 확인
+        System.out.println("meetingId = " + meetingId);
+
         // 타이틀, 시간, 참가자 수 (나열)
         MeetingDTO meetingInfo = meetingService.findMeetingById(meetingId);
+        System.out.println("meetingInfo = " + meetingInfo);
 
         // 참가자 - 닉네임, 사진 ( for each)
         List<JoinMemberProfileDTO> memberList = joinMemberProfileService.getUserProfileInfo(meetingId);
+        System.out.println("memberList = " + memberList);
 
         // 타임리프에 적용
-        model.addAttribute("meetingInfo", meetingInfo);
-        model.addAttribute("memberList", memberList);
+        model.addAttribute("meetingInfo", meetingInfo); // 모임 정보
+        model.addAttribute("memberList", memberList);   // 참가자 정보
         
-        return "redirect:/review/ReviewPage";
+        return "review/reviewPage";
     }
 
 
