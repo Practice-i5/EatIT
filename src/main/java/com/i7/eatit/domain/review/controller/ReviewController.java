@@ -4,6 +4,7 @@ package com.i7.eatit.domain.review.controller;
 import com.i7.eatit.domain.meeting.model.dto.MeetingDTO;
 import com.i7.eatit.domain.meeting.model.service.MeetingService;
 import com.i7.eatit.domain.user.dto.JoinMemberProfileDTO;
+import com.i7.eatit.domain.user.dto.RevieweeProfileDTO;
 import com.i7.eatit.domain.user.service.JoinMemberProfileService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,8 +50,11 @@ public class ReviewController {
         System.out.println("meetingInfo = " + meetingInfo);
 
         // 참가자 - 닉네임, 사진 ( for each)
-        List<JoinMemberProfileDTO> memberList = joinMemberProfileService.getUserProfileInfo(meetingId);
+        // List<JoinMemberProfileDTO> memberList = joinMemberProfileService.getUserProfileInfo(meetingId);
+
+        List<RevieweeProfileDTO> memberList = joinMemberProfileService.getRevieweeProfileInfo(meetingId);
         System.out.println("memberList = " + memberList);
+
 
         // 타임리프에 적용
         model.addAttribute("meetingInfo", meetingInfo); // 모임 정보

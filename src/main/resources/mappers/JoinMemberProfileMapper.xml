@@ -11,15 +11,7 @@
 
         <result property="member_id" column="MEMBER_ID"/>
         <result property="nickname" column="NICKNAME"/>
-
-        <!--memberPhoto-->
-        <association property="memberPhoto" javaType="com.i7.eatit.domain.picture.dto.MemberPhotoDTO">
-            <id property="memberPhotoId" column="PHOTO_ID"/>
-
-            <result property="photoPath" column="PHOTO_PATH"/>
-            <result property="photoName" column="PHOTO_NAME"/>
-            <result property="memberId" column="MEMBER_ID"/>
-        </association>
+        <result property="photoPath" column="PHOTO_PATH"/>
 
         <!--techStack-->
         <collection property="myTechStackList" ofType="com.i7.eatit.domain.user.dto.TechStackDTO">
@@ -36,6 +28,17 @@
         </collection>
 
     </resultMap>
+
+
+    <!-- 모달용 -->
+    <resultMap id="findJoinUserModalMap" type="com.i7.eatit.domain.user.dto.RevieweeProfileDTO">
+        <id property="meeting_id" column="MEETING_ID"/>
+
+        <result property="member_id" column="MEMBER_ID"/>
+        <result property="nickname" column="NICKNAME"/>
+        <result property="photoPath" column="PHOTO_PATH"/>
+    </resultMap>
+
 
     <!--참가자 정보-->
     <select id="findJoinUser" resultMap="JoinMemberProfileMap">
@@ -80,6 +83,38 @@
         F.member_id = A.member_id
         WHERE
         A.meeting_id = #{ member_id }
+    </select>
+
+    <!-- 모달용 -->
+    <select id="findJoinUserModal" resultMap="findJoinUserModalMap">
+        -- 참가자 모달 전용
+
+        SELECT
+                    A.MEETING_ID
+                    , A.MEMBER_ID
+                    , F.NICKNAME
+                    , E.PHOTO_PATH
+
+        FROM
+                    tbl_meeting_participation A
+        LEFT JOIN
+                    tbl_notification B
+        ON
+                    A.participation_id = B.participation_id
+        LEFT JOIN
+                    tbl_member_tech_stack C
+        ON
+                    C.MEMBER_ID = A.member_id
+        LEFT JOIN
+                    tbl_member_photo E
+        ON
+                    A.MEMBER_ID = E.member_id
+        LEFT JOIN
+                    tbl_member F
+        ON
+                    F.member_id = A.member_id
+        WHERE
+                    A.meeting_id = #{ member_id }
     </select>
 
 </mapper>

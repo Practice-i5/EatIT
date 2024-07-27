@@ -136,14 +136,24 @@ VALUES (1, 'Study Group', 'Library', 37.5665, 126.9780, 'Study together', 'Free'
         '2024-08-08 22:00:00', '17:00:00', 7, 6, 'Mixed', '20-60', '2024-07-08 17:00:00', 'Offline',
         'Open', '2024-08-08 17:00:00', 8),
        (9, 'Language Exchange', 'Cafe', 37.5665, 126.9780, 'Exchange languages', 'Free', 'Study',
-        '2024-08-09 22:00:00', '19:00:00', 6, 20, 'Mixed', '18-30', '2024-07-09 18:00:00',
-        'Offline', 'Open', '2024-08-09 19:00:00', 9),
+        '2024-08-09 22:00:00', '19:00:00', 2, 20, 'Mixed', '18-30', '2024-07-09 18:00:00',
+        'Offline', 'Closed', '2024-08-09 19:00:00', 9),
        (10, 'Dance Class', 'Hall', 37.5665, 126.9780, 'Learn to dance', 'Paid', 'Art',
-        '2024-08-10 22:00:00', '20:00:00', 4, 15, 'Mixed', '18-40', '2024-07-10 19:00:00',
-        'Offline', 'Open', '2024-08-10 20:00:00', 10);
+        '2024-08-10 22:00:00', '20:00:00', 2, 6, 'Mixed', '18-40', '2024-07-10 19:00:00',
+        'Offline', 'Closed', '2024-08-10 20:00:00', 10),
+       (11, 'Language Exchange', 'Cafe', 37.5665, 126.9780, 'Discuss books', 'Free', 'Study',
+        '2024-08-09 22:00:00', '19:00:00', 1, 7, 'Mixed', '18-30', '2024-07-09 01:00:00',
+        'Offline', 'Closed', '2024-08-09 19:00:00', 1),
+       (12, 'Language Exchange', 'Cafe', 37.5665, 126.9780, 'Play music', 'Free', 'Study',
+        '2024-08-09 22:00:00', '19:00:00', 1, 8, 'Mixed', '18-30', '2024-07-10 02:00:00',
+        'Offline', 'Closed', '2024-08-09 19:00:00', 1),
+       (13, 'Language Exchange', 'Cafe', 37.5665, 126.9780, 'Yoga practice', 'Free', 'Study',
+        '2024-08-09 22:00:00', '19:00:00', 1, 9, 'Mixed', '18-30', '2024-07-11 03:00:00',
+        'Offline', 'Closed', '2024-08-09 19:00:00', 1);
 
 
-DROP TABLE IF EXISTS `tbl_meeting_interest_category`;
+
+    DROP TABLE IF EXISTS `tbl_meeting_interest_category`;
 
 CREATE TABLE `tbl_meeting_interest_category`
 (
@@ -234,14 +244,17 @@ CREATE TABLE `tbl_meeting_participation`
 INSERT INTO `tbl_meeting_participation` (`participation_id`, `role`, `meeting_id`, `member_id`)
 VALUES (1, 'Host', 1, 1),
        (2, 'Participant', 1, 2),
-       (3, 'Host', 2, 3),
-       (4, 'Participant', 2, 4),
-       (5, 'Host', 3, 5),
-       (6, 'Participant', 3, 6),
-       (7, 'Host', 4, 7),
-       (8, 'Participant', 4, 8),
-       (9, 'Host', 5, 9),
-       (10, 'Participant', 5, 10);
+       (3, 'Participant', 1, 3),
+       (4, 'Participant', 1, 4),
+       (5, 'Participant', 1, 5),
+       (6, 'Host', 2, 3),
+       (7, 'Participant', 2, 4),
+       (8, 'Host', 3, 5),
+       (9, 'Participant', 3, 6),
+       (10, 'Host', 4, 7),
+       (11, 'Participant', 4, 8),
+       (12, 'Host', 5, 9),
+       (13, 'Participant', 5, 10);
 
 
 
