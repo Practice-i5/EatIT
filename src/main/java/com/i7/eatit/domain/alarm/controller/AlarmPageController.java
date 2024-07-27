@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -37,17 +38,26 @@ public class AlarmPageController {
     @GetMapping("alarm")
     public String alarmPage(Model model, @SessionAttribute(value = "loginUser", required = false) UserInfoDTO loginUser) {
 
+        //로그인된 MemberId 가져오기
         int hostMemberId ;
-        hostMemberId =3;    //test
-//        try {
-//            hostMemberId = loginUser.getMember_id();
-//        }catch (NullPointerException e){
-//            return "redirect:/login";
-//        }
+//        hostMemberId =3;    //test
+        try {
+            hostMemberId = loginUser.getMember_id();
+        }catch (NullPointerException e){
+            return "redirect:/login";
+        }
 
 
+        //신청 알람 리스트
         List<AlarmSimpleDTO> alarmList = alarmService.findSimpleAll(hostMemberId);
         model.addAttribute("alarmList", alarmList);
+
+        //미팅 이미지 로딩용 리스트
+        List<Integer> meetingIdList = new ArrayList<>();
+        for (AlarmSimpleDTO alarmSimpleDTO : alarmList) {
+            meetingIdList.add(alarmSimpleDTO.getMeetingId());
+        }
+        model.addAttribute("meetingIdList", meetingIdList);
 
         //알람 배지
         boolean isAlarmRinging = alarmService.checkNewAlarm(hostMemberId);
@@ -83,12 +93,22 @@ public class AlarmPageController {
         System.out.println("photoPath : "+ photoDTO.getPhotoPath());
         System.out.println("url : " + photoService.getPhotoUrlByPath(photoDTO.getPhotoPath()));
 
-
         return photoService.getPhotoUrlByPath(photoDTO.getPhotoPath());
+    }
 
-//        return photoService.getPhotoUrlByPath();
-//        return 1;       //test
-
+    @GetMapping(value="meetingImgs", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public List<String> getMeetingImages(@RequestParam List<Integer> meetingIdList) {
+        List<String> images = new ArrayList<>();
+        for (Integer meetingId : meetingIdList) {
+            System.out.println("meeting id : " + meetingId);
+            MeetingPhotoDTO photoDTO = photoService.findPhotoByMeetingId(meetingId);
+            System.out.println("photoPath : "+ photoDTO.getPhotoPath());
+            String url = photoService.getPhotoUrlByPath(photoDTO.getPhotoPath());
+            System.out.println("url : " + url);
+            images.add(url);
+        }
+        return images;
     }
 
     @GetMapping("accept")
