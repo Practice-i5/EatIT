@@ -75,14 +75,17 @@ public class AlarmService {
         return alarmMapper.findSimpleAll(hostMemberId);
     }
 
+    @Transactional
     public void acceptRecruit(int alarmId) {
         alarmMapper.acceptRecruit(alarmId);
     }
 
+    @Transactional
     public void addParticipant(AlarmUpdateDTO alarmUpdateDTO) {
         alarmMapper.addParticipant(alarmUpdateDTO);
     }
 
+    @Transactional
     public void refuseRecruit(int alarmId) {
         alarmMapper.refuseRecruit(alarmId);
     }
