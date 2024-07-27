@@ -52,10 +52,13 @@ public class AlarmService {
     private int getMeetingId(int ParticipationId){
         return alarmMapper.getMeetingId(ParticipationId);
     }
+//    private int getHostParticipationId(int memberId){
+//        return alarmMapper.getHostParticipationId(memberId);
+//    }
 
     @Transactional
     public void createNewAlarm(AlarmDTO newAlarm){
-        newAlarm.setMeetingId(this.getMeetingId(newAlarm.getParticipationId()));
+        newAlarm.setParticipationId(-1);
         alarmMapper.createNewAlarm(newAlarm);
     }
 

@@ -113,15 +113,16 @@
 
     <div class="container">
         <tr th:each="alarm : ${alarmList}">
-<!--            <script>getAlarmDeatil([[${alarm.getAlarmId()}]])</script>-->
             <div type="button" class="alarm highlight " data-bs-toggle="modal"
                  data-bs-target="#alarmDetailModal" th:onclick="getAlarmDeatil([[${alarm.getAlarmId()}]])">
 <!--                <div style="display:none;" th:text="${alarm.getAlarmId()}" />-->
-                <img src="/img/test_image.png">
+                <img th:id="|target_user_img_${alarm.getMeetingId()}|" src="/img/test_image.png">
+                <script>getMeetingImage([[${alarm.getMemberId()}]])</script>
                 <div class="text">
-                    <td th:text="${alarm.getMeetingName()}">참가 신청 한 모임 이름</td><td>의 참가 신청이 들어왔어요!</td>
+                    <td th:text="${alarm.getMeetingName()}" class="text">참가 신청 한 모임 이름</td><td>의 참가 신청이 들어왔어요!</td>
 <!--                        <small class="important" th:text="${alarm.getAlarmDetail()}">모임 신청이 도착했어요!</small>-->
                 </div>
+                <label th:text="${alarm.getAlarmTime()}">date</label>
             </div>
         </tr>
 
@@ -135,7 +136,7 @@
                     </div>
                     <div id="alarmModelBody" class="modal-body">
                         <div class="d-flex align-items-start">
-                            <img src="/img/test_image.png" class="rounded-circle me-3" style="width: 60px; height: 60px;">
+                            <img id="user-profile-image" src="/img/test_image.png" class="rounded-circle me-3" style="width: 60px; height: 60px;">
                             <div>
                                 <h5 class="mt-0" id="alarm-userName">신청한 사람</h5>
                                 <p class="text-muted"><span id="alarm-meetingName">모임 이름</span>에 참가 신청 하셨어요</p>
@@ -150,6 +151,7 @@
                 </div>
             </div>
         </div>
+    </div>
         <!-- Modal END -->
 
 <!--        필요한것-->
