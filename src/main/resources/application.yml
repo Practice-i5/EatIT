@@ -19,3 +19,7 @@ mybatis:
 app:
   firebase-configuration-file: ./serviceAccount.json
   firebase-bucket: eatit-70ba1.appspot.com
+
+node:
+  server:
+    url: http://localhost:3001
