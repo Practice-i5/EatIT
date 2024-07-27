@@ -117,6 +117,9 @@
         .recruit-contents p {
             margin: 5px 0;
         }
+        .return-value{
+            display: none;
+        }
 
         #recruit-now {
             /*position: fixed;*/
@@ -213,16 +216,11 @@
     <div id="recruit-modal">
         <div id="recruit-template">
             <button id="recruit-close">&times;</button>
-            <form th:action="@{/detail/detail.html}" method="POST">
+            <form th:action="@{/detail/detail}" method="POST">
                 <div class="recruit-header">
                     <h3 class="modal-name">모임 신청하기</h3>
                 </div>
                 <div class="recruit-contents">
-                    <div class="recruit-header">
-                        <div class="recruit-pic">
-                            <img th:src="${meetingImage.hostImageURL}" alt="Recruit Picture">
-                        </div>
-                    </div>
                     <div>
                         <div class="form-group">
                             <label for="group-detail">간단하게 소개해주세요</label>
@@ -231,6 +229,10 @@
                     </div>
                 </div>
                 <div class="align-center">
+                    <label>
+                        <input name="participateAcc" type="number" th:value="1" class="return-value">
+                        <input name="meetingId" type="number" th:value="${meetingDTO.meetingId}" class="return-value">
+                    </label>
                     <button type="submit" class="follow-btn">모임신청</button>
                 </div>
             </form>
@@ -240,7 +242,7 @@
     <div id="profile-modal">
         <div id="profile">
             <button id="profile-close">&times;</button>
-            <form th:action="@{/detail/detail.html}" method="POST">
+            <form th:action="@{/detail/detail}" method="POST">
                 <div class="profile-header">
                     <h3 class="modal-name">프로필 상세 보기</h3>
                 </div>
@@ -262,8 +264,8 @@
     <!--                        </div>-->
                         </div>
                         <div>
-                            <h5>관심분야</h5>
-                            <p>백엔드</p>
+                            <h5></h5>
+                            <p></p>
                         </div>
                         <hr />
                         <div>
@@ -280,8 +282,9 @@
                 <div id="action-buttons">
 <!--                    <button class="follow-btn">팔로우</button>-->
                     <label>
-                        <input name="reportedMemberId" th:value="${meetingDTO.hostMemberId}">
-                        <input name="isDecHuman" th:value="true" type="hidden">
+                        <input name="meetingId" th:value="1" type="number" class="return-value">
+                        <input name="reportedMemberId" th:value="${meetingDTO.hostMemberId}" class="return-value">
+                        <input name="decHuman" type="number" th:value="1" class="return-value">
                     </label>
                     <button type="submit" class="report-button report-btn">신고하기</button>
                 </div>
@@ -362,13 +365,13 @@
                     <div class="row g-4 fruite">
                         <div class="col-lg-12">
                             <div class="leader-data">
-                                <h3 class="align-center padding-top-20px">리더 정보</h3>
+                                <h3 class="align-center padding-top-20px" th:text="${hostInfoDTO.nickname}">리더 정보</h3>
                                 <hr />
                                 <div>
                                     <div class="padding-bottom-20px padding-left-20px">
                                         <a id="open-img" value="button"><img th:src="${meetingImage.hostImageURL}"
-                                                class="profile-image" /></a>
-                                        <a id="open-search" value="button" th:text="${meetingDTO.hostMemberId}">리더 닉네임</a>
+                                                class="profile-image" alt="hostImage"/></a>
+                                        <a id="open-search" value="button" th:text="${hostInfoDTO.nickname}">리더 닉네임</a>
                                     </div>
                                     <div class="leader-data-details">
                                         <div class="padding-bottom-20px padding-left-20px">
@@ -389,18 +392,14 @@
                                             <div class="align-center">
                                                 <form th:action="@{/detail/detail}" method="post" id="recruit-now">
                                                     <label>
-                                                        <input name="meetingId" th:value="${meetingDTO.meetingId}" type="hidden">
-                                                        <input name="isParticipateFree" th:value="true" type="hidden">
+                                                        <input name="participateFree" th:value="1" type="number" class="return-value">
+                                                        <input name="meetingId" th:value="${meetingDTO.meetingId}" type="number" class="return-value">
                                                     </label>
                                                     <button class="active-red normal-btn" style="justify-content: center;" type="submit" th:text="${meetingDTO.participationMethod}">바로등록</button>
                                                 </form>
                                             </div>
                                             <!-- 버튼을 감싸는 div -->
                                             <div id="not-now" class="align-center">
-                                                <label>
-                                                    <input name="meetingId" th:value="${meetingDTO.meetingId}" type="hidden">
-                                                    <input name="isParticipateAcc" th:value="true" type="hidden">
-                                                </label>
                                                 <button type="submit" style="justify-content: center;" class="active-red normal-btn" id="open-rct" th:text="${meetingDTO.participationMethod}">모임신청</button>
                                             </div>
                                         </div>

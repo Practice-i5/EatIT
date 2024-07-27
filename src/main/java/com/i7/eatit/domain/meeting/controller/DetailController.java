@@ -76,6 +76,8 @@ public class DetailController {
     @PostMapping("detail")
     public String writeDetail(Model model, @ModelAttribute DetailMeetingDTO detailDTO, @SessionAttribute("loginUser") UserInfoDTO userInfoDTO) {
         Timestamp now = new Timestamp(System.currentTimeMillis());
+
+        System.out.println("과연 결과는!!!!!!!!!\n" + detailDTO + "\n**************이게 반환되었습니다 ***************");
         model.addAttribute("meetingDTO", meetingService.findMeetingById(detailDTO.getMeetingId()));
         model.addAttribute("interests", meetingService.findInterestsById(detailDTO.getMeetingId()));
         model.addAttribute("userInfo", userInfoDTO);
@@ -83,19 +85,18 @@ public class DetailController {
         model.addAttribute("meetingImage", meetingService.findPreviewById(detailDTO.getMeetingId()));
         model.addAttribute("loadMembers", meetingService.loadMembersById(detailDTO.getMeetingId()));
         model.addAttribute("hostInfoDTO", userInfoService.getUserInfo(meetingService.findHostIdById(detailDTO.getMeetingId())));
-        System.out.println("과연 결과는!!!!!!!!!\n" + detailDTO);
         //        List<MeetingDTO> meetingList = meetingService.findAllMeeting();
-        if (detailDTO.isDecHuman()) {
+        if (detailDTO.getDecHuman() == 1) {
 
             meetingService.increaseMemberReport(detailDTO.getReportedMemberId());
             model.addAttribute("decMessage", "이 유저를 신고했습니다.");
 
-        } else if (detailDTO.isDecMeeting()) {
+        } else if (detailDTO.getDecMeeting() == 1) {
 
             meetingService.increaseMeetingReport(detailDTO.getMeetingId());
             model.addAttribute("decMessage", "이 게시글을 신고했습니다.");
 
-        } else if (detailDTO.isParticipateAcc() && meetingService.isExistAlarm(detailDTO.getMeetingId(), userInfoDTO.getMember_id()) != null) {
+        } else if (detailDTO.getParticipateAcc() == 1 && meetingService.isExistAlarm(detailDTO.getMeetingId(), userInfoDTO.getMember_id()) != null) {
             if (meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitMemberNumber() < meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitmentNumber()){
                 alarmDTO = new AlarmDTO();
                 alarmDTO.setAlarmDetail(detailDTO.getIntroduction());
@@ -108,7 +109,7 @@ public class DetailController {
             } else {
                 model.addAttribute("decMessage", "정원이 전부 찼습니다.");
             }
-        } else if (detailDTO.isParticipateFree() && meetingService.isExistPart(detailDTO.getMeetingId(), userInfoDTO.getMember_id()) != null) {
+        } else if (detailDTO.getParticipateFree() == 1 && meetingService.isExistPart(detailDTO.getMeetingId(), userInfoDTO.getMember_id()) != null) {
 
 //            System.out.println("********************enrollMeeting******************\n" + );
             if (meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitMemberNumber() < meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitmentNumber()) {
