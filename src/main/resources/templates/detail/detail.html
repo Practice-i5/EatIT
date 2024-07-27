@@ -85,6 +85,10 @@
             color: red;
         }
 
+        .action-buttons {
+            padding-top:20px;
+        }
+
         .recruit-header {
             display: flex;
             align-items: center;
@@ -242,7 +246,6 @@
     <div id="profile-modal">
         <div id="profile">
             <button id="profile-close">&times;</button>
-            <form th:action="@{/detail/detail}" method="POST">
                 <div class="profile-header">
                     <h3 class="modal-name">프로필 상세 보기</h3>
                 </div>
@@ -280,13 +283,20 @@
     <!--            <div style="text-align: center"><a th:text="${temp}">매너온도</a></div>-->
 <!--                <div id="action-buttons">-->
                 <div id="action-buttons">
-<!--                    <button class="follow-btn">팔로우</button>-->
-                    <label>
-                        <input name="meetingId" th:value="1" type="number" class="return-value">
-                        <input name="reportedMemberId" th:value="${meetingDTO.hostMemberId}" class="return-value">
-                        <input name="decHuman" type="number" th:value="1" class="return-value">
-                    </label>
-                    <button type="submit" class="report-button report-btn">신고하기</button>
+                    <form th:action="@{/detail/detail}" method="POST">
+                        <label for="follow">
+                            <input name="decMemberId" th:value="${meetingDTO.hostMemberId}" class="return-value">
+                            <button id="follow" class="follow-btn">팔로우</button>
+                        </label>
+                    </form>
+                    <form th:action="@{/detail/detail}" method="POST">
+                        <label for="dec">
+                            <input name="meetingId" th:value="1" type="number" class="return-value">
+                            <input name="reportedMemberId" th:value="${meetingDTO.hostMemberId}" class="return-value">
+                            <input name="decHuman" type="number" th:value="1" class="return-value">
+                            <button id="dec" type="submit" class="report-button report-btn">신고하기</button>
+                        </label>
+                    </form>
                 </div>
 <!--                    <span><input type="button" onclick='toggleReportBtns()'/></span>-->
 <!--                </div>-->

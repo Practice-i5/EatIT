@@ -405,19 +405,10 @@
     </select>
 
     <insert id="participateGuest" parameterType="int">
-        INSERT INTO
-        TBL_MEETING_PARTICIPATION
-        (
-        ROLE,
-        MEETING_ID,
-        MEMBER_ID
-        )
+        INSERT INTO TBL_MEETING_PARTICIPATION
+            ( ROLE, MEETING_ID, MEMBER_ID )
         VALUES
-        (
-        'Participant'
-        , #{ meetingId }
-        , #{ memberId }
-        )
+            ('Participant', #{ meetingId }, #{ memberId })
     </insert>
 
     <insert id="participateHost" parameterType="int">

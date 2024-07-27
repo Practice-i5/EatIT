@@ -6,6 +6,7 @@ import com.i7.eatit.domain.meeting.model.common.SearchCriteria;
 import com.i7.eatit.domain.meeting.model.dto.DetailMeetingDTO;
 import com.i7.eatit.domain.meeting.model.dto.MeetingDTO;
 import com.i7.eatit.domain.meeting.model.service.MeetingService;
+import com.i7.eatit.domain.relationship.service.UserFollowService;
 import com.i7.eatit.domain.user.dto.UserInfoDTO;
 import com.i7.eatit.domain.user.service.JoinMemberProfileService;
 import com.i7.eatit.domain.user.service.UserInfoService;
@@ -30,16 +31,19 @@ public class DetailController {
     public AlarmDTO alarmDTO;
     private MeetingService meetingService;
     private AlarmService alarmService;
+    private UserFollowService userFollowService;
 //    private JoinMemberProfileService joinMemberService;
 
 //    UserInfoService userInfoService;
 
-    public DetailController(MeetingService meetingService, AlarmService alarmService,/*, JoinMemberProfileService joinMemberService*/UserInfoService userInfoService) {
+    public DetailController(MeetingService meetingService, AlarmService alarmService, UserFollowService userFollowService,/*, JoinMemberProfileService joinMemberService*/UserInfoService userInfoService) {
         this.meetingService = meetingService;
         this.alarmService = alarmService;
 //        this.joinMemberService = joinMemberService;
         this.userInfoService = userInfoService;
     }
+
+
 
     @GetMapping("detail")
     public String writeDoneDetail(Model model, @RequestParam("meetingId") int meetingId, @SessionAttribute("loginUser") UserInfoDTO userInfoDTO) {
@@ -115,11 +119,14 @@ public class DetailController {
             if (meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitMemberNumber() < meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitmentNumber()) {
                 meetingService.participateGuest(detailDTO.getMeetingId(), userInfoDTO.getMember_id());
                 meetingService.upCountRecruiterNum(detailDTO.getMeetingId());
+                model.addAttribute("decMessage", "모임 참가 완료했습니다.");
             } else {
                 model.addAttribute("decMessage", "정원이 전부 찼습니다.");
             }
-
+        } else if (detailDTO.getDecMemberId() != 0) {
+            userFollowService.insertFollowMember(userInfoDTO.getMember_id(), detailDTO.getDecMemberId()); // 누르는 사람, 대상
         }
+
         return "detail/detail";
     }
 
