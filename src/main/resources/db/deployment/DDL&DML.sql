@@ -558,11 +558,11 @@ DROP TABLE IF EXISTS `tbl_alarm`;
 
 CREATE TABLE `tbl_alarm`
 (
-    `alarm_id`    INT NOT NULL COMMENT '알림번호',
+    `alarm_id`    INT AUTO_INCREMENT NOT NULL COMMENT '알림번호',
     `alarm_detail`    VARCHAR(300) NOT NULL COMMENT '알림내용',
     `alarm_date`    DATETIME NOT NULL COMMENT '생성날짜',
     `member_id`    INTEGER NOT NULL COMMENT '회원번호',
-    `participation_id`    INTEGER NOT NULL COMMENT '참여번호',
+    `participation_id`    INTEGER COMMENT '참여번호',
     `alarm_status`    VARCHAR(12) NOT NULL COMMENT '상태',
     `alarm_checked`    BOOLEAN NOT NULL COMMENT '확인여부',
     `meeting_id`    INTEGER NOT NULL COMMENT '모임번호',
