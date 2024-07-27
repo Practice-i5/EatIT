@@ -100,7 +100,7 @@ public class DetailController {
             meetingService.increaseMeetingReport(detailDTO.getMeetingId());
             model.addAttribute("decMessage", "이 게시글을 신고했습니다.");
 
-        } else if (detailDTO.getParticipateAcc() == 1 && meetingService.isExistAlarm(detailDTO.getMeetingId(), userInfoDTO.getMember_id()) != null) {
+        } else if (detailDTO.getParticipateAcc() == 1 && meetingService.isExistAlarm(detailDTO.getMeetingId(), userInfoDTO.getMember_id()) == null) {
             if (meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitMemberNumber() < meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitmentNumber()){
                 alarmDTO = new AlarmDTO();
                 alarmDTO.setAlarmDetail(detailDTO.getIntroduction());
@@ -114,7 +114,7 @@ public class DetailController {
             } else {
                 model.addAttribute("decMessage", "정원이 전부 찼습니다.");
             }
-        } else if (detailDTO.getParticipateFree() == 1 && meetingService.isExistPart(detailDTO.getMeetingId(), userInfoDTO.getMember_id()) != null) {
+        } else if (detailDTO.getParticipateFree() == 1 && meetingService.isExistPart(detailDTO.getMeetingId(), userInfoDTO.getMember_id()) == null) {
             System.out.println("heeeeeerrrrrreeeeeeee\n");
 //            System.out.println("********************enrollMeeting******************\n" + );
             if (meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitMemberNumber() < meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitmentNumber()) {

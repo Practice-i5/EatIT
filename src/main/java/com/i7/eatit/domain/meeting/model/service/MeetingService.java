@@ -8,11 +8,8 @@ import com.i7.eatit.domain.meeting.model.dto.MemberLoadDTO;
 import com.i7.eatit.domain.meeting.model.dto.PreviewMeetingDTO;
 import com.i7.eatit.domain.picture.dto.MeetingPhotoDTO;
 import com.i7.eatit.domain.tag.dto.InsertInterestRelDTO;
-<<<<<<< HEAD
 import org.apache.ibatis.annotations.Param;
-=======
 import org.springframework.beans.factory.annotation.Value;
->>>>>>> e8da62b30ae2c19886d1984b6b42fa86916f0f21
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

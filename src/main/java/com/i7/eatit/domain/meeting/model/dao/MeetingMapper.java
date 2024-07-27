@@ -62,7 +62,7 @@ public interface MeetingMapper {
     String findMeetingPhotoById(@Param("meetingId") int meetingId);
 
     String isExistAlarm(@Param("meetingId") int meetingId, @Param("memberId") int memberId);
-
+    // 참가 기록 조회
     String isExistPart(@Param("meetingId") int meetingId, @Param("memberId") int memberId);
 
     void upCountRecruiterNum(int meetingId);
