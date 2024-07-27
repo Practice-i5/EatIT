@@ -1,6 +1,6 @@
 
 function getAlarmDeatil(alarmId) {
-    console.log(alarmId);
+    // console.log(alarmId);
 
     fetch("/alarm/alarmDetail" + "?alarmId=" + alarmId)
         .then(res => res.json())
@@ -87,6 +87,18 @@ function getMeetingImages(meetingIdList){
                     meetingImgElement.src = data[meetingId];
                 }
             }
-
         });
+}
+
+function checkRead(isAlarmRead, alarmId) {
+    // console.log(isAlarmRead)
+    // console.log(alarmId)
+
+    if (isAlarmRead){
+        //nothing
+    }else {
+        const textElement = document.getElementById('target_text_' + alarmId)
+        textElement.classList.add("alarm-important")
+    }
+    
 }

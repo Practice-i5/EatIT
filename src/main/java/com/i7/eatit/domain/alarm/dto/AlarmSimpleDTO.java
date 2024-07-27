@@ -9,16 +9,18 @@ public class AlarmSimpleDTO {
     private int meetingId;
     private String meetingName;     //meeting.title
     private LocalDateTime alarmTime;
+    private boolean alarmChecked;
 
     public AlarmSimpleDTO() {
     }
 
-    public AlarmSimpleDTO(int alarmId, int memberId, int meetingId, String meetingName, LocalDateTime alarmTime) {
+    public AlarmSimpleDTO(int alarmId, int memberId, int meetingId, String meetingName, LocalDateTime alarmTime, boolean alarmChecked) {
         this.alarmId = alarmId;
         this.memberId = memberId;
         this.meetingId = meetingId;
         this.meetingName = meetingName;
         this.alarmTime = alarmTime;
+        this.alarmChecked = alarmChecked;
     }
 
     public int getAlarmId() {
@@ -59,5 +61,13 @@ public class AlarmSimpleDTO {
 
     public void setAlarmTime(LocalDateTime alarmTime) {
         this.alarmTime = alarmTime;
+    }
+
+    public boolean isAlarmChecked() {
+        return alarmChecked;
+    }
+
+    public void setAlarmChecked(boolean alarmChecked) {
+        this.alarmChecked = alarmChecked;
     }
 }
