@@ -48,13 +48,8 @@ public class HomeController {
         return "alarm/alarm"; // 알람 페이지
     }
 
-    @GetMapping("/chat-index") // 경로 변경
-    public String chat() {
-        return "chat/chat-index"; // 1:1 채팅 페이지
-    }
-
     @GetMapping("/chatGroup")
     public String chatGroup() {
-        return "chatGroup/login"; // 그룹 채팅 페이지
+        return "chatGroup/chatrooms"; // 그룹 채팅 페이지
     }
 }
