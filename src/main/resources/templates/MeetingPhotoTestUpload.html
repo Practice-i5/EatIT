@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>미팅포토 강제추가용</title>
+</head>
+<body>
+<h3>
+    모임 사진 추가용임
+</h3>
+<form action="/uploadMeetingPhoto" method="post" enctype="multipart/form-data">
+    <label for="meetingId">미팅번호</label>
+    <input id="meetingId" name="meetingId" type="number"/>
+    <br>
+    <label for="meetingPhoto">이미지</label>
+    <input name="meetingPhoto" id="meetingPhoto" type="file" accept="image/*">
+    <button>제출</button>
+
+    <th:block th:if="${resultImageUrl ne null}">
+        <h3 th:text="|미팅번호 ${meetingId} 업로드 결과|"></h3>
+
+        <img th:src="${resultImageUrl}"/>
+    </th:block>
+
+</form>
+</body>
+</html>
