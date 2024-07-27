@@ -8,6 +8,7 @@ import com.i7.eatit.domain.meeting.model.dto.MeetingDTO;
 import com.i7.eatit.domain.meeting.model.service.MeetingService;
 import com.i7.eatit.domain.user.dto.UserInfoDTO;
 import com.i7.eatit.domain.user.service.JoinMemberProfileService;
+import com.i7.eatit.domain.user.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,17 +26,19 @@ import java.util.List;
 @RequestMapping("/detail/*")
 public class DetailController {
 
+    private final UserInfoService userInfoService;
     public AlarmDTO alarmDTO;
     private MeetingService meetingService;
     private AlarmService alarmService;
-    private JoinMemberProfileService joinMemberService;
+//    private JoinMemberProfileService joinMemberService;
 
 //    UserInfoService userInfoService;
 
-    public DetailController(MeetingService meetingService, AlarmService alarmService, JoinMemberProfileService joinMemberService) {
+    public DetailController(MeetingService meetingService, AlarmService alarmService,/*, JoinMemberProfileService joinMemberService*/UserInfoService userInfoService) {
         this.meetingService = meetingService;
         this.alarmService = alarmService;
-        this.joinMemberService = joinMemberService;
+//        this.joinMemberService = joinMemberService;
+        this.userInfoService = userInfoService;
     }
 
     @GetMapping("detail")
@@ -64,6 +67,8 @@ public class DetailController {
         model.addAttribute("interests", meetingService.findInterestsById(meetingId));
         model.addAttribute("userInfo", userInfoDTO);
         model.addAttribute("meetingImage", meetingService.findPreviewById(meetingId));
+        model.addAttribute("loadMembers", meetingService.loadMembersById(meetingId));
+        model.addAttribute("hostInfoDTO", userInfoService.getUserInfo(meetingService.findHostIdById(meetingId)));
 
         return "detail/detail";
     }
@@ -76,27 +81,43 @@ public class DetailController {
         model.addAttribute("userInfo", userInfoDTO);
 //        model.addAttribute("joinMembers", joinMemberService.getUserProfileInfo(detailDTO.getMeetingId()));
         model.addAttribute("meetingImage", meetingService.findPreviewById(detailDTO.getMeetingId()));
-
+        model.addAttribute("loadMembers", meetingService.loadMembersById(detailDTO.getMeetingId()));
+        model.addAttribute("hostInfoDTO", userInfoService.getUserInfo(meetingService.findHostIdById(detailDTO.getMeetingId())));
+        System.out.println("과연 결과는!!!!!!!!!\n" + detailDTO);
         //        List<MeetingDTO> meetingList = meetingService.findAllMeeting();
         if (detailDTO.isDecHuman()) {
-            // 채호님 api
+
+            meetingService.increaseMemberReport(detailDTO.getReportedMemberId());
             model.addAttribute("decMessage", "이 유저를 신고했습니다.");
+
         } else if (detailDTO.isDecMeeting()) {
-            // 채호님 api
+
+            meetingService.increaseMeetingReport(detailDTO.getMeetingId());
             model.addAttribute("decMessage", "이 게시글을 신고했습니다.");
+
         } else if (detailDTO.isParticipateAcc() && meetingService.isExistAlarm(detailDTO.getMeetingId(), userInfoDTO.getMember_id()) != null) {
-            alarmDTO = new AlarmDTO();
-            alarmDTO.setAlarmDetail(detailDTO.getIntroduction());
-            alarmDTO.setAlarmTime(now.toLocalDateTime());
-            alarmDTO.setMemberId(userInfoDTO.getMember_id());
-            alarmDTO.setAlarmStatus("승인대기");
-            alarmDTO.setAlarmChecked(false);
-            alarmDTO.setMeetingId(detailDTO.getMeetingId());
-            alarmService.createNewAlarm(alarmDTO);
+            if (meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitMemberNumber() < meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitmentNumber()){
+                alarmDTO = new AlarmDTO();
+                alarmDTO.setAlarmDetail(detailDTO.getIntroduction());
+                alarmDTO.setAlarmTime(now.toLocalDateTime());
+                alarmDTO.setMemberId(userInfoDTO.getMember_id());
+                alarmDTO.setAlarmStatus("승인대기");
+                alarmDTO.setAlarmChecked(false);
+                alarmDTO.setMeetingId(detailDTO.getMeetingId());
+                alarmService.createNewAlarm(alarmDTO);
+            } else {
+                model.addAttribute("decMessage", "정원이 전부 찼습니다.");
+            }
         } else if (detailDTO.isParticipateFree() && meetingService.isExistPart(detailDTO.getMeetingId(), userInfoDTO.getMember_id()) != null) {
-            meetingService.participateGuest(detailDTO.getMeetingId(), userInfoDTO.getMember_id());
-            meetingService.participateGuest(detailDTO.getMeetingId(), userInfoDTO.getMember_id());
-            meetingService.upCountRecruiterNum(detailDTO.getMeetingId());
+
+//            System.out.println("********************enrollMeeting******************\n" + );
+            if (meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitMemberNumber() < meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitmentNumber()) {
+                meetingService.participateGuest(detailDTO.getMeetingId(), userInfoDTO.getMember_id());
+                meetingService.upCountRecruiterNum(detailDTO.getMeetingId());
+            } else {
+                model.addAttribute("decMessage", "정원이 전부 찼습니다.");
+            }
+
         }
         return "detail/detail";
     }

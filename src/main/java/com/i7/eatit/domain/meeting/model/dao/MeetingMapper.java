@@ -3,6 +3,7 @@ package com.i7.eatit.domain.meeting.model.dao;
 import com.i7.eatit.domain.meeting.model.common.SearchCriteria;
 import com.i7.eatit.domain.meeting.model.dto.DetailMeetingDTO;
 import com.i7.eatit.domain.meeting.model.dto.MeetingDTO;
+import com.i7.eatit.domain.meeting.model.dto.MemberLoadDTO;
 import com.i7.eatit.domain.meeting.model.dto.PreviewMeetingDTO;
 import com.i7.eatit.domain.tag.dto.InsertInterestRelDTO;
 import org.apache.ibatis.annotations.Mapper;
@@ -62,6 +63,12 @@ public interface MeetingMapper {
     String isExistPart(@Param("meetingId") int meetingId, @Param("memberId") int memberId);
 
     void upCountRecruiterNum(int meetingId);
+
+    void increaseMeetingReport(@Param("meetingId") int meetingId);
+
+    void increaseMemberReport(@Param("memberId") int memberId);
+
+    List<MemberLoadDTO> loadMembersById(@Param("meetingId") int meetingId);
 //    DetailMeetingDTO findDetailMeetingContents(int meetingId);
 //    List<> findParticipationts(int meetingId);
 }

@@ -250,7 +250,7 @@
                             <img th:src="${meetingImage.hostImageURL}" alt="Profile Picture">
                         </div>
                         <div class="profile-info">
-                            <h5 class="profile-name" th:text="${leaderId}">리더 닉네임</h5>
+                            <h5 class="profile-name" th:text="${hostInfoDTO.nickname}">리더 닉네임</h5>
     <!--                        <p>모임 횟수: 5</p>-->
                         </div>
                     </div>
@@ -278,8 +278,11 @@
     <!--            <div style="text-align: center"><a th:text="${temp}">매너온도</a></div>-->
 <!--                <div id="action-buttons">-->
                 <div id="action-buttons">
-                    <button class="follow-btn">팔로우</button>
-                    <input name="isDecHuman" th:value="true" type="hidden">
+<!--                    <button class="follow-btn">팔로우</button>-->
+                    <label>
+                        <input name="reportedMemberId" th:value="${meetingDTO.hostMemberId}">
+                        <input name="isDecHuman" th:value="true" type="hidden">
+                    </label>
                     <button type="submit" class="report-button report-btn">신고하기</button>
                 </div>
 <!--                    <span><input type="button" onclick='toggleReportBtns()'/></span>-->
@@ -426,34 +429,33 @@
                 </div>
             </div>
             <h4 class="fw-bold mb-0">참여자</h4>
-                <div class="owl-carousel vegetable-carousel justify-content-center participants-container">
+                <div class="owl-carousel vegetable-carousel justify-content-center participants-container" th:each="member : ${loadMembers}">
                     <div class=" position-relative participants-container-item">
                         <div class="contents-container border border-primary rounded">
-                            <img src="/img/honeybee_doguri.png" class="contents-container-item" alt="dev1">
+                            <img th:src="@{member.memberImageURL}" class="contents-container-item" alt="dev1">
                             <div class="contents-container-item">
-                                <p class="fw-bold align-center">꿀벌 도**</p>
-                                <p class="align-center">"iOS 개발자"</p>
+                                <p class="fw-bold align-center" th:text="${ nickname }">멤버 닉네임</p>
                             </div>
                         </div>
                     </div>
-                    <div class="position-relative participants-container-item">
-                        <div class="contents-container border border-primary rounded">
-                            <img src="/img/sakura_doguri.png" alt="dev2" class="contents-container-item">
-                            <div class="contents-container-item">
-                                <p class="fw-bold align-center">벛꽃 도**</p>
-                                <p class="align-center">"iOS 개발자"</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="position-relative participants-container-item">
-                        <div class="contents-container border border-primary rounded">
-                            <img src="/img/flower_doguri.png" alt="dev3" class="contents-container-item">
-                            <div class="contents-container-item">
-                                <p class="fw-bold align-center">넥카라 도**</p>
-                                <p class="align-center">"iOS 개발자"</p>
-                            </div>
-                        </div>
-                    </div>
+<!--                    <div class="position-relative participants-container-item">-->
+<!--                        <div class="contents-container border border-primary rounded">-->
+<!--                            <img src="/img/sakura_doguri.png" alt="dev2" class="contents-container-item">-->
+<!--                            <div class="contents-container-item">-->
+<!--                                <p class="fw-bold align-center">벛꽃 도**</p>-->
+<!--                                <p class="align-center">"iOS 개발자"</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="position-relative participants-container-item">-->
+<!--                        <div class="contents-container border border-primary rounded">-->
+<!--                            <img src="/img/flower_doguri.png" alt="dev3" class="contents-container-item">-->
+<!--                            <div class="contents-container-item">-->
+<!--                                <p class="fw-bold align-center">넥카라 도**</p>-->
+<!--                                <p class="align-center">"iOS 개발자"</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
         </div>
     </div>

@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 public class DetailMeetingDTO {
 
     private int meetingId;
+    private int reportedMemberId;
     private int decMemberId;
     private boolean isDecHuman;
     private boolean isDecMeeting;
@@ -15,8 +16,9 @@ public class DetailMeetingDTO {
 
     public DetailMeetingDTO() {}
 
-    public DetailMeetingDTO(int meetingId, int decMemberId, boolean isDecHuman, boolean isDecMeeting, boolean isParticipateFree, boolean isParticipateAcc, String introduction) {
+    public DetailMeetingDTO(int meetingId, int reportedMemberId, int decMemberId, boolean isDecHuman, boolean isDecMeeting, boolean isParticipateFree, boolean isParticipateAcc, String introduction) {
         this.meetingId = meetingId;
+        this.reportedMemberId = reportedMemberId;
         this.decMemberId = decMemberId;
         this.isDecHuman = isDecHuman;
         this.isDecMeeting = isDecMeeting;
@@ -31,6 +33,14 @@ public class DetailMeetingDTO {
 
     public void setMeetingId(int meetingId) {
         this.meetingId = meetingId;
+    }
+
+    public int getReportedMemberId() {
+        return reportedMemberId;
+    }
+
+    public void setReportedMemberId(int reportedMemberId) {
+        this.reportedMemberId = reportedMemberId;
     }
 
     public int getDecMemberId() {
@@ -85,6 +95,7 @@ public class DetailMeetingDTO {
     public String toString() {
         return "DetailMeetingDTO{" +
                 "meetingId=" + meetingId +
+                ", reportedMemberId=" + reportedMemberId +
                 ", decMemberId=" + decMemberId +
                 ", isDecHuman=" + isDecHuman +
                 ", isDecMeeting=" + isDecMeeting +
