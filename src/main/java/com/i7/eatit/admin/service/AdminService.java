@@ -21,6 +21,8 @@ import org.springframework.stereotype.Service;
 public class AdminService {
 
     private static final Logger log = LoggerFactory.getLogger(AdminService.class);
+    private static final int AUTO_MEMBER_STOP_COUNT = 5;
+    private static final int AUTO_MEETING_STOP_COUNT = 5;
 
     AdminMapper adminMapper;
     AdminMemberMapper adminMemberMapper;
@@ -31,10 +33,6 @@ public class AdminService {
         this.adminMemberMapper = adminMemberMapper;
         this.adminMapper = adminMapper;
         this.adminMeetingMapper = adminMeetingMapper;
-    }
-
-    public List<AdminMemberDto> findAllMember(String sort, String searchEmail) {
-        return adminMemberMapper.findAllMember(sort, searchEmail);
     }
 
     public boolean isValidAdminLogin(AdminLoginDto adminLoginDto) {
@@ -82,35 +80,48 @@ public class AdminService {
         return false;
     }
 
+    // 1. 멤버 전체 조회
+    public List<AdminMemberDto> findAllMember(String sort, String searchEmail) {
+        return adminMemberMapper.findAllMember(sort, searchEmail);
+    }
+
+    // 2. 멤버 단일 조회
     public AdminMemberDto findMemberById(int memberId) {
         return adminMemberMapper.findMemberById(memberId);
     }
 
+    // 3. 멤버 신고 횟수 증가 (AUTO_MEMBER_STOP_COUNT 이상일 시 자동 차단)
+    public void increaseMemberReport(int memberId) {
+        adminMemberMapper.increaseMemberReport(memberId);
+        int reportedCount = adminMemberMapper.findMemberById(memberId).getReportedCount();
+        if (reportedCount >= AUTO_MEMBER_STOP_COUNT) {
+            // TODO : 기능 정상 작동하는지 확인해 보지 못했음.
+            adminMemberMapper.updateMemberStatus(memberId);
+        }
+    }
+
+    // 4. 멤버 상태 변경 (중지 <-> 활성화)
     public void updateMemberStatus(int memberId) {
         adminMemberMapper.updateMemberStatus(memberId);
     }
 
+    // 5. 모임 전체 조회
     public List<AdminMeetingDto> findAllMeeting() {
         return adminMeetingMapper.findAllMeeting();
     }
 
+    // 6. 모임 단일 조회
     public AdminMeetingDto findMeetingById(int meetingId) {
         return adminMeetingMapper.findMeetingById(meetingId);
     }
 
+    // 7. 모임 상태 변경 (중지 <-> 활성화)
     public void changeMeetingStatus(int meetingId) {
         adminMeetingMapper.changeMeetingStatus(meetingId);
     }
 
+    // 8. 모임 신고 횟수 증가
     public void increaseMeetingReport(int meetingId) {
         adminMeetingMapper.increaseMeetingReport(meetingId);
-    }
-
-    public void increaseMemberReport(int memberId) {
-        adminMemberMapper.increaseMemberReport(memberId);
-    }
-
-    public void changeMemberStatus(int memberId) {
-        adminMemberMapper.changeMemberStatus(memberId);
     }
 }

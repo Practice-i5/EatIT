@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner.Mode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/admin")
@@ -75,6 +73,7 @@ public class AdminController {
         return "redirect:/admin/members";
     }
 
+    // 1. 멤버 전체 조회
     @GetMapping("/members")
     public String findAllMember(Model model,
         @RequestParam(name = "sort", required = false) String sort,
@@ -90,7 +89,7 @@ public class AdminController {
         return "admin/members";
     }
 
-    // 회원 단일 조회 위한 Controller
+    // 2. 멤버 단일 조회
     @GetMapping("/members/{memberId}")
     public String findMember(@PathVariable(name = "memberId") int memberId, Model model,
         HttpServletRequest request) {
@@ -102,7 +101,15 @@ public class AdminController {
         return "admin/member";
     }
 
-    // 회원을 정지시키기 위한 페이지
+    // 3. 멤버 신고 횟수 증가 -> N회 이상 신고 누적 시 자동으로 시스템에 의해 멤버가 차단 됨.
+    @GetMapping("api/admin/members/{memberId}/increaseReport")
+    public String increaseMemberReport(@PathVariable int memberId) {
+        adminService.increaseMemberReport(memberId);
+        // TODO : redirect Url 현민 님과 맞춰 봐야 함.
+        return "redirect:/index.html";
+    }
+
+    // 4. 멤버 상태 변경 (정지 <-> 활성화)
     @GetMapping("/members/{memberId}/management")
     public String clientManagement(@PathVariable(name = "memberId") int memberId,
         HttpServletRequest request
@@ -114,7 +121,7 @@ public class AdminController {
         return "redirect:/admin/members";
     }
 
-    // 전체 모임 조회
+    // 5. 모임 전체 조회
     @GetMapping("/meetings")
     public String findMeetings(HttpServletRequest request, Model model) {
         if (!adminService.isAdminLoggedIn(request)) {
@@ -126,7 +133,7 @@ public class AdminController {
         return "admin/meetings";
     }
 
-    // 모임 단일 조회
+    // 6. 모임 단일 조회
     @GetMapping("/meetings/{meetingId}")
     public String findMeetingById(HttpServletRequest request, Model model,
         @PathVariable(name = "meetingId") int meetingId) {
@@ -139,23 +146,17 @@ public class AdminController {
         return "admin/meeting";
     }
 
+    // 7. 모임 신고 횟수 추가 -> N회 이상 신고 누적 시 자동으로 시스템에 의해 모임이 정지 됨.
+    @GetMapping("api/admin/meetings/{meetingId}/increaseReport")
+    public String increaseMeetingReport(@PathVariable int meetingId) {
+        adminService.increaseMeetingReport(meetingId);
+        return "redirect:/index.html";
+    }
+
+    // 8. 모임 상태 변경 (중지 <-> 활성화)
     @GetMapping("/meetings/{meetingId}/management")
     public String changeMeetingStatus(@PathVariable int meetingId, Model model) {
         adminService.changeMeetingStatus(meetingId);
         return "redirect:/admin/meetings/" + meetingId;
-    }
-
-    @GetMapping("api/admin/meetings/{meetingId}/increaseReport")
-    public String increaseMeetingReport(@PathVariable int meetingId) {
-        adminService.increaseMeetingReport(meetingId);
-        adminService.changeMeetingStatus(meetingId);
-        return "redirect:/index.html";
-    }
-
-    @GetMapping("api/admin/members/{memberId}/increaseReport")
-    public String increaseMemberReport(@PathVariable int memberId) {
-        adminService.increaseMemberReport(memberId);
-        adminService.changeMemberStatus(memberId);
-        return "redirect:/index.html";
     }
 }
