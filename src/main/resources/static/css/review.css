@@ -37,17 +37,21 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
   margin-bottom: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .checkbox-label {
   display: flex;
   align-items: center;
+  margin-right: 1rem; /* 체크박스 간의 간격을 설정 */
+  margin-bottom: 0.5rem; /* 체크박스 그룹 간의 간격을 설정 */
 }
 
 .form-checkbox {
   height: 1.25rem;
   width: 1.25rem;
   color: #22c55e;
+  margin-right: 0.5rem; /* 체크박스와 텍스트 간의 간격을 설정 */
 }
 
 .ml-2 {
