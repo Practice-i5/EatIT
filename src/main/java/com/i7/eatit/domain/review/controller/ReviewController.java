@@ -3,15 +3,13 @@ package com.i7.eatit.domain.review.controller;
 
 import com.i7.eatit.domain.meeting.model.dto.MeetingDTO;
 import com.i7.eatit.domain.meeting.model.service.MeetingService;
+import com.i7.eatit.domain.review.dto.ReviewDTO;
 import com.i7.eatit.domain.user.dto.JoinMemberProfileDTO;
 import com.i7.eatit.domain.user.dto.RevieweeProfileDTO;
 import com.i7.eatit.domain.user.service.JoinMemberProfileService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -64,6 +62,10 @@ public class ReviewController {
         return "review/reviewPage";
     }
 
-
+    @PostMapping("/regist")
+    public void registerReview(@RequestBody ReviewDTO reviewDTO) {
+        // 받은 ReviewDTO 데이터로 데이터베이스에 저장
+        System.out.println("reviewDTO = " + reviewDTO);
+    }
 
 }
