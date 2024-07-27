@@ -16,5 +16,11 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/chatGroup/chatrooms/**")
                 .excludePathPatterns("/login/**", "/resources/**");
+
+        //마이페이지도 로그인 안한 상태면 리다이렉트 시키도록 추가
+        registry.addInterceptor(loginInterceptor)
+                .addPathPatterns("/my-page/**")
+                .excludePathPatterns("/login/**", "/resources/**");
+
     }
 }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>프로필 수정</title>
+    <link rel="stylesheet" href="css/style-mypage.css" th:href="@{/css/my-page/style-mypage.css}">
+    <link rel="stylesheet" href="css/button.css" th:href="@{/css/my-page/button.css}">
+</head>
+<body>
+<div class="container">
+    <nav class="header">
+        <div class="header-bar">
+            <img class="header-item logo" src="images/logo.png" th:src="@{/img/my-page/logo.png}" >
+            <a class="header-item" href="/">홈</a>
+            <a class="header-item" href="/enroll-meeting">모임 등록</a>
+            <a class="header-item" href="/search">모임 찾기</a>
+            <a class="header-item" >후기</a>
+            <!--            href="/participatingList"-->
+            <div class="header-item">
+                <button id="notification-icon">
+                    <img class="icon-image" src="images/notification.png" th:src="@{/img/my-page/notification.png}">
+                </button>
+                <button class="btn-choice-mid btn-wb" onclick="location.href='/my-page/profile'">마이페이지</button>
+                <button class="btn-choice-mid btn-wb" onclick="location.href='/login/logout'">로그아웃</button>
+            </div>
+        </div>
+    </nav>
+
+    <aside class="bar"></aside>
+
+    <div class="profile">
+        <div class="form-content" style="width:400px;">
+            <h2>마이페이지</h2>
+            <div style="display: flex; flex-direction: row; justify-content: center;">
+                <div class="user-info">
+                    <img src="/img/my-page/profile-voodoo.jpg"
+                         th:src="${profileImage}"
+                    />
+                    <div class="block-info-text">
+                        <h3 th:text="${session.loginUser.nickname}">알 나스르</h3>
+                        <p class="email" th:text="${session.loginUser.email}">out@email.com</p>
+                    </div>
+                </div>
+            </div>
+            <ul class="my-page-menu">
+                <li>프로필 수정</li>
+                <li>기술 프로필 설정</li>
+                <li>팔로우 유저 목록</li>
+                <li>차단 회원 관리</li>
+                <li>계정 정보 관리</li>
+                <li>회원탈퇴</li>
+            </ul>
+        </div>
+    </div>
+    <footer th:replace="~{my-page/footer-mypage::footerFragment}">
+    </footer>
+</div>
+</body>
+</html>

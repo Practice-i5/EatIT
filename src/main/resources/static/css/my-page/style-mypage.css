@@ -48,6 +48,26 @@ img{
 }
 
 
+.my-page-menu{
+    list-style: none;
+    padding-left: 0px;
+}
+
+.my-page-menu li {
+    border-radius: 10px;
+    font-size:18px;
+    padding-top:8px;
+    padding-bottom: 8px;
+    margin-top:3px;
+    margin-bottom: 3px;
+
+}
+
+.my-page-menu li:hover{
+    background-color: #f5f5f5;
+    cursor: grab;
+}
+
 .container {
     min-height: 100vh;
     display: grid;
@@ -303,6 +323,22 @@ img{
     font-size: 12px;
     margin:0px;
     text-align: right;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin:3px;
+}
+
+.user-info h3{
+    margin:5px;
+}
+
+.user-info .email{
+    font-size:14px;
+    margin:3px;
+    color:gray;
 }
 
 .block-info {
