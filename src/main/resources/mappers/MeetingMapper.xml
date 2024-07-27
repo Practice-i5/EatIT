@@ -37,6 +37,13 @@
         <result property="recruitmentNumber" column="recruitment_number"/>
     </resultMap>
 
+    <resultMap id="loadMemberResultMap" type="com.i7.eatit.domain.meeting.model.dto.MemberLoadDTO">
+        <id property="meetingId" column="meeting_id"/>
+        <result property="memberId" column="member_id"/>
+        <result property="nickname" column="nickname"/>
+        <result property="memberImageURL" column="photo_path"/>
+    </resultMap>
+
     <select id="findAllMeetings" resultMap="meetingResultMap">
         SELECT
                 A.MEETING_ID
@@ -410,19 +417,10 @@
     </select>
 
     <insert id="participateGuest" parameterType="int">
-        INSERT INTO
-        TBL_MEETING_PARTICIPATION
-        (
-        ROLE,
-        MEETING_ID,
-        MEMBER_ID
-        )
+        INSERT INTO TBL_MEETING_PARTICIPATION
+            ( ROLE, MEETING_ID, MEMBER_ID )
         VALUES
-        (
-        'Participant'
-        , #{ meetingId }
-        , #{ memberId }
-        )
+            ('Participant', #{ meetingId }, #{ memberId })
     </insert>
 
     <insert id="participateHost" parameterType="int">
@@ -441,7 +439,7 @@
         )
     </insert>
 
-    <select id="isExistAlarm" parameterType="int" resultType="int">
+    <select id="isExistAlarm" parameterType="int" resultType="string">
         SELECT
             ALARM_STATUS
         FROM
@@ -492,11 +490,49 @@
 
     </select>
 
+    <select id="loadMembersById" parameterType="int" resultMap="loadMemberResultMap">
+        SELECT
+                B.MEETING_ID,
+                A.MEMBER_ID,
+                A.NICKNAME,
+                C.PHOTO_PATH
+        FROM
+                    TBL_MEMBER A
+        LEFT JOIN   TBL_MEETING_PARTICIPATION B
+        ON          A.MEMBER_ID = B.MEMBER_ID
+        LEFT JOIN   TBL_MEMBER_PHOTO C
+        ON          A.MEMBER_ID = C.MEMBER_ID
+
+        WHERE
+                B.MEETING_ID = #{ meetingId } AND B.ROLE = 'Participant'
+        GROUP BY
+                    B.MEETING_ID,
+                    A.MEMBER_ID,
+                    A.NICKNAME,
+                    C.PHOTO_PATH
+
+
+    </select>
+
     <update id="upCountRecruiterNum" parameterType="int">
         UPDATE  TBL_MEETING
         SET     RECRUIT_MEMBER_NUMBER = RECRUIT_MEMBER_NUMBER + 1
         WHERE   MEETING_ID = #{ meetingId }
     </update>
+
+    <!-- tmp start -->
+    <update id="increaseMeetingReport" parameterType="int">
+        UPDATE tbl_meeting M
+        SET M.reported_count = M.reported_count + 1
+        WHERE M.meeting_id = #{ meetingId }
+    </update>
+
+    <update id="increaseMemberReport" parameterType="int">
+        UPDATE tbl_member M
+        SET M.reported_count = M.reported_count + 1
+        WHERE M.member_id = #{ memberId }
+    </update>
+    <!--  tmp end  -->
 
     <!-- test mapper start -->
     <select id="testFindMeetings" parameterType="com.i7.eatit.domain.meeting.model.common.SearchCriteria" resultMap="meetingResultMap">

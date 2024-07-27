@@ -4,9 +4,11 @@ import com.i7.eatit.domain.alarm.dto.AlarmDTO;
 import com.i7.eatit.domain.meeting.model.common.SearchCriteria;
 import com.i7.eatit.domain.meeting.model.dao.MeetingMapper;
 import com.i7.eatit.domain.meeting.model.dto.MeetingDTO;
+import com.i7.eatit.domain.meeting.model.dto.MemberLoadDTO;
 import com.i7.eatit.domain.meeting.model.dto.PreviewMeetingDTO;
 import com.i7.eatit.domain.picture.dto.MeetingPhotoDTO;
 import com.i7.eatit.domain.tag.dto.InsertInterestRelDTO;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -91,8 +93,14 @@ public class MeetingService {
     public String isExistAlarm(int meetingId, int memberId) { return meetingMapper.isExistAlarm(meetingId, memberId);}
 
     public String isExistPart(int meetingId, int memberId) { return meetingMapper.isExistPart(meetingId, memberId); }
-
+    @Transactional
     public void upCountRecruiterNum(int meetingId) { meetingMapper.upCountRecruiterNum(meetingId);}
+    @Transactional
+    public void increaseMeetingReport(int meetingId) { meetingMapper.increaseMeetingReport(meetingId);}
+    @Transactional
+    public void increaseMemberReport(int memberId) { meetingMapper.increaseMemberReport(memberId);}
+
+    public List<MemberLoadDTO> loadMembersById(int meetingId) { return meetingMapper.loadMembersById(meetingId);}
 }
 
 
