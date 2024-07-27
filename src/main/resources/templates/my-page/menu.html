@@ -14,12 +14,11 @@
             <a class="header-item" href="/enroll-meeting">모임 등록</a>
             <a class="header-item" href="/search">모임 찾기</a>
             <a class="header-item" >후기</a>
-            <!--            href="/participatingList"-->
             <div class="header-item">
                 <button id="notification-icon">
                     <img class="icon-image" src="images/notification.png" th:src="@{/img/my-page/notification.png}">
                 </button>
-                <button class="btn-choice-mid btn-wb" onclick="location.href='/my-page/profile'">마이페이지</button>
+                <button class="btn-choice-mid btn-wb" onclick="location.href='/my-page'">마이페이지</button>
                 <button class="btn-choice-mid btn-wb" onclick="location.href='/login/logout'">로그아웃</button>
             </div>
         </div>
@@ -36,18 +35,18 @@
                          th:src="${profileImage}"
                     />
                     <div class="block-info-text">
-                        <h3 th:text="${session.loginUser.nickname}">알 나스르</h3>
-                        <p class="email" th:text="${session.loginUser.email}">out@email.com</p>
+                        <h3 th:text="${session.loginUser.nickname}"></h3>
+                        <p class="email" th:text="${session.loginUser.email}"></p>
                     </div>
                 </div>
             </div>
             <ul class="my-page-menu">
-                <li>프로필 수정</li>
-                <li>기술 프로필 설정</li>
-                <li>팔로우 유저 목록</li>
-                <li>차단 회원 관리</li>
-                <li>계정 정보 관리</li>
-                <li>회원탈퇴</li>
+                <li onclick="location.href='/my-page/profile'">프로필 수정</li>
+                <li onclick="location.href='/my-page/tech-profile'">기술 프로필 설정</li>
+                <li onclick="location.href='/my-page/follow-list'">팔로우 유저 목록</li>
+                <li onclick="location.href='/my-page/black-list'">차단 회원 관리</li>
+                <li onclick="location.href='/my-page/account-info'">계정 정보 관리</li>
+                <li onclick="location.href='/my-page/withdraw'">회원탈퇴</li>
             </ul>
         </div>
     </div>
