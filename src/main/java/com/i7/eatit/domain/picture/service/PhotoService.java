@@ -81,6 +81,8 @@ public class PhotoService {
         String savedName = UUID.randomUUID().toString().replace("-", "") + ext;
         
         try{
+            fileUploadService.uploadFile(meetingPhotoFile, "meetingImage/"+savedName);
+
             MeetingPhotoDTO meetingPhoto = new MeetingPhotoDTO();
             meetingPhoto.setMeetingId(meetingId);
             meetingPhoto.setPhotoPath("meetingImage/"+savedName);
