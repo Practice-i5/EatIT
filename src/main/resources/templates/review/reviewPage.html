@@ -17,7 +17,7 @@
     <div th:each="member, iterStat : ${memberList}">
         <div class="mb-6">
             <h3 class="text-lg font-semibold mb-2" th:text="${member.nickname} + '님은 어땠나요?'">모임원은 어땠나요?</h3>
-            <div class="flex space-x-2 mb-4">
+            <div class="flex justify-center mb-4">
                 <button class="bg-blue-500 text-white px-4 py-2 rounded openModalBtn">평가하기</button>
             </div>
             <div class="manager-feedback text-gray-700">
@@ -34,7 +34,7 @@
                 <div class="container">
 
                     <div class="text-center mb-6">
-                        <img src="/static/img/profile.png" th:src="@{member.photoPath}" alt="프로필 사진"
+                        <img src="/static/img/profile.png" th:src="${member.photoPath}" alt="프로필 사진"
                              class="profile-picture">
                         <p class="profile-name" th:text="${member.nickname}">이름</p>
                     </div>
