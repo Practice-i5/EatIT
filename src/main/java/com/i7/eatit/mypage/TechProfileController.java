@@ -66,7 +66,7 @@ public class TechProfileController {
     }
 
     @PostMapping("tech-profile-modify")
-    public String techProfileModify(@SessionAttribute(name="loginUser", required = false) UserInfoDTO loginUser, WebRequest request, RedirectAttributes rttr) {
+    public String techProfileModify(@SessionAttribute(name="loginUser", required = false) UserInfoDTO loginUser,Model model, WebRequest request, RedirectAttributes rttr) {
 
         List<MemberTechStackDTO> stackCodeList = new ArrayList<>();
 
@@ -84,13 +84,15 @@ public class TechProfileController {
         }
 
         if(!stackCodeList.isEmpty()){
-
-            memberTechStackService.updateMemberTechStack(stackCodeList);
+            if(stackCodeList.size()<=5){
+                memberTechStackService.updateMemberTechStack(stackCodeList);
+            } else{
+                model.addAttribute("stack_error", "5개까지 선택가능합니다.");
+            }
             System.out.println("성공?");
-            rttr.addFlashAttribute("techModifyMessage", "성공인듯");
         } else{
+            model.addAttribute("stack_error", "스택을 선택해주세요.");
             System.out.println("실패?");
-            rttr.addFlashAttribute("techModifyMessage", "수정 실패");
         }
 
         return "redirect:/my-page/tech-profile";
@@ -98,7 +100,7 @@ public class TechProfileController {
     
 
     @PostMapping("tech-experience-modify")
-    public String techExperienceModify(TechExperienceDTO techExperience, @SessionAttribute("loginUser")UserInfoDTO loginUser) {
+    public String techExperienceModify(TechExperienceDTO techExperience, Model model, @SessionAttribute("loginUser")UserInfoDTO loginUser) {
         System.out.println(techExperience);
         if("on".equals(techExperience.getIsCurrent())) {
             techExperience.setIsCurrent("Y");
@@ -109,11 +111,14 @@ public class TechProfileController {
         techExperience.setMemberId(loginUser.getMember_id());
         
         if(techExperience.getExperienceId()!=null){
-            System.out.println("경험 아이디");
-            System.out.println(techExperience.getExperienceId());
             profileModifyService.modifyTechExperience(techExperience);
         } else{
-            profileModifyService.addTechExperience(techExperience);
+            List<TechExperienceDTO> techExperienceList = profileModifyService.findMemberTechExperience(loginUser.getMember_id());
+            if(techExperienceList.size()>5){
+                model.addAttribute("experience_error", "10개까지 선택가능합니다.");
+            } else{
+                profileModifyService.addTechExperience(techExperience);
+            }
         }
 
         return "redirect:/my-page/tech-profile-modify";
@@ -121,12 +126,10 @@ public class TechProfileController {
 
     @PostMapping("tech-experience-delete")
     public String deleteTechExperience(@SessionAttribute("loginUser") UserInfoDTO loginUser, WebRequest request){
-        //System.out.println(request.getParameter("deleteId"));
         if(request.getParameter("deleteId")==null){
             System.out.println("오류");
         } else{
             profileModifyService.deleteTechExperience(loginUser.getMember_id(), Integer.parseInt(Objects.requireNonNull(request.getParameter("deleteId"))));
-
         }
 
         return "redirect:/my-page/tech-profile-modify";
