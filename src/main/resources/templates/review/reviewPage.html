@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>평가 폼</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/review.css" th:href="@{/css/review.css}">
+</head>
+
+<body class="bg-gray-100 p-4">
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <h2 class="text-xl font-bold mb-4" th:text="${meetingInfo.title}">즐거운 AI 이야기(스타벅스)</h2>
+    <p class="text-gray-600 mb-6" th:text="${meetingInfo.scheduledDate}">24년 6월 21일 금요일 16:30</p>
+
+    <div th:each="member, iterStat : ${memberList}">
+        <div class="mb-6">
+            <h3 class="text-lg font-semibold mb-2" th:text="${member.nickname} + '님은 어땠나요?'">모임원은 어땠나요?</h3>
+            <div class="flex justify-center mb-4">
+                <button class="bg-blue-500 text-white px-4 py-2 rounded openModalBtn">평가하기</button>
+            </div>
+            <div class="manager-feedback text-gray-700">
+                <div class="selected-feedback hidden mb-2">
+                    <strong>선택한 항목:</strong>
+                    <ul class="selected-items"></ul>
+                </div>
+                <div class="modal-feedback"></div>
+            </div>
+        </div>
+
+        <div th:attr="id='myModal' + ${iterStat.index}" class="modal">
+            <div class="modal-content">
+                <div class="container">
+                    <div class="text-center mb-6">
+                        <img src="/static/img/profile.png" th:src="${member.photoPath}" alt="프로필 사진"
+                             class="profile-picture">
+                        <p class="profile-name" th:text="${member.nickname}">이름</p>
+                    </div>
+
+                    <form id="feedbackForm" class="feedback-form">
+                        <div class="checkbox-grid">
+                            <!-- 매너 행동 체크박스들 -->
+                            <label>
+                                <input type="checkbox" class="form-checkbox" value="밝은 사람입니다.">
+                                <span class="ml-2">밝은 사람입니다.</span>
+                            </label>
+
+                            <label>
+                                <input type="checkbox" class="form-checkbox" value="매우 유익합니다.">
+                                <span class="ml-2">매우 유익합니다.</span>
+                            </label>
+
+                            <label>
+                                <input type="checkbox" class="form-checkbox" value="많이 즐겼습니다.">
+                                <span class="ml-2">많이 즐겼습니다.</span>
+                            </label>
+
+                            <label>
+                                <input type="checkbox" class="form-checkbox" value="많이 배웠습니다.">
+                                <span class="ml-2">많이 배웠습니다.</span>
+                            </label>
+
+                            <label>
+                                <input type="checkbox" class="form-checkbox" value="매우 유익합니다.">
+                                <span class="ml-2">매우 유익합니다.</span>
+                            </label>
+
+                            <label>
+                                <input type="checkbox" class="form-checkbox" value="다시 만나고싶습니다.">
+                                <span class="ml-2">다시 만나고싶습니다.</span>
+                            </label>
+
+                            <label>
+                                <input type="checkbox" class="form-checkbox" value="친절했습니다.">
+                                <span class="ml-2">친절했습니다.</span>
+                            </label>
+
+                            <label>
+                                <input type="checkbox" class="form-checkbox" value="분위기를 잘 이끌었습니다.">
+                                <span class="ml-2">분위기를 잘 이끌었습니다.</span>
+                            </label>
+
+                            <label>
+                                <input type="checkbox" class="form-checkbox" value="유익한 정보가 많습니다.">
+                                <span class="ml-2">유익한 정보가 많습니다.</span>
+                            </label>
+
+                            <label>
+                                <input type="checkbox" class="form-checkbox" value="적극적으로 참여했습니다.">
+                                <span class="ml-2">적극적으로 참여했습니다.</span>
+                            </label>
+
+                            <!-- 비매너 행동 체크박스들 -->
+                            <label>
+                                <input type="checkbox" class="form-checkbox" value="비매너 행동이 있었습니다.">
+                                <span class="ml-2">비매너 행동이 있었습니다.</span>
+                            </label>
+
+                            <label>
+                                <input type="checkbox" class="form-checkbox" value="시간을 지키지 않았습니다.">
+                                <span class="ml-2">시간을 지키지 않았습니다.</span>
+                            </label>
+
+                            <label>
+                                <input type="checkbox" class="form-checkbox" value="언행이 과격합니다.">
+                                <span class="ml-2">언행이 과격합니다.</span>
+                            </label>
+
+                            <label>
+                                <input type="checkbox" class="form-checkbox" value="눈치가 없습니다.">
+                                <span class="ml-2">눈치가 없습니다.</span>
+                            </label>
+
+                            <label>
+                                <input type="checkbox" class="form-checkbox" value="소극적이었습니다.">
+                                <span class="ml-2">소극적이었습니다.</span>
+                            </label>
+
+                            <label>
+                                <input type="checkbox" class="form-checkbox" value="배려가 없습니다.">
+                                <span class="ml-2">배려가 없습니다.</span>
+                            </label>
+
+                            <label>
+                                <input type="checkbox" class="form-checkbox" value="본인 말만 합니다.">
+                                <span class="ml-2">본인 말만 합니다.</span>
+                            </label>
+
+                            <label>
+                                <input type="checkbox" class="form-checkbox" value="모임에 소극적입니다.">
+                                <span class="ml-2">모임에 소극적입니다.</span>
+                            </label>
+
+                            <label>
+                                <input type="checkbox" class="form-checkbox" value="비판적이었습니다.">
+                                <span class="ml-2">비판적이었습니다.</span>
+                            </label>
+
+                            <label>
+                                <input type="checkbox" class="form-checkbox" value="같이 있기 부끄럽습니다.">
+                                <span class="ml-2">같이 있기 부끄럽습니다.</span>
+                            </label>
+                        </div>
+                        <div class="text-center mt-4">
+                            <button class="bg-blue-500 text-white px-6 py-2 rounded submit-btn" type="button" onclick="submitFeedback()">제출</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-6">
+        <button class="bg-red-500 text-white px-6 py-2 rounded" onclick="location.href='/meetingList/endList'">확인
+        </button>
+    </div>
+</div>
+
+<script src="/static/js/review.js" th:src="@{/js/review.js}"></script>
+<script>
+    function submitFeedback() {
+        // 폼 데이터 수집
+        const form = document.getElementById('feedbackForm');
+        const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+        const selectedValues = Array.from(checkboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.value);
+
+        // 서버로 데이터 전송
+        fetch('/review/regist', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                feedback: selectedValues
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                // 성공적으로 데이터가 저장되면 알림을 표시하거나 다른 페이지로 이동
+                alert('피드백이 저장되었습니다.');
+                // 또는 다른 페이지로 이동
+                // window.location.href = '/meetingList/endList';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('서버 오류가 발생했습니다.');
+            });
+    }
+</script>
+</body>
+</html>

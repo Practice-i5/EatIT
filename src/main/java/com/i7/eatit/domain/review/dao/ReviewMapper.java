@@ -1,4 +1,8 @@
 package com.i7.eatit.domain.review.dao;
 
-public class ReviewMapper {
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface ReviewMapper {
+
 }
