@@ -2,6 +2,7 @@ package com.i7.eatit.domain.onetoonechat.controller;
 
 import com.i7.eatit.domain.onetoonechat.dto.OneChatRoomDTO;
 import com.i7.eatit.domain.user.dto.UserInfoDTO;
+import com.i7.eatit.domain.onetoonechat.service.OneChatRoomService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -22,7 +25,9 @@ public class OneChatRoomController {
     private String nodeServerUrl;
 
     @Autowired
-    private com.i7.eatit.domain.onetoonechat.service.OneChatRoomService oneChatRoomService;
+    private OneChatRoomService oneChatRoomService;
+
+    private static final Logger logger = LoggerFactory.getLogger(OneChatRoomController.class);
 
     @GetMapping("/chat-room")
     public String chatRoom(@RequestParam("username") String username, @RequestParam("room") String room, Model model) {
@@ -57,10 +62,9 @@ public class OneChatRoomController {
         return "redirect:/onechatroom/chat-index";
     }
 
-    // 새로운 메시지 엔드포인트 추가
     @PostMapping("/send-message")
     @ResponseBody
-    public ResponseEntity<String> sendMessage(@RequestBody OneChatRoomController.ChatMessage chatMessage) {
+    public ResponseEntity<String> sendMessage(@RequestBody ChatMessage chatMessage) {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -71,12 +75,11 @@ public class OneChatRoomController {
             ResponseEntity<String> response = restTemplate.exchange(nodeServerUrl + "/messages", HttpMethod.POST, request, String.class);
             return response;
         } catch (Exception e) {
-            e.printStackTrace(); // 로그에 오류 메시지 출력
+            logger.error("Error sending message", e); // 로그에 오류 메시지 출력
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error sending message: " + e.getMessage());
         }
     }
 
-    // ChatMessage 클래스 정의
     public static class ChatMessage {
         private String username;
         private String room;

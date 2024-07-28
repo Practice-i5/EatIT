@@ -5,11 +5,11 @@ import java.sql.Timestamp;
 
 public class AdminMeetingDto {
 
-    private int meetingId;          // 모임 id
-    private String title;           // 모임 제목
-    private String locationName;    // 모임 장소명
-    private double locationLatitude;// 모임 위도
-    private double locationLongitude;// 모임 경도
+    private int meetingId;              // 모임 id
+    private String title;               // 모임 제목
+    private String locationName;        // 모임 장소명
+    private double locationLatitude;    // 모임 위도
+    private double locationLongitude;   // 모임 경도
     private String introduction;        // 모임 설명
     private String paymentMethod;       // 지불 방식
     private String meetingType;         // 모임 종류
@@ -25,6 +25,7 @@ public class AdminMeetingDto {
     private Timestamp endDate;          // 종료 일시
     private int hostMemberId;           // 호스트 멤버 id
     private int lastId;                 // 자동 생성된 meeting_id
+    private int reportedCount;          // 모임이 신고 당한 횟수
 
     public int getMeetingId() {
         return meetingId;
@@ -184,5 +185,13 @@ public class AdminMeetingDto {
 
     public void setLastId(int lastId) {
         this.lastId = lastId;
+    }
+
+    public int getReportedCount() {
+        return reportedCount;
+    }
+
+    public void setReportedCount(int reportedCount) {
+        this.reportedCount = reportedCount;
     }
 }

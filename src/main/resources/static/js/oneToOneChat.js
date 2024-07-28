@@ -2,6 +2,7 @@ const chatForm = document.getElementById('chat-form');
 const chatMessages = document.querySelector('.chat-messages');
 const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
+const leaveButton = document.getElementById('leave-btn'); // 방 나가기 버튼 요소 추가
 
 const { username, room } = Qs.parse(location.search, {
     ignoreQueryPrefix: true
@@ -52,6 +53,13 @@ chatForm.addEventListener('submit', (e) => {
             }
         })
         .catch(error => console.error('Error sending message:', error));
+});
+
+leaveButton.addEventListener('click', () => {
+    const leaveRoom = confirm('채팅방을 떠나시겠습니까?');
+    if (leaveRoom) {
+        window.location = '/onechatroom/chat-index'; // 홈으로 리디렉션
+    }
 });
 
 function outputMessage(message) {
