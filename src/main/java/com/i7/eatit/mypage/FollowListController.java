@@ -50,9 +50,7 @@ public class FollowListController {
             followList.add(new FollowListPageDTO(
                     detailFollow.getFolloweeId(),
                     detailFollow.getDetailProfile().getNickname(),
-                    photoService.getPhotoUrlByPath(
-                    detailFollow.getDetailProfile().getMemberPhoto().getPhotoPath())
-            ));
+                    detailFollow.getDetailProfile().getMemberPhoto().getPhotoPath()));
         }
 
 
