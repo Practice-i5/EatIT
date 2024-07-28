@@ -1,10 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
 <body>
+<th:block th:fragment="headerLayout">
+<!--    &lt;!&ndash; Spinner Start &ndash;&gt;-->
+<!--    <div id="spinner"-->
+<!--         class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">-->
+<!--        <div class="spinner-grow text-primary" role="status"></div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; Spinner End &ndash;&gt;-->
 
+
+    <!-- Navbar start -->
+    <div class="container-fluid fixed-top">
+        <div class="container px-0">
+            <nav class="navbar navbar-light bg-white navbar-expand-xl">
+                <!-- 로고 및 사이트 이름 -->
+                <a th:href="@{/home}" class="navbar-brand">
+                    <img th:src="@{/img/image_145.png}" src="/img/image_145.png" alt="Eat-IT Logo">
+                    <h1 class="text-primary display-6">Eat-IT</h1>
+                </a>
+
+                <!-- 모바일용 네비게이션 토글 버튼 -->
+                <button
+                        class="navbar-toggler py-2 px-3"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarCollapse"
+                >
+                    <span class="fa fa-bars text-primary"></span>
+                </button>
+                <!-- 네비게이션 메뉴 -->
+                <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
+                    <div class="navbar-nav mx-auto">
+                        <a th:href="@{/home}" class="nav-item nav-link active">홈</a>
+                        <a th:href="@{/enroll-meeting/enroll-meeting}" class="nav-item nav-link">모임등록</a>
+                        <a th:href="@{/search/list}" class="nav-item nav-link">모임찾기</a>
+                        <!-- 모임목록은 로그인을 해야 들어갈 수 있기에 404 에러가 뜸-->
+                        <a th:href="@{/meetingList/participatingList}" class="nav-item nav-link">모임목록</a>
+
+                    </div>
+                    <!-- 1:1 채팅 및 그룹 채팅 버튼 -->
+                    <a th:href="@{/chat}" class="btn-chat my-auto">
+                        <i class="fas fa-comments"></i>
+                        <span class="btn-text">1:1채팅</span>
+                    </a>
+                    <a th:href="@{/chatGroup/chat-page}" class="btn-chat my-auto">
+                        <i class="fas fa-users"></i>
+                        <span class="btn-text">그룹채팅</span>
+                    </a>
+
+                    <!-- 새 알람이 있으면 배지 달리는 벨 아이콘 start -->
+                    <a href="#" th:href="@{/alarm/alarm}" class="btn-notification my-auto me-4 position-relative">
+                        <i class="fas fa-bell fa-2x ">
+                        </i>
+                        <div id="alarm-badge">
+                                        <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                                            <span class="visually-hidden">New alerts</span>
+                                        </span>
+                        </div>
+                    </a>
+                    <script src="/js/alarm_badge.js"></script>
+                    <!-- 새 알람이 있으면 배지 달리는 벨 아이콘 End -->
+                    <a class="btn btn-danger rounded-pill me-2" th:href="@{/login/loginMain}" id="loginButton">
+                        로그인
+                    </a>
+                    <a class="btn btn-outline-danger rounded-pill" th:href="@{/login/join}" id="signupButton">
+                        회원가입
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+</th:block>
 </body>
 </html>
