@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/alarm")
+@RequestMapping("/alarm/*")
 public class AlarmPageController {
 
     private final AlarmService alarmService;
@@ -76,6 +76,9 @@ public class AlarmPageController {
     @GetMapping(value = "alarmCheck", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public String alarmCheck(@SessionAttribute(value = "loginUser", required = false) UserInfoDTO loginUser) {
+        if (loginUser == null) {
+            return String.valueOf(false);
+        }
         int hostMemberId = loginUser.getMember_id();
         boolean isAlarmRinging = alarmService.checkNewAlarm(hostMemberId);
         return String.valueOf(isAlarmRinging);
