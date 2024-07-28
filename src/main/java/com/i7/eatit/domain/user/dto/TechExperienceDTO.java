@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class TechExperienceDTO {
 
-    private int experienceId;
+    private Integer experienceId;
     private int memberId;
     private String companyName;
     private String description;
@@ -14,7 +14,7 @@ public class TechExperienceDTO {
 
     public TechExperienceDTO() {}
 
-    public TechExperienceDTO(int experienceId, int memberId, String companyName, String description, Date startDate, Date endDate, String isCurrent) {
+    public TechExperienceDTO(Integer experienceId, int memberId, String companyName, String description, Date startDate, Date endDate, String isCurrent) {
         this.experienceId = experienceId;
         this.memberId = memberId;
         this.companyName = companyName;
@@ -24,11 +24,11 @@ public class TechExperienceDTO {
         this.isCurrent = isCurrent;
     }
 
-    public int getExperienceId() {
+    public Integer getExperienceId() {
         return experienceId;
     }
 
-    public void setExperienceId(int experienceId) {
+    public void setExperienceId(Integer experienceId) {
         this.experienceId = experienceId;
     }
 
