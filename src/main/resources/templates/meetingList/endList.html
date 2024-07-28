@@ -233,7 +233,9 @@
                                                          th:text="${meeting.status}">모임 상태
                                                     </div>-->
 
-                                                    <a th:href="@{/review/reviewMain}" class="btn meeting-status text-danger fw-bold">후기 남기기</a>
+                                                    <a th:href="@{|/review/reviewPage?meetingId=${meeting.meetingId}|}"
+                                                       class="btn meeting-status text-danger fw-bold">후기 남기기</a>
+
                                                     <!-- 모임 날짜 및 시간 -->
                                                     <p class="text-dark fs-5 fw-bold mb-0"
                                                        th:text="${meeting.scheduledDate}">모임 날짜 및 시간</p>
