@@ -9,12 +9,28 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-public class MeetingPhotoTestController {
+public class PhotoTestController {
 
     private PhotoService photoService;
 
-    public MeetingPhotoTestController(PhotoService photoService) {
+    public PhotoTestController(PhotoService photoService) {
         this.photoService = photoService;
+    }
+
+    @GetMapping("/uploadMemberPhoto")
+    public String testMemberPhoto() {
+        return "/MemberPhotoTestUpload";
+    }
+
+    @PostMapping("/uploadMemberPhoto")
+    public String testSendMemberPhoto(@RequestParam int memberId, @RequestParam MultipartFile memberPhoto, RedirectAttributes rttr)
+    {
+        String path = photoService.uploadMemberPhoto(memberPhoto, memberId);
+
+        rttr.addFlashAttribute("resultImageUrl", path);
+        rttr.addFlashAttribute("memberId", memberId);
+
+        return "redirect:/uploadMemberPhoto";
     }
 
     @GetMapping("/uploadMeetingPhoto")

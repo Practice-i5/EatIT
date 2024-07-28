@@ -57,10 +57,18 @@
       <p class="text-sm text-muted-foreground" th:text="${adminMeetingDto.title}"></p>
     </div>
     <div class="ml-auto flex items-center gap-1">
-      <!--      <button-->
-      <!--          class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground rounded-md px-3 h-8 gap-1">-->
-      <!--        <span class="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">Add to Calendar</span>-->
-      <!--      </button>-->
+      <button
+          th:onclick="'confirmAndRedirect(\'/admin/meetings/' + ${adminMeetingDto.meetingId} + '/management\')'"
+          th:text="${adminMeetingDto.status == 'Open' ? '정지 시키기' : (adminMeetingDto.status == 'Close' ? '정지 취소하기' : '비정상적 상태')}"
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-destructive text-destructive-foreground hover:bg-red-700 hover:text-white px-4 py-2">
+      </button>
+      <script>
+        function confirmAndRedirect(url) {
+          if (confirm('정지 상태를 변경하시겠습니까?')) {
+            window.location.href = url;
+          }
+        }
+      </script>
     </div>
   </div>
   <div class="p-6 text-sm">

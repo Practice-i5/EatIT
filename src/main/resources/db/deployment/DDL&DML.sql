@@ -144,7 +144,9 @@ VALUES (1, 'Study Group', 'Library', 37.5665, 126.9780, 'Study together', 'Free'
         '리더승인', 'Open', '2024-08-10 20:00:00', 10, 0);
 
 
-DROP TABLE IF EXISTS `tbl_meeting_interest_category`;
+
+
+    DROP TABLE IF EXISTS `tbl_meeting_interest_category`;
 
 CREATE TABLE `tbl_meeting_interest_category`
 (
@@ -235,14 +237,17 @@ CREATE TABLE `tbl_meeting_participation`
 INSERT INTO `tbl_meeting_participation` (`participation_id`, `role`, `meeting_id`, `member_id`)
 VALUES (1, 'Host', 1, 1),
        (2, 'Participant', 1, 2),
-       (3, 'Host', 2, 3),
-       (4, 'Participant', 2, 4),
-       (5, 'Host', 3, 5),
-       (6, 'Participant', 3, 6),
-       (7, 'Host', 4, 7),
-       (8, 'Participant', 4, 8),
-       (9, 'Host', 5, 9),
-       (10, 'Participant', 5, 10);
+       (3, 'Participant', 1, 3),
+       (4, 'Participant', 1, 4),
+       (5, 'Participant', 1, 5),
+       (6, 'Host', 2, 3),
+       (7, 'Participant', 2, 4),
+       (8, 'Host', 3, 5),
+       (9, 'Participant', 3, 6),
+       (10, 'Host', 4, 7),
+       (11, 'Participant', 4, 8),
+       (12, 'Host', 5, 9),
+       (13, 'Participant', 5, 10);
 
 
 
@@ -622,3 +627,13 @@ VALUES
     (48, '안녕하세요, 유관순입니다.', '2023-08-17 12:00:00', 6, 48, '거절', false, 8),
     (49, '안녕하세요, 세종대왕입니다.', '2023-08-18 12:00:00', 7, 49, '승인대기', false, 9),
     (50, '안녕하세요, 홍길동입니다.', '2023-08-19 12:00:00', 1, 50, '승인', false, 10);
+
+DROP TABLE IF EXISTS `tbl_onechatroom`;
+
+CREATE TABLE tbl_onechatroom (
+                     id INT AUTO_INCREMENT PRIMARY KEY,
+                     name VARCHAR(255) NOT NULL,
+                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+

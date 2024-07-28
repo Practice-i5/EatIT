@@ -23,7 +23,6 @@ public class PhotoService {
     }
 
     public MemberPhotoDTO findPhotoByMemberId(int userId){
-
         return photoMapper.findPhotoByMemberId(userId);
 
     }
@@ -32,13 +31,17 @@ public class PhotoService {
         return fileUploadService.getSourceFromPath(path);
     }
 
+    public String getPhotoPathByUrl(String url){
+        return fileUploadService.getPathFromUrl(url);
+    }
+
     public MeetingPhotoDTO findPhotoByMeetingId(int meetingId){
 
         return photoMapper.findPhotoByMeetingId(meetingId);
     }
 
     @Transactional
-    public String uploadMemberPhoto(MultipartFile singleImageFile, int memberId) throws IOException {
+    public String uploadMemberPhoto(MultipartFile singleImageFile, int memberId) {
 
         System.out.println("singleImageFile = " + singleImageFile);
 
@@ -48,20 +51,18 @@ public class PhotoService {
         String savedName = UUID.randomUUID().toString().replace("-", "") + ext;
 
         try {
-            //singleImageFile.transferTo(new File(filePath + "/" + savedName));
-            //String uploadFileId = DriveExample.uploadFile(singleImageFile);
-            fileUploadService.uploadFile(singleImageFile, "memberImage/"+savedName);
+            String savedPath = "memberImage/"+savedName;
+            fileUploadService.uploadFile(singleImageFile, savedPath);
+            String Url = this.getPhotoUrlByPath(savedPath);
 
             MemberPhotoDTO memberPhoto = new MemberPhotoDTO();
             memberPhoto.setMemberId(memberId);
-            memberPhoto.setPhotoPath("memberImage/"+savedName);
+            memberPhoto.setPhotoPath(Url);
             memberPhoto.setPhotoName(originFileName);
 
             photoMapper.uploadMemberPhoto(memberPhoto);
 
             System.out.println("업로드 성공");
-
-            String Url = fileUploadService.getSourceFromPath("memberImage/"+savedName);
             System.out.println("반환 url : "+ Url);
             return Url;
 
@@ -81,17 +82,18 @@ public class PhotoService {
         String savedName = UUID.randomUUID().toString().replace("-", "") + ext;
         
         try{
-            fileUploadService.uploadFile(meetingPhotoFile, "meetingImage/"+savedName);
+            String savedPath = "meetingImage/" + savedName;
+            fileUploadService.uploadFile(meetingPhotoFile, savedPath);
+            String Url = this.getPhotoUrlByPath(savedPath);
 
             MeetingPhotoDTO meetingPhoto = new MeetingPhotoDTO();
             meetingPhoto.setMeetingId(meetingId);
-            meetingPhoto.setPhotoPath("meetingImage/"+savedName);
+            meetingPhoto.setPhotoPath(Url);
             meetingPhoto.setPhotoName(originFileName);
 
             photoMapper.uploadMeetingPhoto(meetingPhoto);
-            System.out.println("업로드 완료");
 
-            String Url = fileUploadService.getSourceFromPath("meetingImage/"+savedName);
+            System.out.println("업로드 완료");
             System.out.println("반환 url : "+ Url);
             return Url;
 
@@ -105,12 +107,20 @@ public class PhotoService {
 
     @Transactional
     public void deleteMemberPhoto(int memberId){
-        photoMapper.deleteMemberPhoto(memberId);
+        MemberPhotoDTO deletePhoto = this.findPhotoByMemberId(memberId);
+        if(deletePhoto != null){
+            fileUploadService.deleteFile(this.getPhotoPathByUrl(deletePhoto.getPhotoPath()));
+            photoMapper.deleteMemberPhoto(memberId);
+        }
     }
 
     @Transactional
     public void deleteMeetingPhoto(int meetingId){
-        photoMapper.deleteMeetingPhoto(meetingId);
+        MeetingPhotoDTO deletePhoto = this.findPhotoByMeetingId(meetingId);
+        if(deletePhoto != null){
+            fileUploadService.deleteFile(this.getPhotoPathByUrl(deletePhoto.getPhotoPath()));
+            photoMapper.deleteMeetingPhoto(meetingId);
+        }
     }
 
 }
