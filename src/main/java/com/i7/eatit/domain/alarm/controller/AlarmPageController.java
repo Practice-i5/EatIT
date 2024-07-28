@@ -28,6 +28,12 @@ public class AlarmPageController {
     private final MeetingService meetingService;
 
 
+    public interface STATUS {
+        String ACCEPT = "승인";
+        String REFUSE = "거절";
+        String WAITING = "승인대기";
+    }
+
 
     public AlarmPageController(AlarmService alarmService, PhotoService photoService, MeetingService meetingService) {
         this.alarmService = alarmService;
@@ -35,7 +41,7 @@ public class AlarmPageController {
         this.meetingService = meetingService;
     }
 
-    @GetMapping("alarm")
+    @GetMapping("/alarm")
     public String alarmPage(Model model, @SessionAttribute(value = "loginUser", required = false) UserInfoDTO loginUser) {
 
         //로그인된 MemberId 가져오기
@@ -66,25 +72,35 @@ public class AlarmPageController {
         return "alarm/alarm";
     }
 
+    //알람 배지용 송신
+    @GetMapping(value = "alarmCheck", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public String alarmCheck(@SessionAttribute(value = "loginUser", required = false) UserInfoDTO loginUser) {
+        int hostMemberId = loginUser.getMember_id();
+        boolean isAlarmRinging = alarmService.checkNewAlarm(hostMemberId);
+        return String.valueOf(isAlarmRinging);
+    }
+
     //생성 테스트
     public void createNewAlarm(AlarmDTO alarmDTO) {
         alarmService.createNewAlarm(alarmDTO);
     }
 
-
+    //알람 모달에 디테일 표시하기 위한 json 송신
     @GetMapping(value="alarmDetail", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public AlarmDetailDTO findAlarmDetail(@RequestParam int alarmId) {
         return alarmService.findAlarmDetail(alarmId);
     }
 
-
+    //유저 이미지용 url 송신
     @GetMapping(value="userImg", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public MemberPhotoDTO getUserImage(@RequestParam int userId) {
         return photoService.findPhotoByMemberId(userId);
     }
 
+    //미팅 단일 이미지용 url 송신
     @GetMapping(value="meetingImg", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public String getMeetingImage(@RequestParam int meetingId) {
@@ -97,6 +113,7 @@ public class AlarmPageController {
         //return photoService.getPhotoUrlByPath(photoDTO.getPhotoPath());
     }
 
+    //미팅 이미지 url 리스트  송신
     @GetMapping(value="meetingImgs", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public List<String> getMeetingImages(@RequestParam List<Integer> meetingIdList) {
@@ -113,16 +130,24 @@ public class AlarmPageController {
         return images;
     }
 
+
+    //수락
     @GetMapping("accept")
     public String acceptJoin(@RequestParam int alarmId) {
         AlarmDTO alarmDTO = alarmService.findOneAlarm(alarmId);
 //        System.out.println(alarmDTO.toString());
 
+        //이미 처리 되어있으면 수정 불가
+        if (!alarmDTO.getAlarmStatus().equals(STATUS.WAITING)){
+            return "redirect:/alarm/alarm";
+        }
+
+        //알람 테이블 승인 처리
         alarmService.acceptRecruit(alarmId);
 
         AlarmUpdateDTO alarmUpdateDTO  = new AlarmUpdateDTO();
         alarmUpdateDTO.setAlarmId(alarmId);
-        alarmUpdateDTO.setAlarmStatus("승인");
+        alarmUpdateDTO.setAlarmStatus(STATUS.ACCEPT);
         alarmUpdateDTO.setAlarmChecked(true);
 
         alarmUpdateDTO.setRole("Participant");
@@ -132,14 +157,26 @@ public class AlarmPageController {
         MeetingDTO meetingDTO = meetingService.findMeetingById(alarmDTO.getMeetingId());
         alarmUpdateDTO.setMemberNum(meetingDTO.getRecruitMemberNumber() + 1);
 
+        //참여 테이블에 추가
         alarmService.addParticipant(alarmUpdateDTO);
+
+        //미팅 테이블에 해당 모임 인구수 +1
+        meetingService.upCountRecruiterNum(alarmDTO.getMeetingId());
 
         return "redirect:/alarm/alarm";
     }
 
+    //거절
     @GetMapping("refuse")
     public String refuseJoin(@RequestParam int alarmId) {
+        AlarmDTO alarmDTO = alarmService.findOneAlarm(alarmId);
 
+        //이미 처리 되어있으면 수정 불가
+        if (!alarmDTO.getAlarmStatus().equals(STATUS.WAITING)){
+            return "redirect:/alarm/alarm";
+        }
+
+        //알람 테이블 거절 처리
         alarmService.refuseRecruit(alarmId);
 
         return "redirect:/alarm/alarm";

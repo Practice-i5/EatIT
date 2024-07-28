@@ -1,7 +1,7 @@
-package com.i7.eatit.home;
+package com.i7.eatit.home.controller;
 
-import com.i7.eatit.domain.meeting.model.dto.MeetingDTO;
-import com.i7.eatit.domain.meeting.model.service.MeetingService;
+import com.i7.eatit.domain.meeting.model.dto.PreviewMeetingDTO;
+import com.i7.eatit.home.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,28 +9,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping
 public class HomeController {
 
+    private final HomeService homeService;
+
     @Autowired
-    private MeetingService meetingService;
+    public HomeController(HomeService homeService) {
+        this.homeService = homeService;
+    }
 
     @GetMapping("/")
     public String home(Model model) {
-        List<String> types = meetingService.findAllType();
-
-        // MeetingDTO 목록을 가져와서 타입별로 그룹화
-        List<MeetingDTO> allMeetings = meetingService.findAllMeetings();
-        Map<String, List<MeetingDTO>> meetingsByType = allMeetings.stream()
-                .collect(Collectors.groupingBy(MeetingDTO::getMeetingType));
-
-        model.addAttribute("types", types);
-        model.addAttribute("meetingsByType", meetingsByType);
-        return "home/home"; // templates/home 디렉토리의 home.html을 가리킵니다
+        List<PreviewMeetingDTO> meetingList = homeService.findPreviewAllMeetings();
+        System.out.println("meetingList = " + meetingList);
+        model.addAttribute("meetingList", meetingList);
+        return "home/home"; // home.html 템플릿 경로
     }
 
     @GetMapping("/home")
