@@ -33,21 +33,23 @@
                 <input name="password" type="password" placeholder="Password" required>
             </div>
 
+
+            <!--이메일, 비밀번호로 조회 후 메인 페이지 연결-->
+            <div class="button">
+                <input type="submit" class="btn" value="로그인"/><!-- onclick="location.href='/review/reviewMain'"-->
+            </div>
+
             <div class="login_etc">
                 <!--이메일, 비밀번호 찾기 페이지 이동 (정보이동 x)-->
                 <div class="forgot_pw">
                     <a th:href="@{/login/findEmail}">이메일 찾기/</a>
                     <a th:href="@{/login/findPwd}">비밀번호 찾기</a>
                 </div>
+
                 <!-- 회원가입 페이지 이동 (정보이동 x)-->
                 <div class="forgot_pw">
                     <a th:href="@{/login/join}">회원가입</a>
                 </div>
-            </div>
-
-            <!--이메일, 비밀번호로 조회 후 메인 페이지 연결-->
-            <div class="button">
-                <input type="submit" class="btn" value="로그인"/><!-- onclick="location.href='/review/reviewMain'"-->
             </div>
 
             <!-- 리다이렉션 URL 필드 -->

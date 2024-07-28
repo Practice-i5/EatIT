@@ -1,0 +1,5 @@
+### 회원 신고 횟수 늘리는 API
+GET http://localhost:8888/admin/api/members/1/increaseReport
+
+### 모임 신고 횟수 늘리는 API
+GET http://localhost:8888/admin/api/meetings/1/increaseReport

@@ -20,7 +20,25 @@ public class UserFollowService {
     }
 
     public List<FollowInfoDetailDTO> findFollowMember(int memberId){
-        return followMapper.findFollowMember(memberId);
+        Map<String, Integer> findFollowInfo = new HashMap<>();
+        findFollowInfo.put("memberId", memberId);
+        return followMapper.findFollowMember(findFollowInfo);
+    }
+
+    public List<FollowInfoDetailDTO> findFollowMemberPage(int memberId, int start, int row){
+        Map<String, Integer> findFollowInfo = new HashMap<>();
+        findFollowInfo.put("memberId", memberId);
+
+        System.out.println("start = " + start);
+        System.out.println("row = " + row);
+
+        findFollowInfo.put("start", start);
+        findFollowInfo.put("row", row);
+        return followMapper.findFollowMember(findFollowInfo);
+    }
+
+    public int countFollowMember(int memberId){
+        return followMapper.countFollowMember(memberId);
     }
 
     @Transactional

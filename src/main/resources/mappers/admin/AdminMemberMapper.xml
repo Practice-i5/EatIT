@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!--내가 만든 Mapper이름과 동일하게 지정-->
+<!--내가 만든 Mapper 이름과 동일하게 지정-->
 <mapper namespace="com.i7.eatit.admin.mapper.AdminMemberMapper">
 
   <resultMap id="AdminMemberResultMap" type="com.i7.eatit.admin.dto.AdminMemberDto">
@@ -44,20 +44,29 @@
 
   <select id="findMemberById" resultMap="AdminMemberResultMap">
     SELECT *
-    FROM tbl_member A
-    WHERE A.member_id = #{ memberId }
+    FROM tbl_member M
+    WHERE M.member_id = #{ memberId }
   </select>
 
-  <update id="updateMemberStatus">
-    UPDATE tbl_member A
-    SET A.is_stopped_by_admin = CASE
-    WHEN A.is_stopped_by_admin = 0 THEN 1
-    WHEN A.is_stopped_by_admin = 1 THEN 0
-    ELSE A.is_stopped_by_admin
-    END
-    WHERE A.member_id = #{ memberId }
+  <update id="increaseMemberReport">
+    UPDATE tbl_member M
+    SET M.reported_count = M.reported_count + 1
+    WHERE M.member_id = #{ memberId }
   </update>
 
+  <update id="updateMemberStatus">
+    UPDATE tbl_member M
+    SET M.is_stopped_by_admin = CASE
+    WHEN M.is_stopped_by_admin = 0 THEN 1
+    WHEN M.is_stopped_by_admin = 1 THEN 0
+    ELSE M.is_stopped_by_admin
+    END
+    WHERE M.member_id = #{ memberId }
+  </update>
 
-
+  <update id="updateMemberStatusToStop">
+    UPDATE tbl_member M
+    SET M.is_stopped_by_admin = 1
+    WHERE M.member_id = #{ memberId }
+  </update>
 </mapper>

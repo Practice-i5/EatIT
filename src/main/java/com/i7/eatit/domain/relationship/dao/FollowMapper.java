@@ -8,9 +8,11 @@ import java.util.Map;
 
 @Mapper
 public interface FollowMapper {
-    List<FollowInfoDetailDTO> findFollowMember(int memberId);
+    List<FollowInfoDetailDTO> findFollowMember(Map<String, Integer> findFollowInfo);
 
-    void deleteFollowMember(Map<String, Integer> FollowInfo);
+    void deleteFollowMember(Map<String, Integer> deleteFollowInfo);
 
-    void insertFollowMember(Map<String, Integer> FollowInfo);
+    void insertFollowMember(Map<String, Integer> followInfo);
+
+    int countFollowMember(int memberId);
 }

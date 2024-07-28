@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>멤버사진 강제추가용</title>
+</head>
+<body>
+<h3>
+    멤버 사진 추가용임
+</h3>
+<form action="/uploadMemberPhoto" method="post" enctype="multipart/form-data">
+    <label for="memberId">멤버번호</label>
+    <input id="memberId" name="memberId" type="number"/>
+    <br>
+    <label for="memberPhoto">이미지</label>
+    <input name="memberPhoto" id="memberPhoto" type="file" accept="image/*">
+    <button>제출</button>
+
+    <th:block th:if="${resultImageUrl ne null}">
+        <h3 th:text="|멤버번호 ${memberId} 업로드 결과|"></h3>
+        <img th:src="${resultImageUrl}"/>
+    </th:block>
+
+</form>
+</body>
+</html>
