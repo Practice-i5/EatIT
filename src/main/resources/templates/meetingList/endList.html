@@ -60,54 +60,64 @@
 </div>
 <!-- Spinner End -->
 
-<!-- Navbar start  수정한 부분-- 헤더 부분!-->
+<!-- 헤더 시작 -->
 <div class="container-fluid fixed-top">
     <div class="container px-0">
         <nav class="navbar navbar-light bg-white navbar-expand-xl">
-            <img th:src="@{/img/image_145.png}" src="/img/image_145.png" width="80" alt="Eat-IT Logo">
-            <h1 class="text-primary display-6">Eat-IT</h1>
+            <!-- 로고 및 사이트 이름 -->
+            <a th:href="@{/home}" class="navbar-brand">
+                <img src="/img/logo.png" alt="Eat-IT Logo" />
+                <h1 class="text-primary display-6">Eat-IT</h1>
+            </a>
 
-            <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse">
+            <!-- 모바일용 네비게이션 토글 버튼 -->
+            <button
+                    class="navbar-toggler py-2 px-3"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarCollapse"
+            >
                 <span class="fa fa-bars text-primary"></span>
             </button>
-
+            <!-- 네비게이션 메뉴 -->
             <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
-
                 <div class="navbar-nav mx-auto">
-                    <a th:href="@{/}" href="home.html" class="nav-item nav-link">홈</a>
-                    <a th:href="@{/enroll-meeting/enroll-meeting}" href="enroll-meeting.html" class="nav-item nav-link">모임등록</a>
-                    <a th:href="@{/search/list}" href="search.html" class="nav-item nav-link">모임찾기</a>
-                    <a th:href="@{/meetingList/participatingList}"
-                       class="nav-item nav-link active">모임 목록</a>
-                </div>
-                <!-- 알림, 로그인, 회원가입 버튼 추가 -->
+                    <a th:href="@{/home}" class="nav-item nav-link">홈</a>
+                    <a th:href="@{/enroll-meeting/enroll-meeting}" class="nav-item nav-link">모임등록</a>
+                    <a th:href="@{/search/list}" class="nav-item nav-link">모임찾기</a>
+                    <!-- 모임목록은 로그인을 해야 들어갈 수 있기에 404 에러가 뜸-->
+                    <a th:href="@{/meetingList/participatingList}" class="nav-item nav-link active">모임목록</a>
 
-                <a href="#" class="btn-notification my-auto me-4">
-                    <i class="fas fa-bell fa-2x"></i>
-                    <span class="position-absolute bg-danger rounded-circle"
-                          style="top: 0; right: 0; width: 10px; height: 10px;"></span>
+                </div>
+                <!-- 1:1 채팅 및 그룹 채팅 버튼 -->
+                <a th:href="@{/chat}" class="btn-chat my-auto">
+                    <i class="fas fa-comments"></i>
+                    <span class="btn-text">1:1채팅</span>
+                </a>
+                <a th:href="@{/chatGroup/chatrooms}" class="btn-chat my-auto">
+                    <i class="fas fa-users"></i>
+                    <span class="btn-text">그룹채팅</span>
                 </a>
 
-                <!-- JavaScript 파일 연결 -->
+                <!-- 알림, 로그인, 회원가입 버튼 -->
 
-                <!--
-                <button  th:onclick="@{my-page}" class="btn btn-danger rounded-pill me-2"
-                         id="loginButton">마이페이지
-                </button>
+                <a href="#" th:href="@{/alarm}" class="btn-notification my-auto me-4">
+                    <i class="fas fa-bell fa-2x"></i>
+                    <span class="notification-dot"></span>
+                </a>
+                <a class="btn btn-danger rounded-pill me-2" th:href="@{/login/loginMain}" id="loginButton">
+                    로그아웃
+                </a>
+                <a class="btn btn-outline-danger rounded-pill" th:href="@{/login/join}" id="signupButton">
+                    마이페이지
+                </a>
 
-                <button th:onclick="@{/login/logout}" class="btn btn-outline-danger rounded-pill"
-                        id="signupButton">로그아웃
-                </button>
-                -->
-                <button class="btn btn-danger rounded-pill me-2" onclick="location.href='/my-page'">마이페이지</button>
-                <button class="btn btn-outline-danger rounded-pill" onclick="location.href='/login/logout'">로그아웃</button>
 
             </div>
         </nav>
     </div>
 </div>
-<!-- Navbar End -->
+<!-- 헤더 끝 -->
 
 
 <!-- 일단 이렇게 해야 페이지 이동될 수 있어서 이 방식으로 했는데, 추후에 js로 분리시켜야 함-->
@@ -310,7 +320,7 @@
                 <h4 class="text-light mb-3">팀원 소개</h4>
                 <a class="btn-link" href="#">팀원 깃허브</a>
                 <div class="team-member">
-                    <img th:src="@{/img/image_161.png}" src="/img/image_161.png" width="400" alt="Team Member"
+                    <img th:src="@{/img/my-page/git_image.png}" src="/img/image_161.png" width="400" alt="Team Member"
                          class="team-member-img">
                 </div>
             </div>
@@ -348,7 +358,77 @@
     </div>
 </div>
 <!-- Copyright End -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // 서버에서 세션 사용자 정보를 가져오는 함수
+        function getSessionUser() {
+            return fetch('/login/getSessionUser', {
+                method: 'GET',
+                credentials: 'include', // 세션 정보를 포함하여 요청
+            })
+                .then(response => response.json())
+                .then(data => data)
+                .catch(error => {
+                    console.error('Error:', error);
+                    return null;
+                });
+        }
 
+        async function updateButtons() {
+            const loginButton = document.getElementById('loginButton');
+            const signupButton = document.getElementById('signupButton');
+
+            const user = await getSessionUser();
+
+            if (user && user.email) { // 로그인한 사용자가 있을 경우
+                loginButton.textContent = '로그아웃';
+                loginButton.setAttribute('href', '/login/logout'); // 로그아웃 URL로 업데이트
+                signupButton.textContent = '마이페이지';
+                signupButton.setAttribute('href', '/my-page'); // 마이페이지 URL로 업데이트
+            } else { // 로그인한 사용자가 없을 경우
+                loginButton.textContent = '로그인';
+                loginButton.setAttribute('href', '/login/loginMain');
+                signupButton.textContent = '회원가입';
+                signupButton.setAttribute('href', '/login/join');
+            }
+        }
+
+        updateButtons();
+
+        // 알림 버튼 이벤트
+        document.querySelector('.btn-notification').addEventListener('click', function () {
+            const notificationDot = this.querySelector('.notification-dot');
+            notificationDot.style.display = notificationDot.style.display === 'none' ? 'block' : 'none';
+            alert('새 알림이 있습니다.');
+        });
+
+        // 로그인 버튼 클릭 시 login.html로 이동
+        document.getElementById('loginButton').addEventListener('click', function (event) {
+            if (this.textContent === '로그아웃') {
+                event.preventDefault();
+                fetch('/login/logout', {
+                    method: 'GET',
+                    credentials: 'include', // 세션 정보를 포함하여 요청
+                })
+                    .then(() => {
+                        localStorage.removeItem('isLoggedIn');
+                        window.location.href = '/';
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        });
+
+        // 회원가입 버튼 클릭 시 join.html로 이동
+        document.getElementById('signupButton').addEventListener('click', function () {
+            if (this.textContent !== '마이페이지') {
+                window.location.href = '/login/join';
+            } else {
+                window.location.href = '/my-page'; // 실제 마이페이지 URL로 업데이트
+            }
+        });
+    });
+
+</script>
 </body>
 
 </html>
