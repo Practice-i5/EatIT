@@ -93,7 +93,7 @@ CREATE TABLE `tbl_meeting`
     `meeting_type`          VARCHAR(255) NOT NULL COMMENT 'meeting_type',
     `scheduled_date`        DATETIME     NOT NULL COMMENT 'scheduled_date', -- fix type DATE -> DATETIEM
     `exit_restriction_time` TIME         NOT NULL COMMENT 'exit_restriction_time',
-    `recruit_member_number` INT          NOT NULL DEFAULT 0 COMMENT 'recruit_member_number',
+    `recruit_member_number` INT          NOT NULL DEFAULT 1 COMMENT 'recruit_member_number',
     `recruitment_number`    INT          NOT NULL COMMENT 'recruitment_number',
     `gender`                VARCHAR(255) NOT NULL COMMENT 'gender',
     `eligible_age`          VARCHAR(255) NOT NULL COMMENT 'eligible_age',
@@ -156,16 +156,18 @@ CREATE TABLE `tbl_meeting_interest_category`
 
 -- 모임관심분야 테이블 데이터 삽입
 INSERT INTO `tbl_meeting_interest_category` (`interests`)
-VALUES ('Python'),
-       ('Swift'),
-       ('VisionOS'),
-       ('C++'),
+VALUES ('AI'),
+       ('Architecture'),
        ('Backend'),
+       ('Embedded System'),
+       ('Kernel'),
+       ('Network'),
+       ('Product Management'),
+       ('Security'),
+       ('Technical Art'),
        ('Unity'),
-       ('UE5'),
-       ('AI'),
-       ('TA'),
-       ('Object-C');
+       ('Unreal Engine5'),
+       ('XR');
 
 
 

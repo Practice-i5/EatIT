@@ -49,6 +49,7 @@
 
         #recruit-modal.active {
             display: flex;
+            /*display: inline-block;*/
         }
 
         #recruit-template {
@@ -131,7 +132,8 @@
         }
 
         #recruit-now.active {
-            display: flex;
+            /*display: flex;*/
+            display: inline-block;
         }
 
         #not-now {
@@ -139,7 +141,8 @@
         }
 
         #not-now.active {
-            display: flex;
+            /*display: flex;*/
+            display: inline-block;
         }
     </style>
 </head>
@@ -336,7 +339,7 @@
                                         <div class="leader-rate">
 <!--                                            <p>81</p>-->
                                         </div>
-                                        <div class="padding-bottom-20px">
+                                        <div class="padding-bottom-20px align-center">
                                             <!-- HTML 폼 -->
                                             <div class="align-center">
                                                 <form th:action="@{/detail/detail}" method="post" id="recruit-now">
@@ -380,9 +383,9 @@
                 <div class="owl-carousel vegetable-carousel justify-content-center participants-container" th:each="member : ${loadMembers}">
                     <div class=" position-relative participants-container-item">
                         <div class="contents-container border border-primary rounded">
-                            <img th:src="@{member.memberImageURL}" class="contents-container-item" alt="dev1">
+                            <img th:src="${member.memberImageURL}" class="contents-container-item" alt="dev1">
                             <div class="contents-container-item">
-                                <p class="fw-bold align-center" th:text="${ nickname }">멤버 닉네임</p>
+                                <p class="fw-bold align-center" th:text="${ member.nickname }">멤버 닉네임</p>
                             </div>
                         </div>
                     </div>

@@ -427,9 +427,9 @@
         INSERT INTO
         TBL_MEETING_PARTICIPATION
         (
-            ROLE
+            ROLE,
             MEETING_ID,
-            MEMBER_ID,
+            MEMBER_ID
         )
         VALUES
         (
@@ -503,13 +503,13 @@
         LEFT JOIN   TBL_MEMBER_PHOTO C
         ON          A.MEMBER_ID = C.MEMBER_ID
 
-        WHERE
-                B.MEETING_ID = #{ meetingId } AND B.ROLE = 'Participant'
         GROUP BY
                     B.MEETING_ID,
                     A.MEMBER_ID,
                     A.NICKNAME,
                     C.PHOTO_PATH
+        HAVING
+                B.MEETING_ID = #{ meetingId }
 
 
     </select>
