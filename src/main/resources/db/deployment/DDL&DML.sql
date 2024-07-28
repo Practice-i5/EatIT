@@ -622,3 +622,13 @@ VALUES
     (48, '안녕하세요, 유관순입니다.', '2023-08-17 12:00:00', 6, 48, '거절', false, 8),
     (49, '안녕하세요, 세종대왕입니다.', '2023-08-18 12:00:00', 7, 49, '승인대기', false, 9),
     (50, '안녕하세요, 홍길동입니다.', '2023-08-19 12:00:00', 1, 50, '승인', false, 10);
+
+DROP TABLE IF EXISTS `tbl_onechatroom`;
+
+CREATE TABLE tbl_onechatroom (
+                     id INT AUTO_INCREMENT PRIMARY KEY,
+                     name VARCHAR(255) NOT NULL,
+                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+

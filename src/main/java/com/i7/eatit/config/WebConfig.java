@@ -22,5 +22,16 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/my-page/**")
                 .excludePathPatterns("/login/**", "/resources/**");
 
+        registry.addInterceptor(loginInterceptor)
+                .addPathPatterns("/detail/**")
+                .excludePathPatterns("/login/**", "/resources/**");
+
+        registry.addInterceptor(loginInterceptor)
+                .addPathPatterns("/list/**")
+                .excludePathPatterns("/login/**", "/resources/**");
+
+        registry.addInterceptor(loginInterceptor)
+                .addPathPatterns("/meetingList/**")
+                .excludePathPatterns("/login/**", "/resources/**");
     }
 }

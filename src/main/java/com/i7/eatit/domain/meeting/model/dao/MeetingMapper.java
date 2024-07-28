@@ -3,7 +3,9 @@ package com.i7.eatit.domain.meeting.model.dao;
 import com.i7.eatit.domain.meeting.model.common.SearchCriteria;
 import com.i7.eatit.domain.meeting.model.dto.DetailMeetingDTO;
 import com.i7.eatit.domain.meeting.model.dto.MeetingDTO;
+import com.i7.eatit.domain.meeting.model.dto.MemberLoadDTO;
 import com.i7.eatit.domain.meeting.model.dto.PreviewMeetingDTO;
+import com.i7.eatit.domain.picture.dto.MeetingPhotoDTO;
 import com.i7.eatit.domain.tag.dto.InsertInterestRelDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -26,6 +28,8 @@ public interface MeetingMapper {
 
     // 모임의 관심분야 등록
     void registInterests(InsertInterestRelDTO interestRel);
+
+    void uploadMeetingPhoto(MeetingPhotoDTO meetingPhoto);
 
     // meeting_id로 관심분야 검색
     List<String> findInterestsById(int meetingId);
@@ -58,10 +62,16 @@ public interface MeetingMapper {
     String findMeetingPhotoById(@Param("meetingId") int meetingId);
 
     String isExistAlarm(@Param("meetingId") int meetingId, @Param("memberId") int memberId);
-
+    // 참가 기록 조회
     String isExistPart(@Param("meetingId") int meetingId, @Param("memberId") int memberId);
 
     void upCountRecruiterNum(int meetingId);
+
+    void increaseMeetingReport(@Param("meetingId") int meetingId);
+
+    void increaseMemberReport(@Param("memberId") int memberId);
+
+    List<MemberLoadDTO> loadMembersById(@Param("meetingId") int meetingId);
 //    DetailMeetingDTO findDetailMeetingContents(int meetingId);
 //    List<> findParticipationts(int meetingId);
 }

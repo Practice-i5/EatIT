@@ -1,6 +1,6 @@
 
 function getAlarmDeatil(alarmId) {
-    console.log(alarmId);
+    // console.log(alarmId);
 
     fetch("/alarm/alarmDetail" + "?alarmId=" + alarmId)
         .then(res => res.json())
@@ -36,16 +36,69 @@ function getUserImage(userId) {
         });
 }
 
+
+
+
 function getMeetingImage(meetingId) {
-    console.log(meetingId)
     const elementId = 'target_meeting_img_' + meetingId
-    fetch("/alarm/meetingImg" + "?meetingId=" + meetingId)
+    // console.log(elementId);
+    // fetch("/alarm/meetingImg" + "?meetingId=" + meetingId)
+    //     .then(res => {
+    //         console.log(res);
+    //         res.json()
+    //
+    //     })
+    //     .then(data => {
+    //         console.log(data);
+    //
+    //         const meetingImg = document.getElementById(elementId);
+    //         console.log(meetingImg)
+    //         meetingImg.src = data.photoPath;
+    //
+    //     });
+
+    // fetch("/alarm/meetingImg" + "?meetingId=" + meetingId)
+    //     .then(res => {
+    //         if (!response.ok) {
+    //             throw new Error('Network response was not ok');
+    //         }
+    //         return response.json();
+    //
+    //     })
+    //     .then(data => {
+    //         console.log(data); // 각 fetch 요청의 결과를 배열로 출력
+    //     })
+    //     .catch(error =>{
+    //         console.error('Fetch error', error)
+    //     })
+}
+
+function getMeetingImages(meetingIdList){
+    // console.log(meetingIdList)
+    fetch("/alarm/meetingImgs" + "?meetingIdList=" + meetingIdList)
         .then(res => res.json())
         .then(data => {
-            const meetingImg = document.getElementById(elementId);
-
-            console.log(data);
-            meetingImg.src = data.photoPath;
-
+            // console.log(data);
+            for (const meetingId of meetingIdList){
+                const meetingImg =
+                    document.getElementsByClassName('target_meeting_img_' + meetingId);
+                // console.log(meetingImg);
+                for (const meetingImgElement of meetingImg) {
+                    meetingImgElement.src = data[meetingId];
+                }
+            }
         });
+}
+
+function checkRead(isAlarmRead, alarmId) {
+    // console.log(isAlarmRead)
+    // console.log(alarmId)
+
+    if (isAlarmRead){
+        //nothing
+    }else {
+        const textElement = document.getElementById('target_text_' + alarmId)
+        textElement.classList.add("alarm-important")
+    }
+    
 }

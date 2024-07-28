@@ -211,7 +211,7 @@ function createChatRoom(roomName) {
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ roomName: roomName })
+    body: JSON.stringify({ roomName: roomName, createdBy: userId, members: [userId] })
   })
       .then(response => response.json())
       .then(data => {
