@@ -109,7 +109,7 @@ public class AdminController {
         return "redirect:/index.html";
     }
 
-    // 4-1) 멤버 상태 변경 (정지 <-> 활성화)
+    // 4) 멤버 상태 변경 (정지 <-> 활성화)
     @GetMapping("/members/{memberId}/management")
     public String changeMemberStatus(@PathVariable(name = "memberId") int memberId,
         HttpServletRequest request
@@ -120,18 +120,6 @@ public class AdminController {
         adminService.updateMemberStatus(memberId);
         return "redirect:/admin/members";
     }
-
-//    // 4-2) 멤버 상태 변경 (원래의 상태는 고려하지 않고 항상 정지 상태로 바꿈)
-//    @GetMapping("/members/{memberId}/management/stop")
-//    public String changeMemberStatusToStop(@PathVariable(name = "memberId") int memberId,
-//        HttpServletRequest request
-//    ) {
-//        if (!adminService.isAdminLoggedIn(request)) {
-//            return REDIRECT_TO_LOGIN;
-//        }
-//        adminService.updateMemberStatusToStop(memberId);
-//        return "redirect:/admin/members";
-//    }
 
     // 5. 모임 전체 조회
     @GetMapping("/meetings")
@@ -165,7 +153,7 @@ public class AdminController {
         return "redirect:/index.html";
     }
 
-    // 8-1) 모임 상태 변경 (중지 <-> 활성화)
+    // 8) 모임 상태 변경 (중지 <-> 활성화)
     @GetMapping("/meetings/{meetingId}/management")
     public String changeMeetingStatus(HttpServletRequest request,
         @PathVariable(name = "meetingId") int meetingId, Model model) {
@@ -175,12 +163,4 @@ public class AdminController {
         adminService.updateMeetingStatus(meetingId);
         return "redirect:/admin/meetings";
     }
-
-//    // 8-2) 모임 상태 변경 (이전 상태를 고려하지 않고 항상 중지로 바꿈)
-//    @GetMapping("/meetings/{meetingId}/management/close")
-//    public String changeMeetingStatusToStop(HttpServletRequest request,
-//        @PathVariable(name = "meetingId") int meetingId, Model model) {
-//        adminService.updateMeetingStatusToClose(meetingId);
-//        return "redirect:/admin/meetings";
-//    }
 }
