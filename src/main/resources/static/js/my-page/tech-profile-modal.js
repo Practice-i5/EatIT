@@ -62,9 +62,9 @@ addBtn.addEventListener("click", () => {
         return;
     }
 
-    if(!modalForm.experienceId){
+    if(!modalForm.experienceId || modalForm.experienceId==''){
         console.log(modalNum.value);
-        modalForm.action="tech-experience-add";
+        modalForm.experienceId=null;
 
     }
     modalForm.submit();

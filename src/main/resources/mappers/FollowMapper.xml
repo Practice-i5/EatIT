@@ -23,7 +23,7 @@
         </association>
     </resultMap>
 
-    <select id="findFollowMember" parameterType="_int" resultMap="followUserMap">
+    <select id="findFollowMember" parameterType="hashmap" resultMap="followUserMap">
         SELECT
                 A.FOLLOW_ID, A.FOLLOW_DATE, A.FOLLOWER_ID, A.FOLLOWEE_ID
               , D.MEMBER_ID, D.NICKNAME, D.PHONE_NUMBER ,  D.WITHDRAWAL_STATUS
@@ -40,7 +40,15 @@
         ON B.MEMBER_ID = C.MEMBER_ID
         ) D
         ON A.FOLLOWEE_ID= D.MEMBER_ID
-        WHERE A.FOLLOWER_ID=#{memberID}
+        WHERE A.FOLLOWER_ID=#{memberId}
+        <if test="start != null and start >= 0 and row != null and row > 0">
+            LIMIT #{start}, #{row}
+        </if>
+    </select>
+
+    <select id="countFollowMember" resultType="_int" parameterType="_int">
+        SELECT count(*) FROM TBL_FOLLOW
+        WHERE FOLLOWER_ID=#{memberId}
     </select>
 
     <delete id="deleteFollowMember" parameterType="hashmap">
@@ -58,4 +66,5 @@
         #{followerId},
         #{followeeId})
     </insert>
+
 </mapper>

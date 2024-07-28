@@ -2,6 +2,7 @@ package com.i7.eatit.domain.user.service;
 
 import com.i7.eatit.domain.user.dao.JoinMemberProfileMapper;
 import com.i7.eatit.domain.user.dto.JoinMemberProfileDTO;
+import com.i7.eatit.domain.user.dto.RevieweeProfileDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +26,15 @@ public class JoinMemberProfileService {
 
         // 1. 미팅 아이디로 유저 조회해서 출력하기
         List<JoinMemberProfileDTO> meetingList = joinMemberProfileMapper.findJoinUser(meeting_id);
+
+        return meetingList;
+    }
+
+    // 리뷰를 위한 정보 받기 ( 닉네임, 대표사진, memberId)
+    public List<RevieweeProfileDTO> getRevieweeProfileInfo(int meetingId) {
+
+        // 1. 미팅 아이디로 유저 조회해서 출력하기
+        List<RevieweeProfileDTO> meetingList = joinMemberProfileMapper.findJoinUserModal(meetingId);
 
         return meetingList;
     }

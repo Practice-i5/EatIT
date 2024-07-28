@@ -18,7 +18,7 @@ import java.io.IOException;
 @SessionAttributes("loginUser")
 public class LoginController {
 
-    private LoginService loginService;
+    private final LoginService loginService;
 
     public LoginController(LoginService loginService) {
         this.loginService = loginService;
@@ -26,7 +26,7 @@ public class LoginController {
 
     /*
         단순 이동 메서드
-     */
+    */
 
     // 메인로그인 페이지로 이동 (브랜드 이미지 클릭)
     @GetMapping("/loginMain")
@@ -47,14 +47,13 @@ public class LoginController {
 
     /*
         정보 전달 메서드
-     */
+    */
 
     // 로그인 - 이메일, 비밀번호
     @PostMapping("/successLogin")
-    public String login(UserLoginDTO userLoginDTO, Model model, HttpSession session) {
+    public String login(UserLoginDTO userLoginDTO, @RequestParam(name="redirectUrl", required = false) String redirectUrl, Model model, HttpSession session) {
 
         UserInfoDTO loginUser = loginService.checkUser(userLoginDTO);
-
 
         System.out.println("loginUser = " + loginUser); // 확인용
 
@@ -62,7 +61,9 @@ public class LoginController {
             model.addAttribute("loginUser", loginUser);
             session.setAttribute("loginUser", loginUser); // 세션에 사용자 정보 저장
             return "redirect:/";
+
         } else {                    // 실패시 로그인 페이지로 이동
+
             return "redirect:/login/loginMain";
         }
     }
@@ -70,7 +71,6 @@ public class LoginController {
     @GetMapping("/successLogin")
     public void successLogin() {
     }
-
 
     @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true") // 클라이언트의 주소를 허용
     @GetMapping("/getSessionUser")
@@ -90,14 +90,15 @@ public class LoginController {
 
         sessionStatus.setComplete(); // 세션 종료
 
-        return "redirect:/login/loginMain";
-    }
+        System.out.println("세션이 종료되었습니다.");
 
+        return "redirect:/";
+    }
 
     // 이메일 찾기
     @PostMapping("/findEmail")
-    public String findEmail(@RequestParam String name,
-                            @RequestParam String phoneNumber,
+    public String findEmail(@RequestParam(name="name") String name,
+                            @RequestParam(name="phoneNumber") String phoneNumber,
                             RedirectAttributes redirectAttributes,
                             Model model) {
 
@@ -119,9 +120,9 @@ public class LoginController {
 
     // 비밀번호 찾기
     @PostMapping("/findPwd")
-    public String findPassword(@RequestParam String email,
-                               @RequestParam String name,
-                               @RequestParam String phoneNumber,
+    public String findPassword(@RequestParam(name="email") String email,
+                               @RequestParam(name="name") String name,
+                               @RequestParam(name="phoneNumber") String phoneNumber,
                                Model model) {
 
         // 비밀번호 조회

@@ -67,7 +67,7 @@
                             <i class="fas fa-comments"></i>
                             <span class="btn-text">1:1채팅</span>
                         </a>
-                        <a th:href="@{/chatGroup/chat-page}" class="btn-chat my-auto">
+                        <a th:href="@{/chatGroup/chatrooms}" class="btn-chat my-auto">
                             <i class="fas fa-users"></i>
                             <span class="btn-text">그룹채팅</span>
                         </a>
@@ -177,7 +177,7 @@
                 <div class="upload-container">
                     <label>모임 대표 사진을 등록해 주세요.</label>
                     <label class="upload-box">
-                        <input type="file" name="file" multiple id="file-input">
+                        <input type="file" name="file" id="file-input">
                         <div class="upload-icon">📷</div>
                         <div id="file-count">0/1</div>
                     </label>
@@ -226,10 +226,10 @@
             <div class="form-group">
                 <label>모집방식</label>
                 <div class="checkbox-group">
-                    <input type="radio" class="btn-check" name="participationMethod" id="accept-regist" autocomplete="off" checked value="리더승인">
+                    <input type="radio" class="btn-check" name="participationMethod" id="accept-regist" autocomplete="off" checked th:value="리더승인">
                     <label class="btn btn-outline-success" for="accept-regist">리더승인</label>
 
-                    <input type="radio" class="btn-check" name="participationMethod" id="free-regist" autocomplete="off" value="자유참여">
+                    <input type="radio" class="btn-check" name="participationMethod" id="free-regist" autocomplete="off" th:value="자유참여">
                     <label class="btn btn-outline-success" for="free-regist">자유참여</label>
                 </div>
             </div>
@@ -271,7 +271,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <button type="submit">등록하기</button>
+                <button type="submit" id="submit-button">등록하기</button>
             </div>
         </form>
     </div>

@@ -1,23 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>유저 페이지</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <script>
-        // 세션 스토리지에 userId 저장
-        sessionStorage.setItem('userId', /*[[${loginUser.member_id}]]*/'');
+        /* 세션 스토리지에 userId 저장 */
+        document.addEventListener('DOMContentLoaded', function() {
+            let userId = /*[[${loginUser.member_id}]]*/'';
+            if (userId) {
+                sessionStorage.setItem('userId', userId);
+            }
+        });
     </script>
 </head>
-
 <body>
-<!--<h1 th:text="|${session.loginUser.member_id} 환영합니다|"></h1>-->
-<!-- th:if 문을 이용해서 div로 감싸서 ifgkrh 세션이 널이 아니면-->
+<!-- 세션이 널이 아니면 환영 메시지 표시 -->
 <div th:if="${loginUser != null}">
-    <h1 th:text="|${loginUser.nickname} 환영합니다|"></h1>
+    <h1 th:text="|${loginUser.nickname}님 환영합니다|"></h1>
 </div>
 <button onclick="location.href='/login/logout'">로그아웃</button>
-  
 <button onclick="location.href='/meetingList/participatingList'">참가중인 모임</button>
-
 <button onclick="location.href='/meetingList/endList'">종료한 모임</button>
+
+<!-- 기존 코드 주석 부분 -->
+<!--<h1 th:text="|${session.loginUser.member_id} 환영합니다|"></h1>-->
+<!-- th:if 문을 이용해서 div로 감싸서 세션이 널이 아니면 -->
 </body>
 </html>

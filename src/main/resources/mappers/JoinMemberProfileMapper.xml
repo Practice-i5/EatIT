@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com/i7/eatit/domain/user/dao/JoinMemberProfileMapper">
+<mapper namespace="com.i7.eatit.domain.user.dao.JoinMemberProfileMapper">
 
     <!--JoinMemberProfileDTO Mapping-->
     <resultMap id="JoinMemberProfileMap" type="com.i7.eatit.domain.user.dto.JoinMemberProfileDTO">
@@ -11,64 +11,110 @@
 
         <result property="member_id" column="MEMBER_ID"/>
         <result property="nickname" column="NICKNAME"/>
-
-        <!--memberPhoto-->
-        <association property="photo" javaType="com.i7.eatit.domain.picture.dto.MemberPhotoDTO">
-             <id property="memberPhotoId" column="PHOTO_ID"/>
-
-            <result property="photoPath" column="PHOTO_PATH"/>
-            <result property="photoName" column="PHOTO_NAME"/>
-            <result property="memberId" column="MEMBER_ID"/>
-        </association>
+        <result property="photoPath" column="PHOTO_PATH"/>
 
         <!--techStack-->
         <collection property="myTechStackList" ofType="com.i7.eatit.domain.user.dto.TechStackDTO">
-            <result property="javaScript" column="JAVASCRIPT"/>
-            <result property="python" column="PYTHON"/>
-            <result property="java" column="JAVA"/>
+            <result property="JavaScript" column="JAVASCRIPT"/>
+            <result property="Python" column="PYTHON"/>
+            <result property="Java" column="JAVA"/>
             <result property="cSharp" column="CSHARP"/>
-            <result property="ruby" column="RUBY"/>
-            <result property="php" column="PHP"/>
-            <result property="swift" column="SWIFT"/>
-            <result property="kotlin" column="KOTLIN"/>
-            <result property="go" column="GO"/>
-            <result property="rust" column="RUST"/>
+            <result property="Ruby" column="RUBY"/>
+            <result property="PHP" column="PHP"/>
+            <result property="Swift" column="SWIFT"/>
+            <result property="Kotlin" column="KOTLIN"/>
+            <result property="Go" column="GO"/>
+            <result property="Rust" column="RUST"/>
         </collection>
 
     </resultMap>
 
+
+    <!-- 모달용 -->
+    <resultMap id="findJoinUserModalMap" type="com.i7.eatit.domain.user.dto.RevieweeProfileDTO">
+        <id property="meeting_id" column="MEETING_ID"/>
+
+        <result property="member_id" column="MEMBER_ID"/>
+        <result property="nickname" column="NICKNAME"/>
+        <result property="photoPath" column="PHOTO_PATH"/>
+    </resultMap>
+
+
+    <!--참가자 정보-->
     <select id="findJoinUser" resultMap="JoinMemberProfileMap">
         SELECT
-                    B.MEMBER_ID
-                    , A.STACK_NAME
-                    , C.NICKNAME
-                    , D.PHOTO_PATH
-                    , A.STACK_NAME JAVASCRIPT
-                    , A.STACK_NAME PYTHON
-                    , A.STACK_NAME JAVA
-                    , A.STACK_NAME CSHARP
-                    , A.STACK_NAME RUBY
-                    , A.STACK_NAME PHP
-                    , A.STACK_NAME SWIFT
-                    , A.STACK_NAME KOTLIN
-                    , A.STACK_NAME GO
-                    , A.STACK_NAME RUST
+        A.meeting_id
+        , A.member_id
+        , F.nickname
+        , E.photo_path
+        , D.stack_name
+        , D.STACK_NAME JAVASCRIPT
+        , D.STACK_NAME PYTHON
+        , D.STACK_NAME JAVA
+        , D.STACK_NAME CSHARP
+        , D.STACK_NAME RUBY
+        , D.STACK_NAME PHP
+        , D.STACK_NAME SWIFT
+        , D.STACK_NAME KOTLIN
+        , D.STACK_NAME GO
+        , D.STACK_NAME RUST
+
         FROM
-                    TBL_TECH_STACK_TYPE A
+        tbl_meeting_participation A
         LEFT JOIN
-                    TBL_MEMBER_TECH_STACK B
+        tbl_notification B
         ON
-                    A.STACK_CODE = B.STACK_CODE
+        A.participation_id = B.participation_id
         LEFT JOIN
-                    TBL_MEMBER C
+        tbl_member_tech_stack C
         ON
-                    C.MEMBER_ID = B.MEMBER_ID
+        C.MEMBER_ID = A.member_id
         LEFT JOIN
-                    TBL_MEMBER_PHOTO D
+        tbl_tech_stack_type D
         ON
-                    D.MEMBER_ID = B.MEMBER_ID
+        C.stack_code = D.stack_code
+        LEFT JOIN
+        tbl_member_photo E
+        ON
+        A.MEMBER_ID = E.member_id
+        LEFT JOIN
+        tbl_member F
+        ON
+        F.member_id = A.member_id
         WHERE
-                    MEETING_ID = #{ meetingId }
+        A.meeting_id = #{ member_id }
+    </select>
+
+    <!-- 모달용 -->
+    <select id="findJoinUserModal" resultMap="findJoinUserModalMap">
+        -- 참가자 모달 전용
+
+        SELECT
+                    A.MEETING_ID
+                    , A.MEMBER_ID
+                    , F.NICKNAME
+                    , E.PHOTO_PATH
+
+        FROM
+                    tbl_meeting_participation A
+        LEFT JOIN
+                    tbl_notification B
+        ON
+                    A.participation_id = B.participation_id
+        LEFT JOIN
+                    tbl_member_tech_stack C
+        ON
+                    C.MEMBER_ID = A.member_id
+        LEFT JOIN
+                    tbl_member_photo E
+        ON
+                    A.MEMBER_ID = E.member_id
+        LEFT JOIN
+                    tbl_member F
+        ON
+                    F.member_id = A.member_id
+        WHERE
+                    A.meeting_id = #{ member_id }
     </select>
 
 </mapper>

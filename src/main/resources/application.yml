@@ -8,10 +8,14 @@ spring:
     username: ohgiraffers
     password: ohgiraffers
 
+
   servlet:
     multipart:
+      enabled: true
       max-file-size: 10MB
       max-request-size: 10MB
+file:
+  upload-dir: ./uploads
 
 mybatis:
   mapper-locations: mappers/**/*.xml
@@ -19,3 +23,9 @@ mybatis:
 app:
   firebase-configuration-file: ./serviceAccount.json
   firebase-bucket: eatit-70ba1.appspot.com
+
+node:
+  server:
+    url: http://localhost:3001
+
+

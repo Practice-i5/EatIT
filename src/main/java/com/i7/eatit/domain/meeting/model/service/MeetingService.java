@@ -1,10 +1,15 @@
 package com.i7.eatit.domain.meeting.model.service;
 
+import com.i7.eatit.domain.alarm.dto.AlarmDTO;
 import com.i7.eatit.domain.meeting.model.common.SearchCriteria;
 import com.i7.eatit.domain.meeting.model.dao.MeetingMapper;
 import com.i7.eatit.domain.meeting.model.dto.MeetingDTO;
+import com.i7.eatit.domain.meeting.model.dto.MemberLoadDTO;
 import com.i7.eatit.domain.meeting.model.dto.PreviewMeetingDTO;
+import com.i7.eatit.domain.picture.dto.MeetingPhotoDTO;
 import com.i7.eatit.domain.tag.dto.InsertInterestRelDTO;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +19,10 @@ import java.util.List;
 public class MeetingService {
 
     MeetingMapper meetingMapper;
+
+    @Value("${file.upload-dir}")
+    private String uploadDir;
+
 
     public MeetingService(MeetingMapper meetingMapper) {
         this.meetingMapper = meetingMapper;
@@ -33,9 +42,16 @@ public class MeetingService {
 
     // 모임 참가
     @Transactional
-    public void participateGuest(int meetingId, int member_id){
-        meetingMapper.participateGuest(meetingId, member_id);
+    public void participateGuest(int meetingId, int memberId){
+        meetingMapper.participateGuest(meetingId, memberId);
     }
+
+    //사진등록
+    @Transactional
+    public void uploadMeetingPhoto(MeetingPhotoDTO meetingPhoto) {
+        meetingMapper.uploadMeetingPhoto(meetingPhoto);
+    }
+
 
     @Transactional
     public void participateHost(int meetingId, int member_id) {
@@ -74,9 +90,20 @@ public class MeetingService {
 
     public PreviewMeetingDTO findPreviewById(int meetingId) { return meetingMapper.findPreviewById(meetingId);}
 
+    public String isExistAlarm(int meetingId, int memberId) { return meetingMapper.isExistAlarm(meetingId, memberId);}
 
+    public String isExistPart(int meetingId, int memberId) { return meetingMapper.isExistPart(meetingId, memberId); }
+    @Transactional
+    public void upCountRecruiterNum(int meetingId) { meetingMapper.upCountRecruiterNum(meetingId);}
+    @Transactional
+    public void increaseMeetingReport(int meetingId) { meetingMapper.increaseMeetingReport(meetingId);}
+    @Transactional
+    public void increaseMemberReport(int memberId) { meetingMapper.increaseMemberReport(memberId);}
+
+    public List<MemberLoadDTO> loadMembersById(int meetingId) { return meetingMapper.loadMembersById(meetingId);}
+}
 
 
 //    public MeetingDTO searchMeetingById(Long id) {}
 
-}
+

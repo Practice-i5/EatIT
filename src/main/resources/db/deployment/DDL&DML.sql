@@ -102,6 +102,7 @@ CREATE TABLE `tbl_meeting`
     `status`                VARCHAR(255) NOT NULL COMMENT 'status',
     `end_date`              DATETIME COMMENT 'end_date',
     `host_member_id`        INT          NOT NULL COMMENT 'host_member_id',
+    `reported_count`        INT DEFAULT 0 NULL COMMENT 'reported_count',
     PRIMARY KEY (`meeting_id`)
 ) COMMENT = 'meeting';
 
@@ -110,40 +111,42 @@ INSERT INTO `tbl_meeting` (`meeting_id`, `title`, `location_name`, `location_lat
                            `location_longitude`, `introduction`, `payment_method`, `meeting_type`,
                            `scheduled_date`, `exit_restriction_time`, `recruit_member_number`,
                            `recruitment_number`, `gender`, `eligible_age`, `created_date`,
-                           `participation_method`, `status`, `end_date`, `host_member_id`)
-VALUES (1, 'Study Group', 'Library', 37.5665, 126.9780, 'Study together', 'Free', 'Study',
-        '2024-08-01 22:00:00', '22:00:00', 1, 10, 'Mixed', '18-25', '2024-07-01 10:00:00', 'Online',
-        'Open', '2024-08-01 22:00:00', 1),
-       (2, 'Running Club', 'Park', 37.5665, 126.9780, 'Morning runs', 'Free', 'Sports',
+                           `participation_method`, `status`, `end_date`, `host_member_id`, `reported_count`)
+VALUES (1, 'Study Group', 'Library', 37.5665, 126.9780, 'Study together', 'Free', 'coding',
+        '2024-08-01 22:00:00', '22:00:00', 1, 10, 'Mixed', '18-25', '2024-07-01 10:00:00', '자유참여',
+        'Open', '2024-08-01 22:00:00', 1, 0),
+       (2, 'Running Club', 'Park', 37.5665, 126.9780, 'Morning runs', 'Free', 'study',
         '2024-08-02 22:00:00', '07:00:00', 3, 20, 'Mixed', '20-30', '2024-07-02 11:00:00',
-        'Offline', 'Open', '2024-08-02 07:00:00', 2),
-       (3, 'Music Band', 'Studio', 37.5665, 126.9780, 'Play music', 'Paid', 'Music',
-        '2024-08-03 22:00:00', '18:00:00', 4, 5, 'Mixed', '18-35', '2024-07-03 12:00:00', 'Offline',
-        'Open', '2024-08-03 18:00:00', 3),
-       (4, 'Coding Bootcamp', 'Office', 37.5665, 126.9780, 'Learn to code', 'Paid', 'Study',
-        '2024-08-04 22:00:00', '09:00:00', 6, 15, 'Mixed', '20-40', '2024-07-04 13:00:00', 'Online',
-        'Open', '2024-08-04 09:00:00', 4),
-       (5, 'Book Club', 'Cafe', 37.5665, 126.9780, 'Discuss books', 'Free', 'Study',
-        '2024-08-05 22:00:00', '15:00:00', 1, 8, 'Mixed', '25-35', '2024-07-05 14:00:00', 'Offline',
-        'Open', '2024-08-05 15:00:00', 5),
-       (6, 'Yoga Class', 'Gym', 37.5665, 126.9780, 'Yoga practice', 'Paid', 'Sports',
+        '자유참여', 'Open', '2024-08-02 07:00:00', 2, 0),
+       (3, 'Music Band', 'Studio', 37.5665, 126.9780, 'Play music', 'Paid', 'coding',
+        '2024-08-03 22:00:00', '18:00:00', 4, 5, 'Mixed', '18-35', '2024-07-03 12:00:00', '자유참여',
+        'Open', '2024-08-03 18:00:00', 3, 0),
+       (4, 'Coding Bootcamp', 'Office', 37.5665, 126.9780, 'Learn to code', 'Paid', 'networking',
+        '2024-08-04 22:00:00', '09:00:00', 6, 15, 'Mixed', '20-40', '2024-07-04 13:00:00', '자유참여',
+        'Open', '2024-08-04 09:00:00', 4, 0),
+       (5, 'Book Club', 'Cafe', 37.5665, 126.9780, 'Discuss books', 'Free', 'turnover',
+        '2024-08-05 22:00:00', '15:00:00', 1, 8, 'Mixed', '25-35', '2024-07-05 14:00:00', '자유참여',
+        'Open', '2024-08-05 15:00:00', 5, 0),
+       (6, 'Yoga Class', 'Gym', 37.5665, 126.9780, 'Yoga practice', 'Paid', 'turnover',
         '2024-08-06 22:00:00', '06:00:00', 6, 12, 'Female', '18-45', '2024-07-06 15:00:00',
-        'Offline', 'Open', '2024-08-06 06:00:00', 6),
-       (7, 'Photography Workshop', 'Studio', 37.5665, 126.9780, 'Learn photography', 'Paid', 'Art',
+        '리더승인', 'Open', '2024-08-06 06:00:00', 6, 0),
+       (7, 'Photography Workshop', 'Studio', 37.5665, 126.9780, 'Learn photography', 'Paid', 'mentoring',
         '2024-08-07 22:00:00', '10:00:00', 4, 10, 'Mixed', '18-50', '2024-07-07 16:00:00',
-        'Offline', 'Open', '2024-08-07 10:00:00', 7),
-       (8, 'Cooking Class', 'Kitchen', 37.5665, 126.9780, 'Cook together', 'Paid', 'Lifestyle',
-        '2024-08-08 22:00:00', '17:00:00', 7, 6, 'Mixed', '20-60', '2024-07-08 17:00:00', 'Offline',
-        'Open', '2024-08-08 17:00:00', 8),
-       (9, 'Language Exchange', 'Cafe', 37.5665, 126.9780, 'Exchange languages', 'Free', 'Study',
+        '리더승인', 'Open', '2024-08-07 10:00:00', 7, 0),
+       (8, 'Cooking Class', 'Kitchen', 37.5665, 126.9780, 'Cook together', 'Paid', 'turnover',
+        '2024-08-08 22:00:00', '17:00:00', 7, 6, 'Mixed', '20-60', '2024-07-08 17:00:00', '리더승인',
+        'Open', '2024-08-08 17:00:00', 8, 0),
+       (9, 'Language Exchange', 'Cafe', 37.5665, 126.9780, 'Exchange languages', 'Free', 'mentoring',
         '2024-08-09 22:00:00', '19:00:00', 6, 20, 'Mixed', '18-30', '2024-07-09 18:00:00',
-        'Offline', 'Open', '2024-08-09 19:00:00', 9),
-       (10, 'Dance Class', 'Hall', 37.5665, 126.9780, 'Learn to dance', 'Paid', 'Art',
+        '리더승인', 'Open', '2024-08-09 19:00:00', 9, 0),
+       (10, 'Dance Class', 'Hall', 37.5665, 126.9780, 'Learn to dance', 'Paid', 'mentoring',
         '2024-08-10 22:00:00', '20:00:00', 4, 15, 'Mixed', '18-40', '2024-07-10 19:00:00',
-        'Offline', 'Open', '2024-08-10 20:00:00', 10);
+        '리더승인', 'Open', '2024-08-10 20:00:00', 10, 0);
 
 
-DROP TABLE IF EXISTS `tbl_meeting_interest_category`;
+
+
+    DROP TABLE IF EXISTS `tbl_meeting_interest_category`;
 
 CREATE TABLE `tbl_meeting_interest_category`
 (
@@ -234,14 +237,17 @@ CREATE TABLE `tbl_meeting_participation`
 INSERT INTO `tbl_meeting_participation` (`participation_id`, `role`, `meeting_id`, `member_id`)
 VALUES (1, 'Host', 1, 1),
        (2, 'Participant', 1, 2),
-       (3, 'Host', 2, 3),
-       (4, 'Participant', 2, 4),
-       (5, 'Host', 3, 5),
-       (6, 'Participant', 3, 6),
-       (7, 'Host', 4, 7),
-       (8, 'Participant', 4, 8),
-       (9, 'Host', 5, 9),
-       (10, 'Participant', 5, 10);
+       (3, 'Participant', 1, 3),
+       (4, 'Participant', 1, 4),
+       (5, 'Participant', 1, 5),
+       (6, 'Host', 2, 3),
+       (7, 'Participant', 2, 4),
+       (8, 'Host', 3, 5),
+       (9, 'Participant', 3, 6),
+       (10, 'Host', 4, 7),
+       (11, 'Participant', 4, 8),
+       (12, 'Host', 5, 9),
+       (13, 'Participant', 5, 10);
 
 
 
@@ -557,11 +563,11 @@ DROP TABLE IF EXISTS `tbl_alarm`;
 
 CREATE TABLE `tbl_alarm`
 (
-    `alarm_id`    INT NOT NULL COMMENT '알림번호',
+    `alarm_id`    INT AUTO_INCREMENT NOT NULL COMMENT '알림번호',
     `alarm_detail`    VARCHAR(300) NOT NULL COMMENT '알림내용',
     `alarm_date`    DATETIME NOT NULL COMMENT '생성날짜',
     `member_id`    INTEGER NOT NULL COMMENT '회원번호',
-    `participation_id`    INTEGER NOT NULL COMMENT '참여번호',
+    `participation_id`    INTEGER COMMENT '참여번호',
     `alarm_status`    VARCHAR(12) NOT NULL COMMENT '상태',
     `alarm_checked`    BOOLEAN NOT NULL COMMENT '확인여부',
     `meeting_id`    INTEGER NOT NULL COMMENT '모임번호',
@@ -621,3 +627,13 @@ VALUES
     (48, '안녕하세요, 유관순입니다.', '2023-08-17 12:00:00', 6, 48, '거절', false, 8),
     (49, '안녕하세요, 세종대왕입니다.', '2023-08-18 12:00:00', 7, 49, '승인대기', false, 9),
     (50, '안녕하세요, 홍길동입니다.', '2023-08-19 12:00:00', 1, 50, '승인', false, 10);
+
+DROP TABLE IF EXISTS `tbl_onechatroom`;
+
+CREATE TABLE tbl_onechatroom (
+                     id INT AUTO_INCREMENT PRIMARY KEY,
+                     name VARCHAR(255) NOT NULL,
+                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
