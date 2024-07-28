@@ -69,10 +69,14 @@
             </div>
         </div>
 
-
-
         <div class="form-content">
             <h2>기술 프로필 설정</h2>
+            <th:block th:if="${stack_error ne null}">
+                <p class="form-message error" th:text="${stack_error}"></p>
+            </th:block>
+            <th:block th:if="${stack_error eq null}">
+                <p class="form-message warn">10개까지 선택가능합니다.</p>
+            </th:block>
             <form action="/my-page/tech-profile-modify" method="post">
             <div class="form-item">
                     <label class="profile-label">기술 스택</label>
@@ -92,12 +96,12 @@
                                 </th:block>
                             </li>
                         </th:block>
-                        <li style="margin-top:5px; margin-bottom: 10px;">
-                            <div>
-                                <input id="interest-1113" class="interest-check" type="checkbox" value="project-management">
-                                <label class="btn-choice-mid interest-label" for="interest-1113">기획</label>
-                            </div>
-                        </li>
+<!--                        <li style="margin-top:5px; margin-bottom: 10px;">-->
+<!--                            <div>-->
+<!--                                <input id="interest-1113" class="interest-check" type="checkbox" value="project-management">-->
+<!--                                <label class="btn-choice-mid interest-label" for="interest-1113">기획</label>-->
+<!--                            </div>-->
+<!--                        </li>-->
                     </ul>
                 </div>
                 <button class="btn-rw btn-submit" type="submit">제출</button>
@@ -106,7 +110,7 @@
             <!-- <a href="./tech-stack.html" > 기술 스택 수정</a> -->
             <div class="form-item" id="nickname-form">
                 <label>개발 경력</label>
-                <div style="width: 70%;">
+                <div class="form-size-limit">
                     <ul style="margin-left:5px; list-style: none; padding-left: 0px; display:flex; flex-flow : column wrap; align-items: baseline;">
                         <th:block th:if="${techExperienceList}">
                             <li style="display: flex; justify-content: space-between; width: 100%;"

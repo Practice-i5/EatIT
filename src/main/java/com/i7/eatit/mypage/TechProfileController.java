@@ -132,21 +132,6 @@ public class TechProfileController {
         return "redirect:/my-page/tech-profile-modify";
     }
 
-
-    @GetMapping("tech-profile/test")
-    public String getTechStack(Model model) {
-        List<TechStackTypeDTO> techStackList = techStackTypeService.findAllTechStack();
-//        techStackList.add(new TechStackTypeDTO(1,  "backend"));
-//        techStackList.add(new TechStackTypeDTO(2,  "frontend"));
-//        techStackList.add(new TechStackTypeDTO(3,  "game client"));
-//        techStackList.add(new TechStackTypeDTO(4,  "project management"));
-//        techStackList.add(new TechStackTypeDTO(5,  "ai"));
-
-        model.addAttribute("techStackList", techStackList);
-
-        return "my-page/tech-profile-modify";
-    }
-
     @GetMapping("member-stack-test")
     public String stackTestPage(Model model){
         List<MemberTechStackDetailDTO> stackList = memberTechStackService.findMemberTechStack(2);
@@ -159,10 +144,7 @@ public class TechProfileController {
     @PostMapping("member-stack-test")
     public String memberStackTest(Model model) {
         List<TechStackTypeDTO> techStackList = techStackTypeService.findAllTechStack();
-        //MemberTechStackDTO memberTechStack = new MemberTechStackDTO(4, 7);
-        //memberTechStackService.addMemberTechStack(memberTechStack);
         memberTechStackService.deleteMemberAllTechStack(11);
-        //작성중
 
         return "redirect:/my-page/profile";
     }
