@@ -5,6 +5,7 @@ import com.i7.eatit.domain.alarm.service.AlarmService;
 import com.i7.eatit.domain.meeting.model.common.SearchCriteria;
 import com.i7.eatit.domain.meeting.model.dto.DetailMeetingDTO;
 import com.i7.eatit.domain.meeting.model.dto.MeetingDTO;
+import com.i7.eatit.domain.meeting.model.dto.PreviewMeetingDTO;
 import com.i7.eatit.domain.meeting.model.service.MeetingService;
 import com.i7.eatit.domain.relationship.service.UserFollowService;
 import com.i7.eatit.domain.user.dto.UserInfoDTO;
@@ -36,10 +37,9 @@ public class DetailController {
 
 //    UserInfoService userInfoService;
 
-    public DetailController(MeetingService meetingService, AlarmService alarmService, UserFollowService userFollowService,/*, JoinMemberProfileService joinMemberService*/UserInfoService userInfoService) {
+    public DetailController(MeetingService meetingService, AlarmService alarmService, UserFollowService userFollowService, UserInfoService userInfoService) {
         this.meetingService = meetingService;
         this.alarmService = alarmService;
-//        this.joinMemberService = joinMemberService;
         this.userInfoService = userInfoService;
         this.userFollowService = userFollowService;
     }
@@ -75,6 +75,8 @@ public class DetailController {
         model.addAttribute("loadMembers", meetingService.loadMembersById(meetingId));
         model.addAttribute("hostInfoDTO", userInfoService.getUserInfo(meetingService.findHostIdById(meetingId)));
 
+        System.out.println("집에 가게 해줘!!!!!!!!" + meetingService.findHostIdById(meetingId));
+
         return "detail/detail";
     }
     // 모임 참가 바로참여 방식
@@ -100,29 +102,38 @@ public class DetailController {
             meetingService.increaseMeetingReport(detailDTO.getMeetingId());
             model.addAttribute("decMessage", "이 게시글을 신고했습니다.");
 
-        } else if (detailDTO.getParticipateAcc() == 1 && meetingService.isExistAlarm(detailDTO.getMeetingId(), userInfoDTO.getMember_id()) == null) {
-            if (meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitMemberNumber() < meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitmentNumber()){
-                alarmDTO = new AlarmDTO();
-                alarmDTO.setAlarmDetail(detailDTO.getIntroduction());
-                alarmDTO.setAlarmTime(now.toLocalDateTime());
-                alarmDTO.setMemberId(userInfoDTO.getMember_id());
-                alarmDTO.setAlarmStatus("승인대기");
-                alarmDTO.setAlarmChecked(false);
-                alarmDTO.setMeetingId(detailDTO.getMeetingId());
-                alarmService.createNewAlarm(alarmDTO);
-                System.out.println("********************이건 alarmDTO****************\n" + alarmDTO + "****************************************");
+        } else if (detailDTO.getParticipateAcc() == 1) {
+                    System.out.println("********************이건 isExitAlarm****************\n" + meetingService.isExistAlarm(detailDTO.getMeetingId(), userInfoDTO.getMember_id()) + "\n****************************************");
+            if (meetingService.isExistAlarm(detailDTO.getMeetingId(), userInfoDTO.getMember_id()) == null) {
+                if (meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitMemberNumber() < meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitmentNumber()){
+                    alarmDTO = new AlarmDTO();
+                    alarmDTO.setAlarmDetail(detailDTO.getIntroduction());
+                    alarmDTO.setAlarmTime(now.toLocalDateTime());
+                    alarmDTO.setMemberId(userInfoDTO.getMember_id());
+                    alarmDTO.setAlarmStatus("승인대기");
+                    alarmDTO.setAlarmChecked(false);
+                    alarmDTO.setMeetingId(detailDTO.getMeetingId());
+                    alarmService.createNewAlarm(alarmDTO);
+                    model.addAttribute("decMessage", "참가 신청이 완료되었습니다.");
+                } else {
+                    model.addAttribute("decMessage", "정원이 전부 찼습니다.");
+                }
             } else {
-                model.addAttribute("decMessage", "정원이 전부 찼습니다.");
+                model.addAttribute("decMessage", "이미 신청한 모임입니다.");
             }
-        } else if (detailDTO.getParticipateFree() == 1 && meetingService.isExistPart(detailDTO.getMeetingId(), userInfoDTO.getMember_id()) == null) {
+        } else if (detailDTO.getParticipateFree() == 1) {
             System.out.println("heeeeeerrrrrreeeeeeee\n");
-//            System.out.println("********************enrollMeeting******************\n" + );
-            if (meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitMemberNumber() < meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitmentNumber()) {
-                meetingService.participateGuest(detailDTO.getMeetingId(), userInfoDTO.getMember_id());
-                meetingService.upCountRecruiterNum(detailDTO.getMeetingId());
-                model.addAttribute("decMessage", "모임 참가 완료했습니다.");
+            if (meetingService.isExistPart(detailDTO.getMeetingId(), userInfoDTO.getMember_id()) == null) {
+//                System.out.println("********************enrollMeeting******************\n" +);
+                if (meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitMemberNumber() < meetingService.findMeetingById(detailDTO.getMeetingId()).getRecruitmentNumber()) {
+                    meetingService.participateGuest(detailDTO.getMeetingId(), userInfoDTO.getMember_id());
+                    meetingService.upCountRecruiterNum(detailDTO.getMeetingId());
+                    model.addAttribute("decMessage", "모임 참가 완료했습니다.");
+                } else {
+                    model.addAttribute("decMessage", "정원이 전부 찼습니다.");
+                }
             } else {
-                model.addAttribute("decMessage", "정원이 전부 찼습니다.");
+                model.addAttribute("decMessage", "이미 참가한 모임입니다.");
             }
         } else if (detailDTO.getDecMemberId() != 0) {
             userFollowService.insertFollowMember(userInfoDTO.getMember_id(), detailDTO.getDecMemberId()); // 누르는 사람, 대상

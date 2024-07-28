@@ -100,7 +100,7 @@ public class MeetingService {
     @Transactional
     public void increaseMemberReport(int memberId) { meetingMapper.increaseMemberReport(memberId);}
 
-    public List<MemberLoadDTO> loadMembersById(int meetingId) { return meetingMapper.loadMembersById(meetingId);}
+    public List<MemberLoadDTO> loadMembersById(int meetingId) {return meetingMapper.loadMembersById(meetingId);}
 }
 
 
