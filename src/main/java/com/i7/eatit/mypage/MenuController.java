@@ -21,7 +21,7 @@ public class MenuController {
     public String myPageMenu(@SessionAttribute("loginUser") UserInfoDTO loginUser, Model model){
         System.out.println(loginUser);
         MemberPhotoDTO memberPhotoDTO = photoService.findPhotoByMemberId(loginUser.getMember_id());
-        model.addAttribute("profileImage", photoService.getPhotoUrlByPath(memberPhotoDTO.getPhotoPath()));
+        model.addAttribute("profileImage", memberPhotoDTO.getPhotoPath());
 
         return "my-page/menu";
     }
