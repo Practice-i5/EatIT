@@ -46,7 +46,7 @@
             <form method="post" action="/my-page/profile-modify-image" enctype="multipart/form-data">
                 <div class="form-item">
                     <label class="profile-label">프로필 사진</label>
-                    <div class="form-input" style="width: 70%; display: flex; align-items: center; justify-content: space-between;">
+                    <div class="form-input form-size-limit" style="display: flex; align-items: center; justify-content: space-between;">
                         <img id="img-preview" src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"
                              th:src="${profileImage}"/>
                         <div>
@@ -67,7 +67,6 @@
                     <input id="get-nickname" type="text" placeholder="닉네임을 입력하세요." name=nickname required
                            th:value="${session.loginUser.nickname}">
                 </div>
-                <p class="form-message warn">주의사항 같은 것 작성</p>
                 <p class="form-message error" th:text="${error_nickname}"></p>
 
                 <div class="form-item">

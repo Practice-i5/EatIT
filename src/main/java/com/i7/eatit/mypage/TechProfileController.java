@@ -84,13 +84,18 @@ public class TechProfileController {
         }
 
         if(!stackCodeList.isEmpty()){
-
-            memberTechStackService.updateMemberTechStack(stackCodeList);
+            System.out.println("stackCodeList 사이즈:" + stackCodeList.size());
+            if(stackCodeList.size()<=5){
+                memberTechStackService.updateMemberTechStack(stackCodeList);
+            } else{
+                rttr.addFlashAttribute("stack_error", "5개까지 선택가능합니다.");
+                return "redirect:/my-page/tech-profile-modify";
+            }
             System.out.println("성공?");
-            rttr.addFlashAttribute("techModifyMessage", "성공인듯");
         } else{
+            rttr.addFlashAttribute("stack_error", "스택을 선택해주세요.");
             System.out.println("실패?");
-            rttr.addFlashAttribute("techModifyMessage", "수정 실패");
+            return "redirect:/my-page/tech-profile-modify";
         }
 
         return "redirect:/my-page/tech-profile";
@@ -98,7 +103,7 @@ public class TechProfileController {
     
 
     @PostMapping("tech-experience-modify")
-    public String techExperienceModify(TechExperienceDTO techExperience, @SessionAttribute("loginUser")UserInfoDTO loginUser) {
+    public String techExperienceModify(TechExperienceDTO techExperience, RedirectAttributes rttr, @SessionAttribute("loginUser")UserInfoDTO loginUser) {
         System.out.println(techExperience);
         if("on".equals(techExperience.getIsCurrent())) {
             techExperience.setIsCurrent("Y");
@@ -109,11 +114,14 @@ public class TechProfileController {
         techExperience.setMemberId(loginUser.getMember_id());
         
         if(techExperience.getExperienceId()!=null){
-            System.out.println("경험 아이디");
-            System.out.println(techExperience.getExperienceId());
             profileModifyService.modifyTechExperience(techExperience);
         } else{
-            profileModifyService.addTechExperience(techExperience);
+            List<TechExperienceDTO> techExperienceList = profileModifyService.findMemberTechExperience(loginUser.getMember_id());
+            if(techExperienceList.size()>5){
+                rttr.addFlashAttribute("experience_error", "10개까지 선택가능합니다.");
+            } else{
+                profileModifyService.addTechExperience(techExperience);
+            }
         }
 
         return "redirect:/my-page/tech-profile-modify";
@@ -121,30 +129,13 @@ public class TechProfileController {
 
     @PostMapping("tech-experience-delete")
     public String deleteTechExperience(@SessionAttribute("loginUser") UserInfoDTO loginUser, WebRequest request){
-        //System.out.println(request.getParameter("deleteId"));
         if(request.getParameter("deleteId")==null){
             System.out.println("오류");
         } else{
             profileModifyService.deleteTechExperience(loginUser.getMember_id(), Integer.parseInt(Objects.requireNonNull(request.getParameter("deleteId"))));
-
         }
 
         return "redirect:/my-page/tech-profile-modify";
-    }
-
-
-    @GetMapping("tech-profile/test")
-    public String getTechStack(Model model) {
-        List<TechStackTypeDTO> techStackList = techStackTypeService.findAllTechStack();
-//        techStackList.add(new TechStackTypeDTO(1,  "backend"));
-//        techStackList.add(new TechStackTypeDTO(2,  "frontend"));
-//        techStackList.add(new TechStackTypeDTO(3,  "game client"));
-//        techStackList.add(new TechStackTypeDTO(4,  "project management"));
-//        techStackList.add(new TechStackTypeDTO(5,  "ai"));
-
-        model.addAttribute("techStackList", techStackList);
-
-        return "my-page/tech-profile-modify";
     }
 
     @GetMapping("member-stack-test")
@@ -159,10 +150,7 @@ public class TechProfileController {
     @PostMapping("member-stack-test")
     public String memberStackTest(Model model) {
         List<TechStackTypeDTO> techStackList = techStackTypeService.findAllTechStack();
-        //MemberTechStackDTO memberTechStack = new MemberTechStackDTO(4, 7);
-        //memberTechStackService.addMemberTechStack(memberTechStack);
         memberTechStackService.deleteMemberAllTechStack(11);
-        //작성중
 
         return "redirect:/my-page/profile";
     }

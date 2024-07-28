@@ -27,7 +27,6 @@ public class BlackListController {
             List<BlockInfoDetailDTO> blockUserList = userBlockService.findBlockedMemberById(loginUser.getMember_id());
             System.out.println(blockUserList);
             model.addAttribute("blockUserList", blockUserList);
-
         }
 
     }
@@ -35,7 +34,6 @@ public class BlackListController {
     @PostMapping("block-user-delete")
     public String followUserDelete(@RequestParam("memberId") int blockedMemberId, @SessionAttribute("loginUser") UserInfoDTO loginUser){
 
-        //System.out.println("받음");
         System.out.println("로그인 유저 id : " +loginUser.getMember_id());
         System.out.println("차단 취소 대상 id : "+blockedMemberId);
         userBlockService.deleteBlockMember(loginUser.getMember_id(),blockedMemberId);
@@ -43,14 +41,4 @@ public class BlackListController {
         return "redirect:/my-page/black-list";
     }
 
-    @GetMapping("black-list-test")
-    public String blackListTest(Model model){
-        List<BlockInfoDetailDTO> blockUserList = userBlockService.findBlockedMemberById(2);
-        //System.out.println(userBlockService.findBlockedMemberById(1));
-        System.out.println(blockUserList);
-        model.addAttribute("blockUserList", blockUserList);
-
-
-        return "my-page/black-list";
-    }
 }

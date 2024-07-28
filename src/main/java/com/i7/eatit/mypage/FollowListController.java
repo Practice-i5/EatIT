@@ -27,21 +27,29 @@ public class FollowListController {
 
 
     @GetMapping("follow-list")
-    public String followList(@SessionAttribute(name = "loginUser") UserInfoDTO loginUser, Model model, @RequestParam(required = false) Integer page) {
+    public String followList(@SessionAttribute(name = "loginUser") UserInfoDTO loginUser, Model model, @RequestParam(required = false) String page) {
+
+        Integer currentPage;
+        try{
+             currentPage = Integer.parseInt(page);
+        } catch(Exception e){
+            e.printStackTrace();
+            return "redirect:/my-page/follow-list?page=1";
+        }
 
         int followCnt = userFollowService.countFollowMember(loginUser.getMember_id());
         int totalPage = (int) Math.ceil((double) followCnt / pageRow); // 총 페이지 수 계산
 //        System.out.println("팔로우 숫자: " + followCnt);
 
-        if (page == null) {
+        if (currentPage == null) {
             return "redirect:/my-page/follow-list?page=1"; // 페이지가 없으면 첫 페이지로 리다이렉트
         }
 
-        if (page > totalPage) {
+        if (currentPage > totalPage) {
             return "redirect:/my-page/follow-list?page=" + totalPage; // 페이지가 총 페이지 수를 넘으면 마지막 페이지로 리다이렉트
         }
 
-        int pageStartIndex = (page - 1) * pageRow; // 페이지의 시작 인덱스 계산
+        int pageStartIndex = (currentPage - 1) * pageRow; // 페이지의 시작 인덱스 계산
         List<FollowInfoDetailDTO> followDetailList = userFollowService.findFollowMemberPage(loginUser.getMember_id(), pageStartIndex, pageRow);
 
 
@@ -58,7 +66,7 @@ public class FollowListController {
         System.out.println("일부 팔로우 리스트");
         System.out.println(followList);
 
-        List<Integer> paginationList = createPaginationList(model, page, totalPage); // 페이지네이션 리스트 생성
+        List<Integer> paginationList = createPaginationList(model, currentPage, totalPage); // 페이지네이션 리스트 생성
         model.addAttribute("currentPage", page);
         model.addAttribute("paginationList", paginationList);
         model.addAttribute("followList", followList);
