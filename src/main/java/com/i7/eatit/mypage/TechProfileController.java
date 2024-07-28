@@ -10,10 +10,7 @@ import com.i7.eatit.domain.user.dto.UserInfoDTO;
 import com.i7.eatit.domain.user.service.ProfileModifyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -98,21 +95,7 @@ public class TechProfileController {
 
         return "redirect:/my-page/tech-profile";
     }
-
-    @PostMapping("tech-experience-add")
-    public String addTechExperience(TechExperienceDTO techExperience, @SessionAttribute("loginUser")UserInfoDTO loginUser){
-        System.out.println(techExperience);
-        if("on".equals(techExperience.getIsCurrent())) {
-            techExperience.setIsCurrent("Y");
-        } else{
-            techExperience.setIsCurrent("N");
-        }
-
-        techExperience.setMemberId(loginUser.getMember_id());
-        profileModifyService.addTechExperience(techExperience);
-
-        return "redirect:/my-page/tech-profile-modify";
-    }
+    
 
     @PostMapping("tech-experience-modify")
     public String techExperienceModify(TechExperienceDTO techExperience, @SessionAttribute("loginUser")UserInfoDTO loginUser) {
@@ -124,7 +107,14 @@ public class TechProfileController {
         }
 
         techExperience.setMemberId(loginUser.getMember_id());
-        profileModifyService.modifyTechExperience(techExperience);
+        
+        if(techExperience.getExperienceId()!=null){
+            System.out.println("경험 아이디");
+            System.out.println(techExperience.getExperienceId());
+            profileModifyService.modifyTechExperience(techExperience);
+        } else{
+            profileModifyService.addTechExperience(techExperience);
+        }
 
         return "redirect:/my-page/tech-profile-modify";
     }
@@ -141,6 +131,7 @@ public class TechProfileController {
 
         return "redirect:/my-page/tech-profile-modify";
     }
+
 
     @GetMapping("tech-profile/test")
     public String getTechStack(Model model) {
