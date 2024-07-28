@@ -107,15 +107,14 @@
                 <button class="btn-rw btn-submit" type="submit">제출</button>
             </form>
 
-            <!-- <a href="./tech-stack.html" > 기술 스택 수정</a> -->
+            <th:block th:if="${experience_error ne null}">
+                <p class="form-message error" th:text="${experience_error}"></p>
+            </th:block>
+            <th:block th:if="${experience_error eq null}">
+                <p class="form-message warn">10개까지 작성가능합니다.</p>
+            </th:block>
             <div class="form-item" id="nickname-form">
                 <label>개발 경력</label>
-                <th:block th:if="${experience_error ne null}">
-                    <p class="form-message error" th:text="${experience_error}"></p>
-                </th:block>
-                <th:block th:if="${experience_error eq null}">
-                    <p class="form-message warn">10개까지 작성가능합니다.</p>
-                </th:block>
                 <div class="form-size-limit">
                     <ul style="margin-left:5px; list-style: none; padding-left: 0px; display:flex; flex-flow : column wrap; align-items: baseline;">
                         <th:block th:if="${techExperienceList}">

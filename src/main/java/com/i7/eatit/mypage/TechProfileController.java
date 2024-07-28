@@ -66,7 +66,7 @@ public class TechProfileController {
     }
 
     @PostMapping("tech-profile-modify")
-    public String techProfileModify(@SessionAttribute(name="loginUser", required = false) UserInfoDTO loginUser,Model model, WebRequest request, RedirectAttributes rttr) {
+    public String techProfileModify(@SessionAttribute(name="loginUser", required = false) UserInfoDTO loginUser, WebRequest request, RedirectAttributes rttr) {
 
         List<MemberTechStackDTO> stackCodeList = new ArrayList<>();
 
@@ -84,15 +84,18 @@ public class TechProfileController {
         }
 
         if(!stackCodeList.isEmpty()){
+            System.out.println("stackCodeList 사이즈:" + stackCodeList.size());
             if(stackCodeList.size()<=5){
                 memberTechStackService.updateMemberTechStack(stackCodeList);
             } else{
-                model.addAttribute("stack_error", "5개까지 선택가능합니다.");
+                rttr.addFlashAttribute("stack_error", "5개까지 선택가능합니다.");
+                return "redirect:/my-page/tech-profile-modify";
             }
             System.out.println("성공?");
         } else{
-            model.addAttribute("stack_error", "스택을 선택해주세요.");
+            rttr.addFlashAttribute("stack_error", "스택을 선택해주세요.");
             System.out.println("실패?");
+            return "redirect:/my-page/tech-profile-modify";
         }
 
         return "redirect:/my-page/tech-profile";
@@ -100,7 +103,7 @@ public class TechProfileController {
     
 
     @PostMapping("tech-experience-modify")
-    public String techExperienceModify(TechExperienceDTO techExperience, Model model, @SessionAttribute("loginUser")UserInfoDTO loginUser) {
+    public String techExperienceModify(TechExperienceDTO techExperience, RedirectAttributes rttr, @SessionAttribute("loginUser")UserInfoDTO loginUser) {
         System.out.println(techExperience);
         if("on".equals(techExperience.getIsCurrent())) {
             techExperience.setIsCurrent("Y");
@@ -115,7 +118,7 @@ public class TechProfileController {
         } else{
             List<TechExperienceDTO> techExperienceList = profileModifyService.findMemberTechExperience(loginUser.getMember_id());
             if(techExperienceList.size()>5){
-                model.addAttribute("experience_error", "10개까지 선택가능합니다.");
+                rttr.addFlashAttribute("experience_error", "10개까지 선택가능합니다.");
             } else{
                 profileModifyService.addTechExperience(techExperience);
             }
