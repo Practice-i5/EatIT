@@ -102,16 +102,16 @@ public class AdminController {
     }
 
     // 3. 멤버 신고 횟수 증가 -> N회 이상 신고 누적 시 자동으로 시스템에 의해 멤버가 차단 됨.
-    @GetMapping("api/admin/members/{memberId}/increaseReport")
-    public String increaseMemberReport(@PathVariable int memberId) {
+    @GetMapping("api/members/{memberId}/increaseReport")
+    public String increaseMemberReport(@PathVariable(name = "memberId") int memberId) {
         adminService.increaseMemberReport(memberId);
         // TODO : redirect Url 현민 님과 맞춰 봐야 함.
         return "redirect:/index.html";
     }
 
-    // 4. 멤버 상태 변경 (정지 <-> 활성화)
+    // 4-1) 멤버 상태 변경 (정지 <-> 활성화)
     @GetMapping("/members/{memberId}/management")
-    public String clientManagement(@PathVariable(name = "memberId") int memberId,
+    public String changeMemberStatus(@PathVariable(name = "memberId") int memberId,
         HttpServletRequest request
     ) {
         if (!adminService.isAdminLoggedIn(request)) {
@@ -120,6 +120,18 @@ public class AdminController {
         adminService.updateMemberStatus(memberId);
         return "redirect:/admin/members";
     }
+
+//    // 4-2) 멤버 상태 변경 (원래의 상태는 고려하지 않고 항상 정지 상태로 바꿈)
+//    @GetMapping("/members/{memberId}/management/stop")
+//    public String changeMemberStatusToStop(@PathVariable(name = "memberId") int memberId,
+//        HttpServletRequest request
+//    ) {
+//        if (!adminService.isAdminLoggedIn(request)) {
+//            return REDIRECT_TO_LOGIN;
+//        }
+//        adminService.updateMemberStatusToStop(memberId);
+//        return "redirect:/admin/members";
+//    }
 
     // 5. 모임 전체 조회
     @GetMapping("/meetings")
@@ -147,16 +159,28 @@ public class AdminController {
     }
 
     // 7. 모임 신고 횟수 추가 -> N회 이상 신고 누적 시 자동으로 시스템에 의해 모임이 정지 됨.
-    @GetMapping("api/admin/meetings/{meetingId}/increaseReport")
-    public String increaseMeetingReport(@PathVariable int meetingId) {
+    @GetMapping("api/meetings/{meetingId}/increaseReport")
+    public String increaseMeetingReport(@PathVariable(name = "meetingId") int meetingId) {
         adminService.increaseMeetingReport(meetingId);
         return "redirect:/index.html";
     }
 
-    // 8. 모임 상태 변경 (중지 <-> 활성화)
+    // 8-1) 모임 상태 변경 (중지 <-> 활성화)
     @GetMapping("/meetings/{meetingId}/management")
-    public String changeMeetingStatus(@PathVariable int meetingId, Model model) {
-        adminService.changeMeetingStatus(meetingId);
-        return "redirect:/admin/meetings/" + meetingId;
+    public String changeMeetingStatus(HttpServletRequest request,
+        @PathVariable(name = "meetingId") int meetingId, Model model) {
+        if (!adminService.isAdminLoggedIn(request)) {
+            return REDIRECT_TO_LOGIN;
+        }
+        adminService.updateMeetingStatus(meetingId);
+        return "redirect:/admin/meetings";
     }
+
+//    // 8-2) 모임 상태 변경 (이전 상태를 고려하지 않고 항상 중지로 바꿈)
+//    @GetMapping("/meetings/{meetingId}/management/close")
+//    public String changeMeetingStatusToStop(HttpServletRequest request,
+//        @PathVariable(name = "meetingId") int meetingId, Model model) {
+//        adminService.updateMeetingStatusToClose(meetingId);
+//        return "redirect:/admin/meetings";
+//    }
 }

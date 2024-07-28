@@ -48,6 +48,12 @@
     WHERE M.member_id = #{ memberId }
   </select>
 
+  <update id="increaseMemberReport">
+    UPDATE tbl_member M
+    SET M.reported_count = M.reported_count + 1
+    WHERE M.member_id = #{ memberId }
+  </update>
+
   <update id="updateMemberStatus">
     UPDATE tbl_member M
     SET M.is_stopped_by_admin = CASE
@@ -58,9 +64,9 @@
     WHERE M.member_id = #{ memberId }
   </update>
 
-  <update id="increaseMemberReport">
+  <update id="updateMemberStatusToStop">
     UPDATE tbl_member M
-    SET M.reported_count = M.reported_count + 1
+    SET M.is_stopped_by_admin = 1
     WHERE M.member_id = #{ memberId }
   </update>
 </mapper>

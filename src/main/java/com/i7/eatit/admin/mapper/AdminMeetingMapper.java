@@ -11,7 +11,9 @@ public interface AdminMeetingMapper {
 
     AdminMeetingDto findMeetingById(int meetingId);
 
-    void changeMeetingStatus(int meetingId);
-
     void increaseMeetingReport(int meetingId);
+
+    void updateMeetingStatus(int meetingId);
+
+    void updateMeetingStatusToStop(int meetingId);
 }

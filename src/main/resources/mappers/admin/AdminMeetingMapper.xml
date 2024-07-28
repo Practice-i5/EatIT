@@ -23,6 +23,7 @@
     <result property="status" column="status"/>
     <result property="endDate" column="end_date"/>
     <result property="hostMemberId" column="host_member_id"/>
+    <result property="reportedCount" column="reported_count"/>
   </resultMap>
 
   <select id="findAllMeeting" resultMap="meetingResultMap">
@@ -36,19 +37,25 @@
     WHERE T.meeting_id = #{ meetingId }
   </select>
 
-  <update id="changeMeetingStatus">
+  <update id="increaseMeetingReport">
     UPDATE tbl_meeting M
-    SET M.is_stopped_by_admin = CASE
-    WHEN M.is_stopped_by_admin = 0 THEN 1
-    WHEN M.is_stopped_by_admin = 1 THEN 0
-    ELSE M.is_stopped_by_admin
+    SET M.reported_count = M.reported_count + 1
+    WHERE M.meeting_id = #{ meetingId }
+  </update>
+
+  <update id="updateMeetingStatus">
+    UPDATE tbl_meeting M
+    SET M.status = CASE
+    WHEN M.status = 'Open' THEN 'Close'
+    WHEN M.status = 'Close' THEN 'Open'
+    ELSE M.status
     END
     WHERE M.meeting_id = #{ meetingId }
   </update>
 
-  <update id="increaseMeetingReport">
+  <update id="updateMeetingStatusToClose">
     UPDATE tbl_meeting M
-    SET M.reported_count = M.reported_count + 1
+    SET M.status = 'Close'
     WHERE M.meeting_id = #{ meetingId }
   </update>
 </mapper>

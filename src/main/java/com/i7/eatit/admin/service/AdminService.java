@@ -93,16 +93,21 @@ public class AdminService {
     // 3. 멤버 신고 횟수 증가 (AUTO_MEMBER_STOP_COUNT 이상일 시 자동 차단)
     public void increaseMemberReport(int memberId) {
         adminMemberMapper.increaseMemberReport(memberId);
-        int reportedCount = adminMemberMapper.findMemberById(memberId).getReportedCount();
+        int reportedCount = findMemberById(memberId).getReportedCount();
         if (reportedCount >= AUTO_MEMBER_STOP_COUNT) {
             // TODO : 기능 정상 작동하는지 확인해 보지 못했음.
-            adminMemberMapper.updateMemberStatus(memberId);
+            updateMemberStatusToStop(memberId);
         }
     }
 
-    // 4. 멤버 상태 변경 (중지 <-> 활성화)
+    // 4-1) 멤버 상태 변경 (중지 <-> 활성화)
     public void updateMemberStatus(int memberId) {
         adminMemberMapper.updateMemberStatus(memberId);
+    }
+
+    // 4-2) 멤버 상태 변경 (무조건 중지로 바꾸기)
+    public void updateMemberStatusToStop(int memberId) {
+        adminMemberMapper.updateMemberStatusToStop(memberId);
     }
 
     // 5. 모임 전체 조회
@@ -115,13 +120,22 @@ public class AdminService {
         return adminMeetingMapper.findMeetingById(meetingId);
     }
 
-    // 7. 모임 상태 변경 (중지 <-> 활성화)
-    public void changeMeetingStatus(int meetingId) {
-        adminMeetingMapper.changeMeetingStatus(meetingId);
-    }
-
-    // 8. 모임 신고 횟수 증가
+    // 7. 모임 신고 횟수 증가 (AUTO_MEETING_STOP_COUNT 이상일 시 자동 차단)
     public void increaseMeetingReport(int meetingId) {
         adminMeetingMapper.increaseMeetingReport(meetingId);
+        int reportedCount = findMeetingById(meetingId).getReportedCount();
+        if (reportedCount >= AUTO_MEETING_STOP_COUNT) {
+            updateMeetingStatusToClose(meetingId);
+        }
+    }
+
+    // 8-1) 모임 상태 변경 (중지 <-> 활성화)
+    public void updateMeetingStatus(int meetingId) {
+        adminMeetingMapper.updateMeetingStatus(meetingId);
+    }
+
+    // 8-2) 모임 상태 변경 (이전 상태를 고려하지 않고 항상 중지로 바꿈)
+    public void updateMeetingStatusToClose(int meetingId) {
+        adminMeetingMapper.updateMeetingStatusToStop(meetingId);
     }
 }
