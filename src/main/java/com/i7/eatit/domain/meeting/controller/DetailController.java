@@ -72,10 +72,11 @@ public class DetailController {
         model.addAttribute("interests", meetingService.findInterestsById(meetingId));
         model.addAttribute("userInfo", userInfoDTO);
         model.addAttribute("meetingImage", meetingService.findPreviewById(meetingId));
+        System.out.println("########################Get의 loadmembers##############################\n" + meetingService.loadMembersById(meetingId) + "\n############################################");
         model.addAttribute("loadMembers", meetingService.loadMembersById(meetingId));
         model.addAttribute("hostInfoDTO", userInfoService.getUserInfo(meetingService.findHostIdById(meetingId)));
 
-        System.out.println("집에 가게 해줘!!!!!!!!" + meetingService.findHostIdById(meetingId));
+//        System.out.println("집에 가게 해줘!!!!!!!!" + meetingService.findHostIdById(meetingId));
 
         return "detail/detail";
     }
@@ -83,12 +84,13 @@ public class DetailController {
     @PostMapping("detail")
     public String writeDetail(Model model, @ModelAttribute DetailMeetingDTO detailDTO, @SessionAttribute("loginUser") UserInfoDTO userInfoDTO) {
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        System.out.println("과연 결과는!!!!!!!!!\n" + detailDTO + "\n**************이게 반환되었습니다 ***************");
+//        System.out.println("과연 결과는!!!!!!!!!\n" + detailDTO + "\n**************이게 반환되었습니다 ***************");
         model.addAttribute("meetingDTO", meetingService.findMeetingById(detailDTO.getMeetingId()));
         model.addAttribute("interests", meetingService.findInterestsById(detailDTO.getMeetingId()));
         model.addAttribute("userInfo", userInfoDTO);
 //        model.addAttribute("joinMembers", joinMemberService.getUserProfileInfo(detailDTO.getMeetingId()));
         model.addAttribute("meetingImage", meetingService.findPreviewById(detailDTO.getMeetingId()));
+        System.out.println("********************************Post의 loadMembers**********************************\n" + meetingService.loadMembersById(detailDTO.getMeetingId()) + "\n***************************************************");
         model.addAttribute("loadMembers", meetingService.loadMembersById(detailDTO.getMeetingId()));
         model.addAttribute("hostInfoDTO", userInfoService.getUserInfo(meetingService.findHostIdById(detailDTO.getMeetingId())));
         //        List<MeetingDTO> meetingList = meetingService.findAllMeeting();

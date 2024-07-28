@@ -446,7 +446,7 @@
                 <div class="owl-carousel vegetable-carousel justify-content-center participants-container" th:each="member : ${loadMembers}">
                     <div class=" position-relative participants-container-item">
                         <div class="contents-container border border-primary rounded">
-                            <img th:src="@{member.memberImageURL}" class="contents-container-item" alt="dev1">
+                            <img th:src="${member.memberImageURL}" class="contents-container-item" alt="dev1">
                             <div class="contents-container-item">
                                 <p class="fw-bold align-center" th:text="${ member.nickname }">멤버 닉네임</p>
                             </div>
