@@ -9,7 +9,7 @@ const { username, room } = Qs.parse(location.search, {
 });
 
 // Socket.IO 서버 URL 설정
-const nodeServerUrl = "http://localhost:3001";
+const nodeServerUrl = "http://192.168.0.30:3001";
 
 // Socket.IO 클라이언트 생성
 const socket = io(nodeServerUrl);
