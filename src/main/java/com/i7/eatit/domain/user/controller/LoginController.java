@@ -72,7 +72,7 @@ public class LoginController {
     public void successLogin() {
     }
 
-    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true") // 클라이언트의 주소를 허용
+    @CrossOrigin(origins = "http://192.168.0.30:3000", allowCredentials = "true") // 클라이언트의 주소를 허용
     @GetMapping("/getSessionUser")
     @ResponseBody
     public UserInfoDTO getSessionUser(@SessionAttribute(value = "loginUser", required = false) UserInfoDTO loginUser,  HttpSession session) {
