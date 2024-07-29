@@ -6,7 +6,9 @@ import com.i7.eatit.domain.meeting.model.dao.MeetingMapper;
 import com.i7.eatit.domain.meeting.model.dto.MeetingDTO;
 import com.i7.eatit.domain.meeting.model.dto.MemberLoadDTO;
 import com.i7.eatit.domain.meeting.model.dto.PreviewMeetingDTO;
+import com.i7.eatit.domain.picture.dao.PhotoMapper;
 import com.i7.eatit.domain.picture.dto.MeetingPhotoDTO;
+import com.i7.eatit.domain.picture.dto.MemberPhotoDTO;
 import com.i7.eatit.domain.tag.dto.InsertInterestRelDTO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,14 +20,16 @@ import java.util.List;
 @Service
 public class MeetingService {
 
-    MeetingMapper meetingMapper;
+    private MeetingMapper meetingMapper;
+    private PhotoMapper photoMapper;
 
     @Value("${file.upload-dir}")
     private String uploadDir;
 
 
-    public MeetingService(MeetingMapper meetingMapper) {
+    public MeetingService(MeetingMapper meetingMapper, PhotoMapper photoMapper) {
         this.meetingMapper = meetingMapper;
+        this.photoMapper = photoMapper;
     }
 
     // 모임 등록
@@ -56,6 +60,11 @@ public class MeetingService {
     @Transactional
     public void participateHost(int meetingId, int member_id) {
         meetingMapper.participateHost(meetingId, member_id);
+    }
+
+    @Transactional
+    public void initMeetingImage(MeetingPhotoDTO meetingPhotoDTO){
+        photoMapper.initMeetingImage(meetingPhotoDTO);
     }
 
     public String findMeetingPhotoById(int meetingId) { return meetingMapper.findMeetingPhotoById(meetingId); }
