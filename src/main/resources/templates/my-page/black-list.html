@@ -43,7 +43,7 @@
         <ul class="form-list-block">
             <th:block th:each="blockUser:${blockUserList} ">
                 <li>
-                    <div class="form-item">
+                    <div class="form-list-item">
                         <div class="block-info">
                             <img th:src="${blockUser.detailProfile.memberPhoto.photoPath}"
                                  src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"/>
@@ -52,7 +52,6 @@
                             </div>
                         </div>
                         <div class="block-modify">
-                            <!-- <button class="btn-choice-small btn-wb">수정</button> -->
                             <form action="/my-page/block-user-delete" method="post">
                                 <button class="btn-choice-small btn-wb"
                                     th:name="memberId" th:value="${blockUser.memberId}">삭제</button>
@@ -64,12 +63,11 @@
 
             <th:block th:if="${blockUserList == null}">
                 <li>
-                    <div class="form-item">
+                    <div class="form-list-item">
                         <div class="block-info">
                             <img id="img-preview1" src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"/>
                             <div class="block-info-text">
                                 닉네임1
-                                <!--                                        <p class="form-message warn">모임 시 비매너 행동</p>-->
                             </div>
                         </div>
                         <div class="block-modify">
@@ -85,42 +83,30 @@
                             <img id="img-preview2" src="images/profile-voodoo.jpg" th:src="@{/static/img/my-page/profile-voodoo.jpg}"/>
                             <div class="block-info-text">
                                 부두술사
-                                <!--                                        <p class="form-message warn">종교 활동 권유</p>-->
                             </div>
                         </div>
 
                         <div class="block-modify">
-<!--                            <button class="btn-choice-small btn-wb">수정</button>-->
                             <button class="btn-choice-small btn-wb">삭제</button>
                         </div>
                     </div>
                 </li>
                 <li>
-                    <div class="form-item">
+                    <div class="form-list-item">
                         <div class="block-info">
                             <img id="img-preview3" src="images/profile-al nassr.svg" th:src="@{/static/img/my-page/profile-al nassr.svg}"/>
                             <div class="block-info-text">
                                 알 나스르
-                                <!--                                        <p class="form-message warn">노쇼</p>-->
                             </div>
                         </div>
 
                         <div class="block-modify">
-<!--                            <button class="btn-choice-small btn-wb">수정</button>-->
                             <button class="btn-choice-small btn-wb">삭제</button>
                         </div>
                     </div>
                 </li>
             </th:block>
         </ul>
-
-<!--        <ul class="list-no-pad" style="display: flex; justify-content: center;">-->
-<!--            <li style="width: 40px;">1</li>-->
-<!--            <li style="width: 40px;">2</li>-->
-<!--            <li style="width: 40px;">3</li>-->
-<!--            <li style="width: 40px;">4</li>-->
-<!--            <li style="width: 40px;">5</li>-->
-<!--        </ul>-->
 
     </div>
 </div>
