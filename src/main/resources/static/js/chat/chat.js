@@ -3,7 +3,7 @@ var messages = document.getElementById("messages");
 
 // 사용자 ID를 세션에서 가져오는 함수
 function getSessionUser(callback) {
-  return fetch("http://localhost:8888/login/getSessionUser", { credentials: 'include' })
+  return fetch("http://social-dining.shop:8888/login/getSessionUser", { credentials: 'include' })
       .then((response) => response.json())
       .then((data) => {
         if (data && data.nickname) {
