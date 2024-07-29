@@ -23,4 +23,8 @@ public interface PhotoMapper {
 
     void deleteMeetingPhoto(int meetingId);
 
+    void initMemberImage(MemberPhotoDTO memberPhotoDTO);
+
+    void initMeetingImage(MeetingPhotoDTO meetingPhotoDTO);
+
 }
