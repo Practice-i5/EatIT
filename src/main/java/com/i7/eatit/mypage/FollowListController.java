@@ -39,7 +39,6 @@ public class FollowListController {
 
         int followCnt = userFollowService.countFollowMember(loginUser.getMember_id());
         int totalPage = (int) Math.ceil((double) followCnt / pageRow); // 총 페이지 수 계산
-//        System.out.println("팔로우 숫자: " + followCnt);
 
         if (currentPage == null) {
             return "redirect:/my-page/follow-list?page=1"; // 페이지가 없으면 첫 페이지로 리다이렉트

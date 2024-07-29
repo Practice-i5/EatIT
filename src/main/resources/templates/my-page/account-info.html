@@ -2,7 +2,6 @@
 <html   xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorate="~{my-page/layout}">
-
 <head>
     <title>계정 정보 수정</title>
 </head>
@@ -41,28 +40,20 @@
         if (passwordChangeMessage) alert(passwordChangeMessage);
     </script>
     <form class="form-content" action="/my-page/account-info-modify" method="post">
-        <h2>로그인 정보 보기</h2>
+        <h2>계정 정보 보기</h2>
         <div class="form-item">
-            <label class="profile-label">이름</label>
-            <input class="form-input" type="text" placeholder="이름"
-                   th:value="${session.loginUser.name}"
-            />
-        </div>
-<!--        <p class="form-message warn">휴대폰 인증시 변경가능합니다</p>-->
-
-        <div class="form-item">
-            <label class="profile-label">휴대폰 번호</label>
-            <div style="display: flex; flex-grow:1">
-                <input class="form-input" type="text" placeholder="휴대폰 번호"
-                       th:value="${session.loginUser.phoneNumber}"/>
-<!--                <button >변경하기</button>-->
-            </div>
+            <label class="profile-label warn">이름</label>
+            <label class="content-label" th:text="${session.loginUser.name}"></label>
         </div>
 
         <div class="form-item">
-            <label class="profile-label">이메일</label>
-            <input class="form-input" disabled placeholder="현재 아이디"
-                   th:value="${session.loginUser.email}"/>
+            <label class="profile-label warn">휴대폰 번호</label>
+            <label class="content-label" th:text="${session.loginUser.phoneNumber}"></label>
+        </div>
+
+        <div class="form-item">
+            <label class="profile-label warn">이메일</label>
+            <label class="content-label" th:text="${session.loginUser.email}"></label>
         </div>
 
         <hr style="width:100%; height:3px; background-color:#F5F5F5; border:none">
@@ -85,9 +76,9 @@
                        placeholder="새 비밀번호 입력" required>
             </div>
             <div class="form-item">
-                <label class="profile-label">새 비밀번호 재입력</label>
+                <label class="profile-label">새 비밀번호 확인</label>
                 <input class="form-input get-password" type="password" name="passwordAfterAgain"
-                       placeholder="새 비밀번호 재입력" required>
+                       placeholder="새 비밀번호 확인" required>
             </div>
             <p class="form-message error" th:text="${error_passwordAgain}"></p>
         </th:block>

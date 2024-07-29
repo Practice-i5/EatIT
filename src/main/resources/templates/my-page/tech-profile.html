@@ -67,7 +67,6 @@
             </div>
         </div>
 
-
         <form class="form-content">
             <h2>기술 프로필 설정</h2>
             <div class="form-item">
@@ -103,16 +102,15 @@
 
                 </ul>
             </div>
-            <!-- <a href="./tech-stack.html" > 기술 스택 수정</a> -->
             <div class="form-item" id="nickname-form">
-                <label>개발 경력</label>
+                <label class="profile-label">개발 경력</label>
                 <div style="width: 70%;">
                     <ul style="margin-left:5px; list-style: none; padding-left: 0px; display:flex; flex-flow : column wrap; align-items: baseline;">
                         <th:block th:if="${techExperienceList}">
                             <li style="display: flex; justify-content: space-between; width: 100%;"
                                     th:each="techExperience:${techExperienceList}">
                                 <div style="display: flex; flex-direction: column; align-items: baseline;">
-                                    <h3 style="margin:0px;" th:text="${techExperience.companyName}"></h3>
+                                    <h4 style="margin:0px;" th:text="${techExperience.companyName}"></h4>
                                     <p class="form-message-mini warn" th:text="${techExperience.description}"></p>
                                     <th:block th:if="${techExperience.endDate ne null}">
                                         <p class="form-message-mini warn" th:text="|${techExperience.startDate}~${techExperience.endDate}|"></p>

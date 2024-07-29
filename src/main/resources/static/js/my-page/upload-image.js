@@ -3,7 +3,7 @@ function uploadImageManage(){
     const preview = document.querySelector('#img-preview');
 
     uploadImagePreview(fileDOM, preview);
-    uploadImageReset(preview);
+    //uploadImageReset(preview);
 }
 
 function uploadImagePreview(fileDOM, preview){
