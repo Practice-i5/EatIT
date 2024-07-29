@@ -1,4 +1,4 @@
-var socket = io("http://localhost:3000");
+var socket = io("http://192.168.0.30:3000");
 var messages = document.getElementById("messages");
 
 // 사용자 ID를 세션에서 가져오는 함수
@@ -154,7 +154,7 @@ function formatTimeAgo(dateString) {
 
 // 초기 채팅 메시지를 데이터베이스에서 가져오기
 (function () {
-  fetch(`http://localhost:3000/chats/rooms/${roomId}/messages`, {
+  fetch(`http://192.168.0.30:3000/chats/rooms/${roomId}/messages`, {
     headers: {
       "username": sessionStorage.getItem("userId")
     }
@@ -206,7 +206,7 @@ setInterval(updateTimestamps, 30000);
 
 // 새로운 채팅방 만들기 요청
 function createChatRoom(roomName) {
-  fetch("http://localhost:3000/chats/createRoom", {
+  fetch("http://192.168.0.30:3000/chats/createRoom", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

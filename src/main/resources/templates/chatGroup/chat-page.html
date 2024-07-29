@@ -40,7 +40,7 @@
   const roomId = urlParams.get('roomId');
 
   if (roomId) {
-    fetch(`http://localhost:3000/chats/rooms/${roomId}/messages`, {
+    fetch(`http://192.168.0.30:3000/chats/rooms/${roomId}/messages`, {
       headers: {
         "username": sessionStorage.getItem("userId")
       }
