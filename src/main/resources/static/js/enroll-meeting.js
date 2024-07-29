@@ -46,9 +46,6 @@ document.getElementById('file-input').addEventListener('change', function(event)
         reader.readAsDataURL(file);
     });
 
-    // 입력 필드 초기화
-    event.target.value = '';
-
     submitButton.disabled = uploadedFiles.length === 0;
 });
 

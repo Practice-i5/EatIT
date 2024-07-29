@@ -33,63 +33,7 @@
 <body>
 
 <!-------------------------------------------------- navbar -------------------------------------------------->
-
-        <nav class="container-fluid fixed-top">
-            <div class="container px-0">
-                <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                    <!-- 로고 및 사이트 이름 -->
-                    <a th:href="@{/home}" class="navbar-brand">
-                        <img th:src="@{/img/image_145.png}" src="/img/image_145.png" alt="Eat-IT Logo">
-                        <h1 class="text-primary display-6">Eat-IT</h1>
-                    </a>
-
-                    <!-- 모바일용 네비게이션 토글 버튼 -->
-                    <button
-                            class="navbar-toggler py-2 px-3"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#navbarCollapse"
-                    >
-                        <span class="fa fa-bars text-primary"></span>
-                    </button>
-                    <!-- 네비게이션 메뉴 -->
-                    <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
-                        <div class="navbar-nav mx-auto">
-                            <a th:href="@{/home}" class="nav-item nav-link active">홈</a>
-                            <a th:href="@{/enroll-meeting}" class="nav-item nav-link">모임등록</a>
-                            <a th:href="@{/search/list}" class="nav-item nav-link">모임찾기</a>
-                            <!-- 모임목록은 로그인을 해야 들어갈 수 있기에 404 에러가 뜸-->
-                            <a th:href="@{/meetingList/participatingList}" class="nav-item nav-link">모임목록</a>
-
-                        </div>
-                        <!-- 1:1 채팅 및 그룹 채팅 버튼 -->
-                        <a th:href="@{/chat}" class="btn-chat my-auto">
-                            <i class="fas fa-comments"></i>
-                            <span class="btn-text">1:1채팅</span>
-                        </a>
-                        <a th:href="@{/chatGroup/chatrooms}" class="btn-chat my-auto">
-                            <i class="fas fa-users"></i>
-                            <span class="btn-text">그룹채팅</span>
-                        </a>
-
-                        <!-- 알림, 로그인, 회원가입 버튼 -->
-
-                        <a href="#" th:href="@{/alarm}" class="btn-notification my-auto me-4">
-                            <i class="fas fa-bell fa-2x"></i>
-                            <span class="notification-dot"></span>
-                        </a>
-                        <a class="btn btn-danger rounded-pill me-2" th:href="@{/login/loginMain}" id="loginButton">
-                            로그인
-                        </a>
-                        <a class="btn btn-outline-danger rounded-pill" th:href="@{/login/join}" id="signupButton">
-                            회원가입
-                        </a>
-
-
-                    </div>
-                </nav>
-            </div>
-        </nav>
+<th:block th:replace="/layout/fragments/header :: headerLayout"></th:block>
 
 <!--------------------------------------------------  -------------------------------------------------->
 <div class="form-container">
@@ -177,7 +121,7 @@
                 <div class="upload-container">
                     <label>모임 대표 사진을 등록해 주세요.</label>
                     <label class="upload-box">
-                        <input type="file" name="file" id="file-input">
+                        <input type="file" accept="image/*" name="file-input" id="file-input">
                         <div class="upload-icon">📷</div>
                         <div id="file-count">0/1</div>
                     </label>
@@ -278,5 +222,7 @@
     <script th:src="'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script  th:src="@{/js/enroll-meeting.js}"></script>
     <script th:src="'https://maps.googleapis.com/maps/api/js?key=AIzaSyCtrF28U4XgcY4rrHUzvKPhOtiOJzbxwRQ&callback=initMap&libraries=places'" async defer></script>
+    <script th:src="@{/js/headerLoginChange.js}"></script>
+
 </body>
 </html>

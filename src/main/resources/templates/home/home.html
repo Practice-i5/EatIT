@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>Eat IT</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta content="" name="keywords" />
-    <meta content="" name="description" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="" name="keywords"/>
+    <meta content="" name="description"/>
 
     <!-- 구글 웹 폰트 연결 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
             href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap"
             rel="stylesheet"
@@ -26,76 +26,22 @@
     />
 
     <!-- 외부 라이브러리 스타일시트 연결 -->
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet"/>
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet"/>
 
     <!-- 커스터마이즈된 부트스트랩 스타일시트 -->
-    <link href="/css/home.min.css" rel="stylesheet" />
+    <link href="/css/home.min.css" rel="stylesheet"/>
 
     <!-- 템플릿 스타일시트 -->
-    <link href="/css/home.css" rel="stylesheet" />
+    <link href="/css/home.css" rel="stylesheet"/>
 </head>
 <body>
 <script>
     const successMessage = `[[${successMessage}]]`
-    if(successMessage) alert(successMessage)
+    if (successMessage) alert(successMessage)
 </script>
 <!-- 헤더 시작 -->
-<div class="container-fluid fixed-top">
-    <div class="container px-0">
-        <nav class="navbar navbar-light bg-white navbar-expand-xl">
-            <!-- 로고 및 사이트 이름 -->
-            <a th:href="@{/home}" class="navbar-brand">
-                <img src="/img/logo.png" alt="Eat-IT Logo" />
-                <h1 class="text-primary display-6">Eat-IT</h1>
-            </a>
-
-            <!-- 모바일용 네비게이션 토글 버튼 -->
-            <button
-                    class="navbar-toggler py-2 px-3"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse"
-            >
-                <span class="fa fa-bars text-primary"></span>
-            </button>
-            <!-- 네비게이션 메뉴 -->
-            <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
-                <div class="navbar-nav mx-auto">
-                    <a th:href="@{/home}" class="nav-item nav-link active">홈</a>
-                    <a th:href="@{/enroll-meeting/enroll-meeting}" class="nav-item nav-link">모임등록</a>
-                    <a th:href="@{/search/list}" class="nav-item nav-link">모임찾기</a>
-                    <!-- 모임목록은 로그인을 해야 들어갈 수 있기에 404 에러가 뜸-->
-                    <a th:href="@{/meetingList/participatingList}" class="nav-item nav-link">모임목록</a>
-
-                </div>
-                <!-- 1:1 채팅 및 그룹 채팅 버튼 -->
-                <a th:href="@{/chat}" class="btn-chat my-auto">
-                    <i class="fas fa-comments"></i>
-                    <span class="btn-text">1:1채팅</span>
-                </a>
-                <a th:href="@{/chatGroup/chatrooms}" class="btn-chat my-auto">
-                    <i class="fas fa-users"></i>
-                    <span class="btn-text">그룹채팅</span>
-                </a>
-
-                <!-- 알림, 로그인, 회원가입 버튼 -->
-
-                <a href="#" th:href="@{/alarm}" class="btn-notification my-auto me-4">
-                    <i class="fas fa-bell fa-2x"></i>
-                    <span class="notification-dot"></span>
-                </a>
-                <a class="btn btn-danger rounded-pill me-2" th:href="@{/login/loginMain}" id="loginButton">
-                    로그인
-                </a>
-                <a class="btn btn-outline-danger rounded-pill" th:href="@{/login/join}" id="signupButton">
-                    회원가입
-                </a>
-            </div>
-        </nav>
-    </div>
-</div>
-<!-- 헤더 끝 -->
+<th:block th:replace="/layout/fragments/header :: headerLayout"></th:block>
 
 <!-- 검색 페이지 연결 부분 -->
 <div class="container-fluid py-5 mb-5 hero-header">
@@ -171,39 +117,45 @@
 </div>
 <!-- 메인 사진 끝 -->
 
-<!-- 관심 개발 분야 목록 -->
+<!-- 모임 목록 -->
 <div class="container-fluid fruite py-5">
     <div class="container py-5">
         <div class="tab-class text-center">
             <div class="row g-4">
                 <div class="col-lg-4 text-start">
-                    <h2>모임 종류</h2>
+                    <h2>모든 모임</h2>
                 </div>
+
                 <div class="col-lg-8 text-end">
-                    <!-- 모임 종류 탭 목록 -->
                     <ul class="nav nav-pills d-inline-flex text-center mb-5">
-                        <li class="nav-item" th:each="type, iterStat : ${types}">
-                            <a class="d-flex m-2 py-2 bg-light rounded-pill" th:classappend="${iterStat.index == 0} ? 'active'" data-bs-toggle="pill" th:href="'#tab-' + ${iterStat.index + 1}">
-                                <span class="text-dark" style="width: 130px" th:text="${type}">스터디</span>
+
+                        <li class="nav-item">
+                            <a class="d-flex py-2 m-2 bg-light rounded-pill active" data-bs-toggle="pill"
+                               href="home.html" th:href="@{/meetingList/home}">
+                                <span class="text-dark" style="width: 130px">모든 모임</span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </div>
+
+            <!-- 모든 모임 목록 나오는 곳-->
             <div class="tab-content">
-                <!-- 각 모임 종류별 모임 목록 -->
-                <div th:each="type, iterStat : ${types}" th:id="'tab-' + ${iterStat.index + 1}" th:classappend=" 'tab-pane fade show p-0' + (${iterStat.index == 0} ? ' active' : '')">
+                <div id="tab-1" class="tab-pane fade show p-0 active">
                     <div class="row g-4">
                         <div class="col-lg-12">
                             <div class="row g-4">
-                                <!-- 타임리프를 사용하여 저장된 데이터만큼 반복 -->
-                                <div th:each="meeting : ${meetingsByType[type]}" class="col-md-6 col-lg-4 col-xl-3">
-                                    <a th:href="@{|/detail/detail?meetingId=${meeting.meetingId}|}" class="meeting-link">
+
+                                <!-- 타임리프를 사용하여 저장된 데이터만큼 반복 --> <!--페이지 이동 추가-->
+                                <div th:each="meeting : ${meetingList}" class="col-md-6 col-lg-4 col-xl-3">
+                                    <a th:href="@{|/detail/detail?meetingId=${meeting.meetingId}|}"
+                                       class="meeting-link">
                                         <div class="rounded position-relative fruite-item">
 
                                             <!-- 모임 이미지 -->
                                             <div class="fruit-img">
-                                                <img th:src="${meeting.meetingImageURL}" class="other-image img-fluid w-100 rounded-top" alt=""/>
+                                                <img th:src="${meeting.meetingImageURL}"
+                                                     class="other-image img-fluid w-100 rounded-top" alt=""/>
                                             </div>
 
                                             <!-- 모임 정보 -->
@@ -214,20 +166,26 @@
 
                                                     <!-- 호스트 프로필과 참가 인원 -->
                                                     <div class="profile-container">
-                                                        <img th:src="${meeting.hostImageURL}" alt="Profile Picture" class="profile-image">
-                                                        <span class="profile-text" th:text="${meeting.recruitMemberNumber + '/' + meeting.recruitmentNumber + '명'}">참가 인원</span>
+                                                        <img th:src="${meeting.hostImageURL}" alt="Profile Picture"
+                                                             class="profile-image">
+                                                        <span class="profile-text"
+                                                              th:text="${meeting.recruitMemberNumber + '/' + meeting.recruitmentNumber + '명'}">참가 인원</span>
                                                     </div>
 
                                                     <!-- 모임 상태 -->
-                                                    <div class="meeting-status text-info fw-bold" th:text="${meeting.status}">모임 상태</div>
+                                                    <div class="meeting-status text-info fw-bold"
+                                                         th:text="${meeting.status}">모임 상태
+                                                    </div>
 
                                                     <!-- 모임 날짜 및 시간 -->
-                                                    <p class="text-dark fs-5 fw-bold mb-0" th:text="${meeting.scheduledDate}">모임 날짜 및 시간</p>
+                                                    <p class="text-dark fs-5 fw-bold mb-0"
+                                                       th:text="${meeting.scheduledDate}">모임 날짜 및 시간</p>
 
                                                     <!-- 찜하기 기능 -->
-                                                    <a href="#" class="icon" onclick="toggleFavorite(event)">
-                                                        <i th:id="'heartIcon' + ${meeting.meetingId}" class="far fa-heart"></i>
+                                                    <!--<a href="#" class="icon" th:onclick="'toggleFavorite(event, \'heartIcon' + ${meeting.id} + '\')'">
+                                                        <i th:id="'heartIcon' + ${meeting.id}" class="fas fa-heart me-2 text-primary"></i> 찜하기
                                                     </a>
+                                                    -->
                                                 </div>
                                             </div>
                                         </div>
@@ -238,13 +196,16 @@
                         </div>
                     </div>
                 </div>
-                <!-- 모임 종류별 모임 목록 끝 -->
+
             </div>
         </div>
     </div>
 </div>
-
 <!-- 관심 개발 분야 목록 끝 -->
+
+
+<th:block th:replace="/layout/fragments/footer :: footerLayout"></th:block>
+<script th:src="@{/js/headerLoginChange.js}"></script>
 
 <!-- JavaScript 파일 연결 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -255,159 +216,6 @@
 <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 <script src="/js/home.js"></script>
 
-<!-- 푸터 시작. -->
-<div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
-    <div class="container py-5">
-        <div
-                class="pb-4 mb-4"
-                style="border-bottom: 1px solid rgba(226, 175, 24, 0.5)"
-        >
-            <div class="row g-4">
-                <div class="col-lg-3">
-                    <a href="#">
-                        <h1 class="text-primary mb-0">Eat IT</h1>
-                        <p class="text-secondary mb-0">
-                            먹고 마시며 즐기는 인맥 확장의 기회!<br />
-                            소소한 IT 소모임 “Eat IT”<br />🍽️🍝🍦🍕🍣🍳🍛🌭🍰🍛🍚🍮🌮☕️
-                        </p>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="row g-5">
-            <div class="col-lg-3 col-md-6">
-                <div class="footer-item">
-                    <h4 class="text-light mb-3">NOTICE</h4>
-                    <p class="mb-4">공지사항</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="d-flex flex-column text-start footer-item">
-                    <h4 class="text-light mb-3">ABOUT US</h4>
-                    <a class="btn-link" href="">Eat IT 소개</a>
-                    <a class="btn-link" href="">회사 소개</a>
-                    <a class="btn-link" href="">인재 채용</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="d-flex flex-column text-start footer-item">
-                    <h4 class="text-light mb-3">팀원 소개</h4>
-                    <a class="btn-link" href="">팀원 깃허브</a>
-                    <div class="team-member">
-                        <img
-                                src="/img/git.png"
-                                alt="Team Member"
-                                class="team-member-img"
-                        />
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="d-flex flex-column text-start footer-item">
-                    <h4 class="text-light mb-3">github</h4>
-                    <a class="btn-link" href=""
-                    >https://github.com/Practice-i5/EatIT-FE</a
-                    >
-                    <a class="btn-link" href="">팀 노션</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container-fluid copyright bg-dark py-4">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                <span class="text-light"
-                ><a href="#"
-                ><i class="fas fa-copyright text-light me-2"></i>Eat IT</a
-                >, All right reserved.</span
-                >
-            </div>
-            <div class="col-md-6 my-auto text-center text-md-end text-white">
-                Designed By
-                <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
-                Distributed By
-                <a class="border-bottom" href="https://themewagon.com"
-                >ThemeWagon</a
-                >
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 푸터 끝 -->
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // 서버에서 세션 사용자 정보를 가져오는 함수
-        function getSessionUser() {
-            return fetch('/login/getSessionUser', {
-                method: 'GET',
-                credentials: 'include', // 세션 정보를 포함하여 요청
-            })
-                .then(response => response.json())
-                .then(data => data)
-                .catch(error => {
-                    console.error('Error:', error);
-                    return null;
-                });
-        }
-
-        async function updateButtons() {
-            const loginButton = document.getElementById('loginButton');
-            const signupButton = document.getElementById('signupButton');
-
-            const user = await getSessionUser();
-
-            if (user && user.email) { // 로그인한 사용자가 있을 경우
-                loginButton.textContent = '로그아웃';
-                loginButton.setAttribute('href', '/login/logout'); // 로그아웃 URL로 업데이트
-                signupButton.textContent = '마이페이지';
-                signupButton.setAttribute('href', '/my-page'); // 마이페이지 URL로 업데이트
-            } else { // 로그인한 사용자가 없을 경우
-                loginButton.textContent = '로그인';
-                loginButton.setAttribute('href', '/login/loginMain');
-                signupButton.textContent = '회원가입';
-                signupButton.setAttribute('href', '/login/join');
-            }
-        }
-
-        updateButtons();
-
-        // 알림 버튼 이벤트
-        document.querySelector('.btn-notification').addEventListener('click', function () {
-            const notificationDot = this.querySelector('.notification-dot');
-            notificationDot.style.display = notificationDot.style.display === 'none' ? 'block' : 'none';
-            alert('새 알림이 있습니다.');
-        });
-
-        // 로그인 버튼 클릭 시 login.html로 이동
-        document.getElementById('loginButton').addEventListener('click', function (event) {
-            if (this.textContent === '로그아웃') {
-                event.preventDefault();
-                fetch('/login/logout', {
-                    method: 'GET',
-                    credentials: 'include', // 세션 정보를 포함하여 요청
-                })
-                    .then(() => {
-                        localStorage.removeItem('isLoggedIn');
-                        window.location.href = '/';
-                    })
-                    .catch(error => console.error('Error:', error));
-            }
-        });
-
-        // 회원가입 버튼 클릭 시 join.html로 이동
-        document.getElementById('signupButton').addEventListener('click', function () {
-            if (this.textContent !== '마이페이지') {
-                window.location.href = '/login/join';
-            } else {
-                window.location.href = '/my-page'; // 실제 마이페이지 URL로 업데이트
-            }
-        });
-    });
-
-</script>
 
 </body>
 </html>

@@ -38,9 +38,7 @@ public class ProfileController {
         System.out.println(photoInfo);
 
         if(photoInfo!=null){
-            System.out.println("프로필 사진 url:");
-            System.out.println(photoService.getPhotoUrlByPath(photoInfo.getPhotoPath()));
-            model.addAttribute("profileImage", photoService.getPhotoUrlByPath(photoInfo.getPhotoPath()));
+            model.addAttribute("profileImage", photoInfo.getPhotoPath());
         }
     }
 

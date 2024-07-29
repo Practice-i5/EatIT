@@ -49,6 +49,7 @@
 
         #recruit-modal.active {
             display: flex;
+            /*display: inline-block;*/
         }
 
         #recruit-template {
@@ -131,7 +132,8 @@
         }
 
         #recruit-now.active {
-            display: flex;
+            /*display: flex;*/
+            display: inline-block;
         }
 
         #not-now {
@@ -139,7 +141,8 @@
         }
 
         #not-now.active {
-            display: flex;
+            /*display: flex;*/
+            display: inline-block;
         }
     </style>
 </head>
@@ -150,70 +153,7 @@
         if(decMessage) alert(decMessage)
     </script>
 
-    <!-- Spinner Start -->
-    <div id="spinner"
-        class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
-        <div class="spinner-grow text-primary" role="status"></div>
-    </div>
-    <!-- Spinner End -->
-
-
-    <!-- Navbar start -->
-    <div class="container-fluid fixed-top">
-        <div class="container px-0">
-            <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                <!-- 로고 및 사이트 이름 -->
-                <a th:href="@{/home}" class="navbar-brand">
-                    <img th:src="@{/img/image_145.png}" src="/img/image_145.png" alt="Eat-IT Logo">
-                    <h1 class="text-primary display-6">Eat-IT</h1>
-                </a>
-
-                <!-- 모바일용 네비게이션 토글 버튼 -->
-                <button
-                        class="navbar-toggler py-2 px-3"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarCollapse"
-                >
-                    <span class="fa fa-bars text-primary"></span>
-                </button>
-                <!-- 네비게이션 메뉴 -->
-                <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
-                    <div class="navbar-nav mx-auto">
-                        <a th:href="@{/home}" class="nav-item nav-link active">홈</a>
-                        <a th:href="@{/enroll-meeting/enroll-meeting}" class="nav-item nav-link">모임등록</a>
-                        <a th:href="@{/search/list}" class="nav-item nav-link">모임찾기</a>
-                        <!-- 모임목록은 로그인을 해야 들어갈 수 있기에 404 에러가 뜸-->
-                        <a th:href="@{/meetingList/participatingList}" class="nav-item nav-link">모임목록</a>
-
-                    </div>
-                    <!-- 1:1 채팅 및 그룹 채팅 버튼 -->
-                    <a th:href="@{/chat}" class="btn-chat my-auto">
-                        <i class="fas fa-comments"></i>
-                        <span class="btn-text">1:1채팅</span>
-                    </a>
-                    <a th:href="@{/chatGroup/chat-page}" class="btn-chat my-auto">
-                        <i class="fas fa-users"></i>
-                        <span class="btn-text">그룹채팅</span>
-                    </a>
-
-                    <!-- 알림, 로그인, 회원가입 버튼 -->
-
-                    <a href="#" th:href="@{/alarm}" class="btn-notification my-auto me-4">
-                        <i class="fas fa-bell fa-2x"></i>
-                        <span class="notification-dot"></span>
-                    </a>
-                    <a class="btn btn-danger rounded-pill me-2" th:href="@{/login/loginMain}" id="loginButton">
-                        로그인
-                    </a>
-                    <a class="btn btn-outline-danger rounded-pill" th:href="@{/login/join}" id="signupButton">
-                        회원가입
-                    </a>
-                </div>
-            </nav>
-        </div>
-    </div>
-    <!-- Navbar End -->
+    <th:block th:replace="/layout/fragments/header :: headerLayout"></th:block>
 
 
     <!-- Modal Search Start -->
@@ -399,7 +339,7 @@
                                         <div class="leader-rate">
 <!--                                            <p>81</p>-->
                                         </div>
-                                        <div class="padding-bottom-20px">
+                                        <div class="padding-bottom-20px align-center">
                                             <!-- HTML 폼 -->
                                             <div class="align-center">
                                                 <form th:action="@{/detail/detail}" method="post" id="recruit-now">
@@ -443,9 +383,9 @@
                 <div class="owl-carousel vegetable-carousel justify-content-center participants-container" th:each="member : ${loadMembers}">
                     <div class=" position-relative participants-container-item">
                         <div class="contents-container border border-primary rounded">
-                            <img th:src="@{member.memberImageURL}" class="contents-container-item" alt="dev1">
+                            <img th:src="${member.memberImageURL}" class="contents-container-item" alt="dev1">
                             <div class="contents-container-item">
-                                <p class="fw-bold align-center" th:text="${ nickname }">멤버 닉네임</p>
+                                <p class="fw-bold align-center" th:text="${ member.nickname }">멤버 닉네임</p>
                             </div>
                         </div>
                     </div>
@@ -473,89 +413,8 @@
     <!-- Single Product End -->
 
 
-    <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
-        <div class="container py-5">
-            <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5)">
-                <div class="row g-4">
-                    <div class="col-lg-3">
-                        <a href="#">
-                            <h1 class="text-primary mb-0">Eat IT</h1>
-                            <p class="text-secondary mb-0">먹고 마시며 즐기는 인맥 확장의 기회!<br>
-                                소소한 IT 소모임 “Eat IT”
-                                <br>🍽️🍝🍦🍕🍣🍳🍛🌭🍰🍛🍚🍮🌮☕️
-                            </p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row g-5">
-            <div class="col-lg-3 col-md-6">
-                <div class="footer-item">
-                    <h4 class="text-light mb-3">NOTICE</h4>
-                    <p class="mb-4">
-                        공지사항
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="d-flex flex-column text-start footer-item">
-                    <h4 class="text-light mb-3">ABOUT US</h4>
-                    <a class="btn-link" href="">Eat IT 소개</a>
-                    <a class="btn-link" href="">회사 소개</a>
-                    <a class="btn-link" href="">인재 채용</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="d-flex flex-column text-start footer-item">
-                    <h4 class="text-light mb-3">팀원 소개</h4>
-                    <a class="btn-link" href="">팀원 깃허브</a>
-                    <div class="team-member">
-                        <img src="../main-page/img/image_team.png" alt="Team Member" class="team-member-img">
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="d-flex flex-column text-start footer-item">
-                    <h4 class="text-light mb-3">github</h4>
-                    <a class="btn-link" href="">https://github.com/Practice-i5/EatIT-FE</a>
-                    <a class="btn-link" href="">팀 노션</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    <!-- Footer End -->
-
-    <!-- Copyright Start -->
-    <div class="container-fluid copyright bg-dark py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    <span class="text-light"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Your Site
-                            Name</a>, All right reserved.</span>
-                </div>
-                <div class="col-md-6 my-auto text-center text-md-end text-white">
-                    <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                    <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                    <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                    Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a
-                        class="border-bottom" href="https://themewagon.com">ThemeWagon</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Copyright End -->
-
-
-
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i
-            class="fa fa-arrow-up"></i></a>
+    <th:block th:replace="/layout/fragments/footer :: footerLayout"></th:block>
+    <script th:src="@{/js/headerLoginChange.js}"></script>
 
 
     <!-- JavaScript Libraries -->
@@ -568,76 +427,6 @@
     <script src="/js/detail.js"></script>
     <script src="/js/profile-modal.js"></script>
     <!-- Template Javascript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // 서버에서 세션 사용자 정보를 가져오는 함수
-            function getSessionUser() {
-                return fetch('/login/getSessionUser', {
-                    method: 'GET',
-                    credentials: 'include', // 세션 정보를 포함하여 요청
-                })
-                    .then(response => response.json())
-                    .then(data => data)
-                    .catch(error => {
-                        console.error('Error:', error);
-                        return null;
-                    });
-            }
-
-            async function updateButtons() {
-                const loginButton = document.getElementById('loginButton');
-                const signupButton = document.getElementById('signupButton');
-
-                const user = await getSessionUser();
-
-                if (user && user.email) { // 로그인한 사용자가 있을 경우
-                    loginButton.textContent = '로그아웃';
-                    loginButton.setAttribute('href', '/login/logout'); // 로그아웃 URL로 업데이트
-                    signupButton.textContent = '마이페이지';
-                    signupButton.setAttribute('href', '/my-page'); // 마이페이지 URL로 업데이트
-                } else { // 로그인한 사용자가 없을 경우
-                    loginButton.textContent = '로그인';
-                    loginButton.setAttribute('href', '/login/loginMain');
-                    signupButton.textContent = '회원가입';
-                    signupButton.setAttribute('href', '/login/join');
-                }
-            }
-
-            updateButtons();
-
-            // 알림 버튼 이벤트
-            document.querySelector('.btn-notification').addEventListener('click', function () {
-                const notificationDot = this.querySelector('.notification-dot');
-                notificationDot.style.display = notificationDot.style.display === 'none' ? 'block' : 'none';
-                alert('새 알림이 있습니다.');
-            });
-
-            // 로그인 버튼 클릭 시 login.html로 이동
-            document.getElementById('loginButton').addEventListener('click', function (event) {
-                if (this.textContent === '로그아웃') {
-                    event.preventDefault();
-                    fetch('/login/logout', {
-                        method: 'GET',
-                        credentials: 'include', // 세션 정보를 포함하여 요청
-                    })
-                        .then(() => {
-                            localStorage.removeItem('isLoggedIn');
-                            window.location.href = '/';
-                        })
-                        .catch(error => console.error('Error:', error));
-                }
-            });
-
-            // 회원가입 버튼 클릭 시 join.html로 이동
-            document.getElementById('signupButton').addEventListener('click', function () {
-                if (this.textContent !== '마이페이지') {
-                    window.location.href = '/login/join';
-                } else {
-                    window.location.href = '/my-page'; // 실제 마이페이지 URL로 업데이트
-                }
-            });
-        });
-    </script>
 </body>
 
 </html>

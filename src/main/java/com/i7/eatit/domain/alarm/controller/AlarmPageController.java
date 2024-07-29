@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/alarm")
+@RequestMapping("/alarm/*")
 public class AlarmPageController {
 
     private final AlarmService alarmService;
@@ -76,6 +76,9 @@ public class AlarmPageController {
     @GetMapping(value = "alarmCheck", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public String alarmCheck(@SessionAttribute(value = "loginUser", required = false) UserInfoDTO loginUser) {
+        if (loginUser == null) {
+            return String.valueOf(false);
+        }
         int hostMemberId = loginUser.getMember_id();
         boolean isAlarmRinging = alarmService.checkNewAlarm(hostMemberId);
         return String.valueOf(isAlarmRinging);
@@ -107,9 +110,10 @@ public class AlarmPageController {
         System.out.println("meeting id : " + meetingId);
         MeetingPhotoDTO photoDTO = photoService.findPhotoByMeetingId(meetingId);
         System.out.println("photoPath : "+ photoDTO.getPhotoPath());
-        System.out.println("url : " + photoService.getPhotoUrlByPath(photoDTO.getPhotoPath()));
+        //System.out.println("url : " + photoService.getPhotoUrlByPath(photoDTO.getPhotoPath()));
 
-        return photoService.getPhotoUrlByPath(photoDTO.getPhotoPath());
+        return photoDTO.getPhotoPath();
+        //return photoService.getPhotoUrlByPath(photoDTO.getPhotoPath());
     }
 
     //미팅 이미지 url 리스트  송신
@@ -121,7 +125,8 @@ public class AlarmPageController {
 //            System.out.println("meeting id : " + meetingId);
             MeetingPhotoDTO photoDTO = photoService.findPhotoByMeetingId(meetingId);
 //            System.out.println("photoPath : "+ photoDTO.getPhotoPath());
-            String url = photoService.getPhotoUrlByPath(photoDTO.getPhotoPath());
+            String url = photoDTO.getPhotoPath();
+            //String url = photoService.getPhotoUrlByPath(photoDTO.getPhotoPath());
 //            System.out.println("url : " + url);
             images.add(url);
         }
