@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<!--<head>-->
-<!--    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/></head>-->
     <th:block th:fragment="headerFragment">
         <div class="header-bar">
             <div style="display:flex; align-items: center;" >
@@ -12,11 +10,7 @@
             <a class="header-item" href="/enroll-meeting/enroll-meeting">모임 등록</a>
             <a class="header-item" href="/search/list">모임 찾기</a>
             <a class="header-item" href="/meetingList/participatingList">모임 목록</a>
-<!--            href="/participatingList"-->
             <div class="header-item">
-<!--                <button id="notification-icon">-->
-<!--                    <img class="icon-image" src="images/notification.png" th:src="@{/img/my-page/notification.png}">-->
-<!--                </button>-->
                 <a class="material" href="/my-page">
                     <span class="material-symbols-outlined" style="font-size:36px">manage_accounts</span>
                 </a>

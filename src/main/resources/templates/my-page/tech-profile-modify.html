@@ -117,13 +117,13 @@
             </th:block>
             <div class="form-item" id="nickname-form">
                 <label class="profile-label">개발 경력</label>
-                <div class="form-size-limit">
+                <div class="form-size-limit" style="margin-top:3px;">
                     <ul style="margin-left:5px; margin-top:3px; list-style: none; padding-left: 0px; display:flex; flex-flow : column wrap; align-items: baseline;">
                         <th:block th:if="${techExperienceList}">
                             <li style="display: flex; justify-content: space-between; width: 100%;"
                                     th:each="techExperience:${techExperienceList}">
                                 <div style="display: flex; flex-direction: column; align-items: baseline;">
-                                    <h3 style="margin:0px;" th:text="${techExperience.companyName}"></h3>
+                                    <h4 style="margin:0px;" th:text="${techExperience.companyName}"></h4>
                                     <p class="form-message-mini warn" th:text="${techExperience.description}"></p>
                                     <th:block th:if="${techExperience.endDate ne null}">
                                         <p class="form-message-mini warn" th:text="|${techExperience.startDate}~${techExperience.endDate}|"></p>

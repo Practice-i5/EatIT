@@ -516,6 +516,10 @@ img{
 }
 
 @media (max-width: 576px) {
+    .form-content{
+        min-width: 300px;
+        width:100%;
+    }
     .form-item{
         display:flex;
         flex-direction: column;
@@ -523,7 +527,13 @@ img{
     }
 
     .form-item input{
-        width: 100%;
+        max-width: 100%;
+        width: 95%;
+    }
+
+    .form-item select{
+        max-width:100%;
+        width:95%;
     }
 
     .profile-label{
