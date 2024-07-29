@@ -57,6 +57,11 @@ public class AlarmPageController {
         //신청 알람 리스트
         List<AlarmSimpleDTO> alarmList = alarmService.findSimpleAll(hostMemberId);
         model.addAttribute("alarmList", alarmList);
+//        String print = "";
+//        for (AlarmSimpleDTO alarm : alarmList) {
+//            print += alarm.getMeetingName() + " , ";
+//        }
+//        System.out.println(print);
 
         //미팅 이미지 로딩용 리스트
         List<Integer> meetingIdList = new ArrayList<>();
@@ -93,7 +98,9 @@ public class AlarmPageController {
     @GetMapping(value="alarmDetail", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public AlarmDetailDTO findAlarmDetail(@RequestParam int alarmId) {
-        return alarmService.findAlarmDetail(alarmId);
+        AlarmDetailDTO alarmDetailDTO = alarmService.findAlarmDetail(alarmId);
+        System.out.println(alarmDetailDTO.toString());
+        return alarmDetailDTO;
     }
 
     //유저 이미지용 url 송신

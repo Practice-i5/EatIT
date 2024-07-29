@@ -119,7 +119,7 @@
             left join tbl_meeting as b
                 on b.meeting_id = AM.meeting_id
             left join tbl_member as c
-                on c.member_id = AM.meeting_id
+                on c.member_id = AM.member_id
         where AM.alarm_id = #{alarmId}
     </select>
 
