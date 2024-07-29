@@ -59,7 +59,6 @@ public class EnrollMeetingController {
         meetingService.createNewInterestsRel(interestsRelDTO);
         meetingService.participateHost(meeting.getLastId(), userInfoDTO.getMember_id());
 
-
         /*
          * 1. 이미지 파일 불러오기
          * 2. 이미지 파일 Upload Service
@@ -91,6 +90,12 @@ public class EnrollMeetingController {
 //            } catch (IOException e) {
 //                e.printStackTrace();
 //            }
+        } else {
+            MeetingPhotoDTO meetingPhotoDTO = new MeetingPhotoDTO();
+            meetingPhotoDTO.setMeetingId(meeting.getLastId());
+            meetingPhotoDTO.setPhotoName("meetingImage1.png");
+            meetingPhotoDTO.setPhotoPath("/img/meeting/meetingImage1.png");
+            meetingService.initMeetingImage(meetingPhotoDTO);
         }
 
 
