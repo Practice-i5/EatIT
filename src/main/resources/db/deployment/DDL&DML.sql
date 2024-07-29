@@ -210,17 +210,18 @@ create table tbl_meeting_photo
 ) comment 'meeting_photo';
 
 -- 모임사진 테이블 데이터 삽입
-INSERT INTO `tbl_meeting_photo` (`photo_id`, `photo_path`, `photo_name`, `meeting_id`)
-VALUES (1, '/img/ade.png', 'ade.png', 1),
-       (2, '/img/crople.png', 'crople.png', 2),
-       (3, '/img/test_image.png', 'test_image.png', 3),
-       (4, '/img/ade.png', 'ade.png', 4),
-       (5, '/img/ade.png', 'ade.png', 5),
-       (6, '/img/ade.png', 'ade.png', 6),
-       (7, '/img/ade.png', 'ade.png', 7),
-       (8, '/img/ade.png', 'ade.png', 8),
-       (9, '/img/ade.png', 'ade.png', 9),
-       (10, '/img/ade.png', 'ade.png', 10);
+INSERT INTO tbl_meeting_photo (photo_id, photo_path, photo_name, meeting_id)
+VALUES
+    (11, '/img/meeting/meetingImage1.png', 'meetingImage1.png', 1),
+    (12, '/img/meeting/meetingImage2.png', 'meetingImage2.png', 2),
+    (13, '/img/meeting/meetingImage3.png', 'meetingImage3.png', 3),
+    (14, '/img/meeting/meetingImage4.png', 'meetingImage4.png', 4),
+    (15, '/img/meeting/meetingImage5.png', 'meetingImage5.png', 5),
+    (16, '/img/meeting/meetingImage6.png', 'meetingImage6.png', 6),
+    (17, '/img/meeting/meetingImage7.png', 'meetingImage7.png', 7),
+    (18, '/img/ade.png', 'ade.png', 8),
+    (19, '/img/crople.png', 'crople.png', 9),
+    (20, '/img/main1.png', 'main1.png', 10);
 
 
 
