@@ -50,7 +50,7 @@ public class ProfileController {
 
     @PostMapping("profile-modify")
     public String modifyProfile(@ModelAttribute ProfileModifyDTO newProfile, @SessionAttribute("loginUser") UserInfoDTO loginUser
-            , @RequestParam MultipartFile imgFile, RedirectAttributes rttr) {
+            , @RequestParam("imgFile") MultipartFile imgFile, RedirectAttributes rttr) {
 
         if (!imgFile.isEmpty()) {
             photoService.uploadMemberPhoto(imgFile, loginUser.getMember_id());
