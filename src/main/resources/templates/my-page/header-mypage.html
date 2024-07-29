@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!--<head>-->
+<!--    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/></head>-->
     <th:block th:fragment="headerFragment">
         <div class="header-bar">
-            <img class="header-item logo" src="images/logo.png" th:src="@{/img/my-page/logo.png}" >
+            <div style="display:flex; align-items: center;" >
+                <img class="header-item logo" src="images/logo.png" th:src="@{/img/my-page/logo.png}" onclick="location.href='/'" >
+                <h1 class="title" onclick="location.href='/'">Eat-IT</h1>
+            </div>
             <a class="header-item" href="/">홈</a>
-            <a class="header-item" href="/enroll-meeting">모임 등록</a>
-            <a class="header-item" href="/search">모임 찾기</a>
-            <a class="header-item" >후기</a>
+            <a class="header-item" href="/enroll-meeting/enroll-meeting">모임 등록</a>
+            <a class="header-item" href="/search/list">모임 찾기</a>
+            <a class="header-item" href="/meetingList/participatingList">모임 목록</a>
 <!--            href="/participatingList"-->
             <div class="header-item">
-                <button id="notification-icon">
-                    <img class="icon-image" src="images/notification.png" th:src="@{/img/my-page/notification.png}">
-                </button>
+<!--                <button id="notification-icon">-->
+<!--                    <img class="icon-image" src="images/notification.png" th:src="@{/img/my-page/notification.png}">-->
+<!--                </button>-->
+                <a class="material" href="/my-page">
+                    <span class="material-symbols-outlined" style="font-size:36px">manage_accounts</span>
+                </a>
+                <a class="material" href="/login/logout">
+                    <span class="material-symbols-outlined" style="font-size:36px">logout</span>
+                </a>
                 <button class="btn-choice-mid btn-wb" onclick="location.href='/my-page/profile'">마이페이지</button>
                 <button class="btn-choice-mid btn-wb" onclick="location.href='/login/logout'">로그아웃</button>
             </div>
