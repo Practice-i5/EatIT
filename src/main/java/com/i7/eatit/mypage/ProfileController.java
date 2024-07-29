@@ -50,21 +50,22 @@ public class ProfileController {
 
     @PostMapping("profile-modify")
     public String modifyProfile(@ModelAttribute ProfileModifyDTO newProfile, @SessionAttribute("loginUser") UserInfoDTO loginUser
-            , RedirectAttributes rttr) {
+            , MultipartFile imgFile, RedirectAttributes rttr) {
+
+        if (!imgFile.isEmpty()) {
+            photoService.uploadMemberPhoto(imgFile, loginUser.getMember_id());
+        }
 
         if(Objects.equals(newProfile.getGender(), "")){
             rttr.addFlashAttribute("error_gender", "성별을 선택해주세요.");
         } else{
-            System.out.println(loginUser);
 
             newProfile.setMemberId(loginUser.getMember_id());
-            System.out.println(newProfile);
             profileModifyService.modifyProfile(newProfile);
 
             loginUser.setGender(newProfile.getGender());
             loginUser.setAge(newProfile.getAge());
             loginUser.setNickname(newProfile.getNickname());
-
 
             rttr.addFlashAttribute("profileChangeMessage", "프로필을 변경했습니다.");
         }
@@ -76,28 +77,15 @@ public class ProfileController {
 //            }
 //        }
 
-        //System.out.println(request.getParameter("nickName"));
         return "redirect:/my-page/profile";
     }
 
-    @PostMapping("profile-modify-image")
-    public String modifyProfileImage(@SessionAttribute("loginUser") UserInfoDTO loginUser,
-            MultipartFile imgFile, RedirectAttributes rttr) throws IOException{
-
-        if (imgFile==null) {
-            rttr.addFlashAttribute("error_image", "이미지를 등록해주세요.");
-        } else{
-            String uploadedUrl = photoService.uploadMemberPhoto(imgFile, loginUser.getMember_id());
-
-            if(uploadedUrl!=null){
-                rttr.addFlashAttribute("profileChangeMessage", "사진을 변경했습니다.");
-            } else{
-                rttr.addFlashAttribute("error_image", "사진 변경에 실패했습니다.");
-            }
-        }
-
+    @GetMapping("reset-image")
+    public String resetImage(@SessionAttribute("loginUser") UserInfoDTO loginUser, Model model) {
+        photoService.setMemberDefaultImage(loginUser.getMember_id());
         return "redirect:/my-page/profile";
     }
+
 
     @GetMapping("uploadTest")
     public void uploadTest(Model model){
@@ -106,39 +94,18 @@ public class ProfileController {
     @PostMapping("uploadTest")
     public String uploadTest(@RequestParam MultipartFile singleFile, RedirectAttributes rttr) throws IOException {
 
-        //System.out.println("singleFile : " + singleFile);
-        //System.out.println("singleFileDescription : " + singleFileDescription);
-        System.out.println("시도");
-        String gdriveUrl = "";
-
         String uploadedUrl = photoService.uploadMemberPhoto(singleFile, 7);
         if (uploadedUrl != null){
-            //gdriveUrl = "https://drive.google.com/thumbnail?id=" + uploadedUrl + "&sz=w300";
             rttr.addFlashAttribute("profileImage", uploadedUrl);
             System.out.println("결과 url");
-            //fireBaseService.deleteFirebaseBucket("memberImage/27403cca033349429e657b83eaef2727.png");
-            //System.out.println(gdriveUrl);
         }
 
-        //rttr.addFlashAttribute("profileImage", uploadedUrl);
         return "redirect:/my-page/uploadResult";
     }
 
     @GetMapping("uploadResult")
     public void uploadResultPage(Model model){
-        //model.addAttribute("profileImage","https://drive.google.com/thumbnail?id=13G0IwZ4hbnisyGlsN4r297BZlcLLDvn1&sz=w200");
-
         System.out.println(model.getAttribute("profileImage"));
     }
 
-    @GetMapping("profile/test")
-    public String profileTest(Model model){
-        model.addAttribute("profileImage", "/img/my-page/파르토.webp");
-        model.addAttribute("nickName", "팡요");
-        model.addAttribute("gender", "male");
-        model.addAttribute("age", 27);
-        model.addAttribute("introduce", "판교에 서식하는 자바 백엔드 개발자, 디저트 카페 찾는걸 좋아함.");
-
-        return "my-page/profile";
-    }
 }

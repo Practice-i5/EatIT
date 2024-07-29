@@ -112,7 +112,7 @@ img{
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    width: 75%;
+    width: 100%;
     max-width: 850px;
 
 }
@@ -146,6 +146,18 @@ img{
 .header a:hover {
     color: #dcb335;
 
+}
+
+.header .material{
+    font-size:36px;
+    margin:3px;
+    color:black;
+    transition: color 0.3s ease;
+    display: none;
+}
+
+.header .material:hover{
+    color:#81c408;
 }
 
 .header button:hover{
@@ -291,6 +303,7 @@ img{
 
 
 .profile-label {
+    font-size:14px;
     display: inline-block;
     text-align: left;
     width: 30%;
@@ -416,6 +429,19 @@ img{
     height:30px;
 }
 
+.form-label-item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.content-label{
+    text-align: left;
+    font-size:15px;
+    width:70%;
+    margin-top:3px;
+    margin-bottom: 3px;
+}
 
 .footer li{
     list-style: none;
@@ -449,7 +475,19 @@ img{
         /* grid-template-columns: 1fr 2fr 3fr  2fr 1fr; */
     }
 
+    .header{
+        width:100%;
+    }
+
     .header a {
+        display:none;
+    }
+
+    .header .material{
+        display: inline;
+    }
+
+    .header button{
         display:none;
     }
 
@@ -466,6 +504,7 @@ img{
     }
 
     .profile-label{
+
         max-width: 75%;
     }
 
@@ -473,9 +512,14 @@ img{
         max-width: 75%;
     }
 
+
 }
 
 @media (max-width: 576px) {
+    .form-content{
+        min-width: 300px;
+        width:100%;
+    }
     .form-item{
         display:flex;
         flex-direction: column;
@@ -483,7 +527,13 @@ img{
     }
 
     .form-item input{
-        width: 100%;
+        max-width: 100%;
+        width: 95%;
+    }
+
+    .form-item select{
+        max-width:100%;
+        width:95%;
     }
 
     .profile-label{

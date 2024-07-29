@@ -1,33 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>프로필 수정</title>
+    <title>회원탈퇴완료</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/style-mypage.css" th:href="@{/css/my-page/style-mypage.css}">
     <link rel="stylesheet" href="css/button.css" th:href="@{/css/my-page/button.css}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
 </head>
 <body>
 <div class="container">
-    <nav class="header">
-        <div class="header-bar">
-            <img class="header-item logo" src="images/logo.png" th:src="@{/img/my-page/logo.png}" >
-            <a class="header-item" href="/">홈</a>
-            <a class="header-item" href="/enroll-meeting">모임 등록</a>
-            <a class="header-item" href="/search">모임 찾기</a>
-            <a class="header-item" >후기</a>
-            <!--            href="/participatingList"-->
-            <div class="header-item">
-                <button id="notification-icon">
-                    <img class="icon-image" src="images/notification.png" th:src="@{/img/my-page/notification.png}">
-                </button>
-                <button class="btn-choice-mid btn-wb" onclick="location.href='/login/join'">회원가입</button>
-                <button class="btn-choice-mid btn-wb" onclick="location.href='/login/loginMain'">로그인</button>
-            </div>
-        </div>
+    <nav th:insert="~{my-page/header-mypage::headerFragment}" class="header">
     </nav>
     <aside class="bar"></aside>
     <div class="profile">
         <div class="form-content">
-            <h2>회원탈퇴 완료</h2>
+            <h2>회원 탈퇴 완료</h2>
             <h3>회원 탈퇴가 완료되었습니다.</h3>
 
             <button class="btn-rw btn-submit" type="button" onclick="location.href='/'">홈으로</button>

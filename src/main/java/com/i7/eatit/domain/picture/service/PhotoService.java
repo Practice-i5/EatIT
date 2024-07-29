@@ -41,6 +41,17 @@ public class PhotoService {
     }
 
     @Transactional
+    public void setMemberDefaultImage(int memberId){
+        deleteMemberPhoto(memberId);
+        MemberPhotoDTO memberPhoto = new MemberPhotoDTO();
+        memberPhoto.setMemberId(memberId);
+        memberPhoto.setPhotoPath("/img/avatar.jpg");
+        memberPhoto.setPhotoName("avatar.jpg");
+        photoMapper.uploadMemberPhoto(memberPhoto);
+        System.out.println("기본 이미지로 설정");
+    }
+
+    @Transactional
     public String uploadMemberPhoto(MultipartFile singleImageFile, int memberId) {
 
         System.out.println("singleImageFile = " + singleImageFile);

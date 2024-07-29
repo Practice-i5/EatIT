@@ -25,7 +25,7 @@
 
     function fetchMessages() {
         if (roomId) {
-            fetch(`http://localhost:3000/chats/rooms/${roomId}/messages`, {
+            fetch(`http://192.168.0.30:3000/chats/rooms/${roomId}/messages`, {
                 headers: {
                     "username": encodeURIComponent(sessionStorage.getItem("userId") || "익명")
                 }
@@ -45,7 +45,7 @@
     }
 
     function fetchChatRooms() {
-        fetch("http://localhost:3000/chats/rooms")
+        fetch("http://192.168.0.30:3000/chats/rooms")
             .then(response => response.json())
             .then(data => {
                 const chatRoomList = document.getElementById("chatRoomList");
@@ -67,7 +67,7 @@
 
     function createChatRoom(roomName) {
         const userId = sessionStorage.getItem("userId");
-        fetch("http://localhost:3000/chats/createRoom", {
+        fetch("http://192.168.0.30:3000/chats/createRoom", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
