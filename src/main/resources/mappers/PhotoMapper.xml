@@ -91,4 +91,14 @@
         DELETE FROM TBL_MEETING_PHOTO
         WHERE MEETING_ID = #{meetingId}
     </delete>
+
+    <insert id="initMemberImage" parameterType="com.i7.eatit.domain.picture.dto.MemberPhotoDTO">
+        INSERT INTO TBL_MEMBER_PHOTO ( PHOTO_PATH, PHOTO_NAME, MEMBER_ID )
+        VALUES ( #{ photoPath }, #{ photoPath }, #{ memberId } )
+    </insert>
+
+    <insert id="initMeetingImage" parameterType="com.i7.eatit.domain.picture.dto.MeetingPhotoDTO">
+        INSERT INTO TBL_MEMBER_PHOTO ( PHOTO_PATH, PHOTO_NAME, MEETING_ID )
+        VALUES ( #{ photoPath }, #{ photoPath }, #{ meetingId } )
+    </insert>
 </mapper>
