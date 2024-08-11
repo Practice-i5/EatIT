@@ -70,4 +70,16 @@ public class AlarmSimpleDTO {
     public void setAlarmChecked(boolean alarmChecked) {
         this.alarmChecked = alarmChecked;
     }
+
+    @Override
+    public String toString() {
+        return "AlarmSimpleDTO{" +
+                "alarmId=" + alarmId +
+                ", memberId=" + memberId +
+                ", meetingId=" + meetingId +
+                ", meetingName='" + meetingName + '\'' +
+                ", alarmTime=" + alarmTime +
+                ", alarmChecked=" + alarmChecked +
+                '}';
+    }
 }
