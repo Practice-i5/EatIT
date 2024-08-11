@@ -1,21 +1,30 @@
 package com.i7.eatit.domain.onetoonechat.controller;
 
 import com.i7.eatit.domain.onetoonechat.dto.OneChatRoomDTO;
-import com.i7.eatit.domain.user.dto.UserInfoDTO;
 import com.i7.eatit.domain.onetoonechat.service.OneChatRoomService;
+import com.i7.eatit.domain.user.dto.UserInfoDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.List;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
 @Controller
 @RequestMapping("/onechatroom")
@@ -24,13 +33,13 @@ public class OneChatRoomController {
     @Value("${node.server.url}")
     private String nodeServerUrl;
 
-    @Autowired
     private OneChatRoomService oneChatRoomService;
 
     private static final Logger logger = LoggerFactory.getLogger(OneChatRoomController.class);
 
     @GetMapping("/chat-room")
-    public String chatRoom(@RequestParam("username") String username, @RequestParam("room") String room, Model model) {
+    public String chatRoom(@RequestParam("username") String username,
+        @RequestParam("room") String room, Model model) {
         model.addAttribute("username", username);
         model.addAttribute("roomName", room);
         return "chat/chat";
@@ -64,23 +73,24 @@ public class OneChatRoomController {
 
     @PostMapping("/send-message")
     @ResponseBody
-    public ResponseEntity<String> sendMessage(@RequestBody ChatMessage chatMessage) {
+    public ResponseEntity<String> sendMessage(@RequestBody ChatMessage chatMessage,
+        @RequestHeader HttpHeaders headers) {
         RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-
-        HttpEntity<OneChatRoomController.ChatMessage> request = new HttpEntity<>(chatMessage, headers);
-
+        HttpEntity<OneChatRoomController.ChatMessage> request = new HttpEntity<>(chatMessage,
+            headers);
         try {
-            ResponseEntity<String> response = restTemplate.exchange(nodeServerUrl + "/messages", HttpMethod.POST, request, String.class);
-            return response;
+            return restTemplate.exchange(nodeServerUrl + "/messages",
+                HttpMethod.POST, request, String.class);
         } catch (Exception e) {
             logger.error("Error sending message", e); // 로그에 오류 메시지 출력
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error sending message: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Error sending message: " + e.getMessage());
         }
     }
 
     public static class ChatMessage {
+
         private String username;
         private String room;
         private String message;
