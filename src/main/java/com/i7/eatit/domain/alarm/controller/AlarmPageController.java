@@ -34,7 +34,6 @@ public class AlarmPageController {
         String WAITING = "승인대기";
     }
 
-
     public AlarmPageController(AlarmService alarmService, PhotoService photoService, MeetingService meetingService) {
         this.alarmService = alarmService;
         this.photoService = photoService;
