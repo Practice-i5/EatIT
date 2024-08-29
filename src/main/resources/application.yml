@@ -26,6 +26,6 @@ app:
 
 node:
   server:
-    url: http://localhost:3001
+    url: http://192.168.0.30:3001
 
 
